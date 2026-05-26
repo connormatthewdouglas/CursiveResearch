@@ -9,7 +9,7 @@ chapters were generated from these sources without intentionally rewriting
 their wording. Conversion verification checked each non-empty source paragraph
 and table cell group for retention in its generated chapter.
 
-| Source Master | Git Blob SHA | Markdown Chapter | Retained Blocks |
+| Source Master | Git Blob SHA / SHA-256 | Markdown Chapter | Retained Blocks |
 | --- | --- | --- | ---: |
 | `Research Master.docx` | `081d0d5e31f2f3f8d3230e9c8db0ece7e50456f1` | `chapters/00-research-master.md` | 33 |
 | `CursiveOS_First_Principles_Report.docx` | `20ff2bd8016cff5bb1b905d37720430a5ab0e360` | `chapters/01-first-principles-and-strategy.md` | 122 |
@@ -20,23 +20,31 @@ and table cell group for retention in its generated chapter.
 | `6. Hardening linux.docx` | `d6f761544e05ccddb4c0269b3d58e059d5bbcad7` | `chapters/06-security-and-hardening.md` | 50 |
 | `4. Tokenomics_.docx` | `839c8733a30a682416ec0858c75e229ebc51131b` | `chapters/07-tokenomics-and-incentives.md` | 145 |
 
+## Supplemental Intake
+
+| Intake Date | Source Master | SHA-256 | Markdown Chapter | Retained Blocks | Status | Notes |
+| --- | --- | --- | --- | ---: | --- | --- |
+| `2026-05-26` | `Local Agent Setup for Arc B70.docx` | `54cde0c3dd1faf51e142b5d76d25aaedf475775995af9f6f76826117006382c5` | `chapters/09-local-agent-arc-b70.md` | 50 | Imported; requires source extraction and hardware validation | Uploaded directly in ChatGPT conversation. Original binary was parsed and converted to Markdown; source hash recorded. |
+
 ## Pending Intake
 
 | Date Added | Source | Intended Action | Status | Notes |
 | --- | --- | --- | --- | --- |
-| `2026-05-26` | Google Doc: `https://docs.google.com/document/d/1kXXy5JjOHHk9dayoQARA2f6ZhzR80DLf-1PeXuTkHqA/edit?usp=drivesdk` | Import as new source master, convert/integrate into relevant chapter, extract cited sources, update validation ledger | Pending content access | Google Drive connector unavailable in current agent environment; public fetch failed. Need exported DOCX/Markdown/TXT/PDF, pasted contents, or accessible share/export link. |
+| `2026-05-26` | Google Doc: `https://docs.google.com/document/d/1kXXy5JjOHHk9dayoQARA2f6ZhzR80DLf-1PeXuTkHqA/edit?usp=drivesdk` | Import as new source master, convert/integrate into relevant chapter, extract cited sources, update validation ledger | Superseded by uploaded DOCX intake if same document | User uploaded `Local Agent Setup for Arc B70.docx`; if this was the Google Doc export, no separate action needed unless the Google Doc has newer content. |
 
 ## Conversion Coverage
 
 | Check | Result |
 | --- | --- |
-| Source files processed | 8 of 8 |
-| Tables detected and converted | 14 |
-| Images, tracked changes, comments, hyperlinks, footnotes, or endnotes detected | None |
-| Non-empty text/table blocks retained in Markdown | 832 of 832 |
+| Initial source files processed | 8 of 8 |
+| Supplemental uploaded sources processed | 1 |
+| Tables detected and converted in initial import | 14 |
+| Tables detected and converted in supplemental import | 4 |
+| Images, tracked changes, comments, hyperlinks, footnotes, or endnotes detected in initial import | None |
+| Non-empty text/table blocks retained in initial Markdown | 832 of 832 |
 
 ## Integrity Policy
 
 The source masters are the lossless record. If a Markdown conversion is ever
-corrected, renamed, summarized, or superseded, preserve its original DOCX and
+corrected, renamed, summarized, or superseded, preserve its original source and
 record the change here so the corpus remains auditable.
