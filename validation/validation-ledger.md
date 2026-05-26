@@ -35,6 +35,8 @@ Human reviewer: <name>
 | --- | --- | --- | --- | --- | --- | --- |
 | 2026-05-26 | GPT-5.5 Thinking / ChatGPT | Created validation system scaffolding: source index, validation ledger, methodology upgrade | source extraction only | SRC-08-001 through SRC-08-005 | Established corpus governance for source extraction and claim validation. Extracted initial Chapter 08 source references. No full claim verification pass completed yet. | Validate Chapter 08 claims against primary sources; then extract/validate Chapter 03 and Chapter 05. |
 | 2026-05-26 | GPT-5.5 Thinking / ChatGPT | Imported uploaded `Local Agent Setup for Arc B70.docx` into `chapters/09-local-agent-arc-b70.md` | not started | Pending SRC-09-* extraction | Converted uploaded DOCX into a corpus chapter, preserved source SHA-256, and registered the supplemental intake. No source extraction or validation pass completed yet. | Extract Chapter 09 sources into `sources/extracted-source-index.md`; validate Intel Arc Pro B70 hardware claims, llama.cpp SYCL claims, OpenVINO claims, model benchmark claims, and Hermes/OpenClaw ecosystem claims. |
+| 2026-05-26 | GPT-5.5 Thinking / ChatGPT | Full first-pass validation of `chapters/08-firmware-and-bios-control.md` | supported with minor caveats | SRC-08-001 through SRC-08-005 | Core CursiveFirmware architecture is supported by primary sources: UEFI runtime services, Linux `efivarfs`, Linux `firmware-attributes`, Redfish BIOS schema, and flashrom docs. Main caveat is platform specificity; these sources validate control surfaces, not universal motherboard support. | Prototype `cursive-firmware-probe`; validate on real Dell/Lenovo/HP and BMC/Redfish systems; add real request/response examples. |
+| 2026-05-26 | GPT-5.5 Thinking / ChatGPT | Targeted validation of highest-risk `chapters/09-local-agent-arc-b70.md` claims | partially verified | SRC-09-001 through SRC-09-009 | Broad local-agent architecture is supported: Intel Arc needs non-CUDA runtimes, llama.cpp SYCL exists, llama.cpp function-calling exists, OpenVINO 2025.3 has relevant LLM features. B70-specific performance/model/tool-calling claims remain unverified pending reproducible benchmarks. | Extract remaining works cited; inspect benchmark repo methodology; create Arc B70 benchmark plan; locate official Intel product docs. |
 
 ## Chapter Validation Matrix
 
@@ -48,17 +50,17 @@ Human reviewer: <name>
 | `chapters/05-ai-guided-tuning.md` | — | — | not started | not started | High priority; cited papers/repos need extraction and evaluation. |
 | `chapters/06-security-and-hardening.md` | — | — | not started | not started | Security recommendations need careful freshness review. |
 | `chapters/07-tokenomics-and-incentives.md` | — | — | not started | not started | Needs protocol-doc and current-tokenomics verification. |
-| `chapters/08-firmware-and-bios-control.md` | 2026-05-26 | GPT-5.5 Thinking / ChatGPT | source extraction only | partial | Initial sources listed as SRC-08-001 through SRC-08-005; claims still need formal verification. |
-| `chapters/09-local-agent-arc-b70.md` | 2026-05-26 | GPT-5.5 Thinking / ChatGPT | not started | not started | Imported from uploaded DOCX; source list exists inside chapter but has not been normalized into SRC-09-* records. |
+| `chapters/08-firmware-and-bios-control.md` | 2026-05-26 | GPT-5.5 Thinking / ChatGPT | supported with minor caveats | complete for current chapter | See `validation/notes/2026-05-26-ch08-firmware-bios-control-validation.md`. |
+| `chapters/09-local-agent-arc-b70.md` | 2026-05-26 | GPT-5.5 Thinking / ChatGPT | partially verified | selected high-priority sources extracted | See `validation/notes/2026-05-26-ch09-arc-b70-targeted-validation.md`. Full works-cited extraction remains open. |
 
 ## Open Validation Work Queue
 
 ### P0
 
-1. Validate `chapters/08-firmware-and-bios-control.md` because it is newly authored and compact.
-2. Extract and validate `chapters/09-local-agent-arc-b70.md` because it informs immediate local-agent and home-rack hardware planning.
-3. Extract and validate `chapters/03-linux-kernel-optimization.md` because it informs near-term engineering.
-4. Extract and validate `chapters/05-ai-guided-tuning.md` because it informs autonomous tuning architecture.
+1. Extract and validate `chapters/09-local-agent-arc-b70.md` fully because it informs immediate local-agent and home-rack hardware planning.
+2. Extract and validate `chapters/03-linux-kernel-optimization.md` because it informs near-term engineering.
+3. Extract and validate `chapters/05-ai-guided-tuning.md` because it informs autonomous tuning architecture.
+4. Convert validated Chapter 08 findings into an experiment/prototype plan for `cursive-firmware-probe`.
 
 ### P1
 
