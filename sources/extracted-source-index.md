@@ -1,6 +1,6 @@
 # Extracted Source Index
 
-Status: First validation pass started 2026-05-26. Source extraction is incomplete across the full corpus.
+Status: Validation passes in progress as of 2026-05-26. Source extraction is incomplete across the full corpus.
 
 Purpose: this file is the canonical index of external sources cited by the research corpus. The existing `source-register.md` tracks provenance of imported DOCX/source-master files. This file tracks the sources cited inside those research documents and inside later project-authored synthesis.
 
@@ -58,7 +58,7 @@ Each source should eventually have this information:
 | --- | --- | --- | --- | --- |
 | `chapters/08-firmware-and-bios-control.md` | P0 | New architecture layer; small enough to fully validate first | Extracted below | Supported with minor caveats |
 | `chapters/09-local-agent-arc-b70.md` | P0 | Immediate local-agent and hardware-planning impact | Selected high-priority sources extracted below | Partially verified; hardware/software architecture supported, performance/model claims need reproduction |
-| `chapters/03-linux-kernel-optimization.md` | P0 | Contains near-term technical tuning claims and version-sensitive kernel claims | Not started | Not started |
+| `chapters/03-linux-kernel-optimization.md` | P0 | Contains near-term technical tuning claims and version-sensitive kernel claims | Selected high-priority sources extracted below | Partially verified; strong on documented kernel features, weak on performance extrapolation |
 | `chapters/05-ai-guided-tuning.md` | P0 | Directly informs autonomous tuning architecture | Not started | Not started |
 | `chapters/06-security-and-hardening.md` | P1 | Security claims are high-impact and time-sensitive | Not started | Not started |
 | `chapters/04-gpu-and-accelerator-tuning.md` | P1 | Hardware-specific claims require platform validation | Not started | Not started |
@@ -68,6 +68,19 @@ Each source should eventually have this information:
 | `chapters/00-research-master.md` | P3 | Mixed snapshot; should be split into source-backed claims or superseded by later chapters | Not started | Not started |
 
 ## Extracted Sources
+
+### Chapter 03 — Linux Kernel Optimization
+
+Selected high-priority sources only. Full source extraction remains open.
+
+| Source ID | Title | Author / Organization | URL / DOI / Repo | Source Type | Date Published / Updated | Date Accessed | Used In | Claims Supported | Reliability Tier | Validation Status | Notes |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| SRC-03-001 | Extensible Scheduler Class | Linux Kernel Documentation | https://docs.kernel.org/scheduler/sched-ext.html | primary documentation | Rolling kernel docs | 2026-05-26 | `03-linux-kernel-optimization.md` §2 | `sched_ext` is a scheduler class whose behavior is defined by BPF programs; it can be enabled dynamically and falls back to default scheduling on error | A | verified | Supports existence and safety/fallback semantics, not specific latency numbers. |
+| SRC-03-002 | Linux 6.12 | KernelNewbies | https://kernelnewbies.org/Linux_6.12 | release summary / secondary technical | 2024-12-13 | 2026-05-26 | `03-linux-kernel-optimization.md` §2 | Linux 6.12 included PREEMPT_RT, EEVDF completion, and BPF-based sched_ext; SCHED_DEADLINE servers help address starvation when higher-priority tasks monopolize CPU | B | verified for release-feature summary | Good release summary with commit links; use kernel docs or commits for deeper claims. |
+| SRC-03-003 | zram: Compressed RAM-based block devices | Linux Kernel Documentation | https://docs.kernel.org/admin-guide/blockdev/zram.html | primary documentation | Rolling kernel docs | 2026-05-26 | `03-linux-kernel-optimization.md` §3 and §7 | zram exposes `algorithm_params`, `compressed_writeback`, and `writeback_batch_size`; compressed writeback avoids decompression overhead; writeback batch size controls in-flight writeback operations | A | verified | Supports sysfs feature existence, not the imported chapter's specific 4x benchmark claim. |
+| SRC-03-004 | Filesystem-level encryption (`fscrypt`) | Linux Kernel Documentation | https://www.kernel.org/doc/html/latest/filesystems/fscrypt.html | primary documentation | Rolling kernel docs | 2026-05-26 | `03-linux-kernel-optimization.md` §1 | fscrypt supports AES-256-XTS for file contents and AES-256-CBC-CTS for filenames; AES acceleration config is recommended on x86 | A | verified | Supports cipher-mode claims; not the AES-CTR performance claim. |
+| SRC-03-005 | Towards Agentic OS: An LLM Agent Framework for Linux Schedulers | arXiv / SchedCP authors | https://arxiv.org/abs/2509.01245 | paper/preprint | 2025-09-01 | 2026-05-26 | `03-linux-kernel-optimization.md` §2 and Chapter 05 overlap | SchedCP uses sched_ext as an LLM-agent control surface for scheduler policy experimentation and reports performance/cost gains | B | needs verification | Relevant to CursiveOS architecture. Needs paper/code review before using performance claims. |
+| SRC-03-006 | Unfair by design: eBPF-based scheduling of mixed database workloads | arXiv | https://arxiv.org/abs/2605.02377 | paper/preprint | 2026-05-04 | 2026-05-26 | `03-linux-kernel-optimization.md` §2 | Recent sched_ext-style eBPF scheduling work can improve throughput and tail latency in mixed database workloads | B | needs verification | Supports broader scheduling opportunity, not inference-specific benefit. |
 
 ### Chapter 08 — Firmware and BIOS Control
 
@@ -101,3 +114,4 @@ Selected high-priority sources only. Full source extraction for all 39 works cit
 - Bracketed numeric citations like `[1]`, `[2]`, or converted citation artifacts must be resolved back to actual references where possible. If the original DOCX has a bibliography that failed conversion, recover it from the preserved source master.
 - Source extraction and claim validation are separate tasks. A source being listed here does not mean the claim has been validated.
 - Chapter 09 has a full works-cited list in the chapter body. Only the most important sources were normalized in the first pass. Community sources, Reddit posts, Medium articles, and third-party setup guides should be demoted unless corroborated by primary docs or reproducible tests.
+- Chapter 03 contains many Phoronix/LWN/forum/news-style performance claims. These are useful leads, but CursiveOS should promote only claims supported by primary docs, upstream commits, or reproducible local benchmarks.
