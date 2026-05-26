@@ -17,6 +17,7 @@ source documents, organized by subject rather than by file-upload order.
 | [06 - Security and Hardening](chapters/06-security-and-hardening.md) | Linux security and operational defense | Threat model and deployment hardening | Imported; requires security review |
 | [07 - Tokenomics and Incentives](chapters/07-tokenomics-and-incentives.md) | DePIN models and incentive mechanisms | Economic design research | Imported; requires economics review |
 | [08 - Firmware and BIOS Control](chapters/08-firmware-and-bios-control.md) | UEFI, BIOS, BMC/Redfish, boot control, firmware mutation | Whole-machine self-optimization architecture | Original synthesis; requires platform validation |
+| [09 - Local Agent Setup for Arc B70](chapters/09-local-agent-arc-b70.md) | Intel Arc Pro B70 local agent stack, model selection, tool calling, VRAM budgeting | Home-rack/local-agent implementation planning | Imported from uploaded DOCX; requires source extraction and hardware validation |
 
 ## How Content Is Classified
 
