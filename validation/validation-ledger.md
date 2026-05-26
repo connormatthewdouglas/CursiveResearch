@@ -38,6 +38,7 @@ Human reviewer: <name>
 | 2026-05-26 | GPT-5.5 Thinking / ChatGPT | Full first-pass validation of `chapters/08-firmware-and-bios-control.md` | supported with minor caveats | SRC-08-001 through SRC-08-005 | Core CursiveFirmware architecture is supported by primary sources: UEFI runtime services, Linux `efivarfs`, Linux `firmware-attributes`, Redfish BIOS schema, and flashrom docs. Main caveat is platform specificity; these sources validate control surfaces, not universal motherboard support. | Prototype `cursive-firmware-probe`; validate on real Dell/Lenovo/HP and BMC/Redfish systems; add real request/response examples. |
 | 2026-05-26 | GPT-5.5 Thinking / ChatGPT | Targeted validation of highest-risk `chapters/09-local-agent-arc-b70.md` claims | partially verified | SRC-09-001 through SRC-09-009 | Broad local-agent architecture is supported: Intel Arc needs non-CUDA runtimes, llama.cpp SYCL exists, llama.cpp function-calling exists, OpenVINO 2025.3 has relevant LLM features. B70-specific performance/model/tool-calling claims remain unverified pending reproducible benchmarks. | Extract remaining works cited; inspect benchmark repo methodology; run `experiments/arc-b70-local-agent-benchmark-plan.md`; locate official Intel product docs. |
 | 2026-05-26 | GPT-5.5 Thinking / ChatGPT | Targeted validation of `chapters/03-linux-kernel-optimization.md` | partially verified | SRC-03-001 through SRC-03-006 | Kernel features such as `sched_ext`, PREEMPT_RT in 6.12, fscrypt cipher modes, and zram sysfs attributes are supported. Exact speedup numbers, kernel-version projections, and inference-specific performance extrapolations remain unverified pending local benchmarks. | Extract remaining Chapter 03 sources; add upstream commit references; run `experiments/kernel-inference-optimization-benchmark-plan.md`; amend chapter with verified findings after local tests. |
+| 2026-05-26 | GPT-5.5 Thinking / ChatGPT | Targeted validation of `chapters/05-ai-guided-tuning.md` | partially verified | SRC-05-001 through SRC-05-008 | Core architecture is supported: LLM/RL/search-based OS tuning is an active research line. SchedCP, OS-R1, PolicySmith, SemaTune, and Fork-Explore-Commit are relevant leads. Performance numbers, maturity/license claims, costs, and recommended ranking remain provisional. SemaTune should supplement the older always-on tuning framing. | Inspect repos for license/activity/reproducibility; validate AutoOS separately; run `experiments/ai-guided-tuning-loop-validation-plan.md`; amend Chapter 05 with updated SemaTune note. |
 
 ## Chapter Validation Matrix
 
@@ -48,7 +49,7 @@ Human reviewer: <name>
 | `chapters/02-market-and-viability.md` | — | — | not started | not started | Market, protocol, and project-status claims are highly time-sensitive. |
 | `chapters/03-linux-kernel-optimization.md` | 2026-05-26 | GPT-5.5 Thinking / ChatGPT | partially verified | selected high-priority sources extracted | See `validation/notes/2026-05-26-ch03-linux-kernel-optimization-validation.md`; benchmark plan: `experiments/kernel-inference-optimization-benchmark-plan.md`. |
 | `chapters/04-gpu-and-accelerator-tuning.md` | — | — | not started | not started | Needs hardware validation on target GPUs and source validation for driver claims. |
-| `chapters/05-ai-guided-tuning.md` | — | — | not started | not started | High priority; cited papers/repos need extraction and evaluation. |
+| `chapters/05-ai-guided-tuning.md` | 2026-05-26 | GPT-5.5 Thinking / ChatGPT | partially verified | selected high-priority sources extracted | See `validation/notes/2026-05-26-ch05-ai-guided-tuning-validation.md`; validation plan: `experiments/ai-guided-tuning-loop-validation-plan.md`. |
 | `chapters/06-security-and-hardening.md` | — | — | not started | not started | Security recommendations need careful freshness review. |
 | `chapters/07-tokenomics-and-incentives.md` | — | — | not started | not started | Needs protocol-doc and current-tokenomics verification. |
 | `chapters/08-firmware-and-bios-control.md` | 2026-05-26 | GPT-5.5 Thinking / ChatGPT | supported with minor caveats | complete for current chapter | See `validation/notes/2026-05-26-ch08-firmware-bios-control-validation.md`. |
@@ -58,7 +59,7 @@ Human reviewer: <name>
 
 ### P0
 
-1. Extract and validate `chapters/05-ai-guided-tuning.md` because it informs autonomous tuning architecture.
+1. Inspect SchedCP, OS-R1, PolicySmith, AutoOS, and SemaTune repos/papers for license, activity, installability, and reproducibility.
 2. Extract and validate `chapters/09-local-agent-arc-b70.md` fully because it informs immediate local-agent and home-rack hardware planning.
 3. Extract remaining `chapters/03-linux-kernel-optimization.md` sources and run the kernel inference benchmark plan.
 4. Convert validated Chapter 08 findings into an experiment/prototype plan for `cursive-firmware-probe`.
