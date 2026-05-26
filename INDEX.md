@@ -16,6 +16,7 @@ source documents, organized by subject rather than by file-upload order.
 | [05 - AI-Guided Tuning](chapters/05-ai-guided-tuning.md) | Automated tuning and agent approaches | Architecture and research backlog | Imported; requires paper/source review |
 | [06 - Security and Hardening](chapters/06-security-and-hardening.md) | Linux security and operational defense | Threat model and deployment hardening | Imported; requires security review |
 | [07 - Tokenomics and Incentives](chapters/07-tokenomics-and-incentives.md) | DePIN models and incentive mechanisms | Economic design research | Imported; requires economics review |
+| [08 - Firmware and BIOS Control](chapters/08-firmware-and-bios-control.md) | UEFI, BIOS, BMC/Redfish, boot control, firmware mutation | Whole-machine self-optimization architecture | Original synthesis; requires platform validation |
 
 ## How Content Is Classified
 
@@ -23,12 +24,14 @@ source documents, organized by subject rather than by file-upload order.
 | --- | --- | --- |
 | Source master | An unmodified document received from a contributor. | `sources/original-docx/` |
 | Imported chapter | A readable conversion that retains the source wording. | `chapters/` |
+| Original synthesis | New project-authored research or architecture notes derived from discussion, experiments, or synthesis. | `chapters/` or future `decisions/` entries |
 | Verified finding | A claim checked against primary/current sources and dated. | Add within a chapter under a clearly labeled verification section. |
 | Decision note | A project recommendation linked back to findings and evidence. | Future `decisions/` entries under the methodology. |
 
 ## Important Boundary
 
-These chapters preserve submitted research; inclusion does not mean every claim
-has been verified. Many statements are date-sensitive or predictive. Future
-updates should retain the imported record and append dated verification,
-correction, or supersession notes rather than quietly rewriting history.
+These chapters preserve submitted research and project-authored synthesis;
+inclusion does not mean every claim has been verified. Many statements are
+date-sensitive, platform-specific, or predictive. Future updates should retain
+the imported or authored record and append dated verification, correction, or
+supersession notes rather than quietly rewriting history.
