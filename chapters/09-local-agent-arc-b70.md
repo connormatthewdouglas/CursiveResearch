@@ -9,6 +9,8 @@ Imported: 2026-05-26
 
 Status: Source import from uploaded DOCX. Requires source extraction and validation before being used for engineering decisions.
 
+Validation plan: see `experiments/arc-b70-local-agent-benchmark-plan.md`. Chapter 09 performance, backend, model-selection, long-context, and tool-calling claims should not be treated as decision-grade until reproduced through that plan.
+
 ## Source Import
 
 ## Engineering Local Agent Workloads on the Intel Arc Pro B70: Hardware Architecture, Model Selection, and Software Co-Design
@@ -82,7 +84,7 @@ Key engineering claims:
 
 - **Parser engine choice:** Qwen 3.5 may work better with `qwen3_xml`, while Qwen 3.6 may require a more permissive `qwen3_coder` parser when strict XML parsing fails on incomplete structures.
 - **Thinking preservation:** Qwen 3.6 has a native `preserve_thinking` configuration. The document says custom `qwen3.5-enhanced.jinja` is incompatible with native `preserve_thinking=true`; when using the custom template, force `preserve_thinking=false`. Without a custom template, use official template plus `preserve_thinking=true` to stabilize tool calls via prefix caching.
-- **Output limits:** Large tool payloads can exceed local model output limits. Raising maximum output tokens is required to prevent truncated tool arguments and parser failure.
+- **Output limits:** Large tool payloads can exceed local model output limits. Raising maximum output token parameter is a mandatory client-side configuration to prevent argument truncation in complex environments.
 
 These claims are high-value for local-agent engineering but need validation against llama.cpp, vLLM, Qwen templates, and actual local test runs.
 
@@ -102,7 +104,7 @@ The document gives example memory estimates for 32 GB Arc Pro B70 operation:
 | Llama 3.1-8B (FP16) | 16.0 GiB | 16,000 Tokens | ~4.0 GiB | 20.0 GiB | 12.0 GiB |
 | Llama 3.1-8B (Q4_K_M) | 4.6 GiB | 16,000 Tokens | ~1.0 GiB | 5.6 GiB | 26.4 GiB |
 
-The source recommends limiting real-time personal agent assistants to around 8,000 operational tokens for responsiveness, even where larger contexts are technically possible. It claims 16,000-token contexts can reduce decode performance by roughly 30–40% because KV-cache reads expand with context length.
+The source recommends limiting real-time personal agent assistants to around 8,000 operational tokens for responsiveness, even where larger contexts are technically possible. It claims 16,000-token contexts can reduce decode performance by roughly 30% to 40% because KV-cache reads expand with context length.
 
 ## Deploying the Hermes Agent Framework Locally
 
@@ -118,10 +120,10 @@ These claims are especially important to validate because some Hermes/OpenClaw/B
 
 The document proposes this local Arc Pro B70 agent setup path:
 
-1. **Hardware preparation and driver verification:** install latest Intel discrete GPU stack and oneAPI Base Toolkit on Ubuntu 22.04 / Linux kernel 6.5 or newer; verify Level Zero runtime visibility.
+1. **Hardware preparation and driver verification:** install latest Intel discrete GPU stack and the oneAPI Base Toolkit on a host operating system such as Ubuntu 22.04 with Linux kernel 6.5. Ensure that the graphics card is recognized and the execution units are mapped within the Level Zero system runtime.
 2. **Runtime compilation:** build llama.cpp with SYCL and Intel compiler toolchain, using `-O3 -DNDEBUG` to strip assertions.
-3. **Model selection:** deploy Qwen 3.5 35B-A3B in Q4_K_M GGUF format as a balance of intelligence, speed, and VRAM headroom.
-4. **API hosting:** launch `llama-server` with native Jinja processing and a 16k context window.
+3. **Model selection:** download the Qwen 3.5 35B-A3B Mixture-of-Experts model in Q4_K_M GGUF format as a balance of intelligence and execution speed.
+4. **API hosting:** launch `llama-server` with native Jinja processing and a 16,000-token context window.
 5. **Hermes orchestration:** point `~/hermes/config.yaml` at the local OpenAI-compatible llama.cpp endpoint.
 6. **Execution containment:** run execution tools in hardened Docker containers to isolate shell, compiler, and code-patching actions from the host.
 
