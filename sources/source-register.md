@@ -20,6 +20,12 @@ and table cell group for retention in its generated chapter.
 | `6. Hardening linux.docx` | `d6f761544e05ccddb4c0269b3d58e059d5bbcad7` | `chapters/06-security-and-hardening.md` | 50 |
 | `4. Tokenomics_.docx` | `839c8733a30a682416ec0858c75e229ebc51131b` | `chapters/07-tokenomics-and-incentives.md` | 145 |
 
+## Pending Intake
+
+| Date Added | Source | Intended Action | Status | Notes |
+| --- | --- | --- | --- | --- |
+| `2026-05-26` | Google Doc: `https://docs.google.com/document/d/1kXXy5JjOHHk9dayoQARA2f6ZhzR80DLf-1PeXuTkHqA/edit?usp=drivesdk` | Import as new source master, convert/integrate into relevant chapter, extract cited sources, update validation ledger | Pending content access | Google Drive connector unavailable in current agent environment; public fetch failed. Need exported DOCX/Markdown/TXT/PDF, pasted contents, or accessible share/export link. |
+
 ## Conversion Coverage
 
 | Check | Result |
