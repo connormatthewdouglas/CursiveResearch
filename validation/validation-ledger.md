@@ -34,6 +34,7 @@ Human reviewer: <name>
 | Date Checked | Agent / Reviewer | Scope | Status | Source Index IDs | Summary | Follow-up |
 | --- | --- | --- | --- | --- | --- | --- |
 | 2026-05-26 | GPT-5.5 Thinking / ChatGPT | Created validation system scaffolding: source index, validation ledger, methodology upgrade | source extraction only | SRC-08-001 through SRC-08-005 | Established corpus governance for source extraction and claim validation. Extracted initial Chapter 08 source references. No full claim verification pass completed yet. | Validate Chapter 08 claims against primary sources; then extract/validate Chapter 03 and Chapter 05. |
+| 2026-05-26 | GPT-5.5 Thinking / ChatGPT | Imported uploaded `Local Agent Setup for Arc B70.docx` into `chapters/09-local-agent-arc-b70.md` | not started | Pending SRC-09-* extraction | Converted uploaded DOCX into a corpus chapter, preserved source SHA-256, and registered the supplemental intake. No source extraction or validation pass completed yet. | Extract Chapter 09 sources into `sources/extracted-source-index.md`; validate Intel Arc Pro B70 hardware claims, llama.cpp SYCL claims, OpenVINO claims, model benchmark claims, and Hermes/OpenClaw ecosystem claims. |
 
 ## Chapter Validation Matrix
 
@@ -48,14 +49,16 @@ Human reviewer: <name>
 | `chapters/06-security-and-hardening.md` | — | — | not started | not started | Security recommendations need careful freshness review. |
 | `chapters/07-tokenomics-and-incentives.md` | — | — | not started | not started | Needs protocol-doc and current-tokenomics verification. |
 | `chapters/08-firmware-and-bios-control.md` | 2026-05-26 | GPT-5.5 Thinking / ChatGPT | source extraction only | partial | Initial sources listed as SRC-08-001 through SRC-08-005; claims still need formal verification. |
+| `chapters/09-local-agent-arc-b70.md` | 2026-05-26 | GPT-5.5 Thinking / ChatGPT | not started | not started | Imported from uploaded DOCX; source list exists inside chapter but has not been normalized into SRC-09-* records. |
 
 ## Open Validation Work Queue
 
 ### P0
 
 1. Validate `chapters/08-firmware-and-bios-control.md` because it is newly authored and compact.
-2. Extract and validate `chapters/03-linux-kernel-optimization.md` because it informs near-term engineering.
-3. Extract and validate `chapters/05-ai-guided-tuning.md` because it informs autonomous tuning architecture.
+2. Extract and validate `chapters/09-local-agent-arc-b70.md` because it informs immediate local-agent and home-rack hardware planning.
+3. Extract and validate `chapters/03-linux-kernel-optimization.md` because it informs near-term engineering.
+4. Extract and validate `chapters/05-ai-guided-tuning.md` because it informs autonomous tuning architecture.
 
 ### P1
 
