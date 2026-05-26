@@ -39,6 +39,7 @@ Human reviewer: <name>
 | 2026-05-26 | GPT-5.5 Thinking / ChatGPT | Targeted validation of highest-risk `chapters/09-local-agent-arc-b70.md` claims | partially verified | SRC-09-001 through SRC-09-009 | Broad local-agent architecture is supported: Intel Arc needs non-CUDA runtimes, llama.cpp SYCL exists, llama.cpp function-calling exists, OpenVINO 2025.3 has relevant LLM features. B70-specific performance/model/tool-calling claims remain unverified pending reproducible benchmarks. | Extract remaining works cited; inspect benchmark repo methodology; run `experiments/arc-b70-local-agent-benchmark-plan.md`; locate official Intel product docs. |
 | 2026-05-26 | GPT-5.5 Thinking / ChatGPT | Targeted validation of `chapters/03-linux-kernel-optimization.md` | partially verified | SRC-03-001 through SRC-03-006 | Kernel features such as `sched_ext`, PREEMPT_RT in 6.12, fscrypt cipher modes, and zram sysfs attributes are supported. Exact speedup numbers, kernel-version projections, and inference-specific performance extrapolations remain unverified pending local benchmarks. | Extract remaining Chapter 03 sources; add upstream commit references; run `experiments/kernel-inference-optimization-benchmark-plan.md`; amend chapter with verified findings after local tests. |
 | 2026-05-26 | GPT-5.5 Thinking / ChatGPT | Targeted validation of `chapters/05-ai-guided-tuning.md` | partially verified | SRC-05-001 through SRC-05-008 | Core architecture is supported: LLM/RL/search-based OS tuning is an active research line. SchedCP, OS-R1, PolicySmith, SemaTune, and Fork-Explore-Commit are relevant leads. Performance numbers, maturity/license claims, costs, and recommended ranking remain provisional. SemaTune should supplement the older always-on tuning framing. | Inspect repos for license/activity/reproducibility; validate AutoOS separately; run `experiments/ai-guided-tuning-loop-validation-plan.md`; amend Chapter 05 with updated SemaTune note. |
+| 2026-05-26 | GPT-5.5 Thinking / ChatGPT | Targeted validation of `chapters/04-gpu-and-accelerator-tuning.md` | partially verified with significant caveats | SRC-04-001 through SRC-04-009 in `sources/chapter-04-selected-sources.md` | Broad mechanisms are supported: AMDGPU controls, sched_ext, hugepages/THP, Kyber tunables, and GPU virtualization ecosystems exist. Specific RX 580 voltage tables, consumer GPU SR-IOV generalizations, hugepage performance claims, Kyber percentages, and Intel Arc power-control details remain unverified and hardware-specific. | Merge selected sources into canonical source index; run `experiments/gpu-accelerator-tuning-validation-plan.md`; add validation caveats to Chapter 04; validate LACT/scx/NUMA/RDMA claims separately. |
 
 ## Chapter Validation Matrix
 
@@ -48,7 +49,7 @@ Human reviewer: <name>
 | `chapters/01-first-principles-and-strategy.md` | — | — | not started | not started | Needs strategic evidence and internal benchmark cross-reference. |
 | `chapters/02-market-and-viability.md` | — | — | not started | not started | Market, protocol, and project-status claims are highly time-sensitive. |
 | `chapters/03-linux-kernel-optimization.md` | 2026-05-26 | GPT-5.5 Thinking / ChatGPT | partially verified | selected high-priority sources extracted | See `validation/notes/2026-05-26-ch03-linux-kernel-optimization-validation.md`; benchmark plan: `experiments/kernel-inference-optimization-benchmark-plan.md`. |
-| `chapters/04-gpu-and-accelerator-tuning.md` | — | — | not started | not started | Needs hardware validation on target GPUs and source validation for driver claims. |
+| `chapters/04-gpu-and-accelerator-tuning.md` | 2026-05-26 | GPT-5.5 Thinking / ChatGPT | partially verified with significant caveats | selected high-priority sources extracted separately | See `validation/notes/2026-05-26-ch04-gpu-accelerator-tuning-validation.md`; validation plan: `experiments/gpu-accelerator-tuning-validation-plan.md`; selected sources: `sources/chapter-04-selected-sources.md`. |
 | `chapters/05-ai-guided-tuning.md` | 2026-05-26 | GPT-5.5 Thinking / ChatGPT | partially verified | selected high-priority sources extracted | See `validation/notes/2026-05-26-ch05-ai-guided-tuning-validation.md`; validation plan: `experiments/ai-guided-tuning-loop-validation-plan.md`. |
 | `chapters/06-security-and-hardening.md` | — | — | not started | not started | Security recommendations need careful freshness review. |
 | `chapters/07-tokenomics-and-incentives.md` | — | — | not started | not started | Needs protocol-doc and current-tokenomics verification. |
@@ -66,8 +67,8 @@ Human reviewer: <name>
 
 ### P1
 
-1. Extract and validate `chapters/06-security-and-hardening.md` before using it for deployment hardening.
-2. Extract and validate `chapters/04-gpu-and-accelerator-tuning.md` against actual hardware and driver documentation.
+1. Run or prepare `experiments/gpu-accelerator-tuning-validation-plan.md` and merge Chapter 04 selected sources into the canonical source index.
+2. Extract and validate `chapters/06-security-and-hardening.md` before using it for deployment hardening.
 3. Add an internal benchmark evidence directory or link to CursiveRoot benchmark exports.
 
 ### P2
