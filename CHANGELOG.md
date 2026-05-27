@@ -4,6 +4,26 @@ This file records meaningful changes to research guidance, validation status,
 and corpus process. It is intended to be readable without reconstructing a
 chain of supporting documents.
 
+## 2026-05-27 - Added Main Repo Gap Closure Synthesis
+
+Changed:
+
+- Added `chapters/13-main-repo-gap-closure-and-research-backlog.md`.
+- Mapped earlier research gaps against the current main `CursiveOS` architecture.
+- Clarified which gaps are already answered by the seed organism, sensor array,
+  Layer 5 economics, and agent architecture.
+- Reframed the highest-value next research targets as implementation-level specs:
+  mutation safety law, CursiveRoot schema, shell implementation, signed preset
+  update channel, and fork obligation/Bitcoin ledger research.
+- Updated `INDEX.md` so Chapter 13 is part of the reading path.
+
+Reason:
+
+The corpus had just absorbed major main-repo architecture in Chapters 10-12, but
+needed a synthesis layer explaining what that architecture closes and what still
+needs research. The project has moved from basic discovery questions toward
+implementation specification questions.
+
 ## 2026-05-27 - Integrated Missing Architecture from Main CursiveOS Repo
 
 Changed:
