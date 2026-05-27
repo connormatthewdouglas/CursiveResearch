@@ -21,7 +21,7 @@ The document claims the Arc Pro B70 is built on TSMC 5 nm using the BMG-G31 Xe2-
 
 | Architectural Feature | Intel Arc Pro B70 Specification |
 | --- | --- |
-| Graphics Processor / Die Area | BMG-G31 (Xe2-HPG Battlemage) / 368 mm² |
+| Graphics Processor / Die Area | BMG-G31 (Xe2-HPG Battlemage) / 368 mm2 |
 | Process Node | TSMC 5 nm |
 | Memory Capacity & Type | 32 GB GDDR6 with ECC Support |
 | Memory Bus Width & Bandwidth | 256-bit / 608.0 GB/s |
@@ -58,9 +58,9 @@ cmake -B build -DGGML_SYCL=ON -DCMAKE_C_COMPILER=icx -DCMAKE_CXX_COMPILER=icpx -
 
 ## Model Selection for Agentic Operations: The MoE Sweet Spot
 
-The source argues that agentic workloads require more than raw chat quality: they need reliable instruction following, multi-turn structured output, tool-call correctness, and resistance to loop states. It states that small dense models in the 3B–8B range can fail in complex agentic loops by hallucinating parameters, emitting malformed JSON, misusing tools, or looping.
+The source argues that agentic workloads require more than raw chat quality: they need reliable instruction following, multi-turn structured output, tool-call correctness, and resistance to loop states. It states that small dense models in the 3B-8B range can fail in complex agentic loops by hallucinating parameters, emitting malformed JSON, misusing tools, or looping.
 
-The central model-selection claim is that Mixture-of-Experts models can deliver higher reasoning class at lower active-parameter cost. The document specifically emphasizes Qwen 3.5-35B-A3B and Qwen 3.6-35B-A3B style models as 35B-total / 3B-active architectures, claiming decode speeds around 54.5–54.7 tokens/sec on Arc Pro B70-class hardware. This must be validated against the named benchmark repository and independently reproduced on CursiveOS hardware.
+The central model-selection claim is that Mixture-of-Experts models can deliver higher reasoning class at lower active-parameter cost. The document specifically emphasizes Qwen 3.5-35B-A3B and Qwen 3.6-35B-A3B style models as 35B-total / 3B-active architectures, claiming decode speeds around 54.5-54.7 tokens/sec on Arc Pro B70-class hardware. This must be validated against the named benchmark repository and independently reproduced on CursiveOS hardware.
 
 | Model Name & Architecture | Parameter Class | Quantization Format | Static Model Size | Prefill Speed (pp512) | Decode Speed (tg128) | Operational Power |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -104,11 +104,11 @@ The document gives example memory estimates for 32 GB Arc Pro B70 operation:
 | Llama 3.1-8B (FP16) | 16.0 GiB | 16,000 Tokens | ~4.0 GiB | 20.0 GiB | 12.0 GiB |
 | Llama 3.1-8B (Q4_K_M) | 4.6 GiB | 16,000 Tokens | ~1.0 GiB | 5.6 GiB | 26.4 GiB |
 
-The source recommends limiting real-time personal agent assistants to around 8,000 operational tokens for responsiveness, even where larger contexts are technically possible. It claims 16,000-token contexts can reduce decode performance by roughly 30% to 40% because KV-cache reads expand with context length.
+For the deployed Hermes Agent build inspected on 2026-05-26, a configured context window below 64,000 tokens is not a viable operating target: Hermes enforces `MINIMUM_CONTEXT_LENGTH = 64_000`, and the local deployment is configured at 65,536 tokens. The practical responsiveness goal is therefore to keep the active prompt, injected tool-schema envelope, and retained conversation history as small as possible while retaining a configured context window of at least 64,000 tokens. The 8,000-token entries above remain useful as general VRAM-scaling examples for non-Hermes runtimes, but should not be interpreted as a recommended Hermes configuration. This implementation-specific limit should be retested if Hermes context handling changes.
 
 ## Deploying the Hermes Agent Framework Locally
 
-The source describes Hermes Agent, attributed to Nous Research, as an autonomous, self-improving agent with persistent memory and an internal-monologue → tool-call → observation → reflection loop. It claims Hermes can operate across multiple messaging platforms and generate reusable skills.
+The source describes Hermes Agent, attributed to Nous Research, as an autonomous, self-improving agent with persistent memory and an internal-monologue -> tool-call -> observation -> reflection loop. It claims Hermes can operate across multiple messaging platforms and generate reusable skills.
 
 The document recommends running local execution in hardened containers with read-only roots, dropped capabilities, PID limits, and restricted system calls, especially for shell/code execution.
 
@@ -135,45 +135,45 @@ Example server command from the source:
 
 ## Works cited
 
-1. Intel Arc Pro B70 Specs | TechPowerUp GPU Database — https://www.techpowerup.com/gpu-specs/arc-pro-b70.c4388
-2. Intel Arc Pro B70 Single-Fan AI & Workstation Graphics Card — Micro Center — https://www.microcenter.com/product/709007/intel-arc-pro-b70-single-fan-ai-workstation-graphics-card
-3. Intel Arc Pro B70 Graphics Card — B&H Photo — https://www.bhphotovideo.com/c/product/1959142-REG/intel_33p01ib0bb_arc_pro_b70_32gb.html
-4. Intel Arc Pro B70 Review — Puget Systems — https://www.pugetsystems.com/labs/articles/intel-arc-pro-b70-review/
-5. LLM Inference on Intel Arc Pro B60: IPEX-LLM and LlamaCPP SYCL — https://gigagpu.com/intel-arc-pro-b60-llm-inference/
-6. Arc Pro B70 Review: The best graphics card Intel has to offer — Reddit — https://www.reddit.com/r/hardware/comments/1tax6jn/arc_pro_b70_review_the_best_graphics_card_intel/
-7. llama.cpp for SYCL — GitHub — https://github.com/ggml-org/llama.cpp/blob/master/docs/backend/SYCL.md
-8. AUR: llama.cpp-sycl — Arch Linux — https://aur.archlinux.org/packages/llama.cpp-sycl
-9. I made an AUR package llama.cpp-sycl to use the Intel B70 — Reddit — https://www.reddit.com/r/IntelArc/comments/1tlcvbi/i_made_an_aur_package_llamacppsycl_to_use_the/
-10. How to Run Qwen3.6–27B Locally on Intel Arc Pro B70 — Medium — https://bibek-poudel.medium.com/how-to-run-qwen3-6-27b-locally-on-intel-arc-pro-b70-what-actually-works-c96dec67c6f7
-11. OpenVINO Model Hub — Intel — https://www.intel.com/content/www/us/en/developer/tools/openvino-toolkit/models.html
-12. Unified interface to run local LLMs on Intel Arc hardware acceleration using OpenVINO — Reddit — https://www.reddit.com/r/IntelArc/comments/1r4jy0y/unified_interface_to_run_local_llms_on_intel_arc/
-13. Release Notes for Intel Distribution of OpenVINO Toolkit 2025.3 — Intel — https://www.intel.com/content/www/us/en/developer/articles/release-notes/openvino/2025-3.html
-14. OpenVINO Model Server + GPT-OSS 20B and Intel Arc A770 — Reddit — https://www.reddit.com/r/IntelArc/comments/1sfme8u/openvino_model_server_gptoss_20b_and_intel_arc/
-15. Intel Arc Pro B70 Benchmarks & Performance Data — GitHub — https://github.com/PMZFX/intel-arc-pro-b70-benchmarks
-16. Building Agentic Multi-Agent System with AutoGen and Ollama — Medium — https://medium.com/executeautomation/building-agentic-multi-agent-system-with-autogen-and-ollama-472bab920150
-17. Breaking the Chains of Walled-Garden AI: Why I Built with Hermes Agent — DEV Community — https://dev.to/moni121189/breaking-the-chains-of-walled-garden-ai-why-i-built-with-hermes-agent-and-how-to-run-it-globally-3nn0
-18. CrewAI agent framework with local models — Reddit — https://www.reddit.com/r/LocalLLaMA/comments/18v527r/crewai_agent_framework_with_local_models/
-19. Local tool calling agents using LangChain and Ollama are inexplicably poorly performing — Reddit — https://www.reddit.com/r/LocalLLaMA/comments/1hbx96u/local_tool_calling_agents_using_langchain_and/
-20. NousResearch/DeepHermes-3-Llama-3-8B-Preview-GGUF — Hugging Face — https://huggingface.co/NousResearch/DeepHermes-3-Llama-3-8B-Preview-GGUF
-21. How to Build a Self-Hosted AI Agent (2026 Stack Guide) — Petronella Technology Group — https://petronellatech.com/blog/hermes-agent-ai-guide/
-22. Qwen3.6-35B-A3B: Agentic Coding Power, Now Open to All — Qwen — https://qwen.ai/blog?id=qwen3.6-35b-a3b
-23. Qwen 3.6-35B-A3B: Reddit Asked, So I Tested If the 3.5 Tool Calling Fixes Carry Over — Reddit — https://www.reddit.com/r/LocalLLM/comments/1sqpsut/qwen_3635ba3b_reddit_asked_so_i_tested_if_the_35/
-24. Qwen 3.5 Tool Calling Fixes for Agentic Use — Reddit — https://www.reddit.com/r/LocalLLaMA/comments/1sdhvc5/qwen_35_tool_calling_fixes_for_agentic_use_whats/
-25. Tested tool calling fixes for Qwen 3.6‑27B‑FP8 — Reddit — https://www.reddit.com/r/LocalLLM/comments/1sv6cqk/follow_up_tested_tool_calling_fixes_for_qwen/
-26. Recommendations for running custom tools with local Ollama models — CrewAI Community — https://community.crewai.com/t/recommendations-for-running-custom-tools-with-local-ollama-models-having-function-calling-capabilities/5777
-27. Qwen3.5 Tool Calling finally fixed — NVIDIA Developer Forums — https://forums.developer.nvidia.com/t/qwen3-5-tool-calling-finally-fixed-possibly/366451
-28. Introducing Tool Eval Bench CLI — NVIDIA Developer Forums — https://forums.developer.nvidia.com/t/introducing-tool-eval-bench-cli/366903/82
-29. Qwen 3/3.5/3.6 tool calling is broken — Reddit — https://www.reddit.com/r/Vllm/comments/1suasv2/qwen_33536_tool_calling_is_broken_even_worse_with/
-30. The Complete Guide to Hermes Agent — Kimi — https://www.kimi.com/resources/hermes-agent
-31. Hermes Agent Documentation — https://hermes-agent.nousresearch.com/docs/
-32. Hermes Agent — Open-Source AI Agent with Persistent Memory — https://hermes-agent.org/
-33. AI-Ecosystem: BiFrost, OpenClaw, Hermes3 — Medium — https://medium.com/@ion.stefanache0/bifrost-ai-gw-openclaw-orchestrator-and-hermes-3-gguf-format-worhing-togeter-on-ollama-rtx-4060-333b85a5d15f
-34. Using Hermes Agent to Manage Your Infrastructure with Clanker Cloud — https://clankercloud.ai/blog/hermes-agent-clanker-cloud-infrastructure-management
-35. NousResearch/Hermes-3-Llama-3.1-8B-GGUF — Hugging Face — https://huggingface.co/NousResearch/Hermes-3-Llama-3.1-8B-GGUF
-36. Hermes Agent: The Self-Improving AI That Grows With You — https://atalupadhyay.wordpress.com/2026/04/07/hermes-agent-the-self-improving-ai-that-grows-with-you/
-37. Install IPEX-LLM on Linux with Intel GPU — GitHub — https://github.com/intel/ipex-llm/blob/main/docs/mddocs/Quickstart/install_linux_gpu.md
-38. IPEX-LLM on Intel GPU — LlamaIndex Developer Documentation — https://developers.llamaindex.ai/python/framework/integrations/llm/ipex_llm_gpu/
-39. llama.cpp function calling docs — GitHub — https://github.com/ggml-org/llama.cpp/blob/master/docs/function-calling.md
+1. Intel Arc Pro B70 Specs | TechPowerUp GPU Database - https://www.techpowerup.com/gpu-specs/arc-pro-b70.c4388
+2. Intel Arc Pro B70 Single-Fan AI & Workstation Graphics Card - Micro Center - https://www.microcenter.com/product/709007/intel-arc-pro-b70-single-fan-ai-workstation-graphics-card
+3. Intel Arc Pro B70 Graphics Card - B&H Photo - https://www.bhphotovideo.com/c/product/1959142-REG/intel_33p01ib0bb_arc_pro_b70_32gb.html
+4. Intel Arc Pro B70 Review - Puget Systems - https://www.pugetsystems.com/labs/articles/intel-arc-pro-b70-review/
+5. LLM Inference on Intel Arc Pro B60: IPEX-LLM and LlamaCPP SYCL - https://gigagpu.com/intel-arc-pro-b60-llm-inference/
+6. Arc Pro B70 Review: The best graphics card Intel has to offer - Reddit - https://www.reddit.com/r/hardware/comments/1tax6jn/arc_pro_b70_review_the_best_graphics_card_intel/
+7. llama.cpp for SYCL - GitHub - https://github.com/ggml-org/llama.cpp/blob/master/docs/backend/SYCL.md
+8. AUR: llama.cpp-sycl - Arch Linux - https://aur.archlinux.org/packages/llama.cpp-sycl
+9. I made an AUR package llama.cpp-sycl to use the Intel B70 - Reddit - https://www.reddit.com/r/IntelArc/comments/1tlcvbi/i_made_an_aur_package_llamacppsycl_to_use_the/
+10. How to Run Qwen3.6-27B Locally on Intel Arc Pro B70 - Medium - https://bibek-poudel.medium.com/how-to-run-qwen3-6-27b-locally-on-intel-arc-pro-b70-what-actually-works-c96dec67c6f7
+11. OpenVINO Model Hub - Intel - https://www.intel.com/content/www/us/en/developer/tools/openvino-toolkit/models.html
+12. Unified interface to run local LLMs on Intel Arc hardware acceleration using OpenVINO - Reddit - https://www.reddit.com/r/IntelArc/comments/1r4jy0y/unified_interface_to_run_local_llms_on_intel_arc/
+13. Release Notes for Intel Distribution of OpenVINO Toolkit 2025.3 - Intel - https://www.intel.com/content/www/us/en/developer/articles/release-notes/openvino/2025-3.html
+14. OpenVINO Model Server + GPT-OSS 20B and Intel Arc A770 - Reddit - https://www.reddit.com/r/IntelArc/comments/1sfme8u/openvino_model_server_gptoss_20b_and_intel_arc/
+15. Intel Arc Pro B70 Benchmarks & Performance Data - GitHub - https://github.com/PMZFX/intel-arc-pro-b70-benchmarks
+16. Building Agentic Multi-Agent System with AutoGen and Ollama - Medium - https://medium.com/executeautomation/building-agentic-multi-agent-system-with-autogen-and-ollama-472bab920150
+17. Breaking the Chains of Walled-Garden AI: Why I Built with Hermes Agent - DEV Community - https://dev.to/moni121189/breaking-the-chains-of-walled-garden-ai-why-i-built-with-hermes-agent-and-how-to-run-it-globally-3nn0
+18. CrewAI agent framework with local models - Reddit - https://www.reddit.com/r/LocalLLaMA/comments/18v527r/crewai_agent_framework_with_local_models/
+19. Local tool calling agents using LangChain and Ollama are inexplicably poorly performing - Reddit - https://www.reddit.com/r/LocalLLaMA/comments/1hbx96u/local_tool_calling_agents_using_langchain_and/
+20. NousResearch/DeepHermes-3-Llama-3-8B-Preview-GGUF - Hugging Face - https://huggingface.co/NousResearch/DeepHermes-3-Llama-3-8B-Preview-GGUF
+21. How to Build a Self-Hosted AI Agent (2026 Stack Guide) - Petronella Technology Group - https://petronellatech.com/blog/hermes-agent-ai-guide/
+22. Qwen3.6-35B-A3B: Agentic Coding Power, Now Open to All - Qwen - https://qwen.ai/blog?id=qwen3.6-35b-a3b
+23. Qwen 3.6-35B-A3B: Reddit Asked, So I Tested If the 3.5 Tool Calling Fixes Carry Over - Reddit - https://www.reddit.com/r/LocalLLM/comments/1sqpsut/qwen_3635ba3b_reddit_asked_so_i_tested_if_the_35/
+24. Qwen 3.5 Tool Calling Fixes for Agentic Use - Reddit - https://www.reddit.com/r/LocalLLaMA/comments/1sdhvc5/qwen_35_tool_calling_fixes_for_agentic_use_whats/
+25. Tested tool calling fixes for Qwen 3.6-27B-FP8 - Reddit - https://www.reddit.com/r/LocalLLM/comments/1sv6cqk/follow_up_tested_tool_calling_fixes_for_qwen/
+26. Recommendations for running custom tools with local Ollama models - CrewAI Community - https://community.crewai.com/t/recommendations-for-running-custom-tools-with-local-ollama-models-having-function-calling-capabilities/5777
+27. Qwen3.5 Tool Calling finally fixed - NVIDIA Developer Forums - https://forums.developer.nvidia.com/t/qwen3-5-tool-calling-finally-fixed-possibly/366451
+28. Introducing Tool Eval Bench CLI - NVIDIA Developer Forums - https://forums.developer.nvidia.com/t/introducing-tool-eval-bench-cli/366903/82
+29. Qwen 3/3.5/3.6 tool calling is broken - Reddit - https://www.reddit.com/r/Vllm/comments/1suasv2/qwen_33536_tool_calling_is_broken_even_worse_with/
+30. The Complete Guide to Hermes Agent - Kimi - https://www.kimi.com/resources/hermes-agent
+31. Hermes Agent Documentation - https://hermes-agent.nousresearch.com/docs/
+32. Hermes Agent - Open-Source AI Agent with Persistent Memory - https://hermes-agent.org/
+33. AI-Ecosystem: BiFrost, OpenClaw, Hermes3 - Medium - https://medium.com/@ion.stefanache0/bifrost-ai-gw-openclaw-orchestrator-and-hermes-3-gguf-format-worhing-togeter-on-ollama-rtx-4060-333b85a5d15f
+34. Using Hermes Agent to Manage Your Infrastructure with Clanker Cloud - https://clankercloud.ai/blog/hermes-agent-clanker-cloud-infrastructure-management
+35. NousResearch/Hermes-3-Llama-3.1-8B-GGUF - Hugging Face - https://huggingface.co/NousResearch/Hermes-3-Llama-3.1-8B-GGUF
+36. Hermes Agent: The Self-Improving AI That Grows With You - https://atalupadhyay.wordpress.com/2026/04/07/hermes-agent-the-self-improving-ai-that-grows-with-you/
+37. Install IPEX-LLM on Linux with Intel GPU - GitHub - https://github.com/intel/ipex-llm/blob/main/docs/mddocs/Quickstart/install_linux_gpu.md
+38. IPEX-LLM on Intel GPU - LlamaIndex Developer Documentation - https://developers.llamaindex.ai/python/framework/integrations/llm/ipex_llm_gpu/
+39. llama.cpp function calling docs - GitHub - https://github.com/ggml-org/llama.cpp/blob/master/docs/function-calling.md
 
 ## Initial Validation Notes
 
