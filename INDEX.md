@@ -19,9 +19,12 @@ Use [VALIDATION.md](VALIDATION.md) for the status of important claims and
 | [04 - GPU and Accelerator Tuning](chapters/04-gpu-and-accelerator-tuning.md) | AMD/Intel GPU behavior and tuning | Hardware-specific experiments | Partly supported; hardware claims need testing |
 | [05 - AI-Guided Tuning](chapters/05-ai-guided-tuning.md) | Automated tuning and agent approaches | Architecture and research backlog | Partly supported; implementation claims remain provisional |
 | [06 - Security and Hardening](chapters/06-security-and-hardening.md) | Linux security and operational defense | Threat model and deployment hardening | Partly supported; deployment validation required |
-| [07 - Tokenomics and Incentives](chapters/07-tokenomics-and-incentives.md) | DePIN models and incentive mechanisms | Economic design research | Unvalidated for decisions |
+| [07 - Tokenomics and Incentives](chapters/07-tokenomics-and-incentives.md) | DePIN models and incentive mechanisms | Economic design research | Superseded for CursiveOS design by Chapter 11; useful comparison material |
 | [08 - Firmware and BIOS Control](chapters/08-firmware-and-bios-control.md) | UEFI, BIOS, BMC/Redfish, boot control, firmware mutation | Whole-machine self-optimization architecture | Core interfaces supported; platform-specific testing required |
 | [09 - Local Agent Setup for Arc B70](chapters/09-local-agent-arc-b70.md) | Arc Pro B70 local agent stack, Hermes, model/tool behavior | Current local-agent implementation planning | Current Hermes context constraint validated locally; performance remains partly supported or unvalidated |
+| [10 - Seed Organism and Sensor Array](chapters/10-seed-organism-and-sensor-array.md) | Phase 0 organism loop, sensors, population confirmation, truth model | Evidence model, selection pressure, CursiveRoot fitness logic | Current project architecture from main repo; implementation still maturing |
+| [11 - Bitcoin-Native Economics and Proof of Useful Optimization](chapters/11-bitcoin-native-economics-and-proof-of-useful-optimization.md) | Layer 5 v3.3 economics, no-token design, BTC contributor payouts | Contributor incentives and economic metabolism | Current project architecture from main repo; specified, not yet deployed for real payments |
+| [12 - Measurement Daemon and Natural-Language Shell](chapters/12-measurement-daemon-and-natural-language-shell.md) | Deterministic measurement daemon vs probabilistic shell agent | Agent trust boundaries and v1.0 operator interface | Daemon specified; shell architectural sketch, not implemented |
 
 ## Confidence Labels
 
