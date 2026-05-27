@@ -4,6 +4,37 @@ This file records meaningful changes to research guidance, validation status,
 and corpus process. It is intended to be readable without reconstructing a
 chain of supporting documents.
 
+## 2026-05-27 - Integrated Missing Architecture from Main CursiveOS Repo
+
+Changed:
+
+- Added `chapters/10-seed-organism-and-sensor-array.md` from the current main
+  `CursiveOS` repo architecture.
+- Added `chapters/11-bitcoin-native-economics-and-proof-of-useful-optimization.md`
+  from Layer 5 Economics v3.3.
+- Added `chapters/12-measurement-daemon-and-natural-language-shell.md` from the
+  main repo agent architecture.
+- Updated `INDEX.md` so the new chapters are first-class corpus entries.
+- Marked Chapter 07's tokenomics research as comparison material superseded for
+  CursiveOS's own design by the Bitcoin-native v3.3 architecture in Chapter 11.
+
+Reason:
+
+The research corpus had validation and external research, but it had not fully
+absorbed the live architecture already specified in the main `CursiveOS` repo.
+That left important research gaps around the seed organism, evidence model,
+sensor array, proof of useful optimization, economic metabolism, measurement
+daemon, and natural-language shell trust boundary.
+
+Evidence and confidence:
+
+| Finding | Status | Evidence |
+| --- | --- | --- |
+| The seed organism is a Phase 0 loop built from reversible presets, paired measurement, CursiveRoot submission, sensor evaluation, and candidate selection. | Supported as current project architecture | Main `CursiveOS` `README.md`, `white-paper.md`, `docs/architecture/sensor-array.md`, and `ROADMAP.md`. |
+| The current CursiveOS economics design is Bitcoin-native and does not use a custom token, pool, voting, or governance. | Supported as current project architecture | Main `CursiveOS` `docs/specs/layer5-economics-v3.3.md` and `white-paper.md`. |
+| The measurement daemon and natural-language shell must remain separate trust domains. | Supported as current project architecture | Main `CursiveOS` `docs/architecture/agent-architecture.md`. |
+| The natural-language shell is planned, not implemented. | Supported | Main `CursiveOS` `docs/architecture/agent-architecture.md` and `ROADMAP.md`. |
+
 ## 2026-05-26 - Simplified the Corpus Workflow
 
 Changed:
