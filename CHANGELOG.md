@@ -4,6 +4,23 @@ This file records meaningful changes to research guidance, validation status,
 and corpus process. It is intended to be readable without reconstructing a
 chain of supporting documents.
 
+## 2026-05-27 - Ingested Software Organisms Self-Improvement Research Packet
+
+Changed:
+
+- Added `sources/intake/software-organisms-self-improvement-research-intake.md`.
+- Expanded `chapters/14-peer-reviewed-research-recursive-self-improvement-and-agentic-evolution.md` using the uploaded `Software Organisms_ Self-Improvement Research.md` document.
+- Expanded `sources/peer-reviewed-rsi-selected-sources.md` with additional systems and papers from the intake packet, including Gödel Agent, Polaris, Programmatic Skill Networks, Darwin Gödel Machine, CodeEvolve, Process-Based Self-Rewarding, Noise-to-Meaning RSI, TerraLingua, and open-ended AI safety research.
+- Strengthened Chapter 14's taxonomy, verifier/fitness discussion, sandboxing section, failure-mode table, and software-organism lessons.
+
+Reason:
+
+The uploaded document provided a richer research synthesis than the initial Chapter 14 seed. The corpus now captures the document's strongest findings as compressed research memory while avoiding verbatim mirroring of the full uploaded text.
+
+Caveat:
+
+Some numeric claims and newer/preprint sources in the uploaded packet still require source-level validation before they become decision-driving claims.
+
 ## 2026-05-27 - Added Peer-Reviewed Research Digest for Recursive Self-Improvement
 
 Changed:
