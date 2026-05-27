@@ -20,7 +20,7 @@ The key principle: no B70 performance, model, backend, tool-calling, or long-con
 | CH09-BM-004 | OpenVINO GenAI/OVMS viability | supported generally; B70-specific unverified | Convert/test supported models and compare throughput, latency, tool-output structure, and memory behavior. |
 | CH09-BM-005 | MoE models outperform dense models for local agents | unverified | Compare dense/MoE candidates on throughput, latency, power, tool-call success, loop rate, and task success. |
 | CH09-BM-006 | Qwen parser/template recommendations reduce tool-call failures | unverified | Run deterministic tool-calling harness across parser/template combinations. |
-| CH09-BM-007 | 8k context is more responsive than 16k/32k for personal agents | unverified | Measure prefill, decode, TTFT, VRAM use, and successful task completion across context lengths. |
+| CH09-BM-007 | Smaller active prompt/tool/history footprints improve Hermes responsiveness within its required context window | corrected from local inspection; performance unverified | For Hermes, configure at least 64,000 tokens and vary injected schema/history footprint; separately test 8k/16k/32k configured contexts only on runtimes that permit them. |
 | CH09-BM-008 | Hermes/OpenClaw/Bifrost/Clanker stack is viable locally | unverified | Validate repos, install path, licenses, maintenance status, local endpoint compatibility, and sandbox behavior. |
 
 ## Required Environment Capture
@@ -134,21 +134,35 @@ Preferred measurement methods:
 
 ## Context Scaling Test
 
-Run each viable model at:
+Separate general runtime context-capacity testing from Hermes operating-profile testing.
+
+For server/runtime paths that permit smaller configured windows, run each viable model at:
 
 ```text
-8k context
-16k context
-32k context if memory allows
+8k configured context
+16k configured context
+32k configured context if memory allows
 ```
 
-For each context size:
+For each configured context size:
 
 1. Load model fresh.
 2. Run a fixed 512-token prefill prompt.
 3. Run a fixed decode target, such as 128 and 512 generated tokens.
 4. Run a long-context retrieval prompt with facts placed near the beginning, middle, and end.
 5. Record VRAM, TTFT, decode speed, errors, and output quality.
+
+For Hermes Agent specifically, do not use 8k as the configured context target unless its implementation changes. The build inspected on 2026-05-26 enforces `MINIMUM_CONTEXT_LENGTH = 64_000`, and the deployed configuration uses 65,536 tokens. Run Hermes at a configured context of at least 64,000 tokens while varying the active request footprint:
+
+```text
+minimal no-tool request
+core interactive tool profile
+expanded tool profile
+short fresh session history
+accumulated session history
+```
+
+For each Hermes footprint, record prompt tokens, serialized tool-schema size, TTFT, end-to-end latency, cache-warm versus cache-cold behavior, VRAM, tool-call validity, and task outcome. The tuning target is the smallest practical active prompt/tool/history payload inside Hermes' required configured context window, not an unsupported 8k Hermes context setting.
 
 Acceptance target for personal-agent mode:
 
@@ -297,7 +311,7 @@ Recommended JSON output shape:
     "name": "...",
     "quantization": "...",
     "file_hash": "sha256:...",
-    "context_length": 16384
+    "context_length": 65536
   },
   "metrics": {
     "prefill_tps": 0.0,
