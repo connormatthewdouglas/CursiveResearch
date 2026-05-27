@@ -26,6 +26,7 @@ Use [VALIDATION.md](VALIDATION.md) for the status of important claims and
 | [11 - Bitcoin-Native Economics and Proof of Useful Optimization](chapters/11-bitcoin-native-economics-and-proof-of-useful-optimization.md) | Layer 5 v3.3 economics, no-token design, BTC contributor payouts | Contributor incentives and economic metabolism | Current project architecture from main repo; specified, not yet deployed for real payments |
 | [12 - Measurement Daemon and Natural-Language Shell](chapters/12-measurement-daemon-and-natural-language-shell.md) | Deterministic measurement daemon vs probabilistic shell agent | Agent trust boundaries and v1.0 operator interface | Daemon specified; shell architectural sketch, not implemented |
 | [13 - Main Repo Gap Closure and Research Backlog](chapters/13-main-repo-gap-closure-and-research-backlog.md) | Mapping main repo architecture to research gaps and next research targets | Gap closure, backlog prioritization, implementation research planning | Current synthesis; use to decide next corpus expansion |
+| [14 - Peer-Reviewed Research: Recursive Self-Improvement and Agentic Evolution](chapters/14-peer-reviewed-research-recursive-self-improvement-and-agentic-evolution.md) | Published research on self-improving agents, evolutionary coding, evaluator-grounded discovery, and benchmark discipline | Foundational literature for software-organism research | Structured digest; source-level review started, not exhaustive |
 
 ## Confidence Labels
 
