@@ -4,6 +4,19 @@ This file records meaningful changes to research guidance, validation status,
 and corpus process. It is intended to be readable without reconstructing a
 chain of supporting documents.
 
+## 2026-05-27 - Added Peer-Reviewed Research Digest for Recursive Self-Improvement
+
+Changed:
+
+- Added `chapters/14-peer-reviewed-research-recursive-self-improvement-and-agentic-evolution.md`.
+- Added `sources/peer-reviewed-rsi-selected-sources.md` with the initial paper/source set.
+- Added Chapter 14 to `INDEX.md`.
+- Framed the new chapter as a structured digest of published research rather than an implementation spec or verbatim paper archive.
+
+Reason:
+
+The corpus needs compressed research memory from high-value papers and systems so future agents can learn core findings without rereading entire papers verbatim. The first intake focuses on evaluator-grounded discovery, recursive scaffold improvement, agent memory, self-evaluation risks, and agent benchmark discipline.
+
 ## 2026-05-27 - Added Research Pipeline and Reasserted Research/Spec Boundary
 
 Changed:
