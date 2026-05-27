@@ -4,6 +4,31 @@ This file records meaningful changes to research guidance, validation status,
 and corpus process. It is intended to be readable without reconstructing a
 chain of supporting documents.
 
+## 2026-05-27 - Hermes Background Load Reliability
+
+Changed:
+
+- Added a validation note for a local Hermes load issue where foreground
+  Telegram work competed with automatic background skill review on the same
+  Arc-hosted OVMS model.
+- Recorded that the failure mode was associated with concurrent local-model
+  requests and OVMS dynamic cache saturation, not host CPU or RAM exhaustion.
+- Recorded the operational mitigation: disabling periodic memory/skill reviews,
+  disabling Hermes cron jobs, and changing gateway readiness to wait for an
+  actual model completion rather than `/v3/models` availability.
+
+Evidence and confidence:
+
+| Finding | Status | Evidence |
+| --- | --- | --- |
+| Background self-review can starve foreground Hermes turns on the inspected single-local-model deployment. | Locally reproduced operational issue | Gateway/session logs and OVMS executor logs from 2026-05-27. |
+| `/v3/models` readiness is insufficient for OVMS startup gating. | Locally reproduced operational issue | OVMS returned model-list availability before the mediapipe graph accepted completions; corrected guard waited for a successful completion. |
+| Disabling background review/cron reduces competing model load. | Operational mitigation applied | Hermes configuration and cron settings updated on 2026-05-27; direct health request completed in approximately 1.33 seconds after mitigation. |
+
+Supporting detail:
+
+- `validation/notes/2026-05-27-hermes-background-load-reliability.md`
+
 ## 2026-05-26 - Simplified the Corpus Workflow
 
 Changed:

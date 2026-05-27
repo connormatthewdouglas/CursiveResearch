@@ -40,3 +40,9 @@ currently believes is useful, and `VALIDATION.md` should identify important
 remaining uncertainty. Routine changes do not require a separate source ID,
 validation note, or ledger entry; add detailed evidence only when it will help
 repeat, audit, or reverse a consequential decision.
+
+## Recent Operational Evidence
+
+| Date | Note | Why It Matters |
+| --- | --- | --- |
+| 2026-05-27 | [Hermes background load reliability](validation/notes/2026-05-27-hermes-background-load-reliability.md) | Shows that automatic skill/memory review and cron work can compete with foreground Telegram work on the same local OVMS model; records the mitigation used on the inspected deployment. |
