@@ -4,6 +4,22 @@ This file records meaningful changes to research guidance, validation status,
 and corpus process. It is intended to be readable without reconstructing a
 chain of supporting documents.
 
+## 2026-05-27 - Added Research Pipeline and Reasserted Research/Spec Boundary
+
+Changed:
+
+- Added root `RESEARCH_PIPELINE.md` as the agent-facing queue for future corpus work.
+- Trifurcated the pipeline into `New Research`, `Knowledge Gaps`, and `Experimental Lift`.
+- Populated `New Research` with foundational literature targets including recursive self-improvement, agent-operable firmware/BIOS control surfaces, software-organism theory, local-agent safety, hardware optimization foundations, Arc B70/Intel AI stack research, and Bitcoin-native contributor economics.
+- Populated `Knowledge Gaps` with conceptual questions that need synthesis before implementation decisions.
+- Populated `Experimental Lift` with proposed experiments from existing chapters and validation plans.
+- Updated `README.md` to make clear that this repository is a research corpus, while concrete organism specs and implementation artifacts belong in the main `CursiveOS` repo.
+- Updated `methodology/maintaining-the-corpus.md` so future agents start from `RESEARCH_PIPELINE.md` and maintain the research/spec boundary.
+
+Reason:
+
+The previous gap list leaned too far toward implementation specs. The corpus should stay focused on foundational knowledge: papers, literature, hardware/OS research, agent safety, software-organism theory, and external systems. Experiments still matter, but they belong in the experimental lift lane or the main implementation repo when they become executable work.
+
 ## 2026-05-27 - Added Main Repo Gap Closure Synthesis
 
 Changed:
@@ -93,7 +109,7 @@ Changed:
 Evidence and confidence:
 
 | Finding | Status | Evidence |
-| --- | --- | --- |
+| --- | --- |
 | Current Hermes build requires at least 64,000 configured tokens and is configured for 65,536. | Validated for the inspected local deployment | Local Hermes source and `~/.hermes/config.yaml` inspection on 2026-05-26. |
 | Reducing active tool/schema payload may improve responsiveness. | Supported, not validated | Initial tool-envelope diagnostic observations; uncontrolled cache state and no repeated benchmark. |
 | Basic structured tool calls can be returned through the current OVMS/parser path. | Supported, not broadly validated | Initial local calls for `read_file`, `skills_list`, and `session_search`. |
