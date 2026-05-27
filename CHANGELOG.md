@@ -14,6 +14,8 @@ Changed:
 - Added `VALIDATION.md` as the compact status page for important claims.
 - Replaced the required source-index/ledger/note pipeline with optional deep
   evidence records only when useful.
+- Retired `validation/validation-ledger.md` as an active workflow document; it
+  now points readers to the compact status page and retained supporting notes.
 - Retained original uploaded documents as immutable intake snapshots.
 
 Reason:
