@@ -4,6 +4,18 @@ This file records meaningful changes to research guidance, validation status,
 and corpus process. It is intended to be readable without reconstructing a
 chain of supporting documents.
 
+## 2026-05-27 - Added Document Intake Policy
+
+Changed:
+
+- Added `methodology/document-intake-policy.md`.
+- Made the default document-intake posture explicit: substantially incorporate useful non-overlapping research rather than reducing rich documents to tiny summaries.
+- Clarified when to merge, omit, or compress uploaded research material.
+
+Reason:
+
+Future agents need a clear standing rule: when the user provides a research document, most useful material should make it into the corpus unless it overlaps existing coverage, is low-confidence, is outside scope, belongs in the implementation repo, or is better represented as a summary.
+
 ## 2026-05-27 - Ingested Software Organisms Self-Improvement Research Packet
 
 Changed:
