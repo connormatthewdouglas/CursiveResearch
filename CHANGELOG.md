@@ -4,6 +4,19 @@ This file records meaningful changes to research guidance, validation status,
 and corpus process. It is intended to be readable without reconstructing a
 chain of supporting documents.
 
+## 2026-05-27 - Properly Incorporated Software Organisms RSI Research Packet
+
+Changed:
+
+- Added `chapters/15-foundations-of-software-organisms-rsi-critical-synthesis.md`.
+- Added Chapter 15 to `INDEX.md`.
+- Promoted more of the uploaded `Software Organisms_ Self-Improvement Research.md` into the corpus as a dedicated critical-synthesis chapter rather than leaving it only as an intake note plus Chapter 14 expansion.
+- Preserved the uploaded document's stronger software-organism framing: what is demonstrated, what remains speculative, what is overhyped, layered taxonomy of self-improvement loops, verifier/fitness framing, sandboxing-as-feedback, runtime self-modification risks, maturity-aware gating, multi-objective fitness, and adopt/avoid/caution guidance.
+
+Reason:
+
+The corpus intake policy now favors substantial incorporation of useful non-overlapping research. The first intake pass compressed the document too aggressively. Chapter 15 keeps Chapter 14 as the paper/system digest while preserving the uploaded document's broader conceptual and organism-specific synthesis.
+
 ## 2026-05-27 - Added Document Intake Policy
 
 Changed:
