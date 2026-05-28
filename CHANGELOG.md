@@ -4,6 +4,18 @@ This file records meaningful changes to research guidance, validation status,
 and corpus process. It is intended to be readable without reconstructing a
 chain of supporting documents.
 
+## 2026-05-27 - Added Paper Extraction Policy
+
+Changed:
+
+- Added `methodology/paper-extraction-policy.md`.
+- Defined a deeper extraction standard for important papers so the corpus captures methods, mechanisms, experiments, results, limitations, and implications rather than only links and short summaries.
+- Added a reusable extraction template for cornerstone, important, supporting, and lead-only papers.
+
+Reason:
+
+The corpus should optimize for useful research memory, not small file size. Important papers should be deeply paraphrased and structured so future agents can understand what was done, what was measured, what improved, who judged improvement, what failed, and what the corpus should learn without mirroring copyrighted papers verbatim.
+
 ## 2026-05-27 - Properly Incorporated Software Organisms RSI Research Packet
 
 Changed:
