@@ -8,6 +8,20 @@ The research corpus should not become a link farm. When a paper is important, th
 
 The goal is **high-density research memory**, not minimal summaries.
 
+## Core Principle: Low-Discretion Extraction First
+
+The extractor should not be the sole judge of what matters.
+
+For important papers, first preserve a neutral map of what the paper itself contains. Only after that should the extractor add interpretation, ranking, and corpus relevance.
+
+Every deep extraction should separate:
+
+1. **Paper-faithful extraction** — what the paper says, does, measures, claims, and concludes.
+2. **Corpus synthesis** — what we think it means for software organisms, CursiveOS, agents, benchmarks, hardware, or optimization.
+3. **Extractor judgment** — what seems important, weak, overclaimed, or transferable.
+
+This prevents an agent from silently discarding details because it guessed they were not important.
+
 ## Copyright Boundary
 
 Do not mirror full papers or copy long paper sections verbatim into the repo.
@@ -42,27 +56,34 @@ A useful target is roughly:
 
 Optimize for useful information, not small file size.
 
-## Extraction Template
+## Required Deep Extraction Structure
 
-For each important paper, extract:
+For cornerstone papers, use this structure.
 
 ```markdown
-## <Paper Title>
+# <Paper Title> — Deep Extraction
 
 Source: <link>
 Authors / Lab: <authors or organization>
 Year / Venue: <year, venue, preprint status>
 Corpus Status: supported | unvalidated | partially validated | speculative
+Extraction Type: cornerstone | important | supporting | lead-only
 
-### Why This Paper Matters
+## 1. Paper Map
 
-Explain why this source is worth corpus space.
+List the paper's actual sections and what each section does.
 
-### Core Thesis
+| Paper Section | What It Covers | Why It Exists In The Paper |
+| --- | --- | --- |
 
-State the paper's central claim in plain language.
+## 2. Author's Core Claims
 
-### System / Method Architecture
+Extract the paper's major claims in neutral language before adding our judgment.
+
+| Claim | Where It Appears | Evidence Used By Authors | Extraction Confidence |
+| --- | --- | --- | --- |
+
+## 3. System / Method Architecture
 
 Describe the system, algorithm, agent loop, experimental setup, or theoretical mechanism.
 
@@ -74,14 +95,14 @@ candidate generator
 -> archive
 -> next candidate
 
-### Key Mechanisms
+## 4. Key Mechanisms Inventory
 
-List the important mechanisms the paper introduces or uses.
+List the important mechanisms the paper introduces or uses. Do not include only the mechanisms that seem immediately relevant to CursiveOS; preserve the paper's mechanism set first.
 
-| Mechanism | What It Does | Why It Matters |
-| --- | --- | --- |
+| Mechanism | What It Does | Inputs | Outputs | Why It Matters |
+| --- | --- | --- | --- | --- |
 
-### Experimental Setup
+## 5. Experimental Setup
 
 Extract the actual experimental design:
 
@@ -91,36 +112,67 @@ Extract the actual experimental design:
 - models;
 - compute assumptions if available;
 - evaluation metrics;
-- repetitions/holdouts if available.
+- repetitions/holdouts if available;
+- ablations if available.
 
-### Reported Results
+| Experiment | Task/Environment | Baseline | Metric | What It Tests |
+| --- | --- | --- | --- | --- |
 
-Summarize the important reported results with numbers when available.
+## 6. Results Inventory
 
-| Result | Metric | Comparison | Caveat |
+Extract reported results with numbers when available. Include caveats and uncertainty.
+
+| Result | Metric | Comparison | Author Interpretation | Caveat |
+| --- | --- | --- | --- | --- |
+
+## 7. Figures and Tables Inventory
+
+Do not copy figures/tables wholesale. Describe each important figure/table and what information it contains.
+
+| Figure/Table | What It Shows | Important Takeaway | Should Corpus Recreate/Summarize? |
 | --- | --- | --- | --- |
 
-### Limitations and Failure Modes
+## 8. Limitations Stated By Authors
 
-What the paper admits, what it does not test, and what could fail.
+List the limitations the authors explicitly acknowledge.
 
-### What Transfers to Software Organisms
+## 9. Limitations Inferred By Corpus
+
+List limitations or risks the paper does not fully handle.
+
+## 10. Failure Modes and Safety Concerns
+
+Extract any failure modes, negative results, instability, safety caveats, or misuse concerns.
+
+## 11. What Transfers To Software Organisms
 
 Explain what the corpus should learn from the paper.
 
-### What Does Not Transfer
+## 12. What Does Not Transfer
 
 Explain what should not be generalized.
 
-### CursiveOS / Corpus Implications
+## 13. CursiveOS / Corpus Implications
 
 Research implications only. Do not write implementation specs.
 
-### Open Questions
+## 14. Open Questions
 
 List questions this paper leaves unresolved.
 
-### Source Reliability
+## 15. Extraction Coverage Notes
+
+State what was extracted deeply and what was not.
+
+Examples:
+
+- All major claims extracted: yes/no.
+- All experiments extracted: yes/no.
+- All figures/tables inventoried: yes/no.
+- Source-level validation complete: yes/no.
+- Sections intentionally skipped or compressed: <list and why>.
+
+## 16. Source Reliability
 
 Assess whether this is peer reviewed, a preprint, a technical report, official repo, blog post, or secondary source.
 ```
@@ -129,8 +181,8 @@ Assess whether this is peer reviewed, a preprint, a technical report, official r
 
 | Level | Extraction Depth |
 | --- | --- |
-| Cornerstone | Full deep extraction using the complete template. |
-| Important | Use most of the template; focus on method/results/limitations. |
+| Cornerstone | Full deep extraction using the complete template. Must include paper map, claim inventory, experiment inventory, result inventory, figure/table inventory, and coverage notes. |
+| Important | Use most of the template; focus on method, claims, results, limitations, and transfer analysis. |
 | Supporting | Shorter structured note with relevance and key claims. |
 | Lead Only | Link plus one paragraph explaining why it may matter later. |
 
@@ -138,13 +190,17 @@ Assess whether this is peer reviewed, a preprint, a technical report, official r
 
 A cornerstone paper should usually get:
 
+- paper section map;
+- author's major claim inventory;
 - architecture/mechanism explanation;
 - evaluator/fitness analysis;
 - experimental setup;
 - reported results table;
+- figure/table inventory;
 - limitations/failure modes;
 - transfer/non-transfer analysis;
-- direct research implications.
+- direct research implications;
+- extraction coverage notes.
 
 For the recursive self-improvement chapter, cornerstone papers include at least:
 
@@ -164,24 +220,49 @@ Instead:
 - describe the figure in our own words;
 - extract the conceptual flow;
 - recreate only simple original diagrams as corpus synthesis;
-- attribute the source.
+- attribute the source;
+- inventory the figure/table so future agents know what existed even if it was not fully recreated.
 
 For tables:
 
 - do not copy large tables verbatim;
 - extract the fields that matter;
-- reframe them around corpus questions.
+- reframe them around corpus questions;
+- record if a table was omitted and why.
+
+## Anti-Overfiltering Rule
+
+For cornerstone papers, do not only extract what appears immediately useful to CursiveOS.
+
+Preserve:
+
+- all major claims;
+- all experiments;
+- all headline results;
+- all stated limitations;
+- all major mechanisms;
+- all important figures/tables as descriptions;
+- any negative or null results;
+- any safety, cost, compute, scaling, or reproducibility caveats.
+
+Then add a separate section explaining what is most relevant to CursiveOS.
 
 ## Extraction Quality Test
 
 A paper extraction is good if a future agent can answer:
 
 1. What did the paper actually do?
-2. What was measured?
-3. What improved?
-4. Who or what judged improvement?
-5. What are the limitations?
-6. What should the corpus learn?
-7. What should the corpus not overclaim?
+2. What sections did the paper contain?
+3. What did the authors claim?
+4. What was measured?
+5. What improved?
+6. Who or what judged improvement?
+7. What experiments and baselines were used?
+8. What results were reported?
+9. What limitations did the authors admit?
+10. What limitations do we infer?
+11. What should the corpus learn?
+12. What should the corpus not overclaim?
+13. What was intentionally omitted or compressed from the extraction?
 
 If the extraction cannot answer those questions, it is too shallow.
