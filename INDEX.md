@@ -27,6 +27,7 @@ Use [VALIDATION.md](VALIDATION.md) for the status of important claims and
 | [12 - Measurement Daemon and Natural-Language Shell](chapters/12-measurement-daemon-and-natural-language-shell.md) | Deterministic measurement daemon vs probabilistic shell agent | Agent trust boundaries and v1.0 operator interface | Daemon specified; shell architectural sketch, not implemented |
 | [13 - Main Repo Gap Closure and Research Backlog](chapters/13-main-repo-gap-closure-and-research-backlog.md) | Mapping main repo architecture to research gaps and next research targets | Gap closure, backlog prioritization, implementation research planning | Current synthesis; use to decide next corpus expansion |
 | [14 - Peer-Reviewed Research: Recursive Self-Improvement and Agentic Evolution](chapters/14-peer-reviewed-research-recursive-self-improvement-and-agentic-evolution.md) | Published research on self-improving agents, evolutionary coding, evaluator-grounded discovery, and benchmark discipline | Foundational literature for software-organism research | Structured digest; source-level review started, not exhaustive |
+| [15 - Foundations of Software Organisms: RSI Critical Synthesis](chapters/15-foundations-of-software-organisms-rsi-critical-synthesis.md) | Critical synthesis of the uploaded software-organisms/self-improvement research packet | Software-organism theory, verifier/fitness framing, failure modes, and adoption/avoidance lessons | Substantial intake synthesis; some source claims still need source-level validation |
 
 ## Confidence Labels
 
