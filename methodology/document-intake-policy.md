@@ -1,6 +1,8 @@
 # Document Intake Policy
 
-Status: Active corpus policy.
+Status: Supporting detail. Start with
+[../CORPUS_WORKFLOW.md](../CORPUS_WORKFLOW.md) for the current simplified
+workflow.
 
 ## Default Posture
 
@@ -12,7 +14,7 @@ The corpus should absorb most useful, non-overlapping research from the document
 
 For each uploaded research document:
 
-1. Preserve an intake record or source record.
+1. Preserve the original source file or intake record.
 2. Compare the document against existing chapters.
 3. Add most useful non-overlapping content to the relevant chapter or create a new chapter.
 4. Keep strong definitions, taxonomies, frameworks, source leads, caveats, and research conclusions.

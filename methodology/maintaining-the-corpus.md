@@ -1,5 +1,9 @@
 # Maintaining the Research Corpus
 
+Status: Supporting detail. Start with
+[../CORPUS_WORKFLOW.md](../CORPUS_WORKFLOW.md) for the current simplified
+workflow.
+
 ## Goal
 
 Maintain research that is easy to read, easy to correct, and honest about what
@@ -14,8 +18,8 @@ in the main `CursiveOS` repo.
 
 ## Core Rules
 
-1. Preserve supplied originals in `sources/original-docx/`; do not edit those
-   files after intake.
+1. Preserve supplied originals and rights-cleared full papers; do not edit those
+   files after intake except to add metadata or attribution around them.
 2. Treat `chapters/` as living research documents. Directly correct or improve
    chapter guidance when new evidence changes the answer.
 3. Use `RESEARCH_PIPELINE.md` as the active queue for missing research, knowledge
@@ -33,8 +37,10 @@ in the main `CursiveOS` repo.
 
 | File / Directory | Responsibility |
 | --- | --- |
+| `CORPUS_WORKFLOW.md` | Primary simplified workflow for intake, papers, corrections, experiments, and minimum recordkeeping. |
 | `RESEARCH_PIPELINE.md` | Active research queue, divided into New Research, Knowledge Gaps, and Experimental Lift. |
 | `chapters/` | Current readable research and practical research guidance. Editable. |
+| `papers/` | Peer-research paper library. Store full text only for rights-cleared papers; otherwise store extraction and metadata. |
 | `CHANGELOG.md` | Required dated record of material research edits and their reasons. |
 | `VALIDATION.md` | Current validation state for important claims. Keep compact. |
 | `sources/original-docx/` | Immutable submitted source snapshots. |
@@ -127,6 +133,10 @@ When a contributor provides a document or research package:
 
 The original file preserves what was received. The Markdown chapter is allowed
 to evolve after import; it does not need to preserve outdated wording.
+
+For papers, use `papers/README.md` and `methodology/paper-extraction-policy.md`.
+The short version: full text is allowed for rights-cleared papers; otherwise
+prefer citation plus deep extraction.
 
 ## When To Validate
 

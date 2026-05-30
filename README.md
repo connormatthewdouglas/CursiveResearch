@@ -1,14 +1,14 @@
 # CursiveResearch
 
-Private living research corpus for the CursiveOS team.
+Living research corpus for the CursiveOS team.
 
 ## Start Here
 
-Read [INDEX.md](INDEX.md) for the chapter library, [RESEARCH_PIPELINE.md](RESEARCH_PIPELINE.md)
-for the active research queue, [VALIDATION.md](VALIDATION.md) for the current confidence
-level of important claims, and [CHANGELOG.md](CHANGELOG.md) for material edits. See
-[methodology/maintaining-the-corpus.md](methodology/maintaining-the-corpus.md) when
-adding or reorganizing research.
+Read [CORPUS_WORKFLOW.md](CORPUS_WORKFLOW.md) first when adding or reorganizing
+research. Use [INDEX.md](INDEX.md) for the chapter library,
+[RESEARCH_PIPELINE.md](RESEARCH_PIPELINE.md) for the active research queue,
+[VALIDATION.md](VALIDATION.md) for important claim status, and
+[CHANGELOG.md](CHANGELOG.md) for material edits.
 
 ## Purpose
 
@@ -28,8 +28,10 @@ does not imply that every claim has been proven.
 
 | Path | Purpose |
 | --- | --- |
+| `CORPUS_WORKFLOW.md` | Primary workflow for uploads, papers, corrections, experiments, and minimum recordkeeping. |
 | `RESEARCH_PIPELINE.md` | Active queue of new research, knowledge gaps, and experimental lift. Start here when deciding what to research next. |
 | `chapters/` | Living research chapters organized by topic. Direct edits are expected when research conclusions change. |
+| `papers/` | Peer-research paper library. Full verbatim text is allowed only for rights-cleared papers. |
 | `CHANGELOG.md` | Required dated record of meaningful chapter, methodology, and evidence changes. |
 | `VALIDATION.md` | Compact status register for claims that affect implementation or decisions. |
 | `sources/original-docx/` | Preserved original Word documents. Treat these as immutable input snapshots. |
@@ -41,8 +43,8 @@ does not imply that every claim has been proven.
 
 ## Working Rule
 
-Preserve the uploaded originals, but do not freeze the chapters. When research
-changes what the project should believe:
+Preserve uploaded originals and rights-cleared full papers, but do not freeze
+the chapters. When research changes what the project should believe:
 
 1. Edit the relevant chapter so it gives the current best research guidance.
 2. Add a dated entry to `CHANGELOG.md` explaining what changed and why.
@@ -53,6 +55,13 @@ changes what the project should believe:
 
 Long evidence notes and benchmark logs are optional. Create them only when the
 detail will matter again.
+
+## Paper Rule
+
+The corpus may store full verbatim papers under `papers/` when the license or
+permission clearly allows redistribution. Otherwise, store citations, links,
+metadata, and deep paraphrased extractions. Do not use “fair use” as a blanket
+reason to mirror whole papers.
 
 ## Research vs Specs
 
@@ -77,10 +86,11 @@ Use the main `CursiveOS` repo for:
 When research becomes a concrete build decision, graduate it into the main
 `CursiveOS` repo and leave a research trail here.
 
-## Confidentiality
+## Sensitivity
 
-Private team material. Do not publish, redistribute, or copy material outside
-approved project channels without authorization.
+Treat this as sensitive project research even if repository visibility changes.
+Do not redistribute copied papers, uploaded source packets, or internal notes
+outside approved project channels without authorization.
 
 ## Initial Import Status
 
