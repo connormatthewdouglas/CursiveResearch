@@ -1,6 +1,9 @@
 # Paper Extraction Policy
 
-Status: Active corpus policy.
+Status: Supporting detail. Start with
+[../CORPUS_WORKFLOW.md](../CORPUS_WORKFLOW.md) and
+[../papers/README.md](../papers/README.md) for the current simplified workflow
+and full-text storage rule.
 
 ## Purpose
 
@@ -24,10 +27,12 @@ This prevents an agent from silently discarding details because it guessed they 
 
 ## Copyright Boundary
 
-Do not mirror full papers or copy long paper sections verbatim into the repo.
+Do not mirror full papers or copy long paper sections verbatim into the repo
+unless the paper is rights-cleared under the rule in `papers/README.md`.
 
 Allowed and encouraged:
 
+- full paper text in `papers/` when redistribution rights are clear;
 - detailed paraphrase;
 - structured notes;
 - method reconstruction in our own words;
@@ -39,7 +44,8 @@ Allowed and encouraged:
 
 Avoid:
 
-- copying full abstracts, introductions, methods, or result sections verbatim;
+- copying full abstracts, introductions, methods, or result sections verbatim
+  when rights are unclear or restrictive;
 - copying large tables wholesale;
 - turning the repo into a paper mirror;
 - losing the distinction between source text and corpus synthesis.

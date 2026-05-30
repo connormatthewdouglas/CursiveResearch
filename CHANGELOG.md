@@ -4,6 +4,28 @@ This file records meaningful changes to research guidance, validation status,
 and corpus process. It is intended to be readable without reconstructing a
 chain of supporting documents.
 
+## 2026-05-30 - Streamlined Corpus Workflow and Added Rights-Cleared Paper Library Rule
+
+Changed:
+
+- Added `CORPUS_WORKFLOW.md` as the primary front-door workflow for uploads,
+  papers, corrections, experiments, and minimum recordkeeping.
+- Added `papers/README.md` to define the peer-research paper library structure.
+- Updated `README.md`, `INDEX.md`, and methodology files so contributors start
+  from the simplified workflow instead of juggling overlapping process docs.
+- Clarified that full verbatim paper text belongs in `papers/` only when the
+  paper is rights-cleared by license, permission, public-domain status, or team
+  ownership.
+- Preserved the deeper document-intake and paper-extraction policies as
+  supporting detail rather than deleting their guidance.
+
+Reason:
+
+The corpus should favor fewer, deeper, more usable research records over broad
+shallow intake. Rights-cleared papers can be stored fully so future agents do
+not lose source detail. Non-rights-cleared papers should still receive deep
+paraphrased extraction rather than being compressed into useless summaries.
+
 ## 2026-05-27 - Added Paper Extraction Policy
 
 Changed:

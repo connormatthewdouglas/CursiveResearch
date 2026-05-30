@@ -5,7 +5,8 @@ corpus. Chapters are living documents: preserve the uploaded originals in
 `sources/original-docx/`, but edit chapter guidance when better evidence or the
 current deployment requires a correction.
 
-Use [VALIDATION.md](VALIDATION.md) for the status of important claims and
+Use [CORPUS_WORKFLOW.md](CORPUS_WORKFLOW.md) for intake and maintenance,
+[VALIDATION.md](VALIDATION.md) for the status of important claims, and
 [CHANGELOG.md](CHANGELOG.md) for the record of material edits.
 
 ## Reading Path
