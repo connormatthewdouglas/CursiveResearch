@@ -71,6 +71,109 @@ reproduction belongs only in rights-cleared paper folders.
 | Supporting | Source list entry plus concise structured note. |
 | Lead Only | Link, citation, and one reason it may matter later. |
 
+## Deep Extraction Template
+
+Use this for cornerstone papers and important papers where shallow summaries
+would destroy the value.
+
+```markdown
+# <Paper Title> — Deep Extraction
+
+Source: <link>
+Authors / Lab: <authors or organization>
+Year / Venue: <year, venue, preprint status>
+Corpus Status: supported | unvalidated | partially validated | speculative
+Extraction Type: cornerstone | important | supporting | lead-only
+Rights Status: full-text allowed | extraction only | unknown
+
+## 1. Paper Map
+
+| Paper Section | What It Covers | Why It Exists In The Paper |
+| --- | --- | --- |
+
+## 2. Author's Core Claims
+
+| Claim | Where It Appears | Evidence Used By Authors | Extraction Confidence |
+| --- | --- | --- | --- |
+
+## 3. System / Method Architecture
+
+Describe the algorithm, agent loop, system, experimental setup, or theoretical
+mechanism. Use plain text diagrams when helpful.
+
+## 4. Key Mechanisms Inventory
+
+| Mechanism | What It Does | Inputs | Outputs | Why It Matters |
+| --- | --- | --- | --- | --- |
+
+## 5. Experimental Setup
+
+Capture tasks, datasets/environments, baselines, models, compute assumptions,
+metrics, repetitions/holdouts, and ablations where available.
+
+| Experiment | Task/Environment | Baseline | Metric | What It Tests |
+| --- | --- | --- | --- | --- |
+
+## 6. Results Inventory
+
+| Result | Metric | Comparison | Author Interpretation | Caveat |
+| --- | --- | --- | --- | --- |
+
+## 7. Figures and Tables Inventory
+
+Describe figures/tables in our own words. Do not copy large tables unless the
+rights-cleared full-text rule allows it and the table is needed.
+
+| Figure/Table | What It Shows | Important Takeaway | Should Corpus Recreate/Summarize? |
+| --- | --- | --- | --- |
+
+## 8. Limitations Stated By Authors
+
+## 9. Limitations Inferred By Corpus
+
+## 10. Failure Modes and Safety Concerns
+
+## 11. What Transfers To Software Organisms
+
+## 12. What Does Not Transfer
+
+## 13. CursiveOS / Corpus Implications
+
+Research implications only. Do not write implementation specs here.
+
+## 14. Open Questions
+
+## 15. Extraction Coverage Notes
+
+- All major claims extracted: yes/no
+- All experiments extracted: yes/no
+- All figures/tables inventoried: yes/no
+- Source-level validation complete: yes/no
+- Sections intentionally skipped or compressed: <list and why>
+
+## 16. Source Reliability
+
+Assess whether this is peer reviewed, a preprint, a technical report, official
+repo, blog post, or secondary source.
+```
+
+## Extraction Quality Test
+
+A useful paper extraction lets a future agent answer:
+
+1. What did the paper actually do?
+2. What sections did the paper contain?
+3. What did the authors claim?
+4. What was measured?
+5. What improved?
+6. Who or what judged improvement?
+7. What experiments and baselines were used?
+8. What limitations did the authors admit?
+9. What limitations do we infer?
+10. What should the corpus learn?
+11. What should the corpus not overclaim?
+12. What was intentionally omitted or compressed?
+
 ## Current Paper Areas
 
 | Area | Purpose |

@@ -32,13 +32,12 @@ does not imply that every claim has been proven.
 | `RESEARCH_PIPELINE.md` | Active queue of new research, knowledge gaps, and experimental lift. Start here when deciding what to research next. |
 | `chapters/` | Living research chapters organized by topic. Direct edits are expected when research conclusions change. |
 | `papers/` | Peer-research paper library. Full verbatim text is allowed only for rights-cleared papers. |
-| `CHANGELOG.md` | Required dated record of meaningful chapter, methodology, and evidence changes. |
+| `CHANGELOG.md` | Required dated record of meaningful chapter, workflow, and evidence changes. |
 | `VALIDATION.md` | Compact status register for claims that affect implementation or decisions. |
 | `sources/original-docx/` | Preserved original Word documents. Treat these as immutable input snapshots. |
 | `sources/` | Source links, bibliographies, and provenance records where they improve research quality. |
 | `experiments/` | Plans and results for tests worth keeping or repeating. Experimental outputs may later become specs or scripts in the main `CursiveOS` repo. |
-| `methodology/` | Lightweight rules for maintaining this corpus. |
-| `validation/` | Legacy detailed validation records and optional deep-dive notes. |
+| `validation/notes/` | Legacy detailed validation records and optional future deep-dive notes. |
 | `tools/` | Repeatable conversion and integrity-checking utilities. |
 
 ## Working Rule
