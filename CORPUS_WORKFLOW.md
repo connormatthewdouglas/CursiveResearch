@@ -19,6 +19,16 @@ preserve the source
 -> record only the process details that future agents will actually need
 ```
 
+## Fast Paths
+
+| Situation | Touch These Files |
+| --- | --- |
+| Uploaded research document | Preserve original under `sources/`, update or create the relevant `chapters/` file, add `CHANGELOG.md` entry. |
+| Rights-cleared paper | Add a folder under `papers/`, include full text if useful, add/deepen extraction, update relevant chapter and `CHANGELOG.md`. |
+| Paper without clear reuse rights | Add metadata/extraction only under `papers/` or `sources/`, update relevant chapter and `CHANGELOG.md`. |
+| Important claim changes | Edit chapter, update `VALIDATION.md`, add `CHANGELOG.md` entry. |
+| New research priority | Update `RESEARCH_PIPELINE.md`; add a chapter only when research is actually incorporated. |
+
 ## Repository Map
 
 | Location | Use |
