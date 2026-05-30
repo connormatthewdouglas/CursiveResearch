@@ -4,6 +4,25 @@ This file records meaningful changes to research guidance, validation status,
 and corpus process. It is intended to be readable without reconstructing a
 chain of supporting documents.
 
+## 2026-05-30 - Reduced Infrastructure Docs
+
+Changed:
+
+- Removed the redundant `methodology/` docs after merging their surviving rules
+  into `CORPUS_WORKFLOW.md` and `papers/README.md`.
+- Removed the retired `validation/README.md` and `validation/validation-ledger.md`
+  active-workflow wrappers.
+- Updated README and validation links so the active process is rooted in
+  `CORPUS_WORKFLOW.md`.
+- Left research chapters, source lists, papers, experiments, validation notes,
+  and original source files untouched.
+
+Reason:
+
+The corpus should have as few process files as possible. The active
+infrastructure is now the root workflow, reading index, research pipeline,
+validation status, changelog, and the paper-library README.
+
 ## 2026-05-30 - Streamlined Corpus Workflow and Added Rights-Cleared Paper Library Rule
 
 Changed:

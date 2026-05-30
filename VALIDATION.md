@@ -2,8 +2,8 @@
 
 This is the current, compact status page for research claims that can affect
 CursiveOS implementation or decisions. For editing rules, see
-[methodology/maintaining-the-corpus.md](methodology/maintaining-the-corpus.md).
-For what changed, see [CHANGELOG.md](CHANGELOG.md).
+[CORPUS_WORKFLOW.md](CORPUS_WORKFLOW.md). For what changed, see
+[CHANGELOG.md](CHANGELOG.md).
 
 ## Status Meanings
 
@@ -37,7 +37,6 @@ For what changed, see [CHANGELOG.md](CHANGELOG.md).
 Detailed records created before this compact status page remain available when
 needed:
 
-- `validation/validation-ledger.md`
 - `validation/notes/`
 - `sources/extracted-source-index.md`
 - `experiments/results/`

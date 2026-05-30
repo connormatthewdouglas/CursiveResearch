@@ -2,8 +2,7 @@
 
 Status: Primary workflow for adding and maintaining research.
 
-This file is the front door. The older methodology files remain as supporting
-detail, but new contributors and agents should start here.
+This file is the front door. New contributors and agents should start here.
 
 ## Operating Principle
 
@@ -34,8 +33,7 @@ preserve the source
 | `sources/intake/` | Intake records for uploaded research packets. |
 | `sources/` | Bibliographies, source lists, and provenance records. |
 | `experiments/` | Research experiment plans and results worth retaining. |
-| `methodology/` | Supporting policy details. |
-| `validation/` | Historical detailed validation notes; optional for new work. |
+| `validation/notes/` | Historical detailed validation notes; optional for new work. |
 
 ## Intake Decision Tree
 
@@ -130,6 +128,18 @@ For important papers, extract enough that a future agent can answer:
 - What transfers to CursiveOS/software organisms?
 - What should not be overclaimed?
 
+For cornerstone papers, keep the extraction low-discretion before adding
+judgment. Separate:
+
+1. **Paper-faithful extraction** — what the paper says, does, measures, claims,
+   and concludes.
+2. **Corpus synthesis** — what it means for software organisms, CursiveOS,
+   agents, benchmarks, hardware, or optimization.
+3. **Extractor judgment** — what seems important, weak, overclaimed, or
+   transferable.
+
+Use the template in `papers/README.md` for cornerstone and important papers.
+
 ## Chapter Editing Rule
 
 Chapters are living documents. They do not need to preserve every old sentence
@@ -154,3 +164,17 @@ For most meaningful research changes, do only this:
 
 That is enough. Extra ledgers, notes, and source tables are optional when they
 help preserve evidence or repeat a consequential result.
+
+## Retired Infrastructure
+
+Do not recreate broad methodology or validation-ledger files unless there is a
+specific need. Earlier detailed validation notes remain in `validation/notes/`,
+and source indexes remain under `sources/`, but the normal workflow is now:
+
+```text
+CORPUS_WORKFLOW.md
++ chapter/paper/source edit
++ CHANGELOG.md
++ VALIDATION.md when a decision-driving claim changes
++ RESEARCH_PIPELINE.md when priorities change
+```

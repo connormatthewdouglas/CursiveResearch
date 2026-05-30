@@ -1,7 +1,7 @@
 # Research Index
 
-This index is the primary navigation page for the private CursiveOS research
-corpus. Chapters are living documents: preserve the uploaded originals in
+This index is the primary navigation page for the CursiveOS research corpus.
+Chapters are living documents: preserve the uploaded originals in
 `sources/original-docx/`, but edit chapter guidance when better evidence or the
 current deployment requires a correction.
 
