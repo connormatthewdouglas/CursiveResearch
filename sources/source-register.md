@@ -39,6 +39,14 @@ and table cell group for retention in its generated chapter.
 | `2026-05-30` | `sources/firmware-control-surfaces-selected-sources.md` | `chapters/08-firmware-and-bios-control.md` | Incorporated | Primary-source pass over Linux `efivarfs`, Linux `firmware-attributes`, DMTF Redfish BIOS/Settings/AttributeRegistry schemas, and fwupd UEFI capsule flow. |
 | `2026-05-31` | `sources/local-agent-safety-selected-sources.md` | `chapters/12-measurement-daemon-and-natural-language-shell.md` | Incorporated | Source-backed pass over OWASP LLM/agentic risks, NCSC and Microsoft prompt-injection guidance, NIST AI RMF, and Linux/gVisor/Firecracker sandboxing docs. |
 
+## Rights-Cleared Paper Intake
+
+| Intake Date | Paper Folder | License | Related Chapter | Status | Notes |
+| --- | --- | --- | --- | --- | --- |
+| `2026-05-31` | `papers/agent-evaluation/swe-bench/` | CC BY 4.0 | `chapters/12-measurement-daemon-and-natural-language-shell.md` | Full PDF/text and extraction incorporated | Real GitHub issue benchmark; useful for execution-based shell evaluation discipline. |
+| `2026-05-31` | `papers/software-engineering-agents/swe-agent/` | CC BY 4.0 | `chapters/12-measurement-daemon-and-natural-language-shell.md` | Full PDF/text and extraction incorporated | Agent-computer interface paper; useful for Cursive shell tool/interface design. |
+| `2026-05-31` | `papers/agent-evaluation/osworld/` | CC BY 4.0 | `chapters/12-measurement-daemon-and-natural-language-shell.md` | Full PDF/text and extraction incorporated | Real computer-use benchmark; useful for VM-backed OS-agent evaluation. |
+
 ## Conversion Coverage
 
 | Check | Result |

@@ -179,5 +179,7 @@ A useful paper extraction lets a future agent answer:
 | Area | Purpose |
 | --- | --- |
 | `recursive-self-improvement/` | RSI, self-improving agents, verifier-grounded discovery, agent memory, and open-ended evolution. |
+| `agent-evaluation/` | Benchmarks and evaluation methods for software agents, computer-use agents, OS agents, and grounded task success. |
+| `software-engineering-agents/` | Agent-computer interfaces, software-fixing agents, repository navigation, and code-editing workflows. |
 
 Add new areas as the corpus grows.

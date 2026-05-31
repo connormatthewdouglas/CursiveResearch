@@ -281,6 +281,29 @@ The confirmation boundary should become stricter when an action can delete
 data, expose secrets, alter services, change boot behavior, spend money, mutate
 firmware, or affect measurement truth.
 
+### Rights-Cleared Agent Evaluation Papers
+
+Three rights-cleared papers were added to the paper library because they give
+the shell design something better than intuition:
+
+| Paper | Why It Matters For Chapter 12 | Corpus Lesson |
+| --- | --- | --- |
+| `papers/agent-evaluation/swe-bench/` | Turns real GitHub issue resolution into execution-based tasks. | Grounded tests and reconstructed starting state matter more than model confidence. |
+| `papers/software-engineering-agents/swe-agent/` | Introduces agent-computer interfaces and shows that LM-friendly tools improve software-agent performance. | The Cursive shell should be an explicit ACI with bounded tools, concise feedback, and policy metadata. |
+| `papers/agent-evaluation/osworld/` | Benchmarks agents in real computer environments with GUI/CLI tasks, VM setup, and execution evaluators. | Cursive shell evaluation should use VM snapshots, OS/app state, executable post-checks, and reset paths. |
+
+Together they sharpen the shell design:
+
+```text
+do not benchmark the shell as chat
+benchmark it as controlled computer operation
+```
+
+For CursiveOS, a useful shell benchmark should combine the SWE-bench discipline
+of executable success criteria, the SWE-agent lesson that interface design
+changes agent capability, and the OSWorld lesson that real computer tasks need
+VM-backed state, GUI/CLI observations, and resettable evaluation.
+
 ## Relationship Between Shell and Daemon
 
 The shell can read from the daemon:
@@ -356,3 +379,9 @@ This chapter fills three gaps:
 - `sources/local-agent-safety-selected-sources.md` — selected-source digest for
   prompt injection, agentic skills, risk management, sandboxing, and operator
   confirmation design.
+- `papers/agent-evaluation/swe-bench/` — rights-cleared full paper and deep
+  extraction on executable software-engineering benchmarks.
+- `papers/software-engineering-agents/swe-agent/` — rights-cleared full paper
+  and deep extraction on agent-computer interfaces.
+- `papers/agent-evaluation/osworld/` — rights-cleared full paper and deep
+  extraction on real computer-use agent evaluation.

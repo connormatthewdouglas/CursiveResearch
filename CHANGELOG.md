@@ -4,6 +4,28 @@ This file records meaningful changes to research guidance, validation status,
 and corpus process. It is intended to be readable without reconstructing a
 chain of supporting documents.
 
+## 2026-05-31 - Ingested Rights-Cleared Agent Evaluation Papers
+
+Changed:
+
+- Added full rights-cleared paper folders for SWE-bench, SWE-agent, and OSWorld.
+- Stored each paper's arXiv PDF and a full text extraction in `paper.md` because
+  all three arXiv pages carry CC BY 4.0 license links.
+- Added `README.md`, `deep-extraction.md`, and `claims-and-results.md` for each
+  paper.
+- Updated Chapter 12 so the natural-language shell research incorporates
+  lessons from execution-based software benchmarks, agent-computer interfaces,
+  and VM-backed real-computer agent evaluation.
+- Updated `papers/README.md`, `VALIDATION.md`, and `sources/source-register.md`
+  so the new paper areas and rights-cleared intake are discoverable.
+
+Reason:
+
+The corpus should preserve fewer, more useful papers deeply when rights allow
+full copying. These papers are directly relevant to CursiveOS because the
+natural-language shell should be evaluated as controlled computer operation,
+not as chat quality.
+
 ## 2026-05-31 - Added Local Agent Safety Research Pass
 
 Changed:

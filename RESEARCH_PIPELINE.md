@@ -126,9 +126,10 @@ It should separate:
 
 Chapter 12 now includes a first source-backed external safety pass, and
 `sources/local-agent-safety-selected-sources.md` records the reviewed material.
-The daemon/shell split is supported by the literature; the next research pass
-should go deeper on specific memory systems, terminal-agent evaluation, and
-concrete containment prototypes.
+The corpus also ingested rights-cleared full-text paper folders for SWE-bench,
+SWE-agent, and OSWorld. The daemon/shell split is supported by the literature;
+the next research pass should go deeper on specific memory systems, terminal
+agent benchmark design, and concrete containment prototypes.
 
 ### Research targets
 
@@ -137,7 +138,7 @@ concrete containment prototypes.
 | Agent safety and prompt injection | OWASP LLM/agent risks, recent agent security papers | Tool-use risk, privilege boundaries, indirect prompt injection. |
 | Human-in-the-loop command execution | CLI agent UX, command preview systems, reversible ops | Confirmation UX patterns and failure modes. |
 | Agent memory systems | MemGPT, Mem0, MemOS, long-term memory papers | What memory belongs in shell vs daemon vs CursiveRoot. |
-| Agent benchmarks | SWE-bench, OSWorld, WebArena, AgentBench, AI Agents That Matter | Which evaluations map to terminal/OS operation. |
+| Agent benchmarks | SWE-bench, SWE-agent, OSWorld, WebArena, AgentBench, AI Agents That Matter | Which evaluations map to terminal/OS operation; SWE-bench, SWE-agent, and OSWorld already have full rights-cleared paper folders. |
 | Sandboxing and least privilege | gVisor, Firecracker, namespaces, seccomp, Landlock | Containment for unattended tool execution. |
 
 ### Desired corpus output
