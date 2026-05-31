@@ -58,7 +58,10 @@ It should answer:
 
 ### Why this matters
 
-Chapter 08 established that firmware/BIOS control surfaces exist, but the corpus still needs a more practical catalog of what settings are actually observable or changeable from an OS, BMC, Redfish endpoint, vendor tool, or open firmware environment.
+Chapter 08 now includes a first source-backed control-surface matrix and
+`sources/firmware-control-surfaces-selected-sources.md` records the primary
+interfaces reviewed. The remaining work is a platform/vendor matrix and real
+hardware probing, not another abstract pass over the idea.
 
 ### Research targets
 
@@ -75,9 +78,10 @@ Chapter 08 established that firmware/BIOS control surfaces exist, but the corpus
 
 ### Desired corpus output
 
-Create or expand a chapter on **Agent-Operable Firmware and BIOS Control Surfaces**.
+Further expand **Firmware and BIOS Control** only when new platform-specific
+evidence is available.
 
-It should produce a table like:
+The next useful output should be a tested matrix like:
 
 | Setting Class | Examples | Interface | Apply Time | Standardized? | Risk | CursiveOS Use |
 | --- | --- | --- | --- | --- | --- | --- |

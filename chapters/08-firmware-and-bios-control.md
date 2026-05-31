@@ -204,6 +204,31 @@ Recommended adapter:
 cursive-firmware-coreboot
 ```
 
+### 3.9 Practical Control-Surface Matrix
+
+The source-backed picture is less mystical and more useful than "an agent can
+change BIOS." Firmware control is a set of uneven interfaces with different
+failure modes, apply times, schemas, and recovery paths.
+
+| Control Surface | Examples | Interface | Apply Time | Standardization | Risk | CursiveOS Use |
+| --- | --- | --- | --- | --- | --- | --- |
+| UEFI variables | Boot entries, `BootOrder`, `BootNext`, OS indications | `efivarfs`, boot manager tools | Next boot or firmware-dependent | UEFI standard plus vendor-specific variables | Medium to high; arbitrary writes can harm boot | Boot inventory, rescue boot, benchmark image selection |
+| Linux firmware attributes | Secure Boot toggles, virtualization flags, boot/device settings, vendor BIOS attributes | `/sys/class/firmware-attributes` | Often reboot-staged; `pending_reboot` may expose state | Kernel ABI with vendor-specific providers | Medium to high; authentication and dependencies matter | Best Linux-native BIOS-setting adapter where available |
+| Redfish BIOS attributes | BIOS attribute registry, pending settings, reset-to-default request | BMC Redfish API, `@Redfish.Settings` | Usually on reset or scheduled maintenance window | DMTF schema; attribute names remain implementation-specific | Medium; safer because recovery can be out-of-band | Preferred server/workstation control plane for serious mutation trials |
+| Attribute registries | Legal values, read-only state, reset requirement, dependency rules | Redfish `AttributeRegistry` | Metadata only | DMTF schema; contents vendor/product-specific | Low for reads; high if ignored before mutation | Constraint source for mutation proposal validation |
+| Firmware update capsules | BIOS/UEFI, EC, device firmware versions | fwupd / LVFS / UEFI capsule flow | Staged from OS, applied through reboot path | UEFI capsule standards plus vendor metadata | High; changes firmware version, not just a setting | Version inventory and deliberate firmware-version mutation |
+| Raw flash | SPI BIOS image read/write/verify | flashrom or external programmer | Power-cycle/reflash | Chip/programmer-specific | Very high; lab only | Sacrificial hardware, recovery drills, coreboot research |
+| KVM/BIOS UI automation | Consumer BIOS menu navigation | PiKVM, BMC remote console, vision/key input | Reboot/manual UI timing | Not standardized | High; brittle and hard to audit | Fallback compatibility experiment, not core product path |
+
+Two design rules fall out of the sources:
+
+1. The adapter must preserve interface semantics. Redfish apply-time, sysfs
+   pending-reboot state, authentication, dependencies, and read-only metadata
+   are not optional decoration; they are safety constraints.
+2. The shell agent should propose firmware mutations, not execute raw firmware
+   writes. A deterministic adapter should validate the proposal against the
+   interface metadata and CursiveRoot policy before staging any change.
+
 ## 4. Runtime Mutation vs Reboot-Staged Mutation
 
 A key design correction: firmware control is usually not live tuning. It is staged mutation followed by reboot and measurement.

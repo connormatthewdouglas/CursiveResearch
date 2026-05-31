@@ -4,6 +4,28 @@ This file records meaningful changes to research guidance, validation status,
 and corpus process. It is intended to be readable without reconstructing a
 chain of supporting documents.
 
+## 2026-05-30 - Added Firmware Control-Surface Research Pass
+
+Changed:
+
+- Added `sources/firmware-control-surfaces-selected-sources.md` as a selected
+  primary-source digest for firmware/BIOS control interfaces.
+- Expanded Chapter 08 with a practical control-surface matrix covering UEFI
+  variables, Linux firmware attributes, Redfish BIOS attributes, Redfish
+  attribute registries, fwupd capsule updates, raw flash, and KVM/BIOS UI
+  automation.
+- Updated `VALIDATION.md` so the firmware-interface claim reflects the new
+  source-backed review.
+- Updated `RESEARCH_PIPELINE.md` to mark the abstract firmware-control gap as
+  partially filled and steer the next pass toward platform-specific evidence.
+
+Reason:
+
+The corpus needed a useful open-ended research addition that did not add fake
+test material or compress source detail away. Firmware control is a P0 research
+gap with immediate value for deciding how a whole-machine optimization organism
+can safely observe and stage deeper mutations.
+
 ## 2026-05-30 - Reduced Infrastructure Docs
 
 Changed:

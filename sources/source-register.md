@@ -32,6 +32,12 @@ and table cell group for retention in its generated chapter.
 | --- | --- | --- | --- | --- |
 | `2026-05-26` | Google Doc: `https://docs.google.com/document/d/1kXXy5JjOHHk9dayoQARA2f6ZhzR80DLf-1PeXuTkHqA/edit?usp=drivesdk` | Import as new source master, convert/integrate into relevant chapter, extract cited sources, update validation ledger | Superseded by uploaded DOCX intake if same document | User uploaded `Local Agent Setup for Arc B70.docx`; if this was the Google Doc export, no separate action needed unless the Google Doc has newer content. |
 
+## Research Source Digests
+
+| Intake Date | Source Digest | Related Chapter | Status | Notes |
+| --- | --- | --- | --- | --- |
+| `2026-05-30` | `sources/firmware-control-surfaces-selected-sources.md` | `chapters/08-firmware-and-bios-control.md` | Incorporated | Primary-source pass over Linux `efivarfs`, Linux `firmware-attributes`, DMTF Redfish BIOS/Settings/AttributeRegistry schemas, and fwupd UEFI capsule flow. |
+
 ## Conversion Coverage
 
 | Check | Result |
