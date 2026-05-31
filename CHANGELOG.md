@@ -4,6 +4,27 @@ This file records meaningful changes to research guidance, validation status,
 and corpus process. It is intended to be readable without reconstructing a
 chain of supporting documents.
 
+## 2026-05-31 - Added Local Agent Safety Research Pass
+
+Changed:
+
+- Added `sources/local-agent-safety-selected-sources.md` as a detailed
+  selected-source digest for prompt injection, agentic skills, tool authority,
+  memory boundaries, sandboxing, and operator confirmation.
+- Expanded Chapter 12 with an external safety research section covering
+  prompt-injection boundaries, tool/skill authority, risk-based execution tiers,
+  shell memory risk, and concrete confirmation UX.
+- Updated `INDEX.md`, `RESEARCH_PIPELINE.md`, `VALIDATION.md`, and
+  `sources/source-register.md` to reflect the new research pass.
+
+Reason:
+
+The natural-language shell is a major planned CursiveOS interface, and the
+existing daemon/shell split needed external grounding. Current agent-safety
+research supports the project's instinct: the shell can translate intent, but
+deterministic policy, sandboxing, and the measurement daemon must hold the real
+authority.
+
 ## 2026-05-30 - Added Firmware Control-Surface Research Pass
 
 Changed:

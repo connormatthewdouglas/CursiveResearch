@@ -124,7 +124,11 @@ It should separate:
 
 ### Why this matters
 
-Chapter 12 has the CursiveOS-specific daemon/shell split. The corpus should add external agent safety and architecture research so the shell design does not depend only on internal intuition.
+Chapter 12 now includes a first source-backed external safety pass, and
+`sources/local-agent-safety-selected-sources.md` records the reviewed material.
+The daemon/shell split is supported by the literature; the next research pass
+should go deeper on specific memory systems, terminal-agent evaluation, and
+concrete containment prototypes.
 
 ### Research targets
 
@@ -138,7 +142,10 @@ Chapter 12 has the CursiveOS-specific daemon/shell split. The corpus should add 
 
 ### Desired corpus output
 
-Expand Chapter 12 or add a dedicated chapter on **Local Agent Safety and Operator Interfaces**.
+Further expand Chapter 12 when new evidence changes shell memory, tool policy,
+confirmation UX, or containment guidance. If the topic grows beyond shell
+safety, split out a dedicated **Local Agent Safety and Operator Interfaces**
+chapter.
 
 ## P1 — Hardware Optimization Foundations
 

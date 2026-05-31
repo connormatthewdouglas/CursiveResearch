@@ -162,6 +162,125 @@ Every command should be visible to the user.
 
 The shell agent may make Linux easier, but it must not become a hidden automation box. Users should be able to see, learn from, rerun, and modify commands.
 
+## External Safety Research: Agentic Shells
+
+External security guidance supports the core CursiveOS split: the model-driven
+shell can help the user act, but deterministic software must own authority,
+measurement truth, and policy enforcement.
+
+The practical lesson from OWASP, NCSC, Microsoft, NIST, and Linux sandboxing
+documentation is that agent safety is not a single prompt. It is a stack:
+
+```text
+untrusted input handling
+-> model proposes intent
+-> deterministic policy checks tool scope
+-> risk-based sandbox or helper executes
+-> user confirms high-risk actions
+-> result is logged and reviewable
+```
+
+### Prompt Injection Boundary
+
+The shell will read untrusted text constantly: terminal output, issue comments,
+documentation, source files, webpages, logs, package metadata, and model
+responses. Prompt injection should therefore be treated as a standing condition,
+not an exceptional event.
+
+Design consequence:
+
+- external text can inform the model, but cannot authorize action;
+- model confidence is not a permission check;
+- tool execution must be constrained even when the model claims the instruction
+  came from the user;
+- sensitive operations need impact containment, because input filtering will not
+  catch every malicious instruction.
+
+This strengthens the daemon boundary. A prompt-injected shell may suggest a bad
+command; it must not be able to rewrite sensor results, mark a bad preset as
+good, or submit false CursiveRoot evidence.
+
+### Tool and Skill Authority
+
+Agentic skills and tools are a supply-chain surface. A skill is not just prose;
+it can route natural-language intent toward real filesystem, network, package,
+system, or credential behavior.
+
+Minimum research guidance:
+
+| Artifact | Required Metadata | Why It Matters |
+| --- | --- | --- |
+| Tool | name, owner, version, read/write/root/network scope, destructive flag | lets policy reject overbroad or surprising execution |
+| Skill | purpose, allowed tools, forbidden tools, trust level, update source | prevents prompt-only instructions from smuggling authority |
+| Command proposal | exact command, target paths/services/devices, network destinations, privilege level | gives the user and policy layer something concrete to approve |
+| Execution result | exit status, changed files, stdout/stderr summary, rollback hint | makes agent action reviewable and teachable |
+
+The shell should never treat a newly discovered tool, plugin, MCP server, or
+skill as trusted merely because it is available in the environment.
+
+### Risk-Based Execution Tiers
+
+The shell's read/write/root permission modes are necessary but not sufficient.
+The execution substrate should also change by risk.
+
+| Risk Class | Examples | Suggested Execution Boundary |
+| --- | --- | --- |
+| Read-only inspection | `ls`, `cat`, hardware inventory, non-mutating status checks | direct execution with allowlist and logging |
+| User-workspace edit | Markdown/code edit inside approved project | workspace-scoped filesystem boundary, diff preview, undo path |
+| Network read | fetching docs, package metadata, source references | domain/URL logging, no ambient credential forwarding |
+| Build or test | compiler, test runner, package install inside repo | container, Landlock, or equivalent filesystem boundary |
+| Untrusted code | downloaded script, unknown benchmark, third-party repo | gVisor-like sandbox or Firecracker-like microVM with clean state |
+| Root/system mutation | services, kernel parameters, package manager, boot settings | explicit confirmation, narrow helper, reversible plan, post-check |
+| Measurement truth | sensor execution and result submission | deterministic daemon only; no LLM write path |
+
+seccomp, Landlock, containers, gVisor, and microVMs are complementary rather
+than interchangeable. The research direction should be a risk-based selector:
+use the lightest boundary that preserves the required safety property, and
+escalate isolation when code or input is untrusted.
+
+### Memory Boundary
+
+Persistent shell memory is useful for operator experience, but it must not
+become organism truth. Memory can be poisoned by malicious docs, stale terminal
+output, or attacker-shaped repository content.
+
+Safe memory properties:
+
+- scoped to the shell, not the measurement daemon;
+- inspectable and deletable by the user;
+- tagged with source, timestamp, and confidence;
+- excluded from policy unless explicitly promoted by the user;
+- forbidden from storing secrets, credentials, shell history, browser history,
+  clipboard contents, or sensitive file excerpts by default.
+
+This keeps the model helpful without letting yesterday's untrusted text become
+tomorrow's hidden instruction.
+
+### Confirmation UX
+
+Confirmation should be concrete enough that a user can say yes or no with real
+understanding.
+
+Bad confirmation:
+
+```text
+Allow the agent to fix networking?
+```
+
+Better confirmation:
+
+```text
+Run: sudo sysctl -w net.ipv4.tcp_congestion_control=bbr
+Scope: kernel network behavior until reboot
+Risk: may affect throughput/latency for active connections
+Rollback: sudo sysctl -w net.ipv4.tcp_congestion_control=cubic
+Post-check: sysctl net.ipv4.tcp_congestion_control
+```
+
+The confirmation boundary should become stricter when an action can delete
+data, expose secrets, alter services, change boot behavior, spend money, mutate
+firmware, or affect measurement truth.
+
 ## Relationship Between Shell and Daemon
 
 The shell can read from the daemon:
@@ -214,12 +333,16 @@ This chapter fills three gaps:
 
 ## Open research gaps
 
-1. Define the shell's persistent memory model.
-2. Design the exact command confirmation UX for destructive and root actions.
+1. Define the shell's persistent memory model, including provenance, decay,
+   deletion, and promotion rules.
+2. Design the exact command confirmation UX for destructive, network, root,
+   firmware, payment, and measurement-adjacent actions.
 3. Decide which model families fit each hardware tier.
-4. Build containment for unattended tool execution before enabling host mutations.
+4. Build risk-based containment for unattended tool execution before enabling
+   host mutations.
 5. Specify the remote-tier privacy disclosure boundary.
 6. Implement daemon/plugin signing and sensor manifest verification.
+7. Define the tool/skill manifest format used by the policy layer.
 
 ## Source anchors from main CursiveOS repo
 
@@ -227,3 +350,9 @@ This chapter fills three gaps:
 - `ROADMAP.md` — v1.0 natural-language shell as flagship feature.
 - `white-paper.md` v2.4 — deterministic measurement path and five-layer architecture.
 - `README.md` — current project positioning and roadmap summary.
+
+## External Source Anchors
+
+- `sources/local-agent-safety-selected-sources.md` — selected-source digest for
+  prompt injection, agentic skills, risk management, sandboxing, and operator
+  confirmation design.

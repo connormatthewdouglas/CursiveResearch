@@ -37,6 +37,7 @@ and table cell group for retention in its generated chapter.
 | Intake Date | Source Digest | Related Chapter | Status | Notes |
 | --- | --- | --- | --- | --- |
 | `2026-05-30` | `sources/firmware-control-surfaces-selected-sources.md` | `chapters/08-firmware-and-bios-control.md` | Incorporated | Primary-source pass over Linux `efivarfs`, Linux `firmware-attributes`, DMTF Redfish BIOS/Settings/AttributeRegistry schemas, and fwupd UEFI capsule flow. |
+| `2026-05-31` | `sources/local-agent-safety-selected-sources.md` | `chapters/12-measurement-daemon-and-natural-language-shell.md` | Incorporated | Source-backed pass over OWASP LLM/agentic risks, NCSC and Microsoft prompt-injection guidance, NIST AI RMF, and Linux/gVisor/Firecracker sandboxing docs. |
 
 ## Conversion Coverage
 
