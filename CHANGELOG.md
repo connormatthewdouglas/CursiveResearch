@@ -4,6 +4,37 @@ This file records meaningful changes to research guidance, validation status,
 and corpus process. It is intended to be readable without reconstructing a
 chain of supporting documents.
 
+## 2026-06-11 - Benchmark Schema and Measurement Validity Assessment
+
+Changed:
+
+- Added Chapter 16 (`chapters/16-benchmark-schema-and-measurement-validity.md`):
+  a first assessment of the deployed benchmark suite and CursiveRoot schema,
+  grounded in the actual harness code (wrapper v1.4.1), the live schema, and
+  77 production run rows.
+- Key findings: the network headline delta is substantially a CUBIC-vs-BBR
+  congestion-control comparison under loopback netem (real within the
+  emulation, unproven for real paths); idle-power readings mix physically
+  different sources (RAPL package vs GPU hwmon vs turbostat) without
+  recording which, so cross-machine power comparison is not yet valid;
+  per-pass variance reaches CursiveRoot only via the seed path; several
+  cheap context fields (power source, temps, AC/battery, model identity,
+  netem verification) would convert mystery variance into attributable
+  variance.
+- Updated `VALIDATION.md` with two decision-driving claims (network scope,
+  idle-power comparability) and `RESEARCH_PIPELINE.md` experimental lift
+  items (real-path network A/B, power-source normalization, every-run
+  detail bundles).
+- Updated `INDEX.md` reading path.
+
+Reason:
+
+The organism's truth model is only as strong as its measurement layer, and
+the corpus had no chapter assessing what the deployed suite actually proves.
+The assessment was performed alongside live work on the main repo (machine
+identity v2, screen-verdict analyzer) so the findings reference the current
+implementation, not an idealized one.
+
 ## 2026-05-31 - Ingested Rights-Cleared Agent Evaluation Papers
 
 Changed:
