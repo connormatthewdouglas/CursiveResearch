@@ -4,6 +4,27 @@ This file records meaningful changes to research guidance, validation status,
 and corpus process. It is intended to be readable without reconstructing a
 chain of supporting documents.
 
+## 2026-06-12 - Chapter 16 Empirical Follow-Ups
+
+Changed:
+
+- Added §5 to Chapter 16 recording the v0.9b/v0.9c complementary ablation on
+  the rebuilt founder rig: the Arc cold-start win (−51%) is CPU-side; the GPU
+  frequency pin contributes nothing (verified active via phase telemetry) and
+  leaves the lineage. v0.9c is the first real acceptance candidate.
+- Recorded production confirmation of the §2.2 power-source warning (RAPL
+  package-only meter read +0.0W while a discrete GPU idled pinned at 2000MHz).
+- Recorded the metric split shipped in the main repo: "transport resilience"
+  (CUBIC-vs-BBR, algorithm selection) vs "stack delta" (BBR constant, only
+  CursiveOS tuning toggled), with netem verification.
+
+Reason:
+
+The chapter's program was executed within 24 hours of being written; the
+results both validated the methodology critique and produced the project's
+first clean attribution. Single-screen results still require reversed-order
+and second-machine confirmation before acceptance.
+
 ## 2026-06-11 - Benchmark Schema and Measurement Validity Assessment
 
 Changed:

@@ -146,7 +146,34 @@ the idle-power penalty, and (future) concurrency results are the natural
 counterweights. This instantiates the corpus's standing Goodhart concern
 (Chapter 10/15) in the one place it is currently concrete.
 
-## 5. What this changes for decisions
+## 5. Empirical follow-ups (2026-06-12)
+
+The 2026-06-12 sessions on the rebuilt founder rig (Ryzen 7 5700 + Arc A750,
+fingerprint `3e6b165ddf112a75`) executed this chapter's program and produced
+three results worth recording:
+
+1. **Attribution by complementary ablation works.** v0.9b (GPU frequency pin
+   only — pin *verified active at 2000 MHz* via the new phase-context
+   telemetry) produced zero cold-start improvement; v0.9c (full v0.8 minus
+   the GPU pin) retained the full −51% cold-start win with equivalent
+   network and package power. Conclusion: the Arc cold-start win is
+   CPU-side (governor/C-state/EPP), and the GPU pin is dead weight. This is
+   the project's first clean two-sided attribution and validates the
+   telemetry-first methodology: without phase context, v0.9b's null result
+   would have been indistinguishable from a failed preset apply.
+2. **The power-source warning (§2.2) was confirmed in production.** The rig
+   reports RAPL CPU-package only; v0.9b pinned a discrete A750 at 2000 MHz
+   idle and the meter read +0.0W. GPU-side power remains invisible until a
+   GPU hwmon channel is added.
+3. **Metric split implemented** (main repo): the legacy CUBIC-vs-BBR netem
+   number is now labeled *transport resilience* (algorithm selection), and a
+   new stack-delta benchmark holds BBR constant and toggles only the
+   CursiveOS buffer/qdisc tuning — the number attributable to the project's
+   own work. netem application is now verified before measurement (item 7
+   of §3). Public iperf3 endpoints proved unreliable for real-path testing;
+   a LAN endpoint remains the practical path.
+
+## 6. What this changes for decisions
 
 - Marketing/README numbers should keep the "WAN simulation" qualifier
   prominently; "network throughput +5xx%" without scope is overclaiming.
