@@ -4,6 +4,26 @@ This file records meaningful changes to research guidance, validation status,
 and corpus process. It is intended to be readable without reconstructing a
 chain of supporting documents.
 
+## 2026-06-13 - Stack-Delta Result Corrects Network Attribution
+
+Changed:
+
+- Chapter 16 §5 item 4 + VALIDATION: the stack-delta benchmark (BBR held
+  constant, only CursiveOS buffer/qdisc tuning toggled) measured +245.8% on
+  the founder rig (BBR-only 395.5 → BBR+our-stack 1367.5 Mbit/s, netem
+  verified). Decomposing the ~+800% legacy total: CUBIC→BBR ≈ 2.6×, our
+  buffer tuning ≈ 3.5×. This corrects the earlier "mostly just BBR"
+  assumption — on a high-BDP path the project's own tuning is the larger
+  factor. Loopback caveat retained; real-path A/B still pending.
+
+Reason:
+
+The user asked whether the network gains are real or manufactured textbook
+results. Splitting the metric (algorithm swap vs our stack) and holding BBR
+constant gave an honest, decomposable answer that happens to be more
+favorable to the project than the conservative prior assumption — while
+keeping the loopback magnitude caveat explicit.
+
 ## 2026-06-12 - Chapter 16 Empirical Follow-Ups
 
 Changed:

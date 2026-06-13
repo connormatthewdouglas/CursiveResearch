@@ -173,6 +173,32 @@ three results worth recording:
    of §3). Public iperf3 endpoints proved unreliable for real-path testing;
    a LAN endpoint remains the practical path.
 
+4. **Stack-delta result corrects the §2.1 assumption (2026-06-13).** Running
+   the new stack-delta benchmark on the founder rig (loopback, ~50ms RTT /
+   ~0.5% loss equivalent, **BBR on both sides**, netem verified) gave:
+   - BBR + host-default buffers: **395.5 Mbit/s**
+   - BBR + CursiveOS buffer/qdisc tuning: **1367.5 Mbit/s**
+   - **Stack delta: +245.8%** attributable to our tuning *beyond* the
+     algorithm swap.
+
+   Decomposing the legacy ~+800% total (untuned CUBIC ~150 → fully tuned
+   ~1367 Mbit/s ≈ 9×): the CUBIC→BBR swap alone is ~2.6× (+160%), and the
+   buffer/qdisc tuning on top of BBR is ~3.5× (+246%); 2.6 × 3.5 ≈ 9×. So
+   §2.1's original framing ("much of the +500% is attributable to one sysctl,
+   bbr") was **wrong on the magnitude split** — on a high-BDP path the buffer
+   tuning is the *larger* multiplicative factor. BBR is still necessary (it
+   lets the enlarged windows be used without CUBIC's loss-collapse), but the
+   project's own tuning does more of the lifting than first assumed.
+
+   **Caveat that still holds:** this is loopback. netem manufactures a
+   high bandwidth-delay product, and default Linux buffers genuinely cap the
+   window below that BDP — a real and well-understood mechanism. But the
+   *magnitude* only transfers to real paths whose BDP actually exceeds
+   default buffer sizing (high-bandwidth, high-latency links). On low-BDP
+   paths (LAN, modest internet) the stack delta should approach zero. The
+   real-path A/B is still required to bound transfer; the mechanism is sound,
+   the magnitude is path-dependent.
+
 ## 6. What this changes for decisions
 
 - Marketing/README numbers should keep the "WAN simulation" qualifier
