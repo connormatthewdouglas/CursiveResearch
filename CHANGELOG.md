@@ -4,6 +4,25 @@ This file records meaningful changes to research guidance, validation status,
 and corpus process. It is intended to be readable without reconstructing a
 chain of supporting documents.
 
+## 2026-06-13 - Cold-Start Optimization Is Hardware-Scoped (Second Machine)
+
+Changed:
+
+- Chapter 16 §5 item 5 + VALIDATION: second-machine run (i5-11300H laptop)
+  shows the cold-start optimization gives ~0% there vs −51% on the Arc A750
+  desktop. Phase-context telemetry confirms the governor changed to
+  performance on AC power, so it is a genuine hardware difference, not a
+  failed apply. First empirical instance of hardware-scoped fitness
+  (Chapter 10). v0.9c ≡ v0.8 on both machines, so it remains a safe global
+  parent replacement; the cold-start benefit is desktop-Arc-specific.
+
+Reason:
+
+The second-machine confirmation for v0.9c surfaced a larger finding: the
+headline cold-start gain does not transfer across hardware classes. The
+telemetry added the day before is what made the result trustworthy rather
+than ambiguous.
+
 ## 2026-06-13 - Stack-Delta Result Corrects Network Attribution
 
 Changed:

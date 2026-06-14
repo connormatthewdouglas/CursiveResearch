@@ -199,6 +199,35 @@ three results worth recording:
    real-path A/B is still required to bound transfer; the mechanism is sound,
    the magnitude is path-dependent.
 
+5. **Cold-start optimization is hardware-scoped (2026-06-13, second machine).**
+   The same presets were run on a second machine (i5-11300H laptop, new v2
+   fingerprint `42e7c7257af11f46`). Cold-start results diverge sharply by
+   hardware:
+
+   | Machine | v0.8 cold-start | v0.9c cold-start |
+   | --- | --- | --- |
+   | Ryzen 7 5700 + Arc A750 (desktop) | −51% | −51% |
+   | i5-11300H (laptop) | ~0% (−0.1, −6.3) | +0.4% |
+
+   Crucially, the phase-context telemetry **rules out the obvious confounds**:
+   on the laptop the governor did change `powersave → performance`, the
+   machine was on **AC power** (`ac_online: 1`), and the preset applied
+   cleanly. The laptop genuinely does not benefit from the cold-start tuning
+   that gives the Arc desktop −51%. (The laptop's own May run showed −29%,
+   so its small benefit is also unstable across conditions.) This is the
+   project's **first empirical instance of hardware-scoped fitness** — the
+   exact scenario Chapter 10's evidence model anticipates: a variant that
+   helps one hardware class must not be promoted as a global gain. It also
+   demonstrates the payoff of the §3 telemetry additions: without governor
+   and AC state in the record, "laptop doesn't benefit" would be
+   indistinguishable from "tweak didn't stick / ran on battery."
+
+   Implication for v0.9c: on **both** machines v0.9c ≡ v0.8 (laptop: both
+   ~0 cold; desktop: both −51%), so dropping the GPU pin costs nothing
+   anywhere — v0.9c remains a safe global parent replacement. But the
+   cold-start *benefit* it carries is desktop-Arc-specific and must be
+   labeled as such, not as a universal CursiveOS result.
+
 ## 6. What this changes for decisions
 
 - Marketing/README numbers should keep the "WAN simulation" qualifier
