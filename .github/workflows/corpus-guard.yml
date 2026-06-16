@@ -1,0 +1,70 @@
+name: Corpus Guard
+
+# Server-side protection for the corpus, independent of where a commit came
+# from (phone git app, GitHub web/API, or any machine — none of which run the
+# local .githooks). On a pull request it fails the check (gates merge if branch
+# protection is on). On a direct push to main it detects damage and, for the
+# unambiguous placeholder-wipe case, AUTO-REVERTS — because commits made from a
+# phone won't be watched in CI. Recovery of last resort remains git history.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: corpus-guard-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  guard:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Determine commit range
+        id: range
+        run: |
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            echo "base=${{ github.event.pull_request.base.sha }}" >> "$GITHUB_OUTPUT"
+            echo "head=${{ github.event.pull_request.head.sha }}" >> "$GITHUB_OUTPUT"
+            echo "mainpush=0" >> "$GITHUB_OUTPUT"
+          else
+            base="${{ github.event.before }}"
+            case "$base" in 0000000000000000000000000000000000000000) base="${{ github.sha }}~1" ;; esac
+            echo "base=$base" >> "$GITHUB_OUTPUT"
+            echo "head=${{ github.sha }}" >> "$GITHUB_OUTPUT"
+            echo "mainpush=1" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Run corpus guard
+        id: check
+        run: |
+          set +e
+          bash .githooks/corpus-guard-ci.sh "${{ steps.range.outputs.base }}" "${{ steps.range.outputs.head }}"
+          echo "code=$?" >> "$GITHUB_OUTPUT"
+
+      - name: Auto-revert placeholder wipe on main
+        if: steps.check.outputs.code == '2' && steps.range.outputs.mainpush == '1'
+        run: |
+          git config user.name  "corpus-guard-bot"
+          git config user.email "actions@users.noreply.github.com"
+          if git revert --no-edit "${{ steps.range.outputs.base }}..${{ steps.range.outputs.head }}"; then
+            git push origin HEAD:main
+            echo "::error::Placeholder/elision content detected on main and AUTO-REVERTED. Re-do the edit with real content."
+          else
+            git revert --abort 2>/dev/null || true
+            echo "::error::Placeholder detected but auto-revert failed (merge commit in range?). Manual revert required."
+          fi
+
+      - name: Fail the run if the guard tripped
+        if: steps.check.outputs.code != '0'
+        run: |
+          echo "::error::corpus-guard exit ${{ steps.check.outputs.code }} (2=placeholder, 3=silent shrink). See log above."
+          exit 1
