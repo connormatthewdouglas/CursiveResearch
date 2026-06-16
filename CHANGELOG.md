@@ -4,6 +4,25 @@ This file records meaningful changes to research guidance, validation status,
 and corpus process. It is intended to be readable without reconstructing a
 chain of supporting documents.
 
+## 2026-06-16 - Noise Floor Measured + GPU Power Now Visible
+
+Changed:
+- Chapter 16 §5 item 7 + VALIDATION: first per-channel within-machine noise
+  floor (6 identical v0.9 runs on Stardust). Cold-start CV 0.002 (rock-solid),
+  network CV 0.192 (above 0.15 escalation threshold; range 602–970%), sustained
+  sign-unstable (signal<noise), idle-power(CPU) CV 0.83 (near-random). Argues
+  for per-channel confirmation counts and against gating on sustained-single-
+  stream or idle power as currently measured.
+- GPU-side power sensor (wrapper v1.4.3) confirmed working on the Arc A750
+  (~37 W idle via hwmon energy counter); total power (CPU+GPU ≈ 55 W) now
+  measurable — the §2.2 blindspot is closed on this hardware.
+
+Reason:
+- Closes the 2026-06-16 hardware sprint. The noise floor is the empirical input
+  Chapter 10's population-confirmation model lacked; it also explains why power
+  and sustained deltas have swung wildly across past runs. Cold-start is the one
+  channel solid enough to drive selection today.
+
 ## 2026-06-16 - Real-Path A/B Overturns the Stack-Delta Magnitude
 
 Changed:

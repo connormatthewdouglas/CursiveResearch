@@ -253,6 +253,34 @@ three results worth recording:
    untested. The loopback stack-delta benchmark should be treated as a
    *mechanism demonstration*, never a user-facing magnitude.
 
+7. **Per-channel noise floor measured — the first fleet-variance data (2026-06-16).**
+   Six identical v0.9 full-tests on one machine (Stardust) give the within-machine
+   noise floor that the population-confirmation rule (Chapter 10) needs:
+
+   | Channel | Mean | Std | CV | Note |
+   | --- | --- | --- | --- | --- |
+   | Cold-start | −50.8% | 0.1 | **0.002** | rock-solid; the project's most reliable signal |
+   | Network | 707% | 136 | **0.192** | above the 0.15 CV threshold; range 602–970% |
+   | Sustained | −0.45% | 0.51 | sign-unstable | signal < noise; unusable single-stream |
+   | Idle power (CPU) | 4.02 W | 3.32 | **0.83** | near-random as currently measured |
+
+   Implications, concrete: (a) **cold-start needs ~1 confirmation** (CV≈0); the
+   −51% Arc win is extremely repeatable. (b) **Network genuinely triggers the
+   CV>0.15 escalation** (N+2 confirmations) and its *magnitude* should never be
+   quoted precisely — only its presence. (c) **Sustained single-stream and idle
+   power cannot gate selection as measured** — sustained is below its own noise,
+   and idle power at CV 0.83 means the fitness idle-power penalty term is being
+   fed near-random input. This argues for a single global N being wrong: the
+   organism should use **per-channel confirmation counts** keyed to each
+   channel's measured CV. The power term in particular should not gate decisions
+   until its method is improved (more samples / longer settle / better sensor).
+
+   Separately, the **GPU-side power sensor (wrapper v1.4.3) works** on the Arc
+   A750 via `hwmon*/energy1_input` (~37 W idle), closing the §2.2 blindspot on
+   this hardware: total power (CPU package + dGPU ≈ 55 W) is now measurable, so
+   the true cost of a GPU pin can finally be quantified against v0.8 in a
+   future run.
+
 ## 6. What this changes for decisions
 
 - Marketing/README numbers should keep the "WAN simulation" qualifier
