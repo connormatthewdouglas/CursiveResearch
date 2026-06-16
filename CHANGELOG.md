@@ -4,7 +4,31 @@ This file records meaningful changes to research guidance, validation status,
 and corpus process. It is intended to be readable without reconstructing a
 chain of supporting documents.
 
-## 2026-06-16 - Goodhart's Law and Proxy Optimization in Self-Improving Systems
+## 2026-06-16 - Corpus Guardrail Hooks + Chapter 15 Restore + Gödel Extraction
+
+Changed:
+- **Restored Chapter 15**, which an automated contributor (Grok) had wiped to
+  a one-line placeholder (`# [full new content would go here but for brevity]`)
+  in commit 3b71797 while claiming to "deepen" it. Restored to the last-good
+  state (8b427e7, 352 lines), preserving Grok's two genuinely useful additions
+  (Goodhart/proxy-optimization subsection, Karpathy autoresearch case study).
+- **Added `.githooks/` corpus guardrails** (enable with
+  `git config core.hooksPath .githooks`): `pre-commit` blocks lazy-elision
+  placeholder text; `commit-msg` blocks any tracked markdown losing >40% of its
+  lines without a `REWRITE:` prefix (the rule that would have caught the
+  Chapter 15 wipe). Both tested: placeholder and shrink correctly blocked,
+  `REWRITE:` override correctly allowed.
+- **Completed the Gödel Agent paper entry** with `deep-extraction.md`
+  (previously only a README stub). Grounded in the arXiv abstract; specifics
+  that need the full-text body are flagged, not guessed.
+
+Reason:
+- Audit of Grok's automated corpus additions found the content useful but the
+  process unguarded — a single rewrite destroyed a chapter with no validation.
+  The hooks let automated contribution continue safely; the daily encrypted
+  backup remains the last-resort net.
+
+
 
 Changed:
 - Added a substantial new subsection to Chapter 15 (`chapters/15-foundations-of-software-organisms-rsi-critical-synthesis.md`) on Goodhart's Law, reward hacking mechanisms, benchmark overfitting, and robust fitness design patterns specifically for software organisms and CursiveOS measurement/selection loops.

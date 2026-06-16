@@ -1,0 +1,43 @@
+#!/usr/bin/env bash
+# CursiveResearch corpus guardrail — Guard 2: silent large shrinkage.
+#
+# Blocks a commit where a tracked markdown file loses more than 40% of its
+# lines (a full-file rewrite that drops most of the content). This is the
+# rule that would have caught the 2026-06-16 Chapter 15 wipe (352 -> 1).
+#
+# $1 is the commit message file. Override an intentional rewrite by starting
+# the commit message with "REWRITE:" (or set CORPUS_REWRITE=1). Bypass with
+# `git commit -n`.
+
+set -u
+RED=$'\033[1;31m'; YEL=$'\033[1;33m'; NC=$'\033[0m'
+
+msgfile="$1"
+is_rewrite=0
+[[ "${CORPUS_REWRITE:-0}" == "1" ]] && is_rewrite=1
+head -1 "$msgfile" 2>/dev/null | grep -qiE '^REWRITE:' && is_rewrite=1
+[[ "$is_rewrite" == "1" ]] && exit 0
+
+fail=0
+mapfile -t staged < <(git diff --cached --name-only --diff-filter=ACM)
+for f in "${staged[@]}"; do
+    case "$f" in *.md|*.markdown) ;; *) continue ;; esac
+    if git cat-file -e "HEAD:$f" 2>/dev/null; then
+        old=$(git show "HEAD:$f" | wc -l)
+    else
+        old=0
+    fi
+    new=$(wc -l < "$f" 2>/dev/null || echo 0)
+    [[ "$old" -ge 40 ]] || continue
+    if (( new * 100 < old * 60 )); then
+        echo "${RED}BLOCKED (silent shrinkage):${NC} $f went from $old to $new lines (>40% loss)."
+        fail=1
+    fi
+done
+
+if [[ "$fail" == "1" ]]; then
+    echo "${YEL}Corpus guardrail: a markdown file shrank sharply. If intentional,"
+    echo "start the commit message with 'REWRITE:' or set CORPUS_REWRITE=1.${NC}"
+    exit 1
+fi
+exit 0
