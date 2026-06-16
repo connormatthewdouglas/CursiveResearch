@@ -15,6 +15,16 @@ CursiveOS implementation or decisions. For editing rules, see
 | `Disproven` | Evidence shows the claim is wrong or does not apply in the stated scope. |
 | `Superseded` | Replaced by changed conditions or better guidance. |
 
+## Flagged for Review
+
+Items an agent or contributor spotted as wrong, unsupported, outdated, or
+needing a human/agent decision — but did **not** edit directly. Newest on top.
+When a flag is resolved, delete its row (git history preserves it).
+
+| Date | Item | Location (file §) | Issue | Suggested action | Status |
+| --- | --- | --- | --- | --- | --- |
+| _(none open)_ | | | | | |
+
 ## Current High-Impact Claims
 
 | Area | Claim | Status | Checked | Evidence / Scope | Action |
