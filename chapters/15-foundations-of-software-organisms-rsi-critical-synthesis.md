@@ -149,6 +149,55 @@ Goodhart’s Law (“when a measure becomes a target, it ceases to be a good mea
 - That any single benchmark or sensor is permanently trustworthy once optimized against.
 - That linguistic self-evaluation or agent-as-judge can safely replace external verifiers for mutation decisions.
 
+## Practical Bounded Autoresearch Loops: Karpathy's autoresearch as a Case Study
+
+In early 2026, Andrej Karpathy released `autoresearch` (https://github.com/karpathy/autoresearch), a deliberately minimal but powerful demonstration of an autonomous research loop running on a single GPU. While not a traditional academic paper, it provides one of the cleanest existing concrete examples of bounded, verifiable self-improvement in practice.
+
+### How the Loop Works
+
+- The human writes high-level strategy and success criteria in a `program.md` file.
+- An LLM coding agent is pointed at the repository and is only permitted to edit one file: `train.py` (model architecture, optimizer, hyperparameters, etc.).
+- The agent triggers short, fixed-length experiments (default: exactly 5 minutes of wall-clock training time).
+- After each run, it evaluates a clear, objective metric (`val_bpb` — validation bits-per-byte; lower is better).
+- If the result improves on the previous best, the change is kept (committed to git). Otherwise it is discarded or reverted.
+- The loop repeats autonomously overnight.
+- In the morning, the human reviews the experiment log and the final improved artifact.
+
+### Why This Approach Is Powerful
+
+- **Strong external verifier**: Success is determined by an objective, automatable metric rather than the agent's linguistic self-assessment. This directly embodies the "verifier as immune system" principle.
+- **Constrained mutation surface**: By limiting edits to a single file, changes remain reviewable and the scope of possible regressions is reduced.
+- **Cheap, comparable iteration**: The fixed time budget makes experiments fast and roughly comparable, enabling many generations of improvement with modest resources.
+- **Git as transparent archive and memory**: Every accepted improvement (and many rejected attempts) leaves a clear git history. This creates natural negative memory and an auditable trail of what was tried.
+- **Human stays in the strategy layer**: The human defines the high-level goal and metric; the agent executes the low-level iteration loop. This division of labor is healthy for early software organisms.
+
+### Mapping to Software Organism Concepts
+
+Karpathy's autoresearch maps remarkably well onto several ideas developed in this chapter and Chapter 14:
+
+- It is a working example of **bounded recursive self-improvement** — the agent improves the training process by modifying code, but the loop is deliberately scoped and grounded.
+- The metric functions as a **protected verifier** that the proposing agent cannot easily game or rewrite.
+- Git history serves as both **archive of successful variants** and a record of failed mutations.
+- The design shows how **selection pressure** can be implemented simply and effectively through measurable improvement.
+- It demonstrates a practical human–agent collaboration pattern that keeps the human in control of direction while removing them from the iteration bottleneck.
+
+### What Transfers to CursiveOS
+
+- The pattern of cheap, repeatable evaluation loops is directly relevant to screening preset candidates or OS-level mutations.
+- Strong emphasis on objective, automatable metrics aligns with the design of CursiveRoot sensors and benchmark validity work.
+- Using version control as a transparent, auditable archive of accepted and rejected variants is worth adopting.
+- Constraining mutation surfaces and making them reviewable is a valuable safety and debuggability practice.
+- The overall philosophy of letting an agent handle high-volume iteration while a higher-level system (human or future meta-layer) sets strategy and success criteria.
+
+### Limitations and Needed Extensions for Our Context
+
+- The original system is specialized for ML training scripts with a single scalar metric and fixed experiment length.
+- CursiveOS requires richer, multi-objective evaluation (power, latency, reliability, hardware transfer, security) and stronger safety/sandboxing guarantees.
+- Extending similar loops to OS-level or runtime mutations would benefit from more structured experiment feedback beyond a single number.
+- Long-term organism identity and protection of core verifiers/safety boundaries become more important as mutation surfaces expand.
+
+This source strengthens the corpus by providing a concrete, working reference implementation of many of the abstract principles discussed elsewhere in this chapter.
+
 ## Linguistic Evaluation Is Not Enough
 
 LLM-as-judge systems can help triage outputs, but they should not validate code-level or system-level mutation alone.
