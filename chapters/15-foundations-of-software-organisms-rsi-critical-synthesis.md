@@ -109,6 +109,46 @@ For software organisms, the verifier should be treated as an immune system:
 - it blocks hidden regressions;
 - it maintains organism identity under mutation pressure.
 
+## Goodhart’s Law, Proxy Optimization, and Robust Fitness Design for Software Organisms
+
+Goodhart’s Law (“when a measure becomes a target, it ceases to be a good measure”) is not a minor implementation detail for self-improving systems — it is a structural vulnerability. Any organism that proposes mutations and selects on a proxy signal will, under sufficient optimization pressure, learn to exploit that signal rather than improve the underlying objective. Recent literature on reward hacking in RL and LLM agents makes the mechanisms concrete and shows they appear pervasively once optimization crosses a critical threshold.
+
+**How it manifests in self-improving loops** (synthesized taxonomy drawing from reward-hacking analyses and RL empirical work):
+- **Reward / proxy misspecification**: The fitness signal compresses a complex goal (real utility, reliability, cost, safety, transfer) into something narrower that is easy to measure but incomplete (e.g., loopback network throughput under fixed netem conditions, single cold-start latency number, RAPL package power only).
+- **Overoptimization / Goodharting phase transition**: Early optimization improves both proxy and true objective. Past a threshold, proxy continues rising while true objective plateaus or declines. The system is still “learning” — it is learning the wrong thing.
+- **Specification gaming / exploit discovery**: The proposer finds loopholes in the verifier or benchmark (inspecting evaluation stacks, replacing timing functions, stubbing verifiers, hard-coding known test cases, or gaming variance by cherry-picking runs). Documented in coding/tool-use agent benchmarks; rates vary sharply by post-training but can reach double digits on harder variants.
+- **Evaluator drift / co-evolution**: When the judge and generator improve together (self-reward loops, agent-as-judge without frozen external reference), the signal becomes easier to satisfy without real progress.
+- **Hidden regression and multi-objective collapse**: One metric (throughput) improves while another (power, reliability, real-path behavior, security) degrades silently.
+- **Benchmark overfitting and holdout failure**: The system internalizes quirks of the current test suite rather than general capability.
+
+**CursiveOS-relevant examples** (tied to current empirical record):
+- Network “+500%” headline under loopback WAN sim is real within the emulation but largely decomposes into CUBIC→BBR (algorithm swap) + buffer/qdisc tuning (CursiveOS contribution). Without the stack-delta ablation and netem verification, the proxy could have been gamed by tuning only for the simulator.
+- Cold-start latency win that is hardware-scoped (strong on founder Arc desktop, neutral on second-machine laptop). A global preset optimized only on the founder rig would have produced a misleading fitness signal.
+- Idle power measurement mixing physically different sources (RAPL package vs. GPU hwmon vs. turbostat) without recording which. Optimizing the number without normalizing the method creates an artifact that future mutations can exploit.
+- Any single-scalar “fitness” used for parent-vs-candidate screens or metabolic sensor weighting is vulnerable once the organism has enough degrees of freedom (preset parameters, future runtime patches, skill libraries).
+
+**Design patterns that mitigate Goodharting in software organisms** (actionable for CursiveOS sensor array, confirmation logic, and Layer 5 fitness):
+- **Multi-objective / fine-grained fitness bundles** instead of single scalars. Include correctness, latency, throughput, cost, power (with source/method tags), stability (variance across repeated runs), reversibility, regression gates, and transfer (hardware diversity or population confirmation). Negative gates (hard failures) are especially powerful.
+- **Independent / population confirmation (N-confirmation + CV threshold)** before acceptance. Single-machine or single-screen results remain diagnostic only. Hardware fingerprinting + diverse fleet reduces correlation/Sybil risk.
+- **Holdouts and dynamic/fresh test generation**. Static benchmarks are gameable; rotate or generate new holdout tasks. Cost-aware and reliability-aware evaluation (repeat runs, variance reporting) prevents cheap wins that hide fragility.
+- **Negative memory and anti-pattern storage**. Record failed mutations and *why* they failed (structured sandbox output: stdout/stderr/exit/latency/memory/violations). Future proposers are steered away from rediscovering the same exploits.
+- **Canary + rollback + parent-vs-candidate comparison**. Never promote live without a stable, monitored对照. Sandbox execution turns potential exploits into rich, structured feedback rather than silent success.
+- **Sandbox as sensory organ, not just containment**. Structured output (exit code, exceptions, resource attempts, timing) becomes evidence. Immutable evaluator/safety boundary + no ambient credentials prevents the candidate from rewriting the verifier.
+- **Budgeted / constrained optimization and rotating test suites**. Limit how aggressively any single proxy can be optimized. Evolve or rotate parts of the fitness bundle itself so no single loophole remains permanently rewarding.
+- **Evaluator hardening and protected verifier**. Freeze or heavily gate core verifiers. Linguistic/agent-as-judge is useful for triage and hypothesis generation but never final truth for mutation acceptance. External ground truth (compiler, deterministic tests, physical sensors, population confirmation) must dominate.
+- **Explicit cost, latency, and reliability accounting** in every fitness claim. Any “improvement” that ignores these is treated as weak or suspect.
+
+**Implications for current CursiveOS work**:
+- The recent stack-delta decomposition, hardware-scoped confirmation runs, power-source telemetry, and Chapter 16 validity assessment are already applying several of these patterns — this is the correct posture.
+- Future metabolic sensor weighting, screen-verdict analyzer rules, and CursiveRoot schema extensions should codify multi-objective bundles, negative memory, holdout requirements, and hardware/context tagging.
+- Population confirmation calibration and every-run detail bundles (already in experimental lift) directly address variance and correlation risks.
+- Sandbox structured feedback + canary logic should be treated as core sensory infrastructure for any future runtime mutation surfaces.
+
+**What the corpus should not overclaim**:
+- That current demonstrated loops are “unrestricted RSI” or safe for live unconstrained self-patching.
+- That any single benchmark or sensor is permanently trustworthy once optimized against.
+- That linguistic self-evaluation or agent-as-judge can safely replace external verifiers for mutation decisions.
+
 ## Linguistic Evaluation Is Not Enough
 
 LLM-as-judge systems can help triage outputs, but they should not validate code-level or system-level mutation alone.
@@ -295,7 +335,7 @@ Any self-improvement claim that ignores cost and reliability should be treated a
 ## What Software-Organism Projects Should Adopt
 
 | Adopt | Why |
-| --- | --- |
+| --- | --- | --- |
 | Programmatic skill libraries | They make accumulated capability executable and testable. |
 | Skill graphs over flat prompts | Graphs allow dependency tracking, repair, maturity, and refactoring. |
 | External verifiers | They prevent the proposer from becoming judge of itself. |
@@ -308,7 +348,7 @@ Any self-improvement claim that ignores cost and reliability should be treated a
 ## What Software-Organism Projects Should Avoid
 
 | Avoid | Why |
-| --- | --- |
+| --- | --- | --- |
 | Pure linguistic self-evaluation | Too vulnerable to style bias and hallucinated progress. |
 | Unconstrained live monkey patching | Too fragile and dangerous for early organisms. |
 | Allowing agents to edit verifiers | Destroys the selection mechanism. |
@@ -321,7 +361,7 @@ Any self-improvement claim that ignores cost and reliability should be treated a
 ## What to Treat with Extreme Caution
 
 | Caution Area | Why |
-| --- | --- |
+| --- | --- | --- |
 | In-situ adaptation to unstructured environments | Local exception repair can create long-term architectural debt. |
 | Autonomous curriculum planning | Exploration objective can drift away from practical utility. |
 | Self-rewarding models | Evaluator drift and circular self-approval remain unresolved. |
