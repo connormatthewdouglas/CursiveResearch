@@ -4,6 +4,27 @@ This file records meaningful changes to research guidance, validation status,
 and corpus process. It is intended to be readable without reconstructing a
 chain of supporting documents.
 
+## 2026-06-16 - Real-Path A/B Overturns the Stack-Delta Magnitude
+
+Changed:
+- Chapter 16 §5 item 6 + VALIDATION: the real-path network A/B finally ran
+  (Stardust → 2nd machine over real 1GbE, netem 50ms + 0.5% loss). Result:
+  CUBIC 43.1, BBR 851.1, BBR+our-stack 845.0 Mbit/s. The whole real-world win
+  is the CUBIC→BBR swap (+1875%); our buffer/qdisc stack adds ~0% (−0.7%).
+- This corrects the 2026-06-13 loopback decomposition ("+246% from our tuning"):
+  that is a loopback BDP artifact and does not transfer to ordinary ≤1GbE
+  links, where default-buffer autotuning already covers the ~6 MB BDP. The
+  loopback stack-delta benchmark is mechanism-only, not a user magnitude.
+- Network VALIDATION claim moved Supported → Validated with the narrower,
+  honest scope (the win is BBR; buffers untested-and-likely-irrelevant below
+  >1Gbit/high-latency WAN).
+
+Reason:
+- The real-path experiment did its job: it falsified the magnitude transfer of
+  the project's own buffer tuning. Better to know the headline is "BBR" than to
+  credit ourselves with a loopback artifact. Part of the 2026-06-16 hardware
+  sprint (also: v0.9 parent promotion, GPU power sensor, parsimony fitness).
+
 ## 2026-06-16 - Corpus Guardrail Hooks + Chapter 15 Restore + Gödel Extraction
 
 Changed:

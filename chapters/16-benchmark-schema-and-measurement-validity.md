@@ -228,6 +228,31 @@ three results worth recording:
    cold-start *benefit* it carries is desktop-Arc-specific and must be
    labeled as such, not as a universal CursiveOS result.
 
+6. **Real-path A/B overturns the stack-delta magnitude (2026-06-16).** The
+   real-path experiment finally ran: Stardust as the tuned iperf3 sender
+   (reverse mode) to a second machine over a real 1GbE NIC, with netem on the
+   real egress to match the loopback condition (50ms delay + 0.5% loss). With
+   loss present (the key — earlier delay-only runs showed nothing because no
+   buffer pressure exists without loss):
+   - CUBIC + host-default buffers: **43.1 Mbit/s** (collapses under loss)
+   - BBR + host-default buffers: **851.1 Mbit/s** — algorithm gain **+1875%**
+   - BBR + CursiveOS buffer stack: **845.0 Mbit/s** — our-stack gain **−0.7%**
+
+   On a real ≤1GbE link the **entire** real-world network win is the CUBIC→BBR
+   congestion-control swap; the CursiveOS buffer/qdisc stack adds **nothing**.
+   This *corrects* item 4: the loopback "+246% attributable to our tuning" is a
+   **loopback artifact**. Loopback's "link" is memory bandwidth (tens of Gbit/s),
+   so netem there manufactures a bandwidth-delay product (~tens of MB) that
+   real default buffers cannot fill — and our 16 MB buffers helped. A real
+   1GbE link at 50 ms has BDP ≈ 6 MB, which default Linux autotuning already
+   covers, so larger buffers buy nothing. The honest, transferable network
+   claim is therefore narrower than item 4 implied: **switch to BBR** (huge
+   under loss, but a one-line sysctl, not CursiveOS tuning); our buffer stack
+   is dead weight on ordinary ≤1GbE hardware and earns its keep only on
+   genuinely high-BDP links (>1Gbit and/or high-latency WAN), which remain
+   untested. The loopback stack-delta benchmark should be treated as a
+   *mechanism demonstration*, never a user-facing magnitude.
+
 ## 6. What this changes for decisions
 
 - Marketing/README numbers should keep the "WAN simulation" qualifier
