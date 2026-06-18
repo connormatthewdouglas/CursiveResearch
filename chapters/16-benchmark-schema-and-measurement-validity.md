@@ -299,6 +299,26 @@ three results worth recording:
    the true cost of a GPU pin can finally be quantified against v0.8 in a
    future run.
 
+8. **GPU-pin power cost ≈ 0 W, and the power-noise was a sampling artifact (2026-06-16, Phase D).**
+   A dedicated total-power probe (CPU RAPL + GPU energy, 12 settled samples per
+   state, ×2 reps) measured the v0.8 Arc GPU pin (slpc_ignore_eff + rps_min
+   2000 + rps_boost max) vs unpinned (v0.9):
+   - Unpinned (v0.9): CPU 5.49 W + GPU 36.66 W = **42.15 W**
+   - Pinned (v0.8): CPU 5.49 W + GPU 36.67 W = **42.16 W**  → **pin cost ≈ 0 W**
+
+   Two conclusions: (a) the GPU pin is inert at idle — it costs ~0 W, so v0.9's
+   basis for dropping it is **parsimony, not power savings** (this corrects the
+   earlier item-2 worry about "unmeasured GPU power"). A750 idle power is
+   static/memory-dominated (~37 W), so clock-pinning doesn't move it; load-time
+   power remains untested. (b) **The CV 0.83 idle-power noise from §5 item 7 is
+   a sampling artifact, not inherent.** At settled true idle with 12 samples the
+   readings are rock-stable (CPU 5.49/5.49/5.46, GPU 36.66/36.67/36.66 across
+   runs; CV ≈ 0.01). The full-test's noisy power came from sampling during the
+   thermal/activity tail immediately after the benchmark phases, before the
+   system settled. Fix: add a settle delay and more samples before the idle
+   capture (applied to the harness). This makes idle power a usable selection
+   channel after all — once measured correctly.
+
 ## 6. What this changes for decisions
 
 - Marketing/README numbers should keep the "WAN simulation" qualifier
