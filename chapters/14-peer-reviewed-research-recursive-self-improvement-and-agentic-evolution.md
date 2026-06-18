@@ -55,7 +55,7 @@ Speculative or unproven claims:
 | Loop Type | Core Mechanism | Representative Systems | Evaluator Type | Primary Operational Risk | Relevance to Software Organisms |
 | --- | --- | --- | --- | --- | --- |
 | Parameter fine-tuning loop | Generate instruction/preference data, then update model behavior through training or preference optimization. | Self-Rewarding Language Models; Process-Based Self-Rewarding | Self-as-judge or process-level reward | Evaluator drift, model collapse, loss of generality | Moderate: useful for offline consolidation, too heavy/risky for real-time adaptation. |
-| Discrete scaffolding optimization | Search over prompts, wrappers, flow control, and code scaffolds. | STOP; Self-Developing-style systems | Programmatic downstream utility | Local optima, syntax failures, sandbox bypass attempts | High: directly demonstrates self-restructuring without model training. |
+| Discrete scaffolding optimization | Search over prompts, wrappers, flow control, and code scaffolds. | STOP; Self-Developing-style systems; LADDER | Programmatic downstream utility | Local optima, syntax failures, sandbox bypass attempts | High: directly demonstrates self-restructuring without model training. |
 | Programmatic skill acquisition | Build reusable code skills and retrieve/compose them later. | Voyager; Programmatic Skill Networks | Environment logs, execution traces, verification checks | Cascading skill dependency failures, memory bloat | Very high: closest analogue to cumulative organism memory. |
 | Runtime policy modification | Modify active runtime classes, policies, globals, or patch routines. | Gödel Agent; Polaris | Validation tests and error abstraction | Infinite loops, runtime crash, resource escalation | Extremely high conceptually, but dangerous without isolation. |
 | Algorithmic superoptimization | Evolutionary or RL search over executable algorithms or low-level routines. | AlphaEvolve; FunSearch; AlphaDev; AlphaTensor; CodeEvolve | Deterministic compiler/math/testbench verifier | Heavy compute; limited to verifiable domains | High: blueprint for optimizing backend utilities and algorithms. |
@@ -68,7 +68,7 @@ Speculative or unproven claims:
 ### RSI-001: AlphaEvolve
 
 | Field | Notes |
-| --- | --- |
+| --- | --- | --- |
 | Core idea | Combine frontier model code generation with evolutionary search and automated evaluators. |
 | Improvement target | Algorithms, heuristics, low-level kernels, infrastructure-adjacent procedures. |
 | Feedback signal | Domain-specific verifiers and benchmarks. |
@@ -79,7 +79,7 @@ Speculative or unproven claims:
 ### RSI-002: FunSearch
 
 | Field | Notes |
-| --- | --- |
+| --- | --- | --- |
 | Core idea | LLMs generate programs that are scored by an evaluator, with successful programs fed back into the search. |
 | Improvement target | Mathematical constructions and programmatic heuristics. |
 | Feedback signal | Automated scoring of candidate programs. |
@@ -90,7 +90,7 @@ Speculative or unproven claims:
 ### RSI-003: Self-Taught Optimizer / STOP
 
 | Field | Notes |
-| --- | --- |
+| --- | --- | --- |
 | Core idea | A seed improver edits code-generation scaffolds and can be applied to its own improvement logic. |
 | Improvement target | Wrapper programs, search strategies, and scaffolds rather than base model weights. |
 | Feedback signal | Programmatic utility function and execution outcome. |
@@ -98,10 +98,21 @@ Speculative or unproven claims:
 | Main limitation | Base model is fixed; sandbox and safety boundaries are central. |
 | Software-organism relevance | High. It is a direct reference for bounded recursive self-improvement without unrestricted model mutation. |
 
+### RSI-023: LADDER (Learning through Autonomous Difficulty-Driven Example Recursion)
+
+| Field | Notes |
+| --- | --- | --- |
+| Core idea | Model recursively generates easier variants of hard problems to create its own difficulty gradient, then uses verifiable RL (GRPO) on the variants. Extends to test-time RL (TTRL). | 
+| Improvement target | Problem-solving capability on hard verifiable tasks (demonstrated on mathematical integration). |
+| Feedback signal | Deterministic numerical integration verifier (exact or high-precision match). |
+| Demonstrated result | Llama 3.2 3B: 1% → 82% on undergraduate integration problems. Qwen2.5 7B model: 73% on 2025 MIT Integration Bee qualifying (beats GPT-4o); 90% with TTRL (surpasses o1). |
+| Main limitation | Relies on existence of a reliable automatic verifier; demonstrated primarily in narrow numeric math domain. |
+| Software-organism relevance | **Very high**. One of the cleanest examples of autonomous curriculum construction + grounded verifier-driven improvement. Directly supports test-time adaptation patterns and the principle that the verifier (not LLM judgment) must anchor the loop. Fits between STOP and pure evolutionary search. |
+
 ### RSI-004: AI Agents That Matter
 
 | Field | Notes |
-| --- | --- |
+| --- | --- | --- |
 | Core idea | Agent evaluation must account for cost, reliability, holdouts, and simple baselines, not just headline accuracy. |
 | Improvement target | Evaluation methodology. |
 | Feedback signal | Critical analysis of agent benchmark practices. |
@@ -112,7 +123,7 @@ Speculative or unproven claims:
 ### RSI-005: Voyager
 
 | Field | Notes |
-| --- | --- |
+| --- | --- | --- |
 | Core idea | An embodied agent explores a simulated world, creates executable skills, stores them in a library, and reuses them. |
 | Improvement target | Agent capabilities through accumulated programmatic skills. |
 | Feedback signal | Environment feedback, execution logs, self-verification. |
@@ -123,7 +134,7 @@ Speculative or unproven claims:
 ### RSI-006: Reflexion
 
 | Field | Notes |
-| --- | --- |
+| --- | --- | --- |
 | Core idea | Agents improve across attempts by storing natural-language reflections from previous outcomes. |
 | Improvement target | Task strategy and behavior. |
 | Feedback signal | Task outcome plus verbal reflection. |
@@ -134,7 +145,7 @@ Speculative or unproven claims:
 ### RSI-007: Language Agents as Optimizable Graphs / GPTSwarm
 
 | Field | Notes |
-| --- | --- |
+| --- | --- | --- |
 | Core idea | Represent multi-agent systems as graphs whose prompts, nodes, roles, and connections can be optimized. |
 | Improvement target | Agent scaffold architecture. |
 | Feedback signal | Benchmark objective. |
@@ -145,7 +156,7 @@ Speculative or unproven claims:
 ### RSI-008: Self-Taught Evaluators
 
 | Field | Notes |
-| --- | --- |
+| --- | --- | --- |
 | Core idea | Improve evaluator models through synthetic data and iterative training. |
 | Improvement target | Evaluation quality. |
 | Feedback signal | Synthetic comparisons and self-generated training loops. |
@@ -156,7 +167,7 @@ Speculative or unproven claims:
 ### RSI-009: AlphaDev
 
 | Field | Notes |
-| --- | --- |
+| --- | --- | --- |
 | Core idea | Deep reinforcement learning discovers faster low-level algorithms such as sorting routines. |
 | Improvement target | Low-level algorithmic procedures. |
 | Feedback signal | Correctness and performance reward. |
@@ -167,7 +178,7 @@ Speculative or unproven claims:
 ### RSI-010: AlphaTensor
 
 | Field | Notes |
-| --- | --- |
+| --- | --- | --- |
 | Core idea | Matrix multiplication algorithm discovery is framed as a game/search problem. |
 | Improvement target | Matrix multiplication algorithms and hardware-sensitive computation strategies. |
 | Feedback signal | Correctness and efficiency reward. |
@@ -178,7 +189,7 @@ Speculative or unproven claims:
 ### RSI-011: Self-Rewarding Language Models
 
 | Field | Notes |
-| --- | --- |
+| --- | --- | --- |
 | Core idea | Models act as both instruction-following generators and judges of outputs, then train on generated preferences. |
 | Improvement target | Instruction-following and reward modeling behavior. |
 | Feedback signal | LLM-as-judge rubric and preference optimization. |
@@ -189,7 +200,7 @@ Speculative or unproven claims:
 ### RSI-012: Agent-as-a-Judge
 
 | Field | Notes |
-| --- | --- |
+| --- | --- | --- |
 | Core idea | Use agentic evaluators to judge agentic systems more realistically than single static judge prompts. |
 | Improvement target | Evaluation of complex multi-step agent behavior. |
 | Feedback signal | Another agentic judging process. |
@@ -200,7 +211,7 @@ Speculative or unproven claims:
 ### RSI-013: Gödel Agent
 
 | Field | Notes |
-| --- | --- |
+| --- | --- | --- |
 | Core idea | Allow an agent to inspect and modify its own runtime memory, code, globals, classes, or policies. |
 | Improvement target | Active runtime behavior and meta-policy. |
 | Feedback signal | Validation tasks and observed execution outcomes. |
@@ -211,7 +222,7 @@ Speculative or unproven claims:
 ### RSI-014: Polaris
 
 | Field | Notes |
-| --- | --- |
+| --- | --- | --- |
 | Core idea | Adapt Gödel-agent-style repair to small language models using compact experience abstraction and localized policy patches. |
 | Improvement target | Runtime policy behavior for SLMs. |
 | Feedback signal | Validation samples and error traces. |
@@ -222,7 +233,7 @@ Speculative or unproven claims:
 ### RSI-015: Programmatic Skill Networks
 
 | Field | Notes |
-| --- | --- |
+| --- | --- | --- |
 | Core idea | Extend flat skill libraries into compositional graphs of executable programs. |
 | Improvement target | Skill organization, reuse, fault localization, and refactoring. |
 | Feedback signal | Execution traces, validation, and graph-level repair. |
@@ -233,7 +244,7 @@ Speculative or unproven claims:
 ### RSI-016: Darwin Gödel Machine
 
 | Field | Notes |
-| --- | --- |
+| --- | --- | --- |
 | Core idea | Explore open-ended evolution of self-improving agents. |
 | Improvement target | Agent variants and improvement mechanisms. |
 | Feedback signal | Evolutionary selection pressure. |
@@ -244,7 +255,7 @@ Speculative or unproven claims:
 ### RSI-017: CodeEvolve
 
 | Field | Notes |
-| --- | --- |
+| --- | --- | --- |
 | Core idea | Open-source evolutionary framework for algorithmic discovery and optimization. |
 | Improvement target | Code and algorithms. |
 | Feedback signal | Programmatic evaluators. |
@@ -255,7 +266,7 @@ Speculative or unproven claims:
 ### RSI-018: Process-Based Self-Rewarding Language Models
 
 | Field | Notes |
-| --- | --- |
+| --- | --- | --- |
 | Core idea | Step-wise/process-level self-rewarding rather than only final-answer reward. |
 | Improvement target | Reasoning process and preference behavior. |
 | Feedback signal | Model-produced process reward. |
@@ -266,7 +277,7 @@ Speculative or unproven claims:
 ### RSI-019: Noise-to-Meaning Recursive Self-Improvement
 
 | Field | Notes |
-| --- | --- |
+| --- | --- | --- |
 | Core idea | Mathematical framing of how recursive feedback loops may or may not grow complexity. |
 | Improvement target | Theoretical understanding of complexity growth and feedback. |
 | Feedback signal | Formal/theoretical gain criteria. |
@@ -277,7 +288,7 @@ Speculative or unproven claims:
 ### RSI-020: Safety Must Precede the Deployment of Open-Ended AI
 
 | Field | Notes |
-| --- | --- |
+| --- | --- | --- |
 | Core idea | Open-ended AI systems require safety controls before deployment because exploration can discover harmful strategies. |
 | Improvement target | Safety policy and deployment framing. |
 | Feedback signal | Safety analysis. |
@@ -288,7 +299,7 @@ Speculative or unproven claims:
 ### RSI-021: TerraLingua
 
 | Field | Notes |
-| --- | --- |
+| --- | --- | --- |
 | Core idea | Study emergence and open-endedness in LLM ecologies. |
 | Improvement target | Language/ecology dynamics among agents or populations. |
 | Feedback signal | Emergence/open-endedness analysis. |
@@ -299,7 +310,7 @@ Speculative or unproven claims:
 ### RSI-022: Evolutionary Computation and Large Language Models Survey
 
 | Field | Notes |
-| --- | --- |
+| --- | --- | --- |
 | Core idea | Survey of evolutionary computation and LLM synergies. |
 | Improvement target | Field-level synthesis. |
 | Feedback signal | Literature survey. |
@@ -407,6 +418,7 @@ Important sandbox constraints:
 | P0 | Use `AI Agents That Matter` as a benchmark-quality guardrail. | Avoids fake progress from cost-blind or holdout-poor agent tests. |
 | P0 | Treat STOP as bounded RSI, not proof of unrestricted RSI. | It improves scaffolds, not base model intelligence. |
 | P0 | Add Gödel Agent / Polaris / SICA as risk-and-capability leads for runtime self-modification. | These systems map directly to the self-modifying organism idea but expose high instability. |
+| P0 | Add LADDER as a key reference for autonomous curriculum construction and test-time verifiable RL. | Provides concrete evidence that models can bootstrap their own difficulty gradients when a clean verifier exists; directly relevant to safe self-improvement loops in CursiveOS. |
 | P1 | Study Voyager and Programmatic Skill Networks for capability memory. | They show how skill accumulation can be executable and structured. |
 | P1 | Study self-rewarding and evaluator-improvement papers as risk literature. | They help define what not to trust. |
 | P1 | Add artificial life/open-ended evolution literature next. | Needed to ground the software-organism framing beyond current LLM agents. |
@@ -423,6 +435,7 @@ Important sandbox constraints:
 - How should negative results be stored so future agents avoid rediscovering bad mutations?
 - Can local/small models participate meaningfully in self-improvement if verifiers and scaffolds are strong?
 - How can safety rules remain outside the mutable substrate?
+- How far can autonomous curriculum construction (LADDER-style) generalize beyond narrow verifiable domains?
 
 ## Source List
 
@@ -441,3 +454,4 @@ Add or expand pipeline items for:
 - sandbox escape and self-improving code safety;
 - dynamic holdout generation and cost-aware evaluation;
 - small-model self-repair and local-agent adaptation.
+- autonomous curriculum construction and test-time RL patterns (LADDER).
