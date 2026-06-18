@@ -52,7 +52,7 @@ and table cell group for retention in its generated chapter.
 ## Conversion Coverage
 
 | Check | Result |
-| --- | --- | --- |
+| --- | --- |
 | Initial source files processed | 8 of 8 |
 | Supplemental uploaded sources processed | 1 |
 | Tables detected and converted in initial import | 14 |

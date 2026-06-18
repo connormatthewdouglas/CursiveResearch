@@ -19,7 +19,7 @@
 ## 2. Author's Core Claims
 
 | Claim | Where It Appears | Evidence Used By Authors | Extraction Confidence |
-| --- | --- | --- |
+| --- | --- | --- | --- |
 | LADDER enables autonomous improvement via recursive difficulty-driven example generation without human data or curated datasets | Abstract, Introduction, Methodology | Llama 3B experiment: 1% → 82% on undergraduate integration; 7B model reaches 73% on MIT Integration Bee | High |
 | TTRL extends the same mechanism to inference time and yields further gains (73% → 90%) | Abstract, Methodology 3.1.5, Results | Direct before/after on MIT Integration Bee qualifying exam, outperforming o1 | High |
 | Only a reliable verifier (numerical integration) is needed; no human feedback required | Introduction, Methodology | All experiments use only the numerical checker for rewards | High |
