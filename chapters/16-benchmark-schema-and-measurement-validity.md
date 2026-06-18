@@ -146,6 +146,24 @@ the idle-power penalty, and (future) concurrency results are the natural
 counterweights. This instantiates the corpus's standing Goodhart concern
 (Chapter 10/15) in the one place it is currently concrete.
 
+### 4.1 Formal Foundations: Reward Hacking and Unhackable Proxies (Skalse et al., NeurIPS 2022)
+
+**Paper**: [Defining and Characterizing Reward Hacking](https://arxiv.org/abs/2209.13085) by Joar Skalse, Nikolaus H. R. Howe, Dmitrii Krasheninnikov, David Krueger (NeurIPS 2022; arXiv v2 2025). Highly cited foundational theoretical work (~784 citations). Added as cornerstone extraction in `papers/recursive-self-improvement/reward-hacking-skalse-2022/` (extraction-only; arXiv non-exclusive license).
+
+**Core contribution retrieved directly from source**: First formal definition of reward hacking — optimizing an imperfect proxy reward function ˜R leads to poor performance according to the true reward R. A proxy is *unhackable* if increasing the expected proxy return can never decrease the expected true return. Due to linearity of reward in state-action visit counts, for the set of *all stochastic policies*, two reward functions can only be unhackable if one is constant (very strong negative result). Non-trivial unhackable pairs *always exist* for deterministic policies and any finite set of stochastic policies, with necessary and sufficient conditions derived for simplifications (asymmetric case where proxy overlooks some features/details).
+
+**Illustrative example (cleaning robot MDP, directly relevant to proxy design)**: 3-room house (Attic, Bedroom, Kitchen). Deterministic policy = binary vector of rooms cleaned. True reward r_true = [1,1,1] (equal value all rooms). A proxy that overlooks one room (e.g., r_proxy = [1,1,0]) can be unhackable under certain conditions, but a narrower proxy (only attic: [1,0,0]) is hackable: the proxy prefers cleaning only attic while true reward prefers cleaning bedroom+kitchen. Natural "simplifications" (omitting features or fine-graining details) frequently produce hackable proxies unless the omitted terms are jointly less important than shared ones.
+
+**Key implications for CursiveOS measurement validity and self-improvement**:
+- **Fitness functions as proxies**: The current network-weighted fitness (0.40) creates exactly the incentive structure analyzed: cheapest way to improve proxy score may not improve (or may degrade) true organism fitness (hardware-scoped evidence, population confirmation, long-term viability). The formal results explain *why* narrow channel optimization risks sudden qualitative failure even if early proxy gains look good.
+- **Unhackability as design target**: While full unhackability is strong, the conditions highlight the value of hardware-scoping, per-channel confirmation gates (Chapter 10), variance-aware thresholds, and multi-signal fitness that approximate robustness. Single dominant channels (like emulation network) are inherently risky.
+- **Tension between narrow specs and alignment**: Directly reinforces the corpus stance that proxies (benchmarks, LLM self-judgment in agent loops) are best treated as *auxiliaries* to selection/verification rather than primary optimized objectives. This maps to RESEARCH_PIPELINE.md P0 gaps on Goodhart/measurement in RSI and software organisms, and the need for verifier-grounded loops (cf. Gödel Agent already in corpus).
+- **Agent evaluation / local agents**: In self-improving agent contexts (test-time improvement, self-rewarding models), proxy drift or hacking is a core failure mode. The paper's emphasis on verifier/fitness function integrity supports bounded self-improvement designs and population confirmation to detect gaming.
+
+**What this adds to the chapter**: Provides the rigorous theoretical backbone for the existing empirical Goodhart exposure discussion. Future fitness/schema work can reference these conditions when designing combined or robust proxies. No existing content rewritten; this is purely additive after §4.
+
+**Why it matters to CursiveOS**: Recursive self-improvement and organism measurement rely on proxy optimization (benchmark deltas, fitness for selection). Without formal grounding on when such optimization is safe, the system risks Goodhart-style gaming at the measurement layer — the exact concern this chapter surfaces in production data. The paper fills that foundational gap without overclaiming transfer to noisy real hardware.
+
 ## 5. Empirical follow-ups (2026-06-12)
 
 The 2026-06-12 sessions on the rebuilt founder rig (Ryzen 7 5700 + Arc A750,
