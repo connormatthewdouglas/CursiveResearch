@@ -38,6 +38,7 @@ and table cell group for retention in its generated chapter.
 | --- | --- | --- | --- | --- |
 | `2026-05-30` | `sources/firmware-control-surfaces-selected-sources.md` | `chapters/08-firmware-and-bios-control.md` | Incorporated | Primary-source pass over Linux `efivarfs`, Linux `firmware-attributes`, DMTF Redfish BIOS/Settings/AttributeRegistry schemas, and fwupd UEFI capsule flow. |
 | `2026-05-31` | `sources/local-agent-safety-selected-sources.md` | `chapters/12-measurement-daemon-and-natural-language-shell.md` | Incorporated | Source-backed pass over OWASP LLM/agentic risks, NCSC and Microsoft prompt-injection guidance, NIST AI RMF, and Linux/gVisor/Firecracker sandboxing docs. |
+| `2026-06-18` | `papers/recursive-self-improvement/reward-hacking-skalse-2022/` (Skalse et al. 2022, NeurIPS) | `chapters/16-benchmark-schema-and-measurement-validity.md` (additive §4.1) + RESEARCH_PIPELINE.md Goodhart gaps | Extraction incorporated; full text not stored (arXiv non-exclusive) | Formal definition of reward hacking and unhackable proxies. Fills Goodhart/proxy theory gap for measurement validity and self-improvement fitness functions. Paraphrased deep extraction + citation only. | 
 
 ## Rights-Cleared Paper Intake
 
