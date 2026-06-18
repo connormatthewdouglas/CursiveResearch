@@ -47,11 +47,12 @@ and table cell group for retention in its generated chapter.
 | `2026-05-31` | `papers/agent-evaluation/swe-bench/` | CC BY 4.0 | `chapters/12-measurement-daemon-and-natural-language-shell.md` | Full PDF/text and extraction incorporated | Real GitHub issue benchmark; useful for execution-based shell evaluation discipline. |
 | `2026-05-31` | `papers/software-engineering-agents/swe-agent/` | CC BY 4.0 | `chapters/12-measurement-daemon-and-natural-language-shell.md` | Full PDF/text and extraction incorporated | Agent-computer interface paper; useful for Cursive shell tool/interface design. |
 | `2026-05-31` | `papers/agent-evaluation/osworld/` | CC BY 4.0 | `chapters/12-measurement-daemon-and-natural-language-shell.md` | Full PDF/text and extraction incorporated | Real computer-use benchmark; useful for VM-backed OS-agent evaluation. |
+| `2026-06-18` | `papers/recursive-self-improvement/ladder/` | CC BY 4.0 | `chapters/14-peer-reviewed-research-recursive-self-improvement-and-agentic-evolution.md` (additive RSI-023 section) | Full paper.md + deep-extraction + claims created | LADDER (Simonds & Yoshiyama 2025). Autonomous recursive variant generation + verifiable RL and test-time adaptation. Strong fit for verifier-grounded self-improvement loops in CursiveOS. | 
 
 ## Conversion Coverage
 
 | Check | Result |
-| --- | --- |
+| --- | --- | --- |
 | Initial source files processed | 8 of 8 |
 | Supplemental uploaded sources processed | 1 |
 | Tables detected and converted in initial import | 14 |
