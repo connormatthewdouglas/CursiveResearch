@@ -1,6 +1,6 @@
 # Peer-Reviewed / Published Research Sources: Recursive Self-Improvement
 
-Date extracted: 2026-05-27  
+Date extracted: 2026-06-18 (LADDER addition)  
 Scope: foundational papers and systems for recursive self-improvement, self-improving agents, evolutionary coding agents, verifier-guided discovery, open-ended evolution, and agent evaluation.
 
 ## Purpose
@@ -33,11 +33,13 @@ This file records the current source set for the recursive self-improvement rese
 | RSI-020 | Safety Must Precede the Deployment of Open-Ended AI | https://arxiv.org/abs/2502.04512 | arXiv preprint | Safety framing for open-ended systems and autonomous discovery. | Medium-high as safety context. |
 | RSI-021 | TerraLingua: Emergence and Analysis of Open-endedness in LLM Ecologies | https://arxiv.org/abs/2603.16910 | arXiv preprint | Open-endedness in LLM ecologies; useful for organism/evolution framing. | Medium; needs review. |
 | RSI-022 | Evolutionary Computation and Large Language Models: A Survey of Methods, Synergies, and Applications | https://arxiv.org/abs/2505.15741 | arXiv survey | Survey connecting evolutionary computation and LLMs. | Medium-high; useful orientation. |
+| RSI-023 | LADDER: Self-Improving LLMs Through Recursive Problem Decomposition | https://arxiv.org/abs/2503.00735 | arXiv preprint (CC BY 4.0) | Autonomous recursive variant generation for difficulty gradients + verifiable GRPO RL and test-time RL (TTRL). Dramatic gains on hard math with only a numeric verifier. Excellent example of bounded, curriculum-style self-improvement. | High. Full rights-cleared paper folder created. |
 
 ## Intake Notes
 
 - Google DeepMind's AlphaEvolve, FunSearch, AlphaDev, and AlphaTensor form the strongest evaluator-grounded discovery cluster.
 - STOP, GPTSwarm, Voyager, Reflexion, Gödel Agent, Polaris, PSN, Self-Taught Evaluators, and Self-Rewarding Language Models form the strongest self-improving-agent cluster.
+- **LADDER (RSI-023)** added 2026-06-18 as a cornerstone example of autonomous curriculum construction via recursive problem decomposition and verifier-grounded RL (including test-time adaptation). Full paper folder with deep extraction created under `papers/recursive-self-improvement/ladder/`.
 - `AI Agents That Matter` should be treated as a methodology guardrail for all agent claims.
 - The corpus should distinguish self-improvement of code, scaffolds, skills, evaluators, policies, memory, and model weights.
 - The central recurring lesson is that improvement requires a trusted feedback signal. LLM self-judgment is useful but weaker than deterministic tests, environment feedback, or independently validated sensors.
