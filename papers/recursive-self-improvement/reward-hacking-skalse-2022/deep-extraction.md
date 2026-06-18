@@ -20,7 +20,7 @@ Rights Status: extraction only (arXiv non-exclusive)
 
 | Claim | Where It Appears | Evidence Used By Authors | Extraction Confidence |
 | --- | --- | --- | --- |
-| Reward hacking: optimizing imperfect proxy ˜R leads to poor performance on true R | Abstract, §1 | Formal def + MDP counterexamples | High (direct from text) |
+| Reward hacking: optimizing imperfect proxy R_proxy leads to poor performance on true R_true | Abstract, §1 | Formal def + MDP counterexamples | High (direct from text) |
 | A proxy is unhackable if increasing E[proxy return] can never decrease E[true return] | Abstract, §1 | Definition + proofs | High |
 | For all stochastic policies, two rewards are unhackable only if one is constant | §5.1 (theoretical) | Linearity of reward in state-action visit counts | High |
 | Non-trivial unhackable pairs exist for deterministic policies and finite stochastic sets | §5.2 | Construction + necessary/sufficient conditions for simplifications | High |
