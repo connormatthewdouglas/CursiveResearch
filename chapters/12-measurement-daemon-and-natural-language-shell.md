@@ -238,6 +238,85 @@ than interchangeable. The research direction should be a risk-based selector:
 use the lightest boundary that preserves the required safety property, and
 escalate isolation when code or input is untrusted.
 
+### Containment Primitive Characterization
+
+The risk tiers above *name* primitives (seccomp, Landlock, containers, gVisor,
+microVMs) but do not say what each one actually contains, what it leaves
+exposed, or what it costs. This subsection records that characterization so the
+risk-based selector called for in Open Research Gap #4 ("build risk-based
+containment for unattended tool execution") can be designed from properties
+rather than vibes. The central finding: **no single Linux primitive is a
+complete sandbox**, so CursiveOS containment is a composition problem, not a
+choice of one tool.
+
+| Primitive | Boundary it enforces | What it does NOT contain on its own | Setup privilege | Cost | Best CursiveOS role |
+| --- | --- | --- | --- | --- | --- |
+| Namespaces + cgroups v2 | Separate views of PID/mount/net/user/IPC; quota CPU/memory/PIDs/IO | Syscall surface to host kernel; a kernel bug = host compromise | Some namespaces need root or unprivileged-userns enabled | Negligible | Baseline isolation + resource caps for any tool runner |
+| seccomp-BPF | Allow/deny syscalls by number and **scalar** arguments | Anything behind a pointer (file paths, sockaddr); dangerous args to allowed syscalls | Unprivileged (with `no_new_privs`) | Negligible | Shrink the syscall attack surface of a runner; defense layer, never sole gate |
+| Landlock LSM | Unprivileged self-restriction of filesystem access (since 5.13) and TCP bind/connect (since 6.7, ABI v4) | Syscall filtering; UDP; capability when running on an older kernel | Unprivileged | Negligible | Per-command/per-tool filesystem confinement without root |
+| bubblewrap | Unprivileged namespace + bind-mount + seccomp sandbox (the Flatpak engine) | Strong kernel isolation; depends on the userns attack surface it relies on | Unprivileged (needs unprivileged user namespaces enabled) | Low | Ergonomic per-command jail for build/test in user space |
+| gVisor | Per-sandbox application kernel (Sentry, Go) re-implements Linux syscalls, so the app rarely touches the host kernel directly | Full Linux syscall compatibility; cheap syscall-heavy I/O | Root/container runtime to install | Moderate (syscall-heavy workloads slow; CPU-bound near-native) | Container-UX sandbox for untrusted code needing a stronger syscall boundary |
+| Firecracker microVM | A real KVM guest-kernel boundary (hardware virtualization) plus a `jailer` that drops privileges | Nothing about *what runs inside* the guest; needs its own kernel + rootfs | Root/KVM on the host | Highest (but small: ≤125 ms to guest init, <5 MiB VMM overhead) | Strongest isolation for unattended/untrusted or paid-resource tasks |
+
+The sharp edges that decide real safety:
+
+- **seccomp cannot read pointers.** A BPF filter sees syscall numbers and scalar
+  register values, not the memory they point to. It can forbid `dup2` to fd 2,
+  but it cannot restrict `open()` to a path allowlist, because the path is a
+  pointer. This is a deliberate design choice that also makes seccomp immune to
+  TOCTOU argument-swapping — but it means seccomp must be paired with a
+  path-aware mechanism (Landlock, mount namespace, gVisor) whenever filesystem
+  scope matters. Treating seccomp as a filesystem boundary is a category error.
+- **Landlock capability is kernel-version-scoped.** Filesystem rules need
+  ≥5.13; TCP network rules need ≥6.7 (ABI v4). Because Landlock is ABI-versioned
+  and best-effort, a CursiveOS tool runner must query the supported ABI at
+  runtime and either degrade explicitly or refuse the action — it must never
+  silently assume network confinement on a kernel that does not enforce it.
+- **Unprivileged user namespaces are themselves attack surface.** bubblewrap
+  and rootless containers rely on unprivileged user namespaces, which are the
+  default on most distributions but are also a recurring source of
+  privilege-escalation CVEs, which is why some hardened distros disable them.
+  CursiveOS containment cannot *assume* this feature exists; if it is off, the
+  fallback is a privileged setup path or a heavier boundary (gVisor/microVM),
+  not a silent loss of isolation.
+- **gVisor trades compatibility and syscall cost for a smaller host-kernel
+  surface.** The Sentry intercepts syscalls (default `systrap` platform via
+  `SECCOMP_RET_TRAP`/`SIGSYS`, optional KVM, deprecated ptrace) and services
+  them in a memory-safe user-space kernel. Overhead is near-zero for CPU-bound
+  work and meaningful for syscall- or I/O-heavy work, and not every Linux
+  syscall is implemented — so it suits untrusted code, not latency-critical
+  measurement.
+- **Firecracker is the only option here with a hardware-enforced guest-kernel
+  boundary.** It powers AWS Lambda and Fargate precisely because the microVM
+  line is stronger than any in-kernel namespace/LSM boundary, and the cost is
+  now small (sub-second start, single-digit-MiB VMM overhead). The trade is
+  operational: it needs KVM, a guest kernel, and a root filesystem, and it
+  contains the guest, not the program logic inside it.
+
+**Selector implication for CursiveOS.** The lightest adequate boundary should
+be chosen by *input trust* and *blast radius*, and the layers compose upward:
+
+```text
+read-only inspection      -> namespace view + seccomp + Landlock read rules
+workspace build/test       -> + cgroup caps + Landlock/bwrap write scope + egress allowlist
+untrusted downloaded code  -> + gVisor (no secrets, no host fs, controlled egress)
+unattended / paid resource -> Firecracker microVM with clean state + jailer
+measurement-truth path     -> deterministic daemon only; NOT a sandbox tier at all
+```
+
+The last line is the load-bearing one. Containment hardness protects the *host
+and operator*; it does **not** earn the language model write access to organism
+truth. A perfectly sandboxed shell agent is still a probabilistic component, so
+even a Firecracker-isolated shell action must route through the same read-only
+relationship to the measurement daemon described later in this chapter.
+Sandboxing answers "can this command hurt the machine"; the daemon/shell split
+answers "can this command corrupt the fitness ledger" — and those remain two
+separate guarantees.
+
+Specific sources for this characterization are recorded under "Containment
+Primitive Deep-Dive Sources" in
+`sources/local-agent-safety-selected-sources.md`.
+
 ### Memory Boundary
 
 Persistent shell memory is useful for operator experience, but it must not
