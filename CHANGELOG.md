@@ -4,6 +4,34 @@ This file records meaningful changes to research guidance, validation status,
 and corpus process. It is intended to be readable without reconstructing a
 chain of supporting documents.
 
+## 2026-06-20 - Adversarial Review: Flagged Chapter 02 TDX Bus-Attack Claim
+
+Changed:
+- Filed a "Flagged for Review" item in `VALIDATION.md` against Chapter 02's
+  claim that "TDX, built for the DDR5 era, is hardened against physical bus-level
+  attacks" (and the attestation table's "Bus Attack Resistance: Hardened
+  (DDR5)"). Original chapter wording left untouched (it is a preserved DOCX
+  import; resolved via flag, not in-place edit).
+- Added `validation/notes/2026-06-20-ch02-tdx-bus-attack-resistance-challenge.md`
+  with the full challenge and external citations.
+
+Reason:
+- This is a decision-driving security claim: the chapter recommends an SGX → TDX
+  + NVIDIA CC migration as the answer to the DePIN "oracle problem." External
+  evidence contradicts the "hardened" property for the relevant threat model.
+  **TEE.Fail** (Oct 2025, Georgia Tech + Purdue) is a practical **DDR5**
+  memory-bus interposer that extracts keys and **forges remote attestation
+  against Intel SGX/TDX, AMD SEV-SNP, and NVIDIA CC** — defeating *both*
+  recommended successors on the exact bus called "hardened." **Battering RAM**
+  (2025, ~$50 DDR4 interposer) breaks SGX/SEV-SNP and its authors expect DDR5
+  interposers to follow; Intel's TDX mitigation ("integrity mode") is not the
+  default posture. Intel and AMD explicitly place physical-access attacks
+  **out of threat model** — which is exactly the DePIN model (a node operator
+  with physical access to its own DRAM bus). For that model the claim is
+  effectively Disproven; the oracle problem must rest on the project's own
+  non-TEE defenses (population confirmation, fingerprint cross-checks, anomaly
+  detection, economic slashing), not on TEE bus integrity.
+
 ## 2026-06-16 - Noise Floor Measured + GPU Power Now Visible
 
 Changed:
