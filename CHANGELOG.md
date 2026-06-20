@@ -4,6 +4,27 @@ This file records meaningful changes to research guidance, validation status,
 and corpus process. It is intended to be readable without reconstructing a
 chain of supporting documents.
 
+## 2026-06-20 - Experiment Proposed: Proposer vs Random Search
+
+Added:
+- `experiments/proposer-vs-random-tuning-experiment.md`: a single falsifiable,
+  properly-powered experiment to test the project's load-bearing untested claim
+  (CH05-BM-002) — does the LLM proposer beat blind random search over the same
+  allowlist at equal budget? Uses cold-start as the only fitness channel (the
+  one solid enough to drive selection per the 2026-06-16 noise floor, CV 0.002),
+  seeds the allowlist with a validated-inert decoy knob (the v0.8 GPU pin) to
+  catch Goodhart/knob-hoarding, and pre-registers an honest null (C ≈ B is the
+  likely, and still decision-changing, outcome).
+- RESEARCH_PIPELINE §3 Experimental Lift: new row pointing the AI-guided tuning
+  validation at this sharper, runnable instance.
+
+Reason:
+- The corpus has empirically grounded its measurement layer (Chapter 16) but has
+  never tested whether the *proposer*, not just the knobs, creates value. The
+  recent network result (the whole win was one sysctl) and the inert GPU pin
+  show exactly the failure mode this would catch. The 2026-06-16 noise floor is
+  the missing input that finally makes the test powered and worth running.
+
 ## 2026-06-16 - Noise Floor Measured + GPU Power Now Visible
 
 Changed:
