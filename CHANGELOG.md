@@ -4,6 +4,29 @@ This file records meaningful changes to research guidance, validation status,
 and corpus process. It is intended to be readable without reconstructing a
 chain of supporting documents.
 
+## 2026-06-21 - Cold-Start Mechanism + Hardware-Scoping Experiment Proposed
+
+Changed:
+- Added `experiments/cold-start-mechanism-and-hardware-scoping-plan.md`: a
+  falsifiable experiment plan targeting the corpus's most-trusted signal
+  (cold-start, within-machine CV 0.002). Two hypotheses: (H1) the −51% desktop
+  win is carried by a single CPU idle-exit knob, tested by a 2³ factorial over
+  governor / EPP / C-state limit on the Ryzen 7 5700 + Arc A750 desktop; (H2) a
+  cheap preset-free idle-exit pre-probe (cold TTFT − warm TTFT) predicts which
+  machines benefit, tested across all available tester machines.
+- Added the plan to RESEARCH_PIPELINE.md Experimental Lift; marked the real-path
+  network A/B row Done (it had been completed on 2026-06-16 but the pipeline row
+  still read "Proposed").
+
+Reason:
+- Cold-start currently drives selection (`chapters/16` §5.7), yet its mechanism
+  is only half-isolated (CPU-side, but no single knob — §5.1) and its hardware
+  scoping is unexplained (−51% desktop vs ~0% laptop — §5.5). The standing
+  VALIDATION instruction is "build hardware-scoped fitness before any fleet-wide
+  preset claim"; this experiment is the cheapest path to both the causal knob
+  and a predictor, reusing the factorial-decomposition discipline that already
+  paid off on the network thread (§5.6).
+
 ## 2026-06-16 - Noise Floor Measured + GPU Power Now Visible
 
 Changed:
