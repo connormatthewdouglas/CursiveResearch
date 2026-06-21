@@ -23,7 +23,7 @@ When a flag is resolved, delete its row (git history preserves it).
 
 | Date | Item | Location (file §) | Issue | Suggested action | Status |
 | --- | --- | --- | --- | --- | --- |
-| _(none open)_ | | | | | |
+| 2026-06-21 | Covenant-72B's 67.1 MMLU described as "competitive with early GPT-4-class models," cited as evidence "decentralized compute can achieve data-center-level results." | `chapters/02-market-and-viability.md` § "The Bittensor (TAO) Ecosystem: Performance Benchmarks" → "Model Benchmarks: Covenant-72B" (and the summary-table "Average Model MMLU" row). | Overstated, contradicts external evidence. GPT-4 (2023) scored 86.4% on MMLU; 67.1 is ~19 pts lower, at the Llama-2-70B (~68.9%) / GPT-3.5 (~70%) tier. Covenant-72B's *own* reported peer set is LLaMA-2-70B (65.6) and LLM360 K2 (65.5) — 2023-era open base models, not GPT-4. The decentralized-training feat (72B, 1.1T tokens, ~70 commodity-hardware contributors) is real and not disputed; only the "GPT-4-class / data-center-level" framing is. | Do not edit the preserved-DOCX wording in place. Treat the "GPT-4-class" comparison as Disproven and do not reuse it in external/marketing material; when Chapter 02 is next revised, rephrase to the Llama-2-70B / open-base-model framing. Evidence: `validation/notes/2026-06-21-ch02-covenant-72b-gpt4-class-overstatement-challenge.md`. | Open |
 
 ## Current High-Impact Claims
 
