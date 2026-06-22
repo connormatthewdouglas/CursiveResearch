@@ -120,6 +120,15 @@ It should separate:
 - measurable organism properties;
 - implementation consequences for CursiveOS.
 
+Status (2026-06-22): a first literature pass landed as Chapter 15 §"Biological
+and Artificial-Life Foundations of the Organism Framing" — autopoiesis
+(Maturana & Varela), cybernetics/VSM + Ashby's Law (Beer), artificial life
+(Langton, Tierra, Avida/Lenski 2003), and open-ended evolution (novelty search,
+MAP-Elites, POET), with the metaphor/analogy/property/consequence separation
+requested above. Remaining: a dedicated standalone chapter if the topic grows,
+deeper open-ended-evolution and quality-diversity reading, and source-level
+extraction of the cornerstone ALife papers.
+
 ## P1 — Local Agent Architecture and Safety Literature
 
 ### Why this matters

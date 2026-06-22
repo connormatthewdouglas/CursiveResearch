@@ -4,6 +4,37 @@ This file records meaningful changes to research guidance, validation status,
 and corpus process. It is intended to be readable without reconstructing a
 chain of supporting documents.
 
+## 2026-06-22 - Chapter 15: Autopoiesis / Artificial-Life Grounding of the Organism Framing
+
+Changed:
+- Chapter 15: added section "Biological and Artificial-Life Foundations of the
+  Organism Framing" (additive, inserted after "What Remains Speculative"). It
+  grounds the corpus's "organism" language in autopoiesis (Maturana & Varela,
+  1972/1980), cybernetics (Beer's Viable System Model 1972; Ashby's Law of
+  Requisite Variety), and artificial life (Langton's "life as it could be";
+  Tierra, Ray 1990; Avida, with Lenski/Ofria/Pennock/Adami, Nature 423:139–144,
+  2003 on incremental evolution of complex features). It then covers the
+  open-ended-evolution literature — novelty search (Lehman & Stanley 2011),
+  Quality-Diversity / MAP-Elites (Mouret & Clune, arXiv:1504.04909, 2015), and
+  POET (Wang et al., arXiv:1901.01753, 2019) — and adds a table separating
+  metaphor / structural analogy / measurable property / implementation
+  consequence for each biological term.
+
+Reason:
+- Closes the explicit "artificial life and open-ended evolution" follow-up
+  flagged at the end of Chapters 14 and 15, and addresses RESEARCH_PIPELINE.md
+  P0 item "Software Organisms, Autopoiesis, and Evolutionary Systems" and the P0
+  knowledge gap "What makes a software system an organism rather than an
+  automation pipeline?" Key takeaways for CursiveOS: today the system is closer
+  to allopoietic (automation reaching toward organism properties), not
+  autopoietic; the "genome" should be a diverse, stepping-stone-structured
+  archive (MAP-Elites-style) rather than a champion changelog; fitness must
+  reward stepping stones (Avida/EQU) or capabilities will not evolve; sensor/
+  verifier variety must match mutation variety (Ashby); and indefinite
+  open-ended improvement is unproven even in purpose-built ALife systems, so
+  plateaus should be expected and designed for. Sources cited are those actually
+  retrieved via web search (2026-06-22); no full-text paper mirroring.
+
 ## 2026-06-16 - Noise Floor Measured + GPU Power Now Visible
 
 Changed:
