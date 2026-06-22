@@ -4,6 +4,24 @@ This file records meaningful changes to research guidance, validation status,
 and corpus process. It is intended to be readable without reconstructing a
 chain of supporting documents.
 
+## 2026-06-22 - Experiment Plan: Idle-Power Selection-Channel Validation
+
+Changed:
+- Added `experiments/idle-power-selection-channel-validation-plan.md`. A
+  pre-registered, falsifiable plan to test whether the 2026-06-16 harness
+  idle-power fix (settle delay + more samples) actually makes idle power a
+  selection-usable channel (CV ≤ 0.15 per Chapter 10) in the **production
+  full-test path** and across hardware — not just in the one-off Phase-D probe
+  on the Arc A750 desktop where it was demonstrated.
+
+Reason:
+- Chapter 16 §5 items 7–8 left a tension on the record: idle power was CV ≈ 0.83
+  in the production noise floor but CV ≈ 0.01 in a bespoke probe. Chapter 10's
+  confirmation rule and the live v0.9 screen's power term both depend on which
+  is true in the path operators actually run, on more than one machine. The plan
+  also ships the §3 item-1 `power_source` field as a side effect and keeps the
+  §2.2 cross-machine pooling bar explicit (H3).
+
 ## 2026-06-16 - Noise Floor Measured + GPU Power Now Visible
 
 Changed:
