@@ -23,7 +23,7 @@ When a flag is resolved, delete its row (git history preserves it).
 
 | Date | Item | Location (file §) | Issue | Suggested action | Status |
 | --- | --- | --- | --- | --- | --- |
-| _(none open)_ | | | | | |
+| 2026-06-22 | Ch01 frames a static 212KB TCP buffer default ("appropriate for 1990s modem speeds") as the universal OS-level bottleneck and "foundational opportunity"; the in-chapter assessment cites +454–616% network deltas and marks the wording canon for verbatim white-paper reuse. | `chapters/01-first-principles-and-strategy.md` §2.1, §2.2, and Research-master assessment | Overstated and contradicts both external evidence and the corpus's own **Validated** Chapter 16. Linux receive-buffer autotuning (since kernel 2.4.17/2.6.7) already sizes buffers to path BDP; 212992 is the `net.core.rmem_max` ceiling, not an applied default. The large real network win is the buffer-independent CUBIC→BBR congestion-control swap. Chapter 16 real-path A/B found the CursiveOS buffer/qdisc stack adds ~0% (−0.7%) on ordinary ≤1GbE links. The "1990s modem" parenthetical is inverted (208KB ≫ a 56kbps BDP). | Reconcile Ch01 with Validated Ch16: reframe the example as a congestion-control (BBR) win, not a buffer-ceiling win; correct/drop the "212KB default / 1990s modem" wording; quarantine the +454–616% headline from white-paper reuse until restated with real-path scope. Full evidence: `validation/notes/2026-06-22-ch01-buffer-default-overstatement-challenge.md`. | Open |
 
 ## Current High-Impact Claims
 
