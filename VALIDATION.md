@@ -23,7 +23,7 @@ When a flag is resolved, delete its row (git history preserves it).
 
 | Date | Item | Location (file §) | Issue | Suggested action | Status |
 | --- | --- | --- | --- | --- | --- |
-| _(none open)_ | | | | | |
+| 2026-06-23 | First Principle #1 flagship example: "TCP socket buffers default to 212KB (appropriate for 1990s modem speeds)." | `chapters/01-first-principles-and-strategy.md` §2.1 | Both halves are wrong. 212 KB is `net.core.rmem_max` (the cap on *manually* set `SO_RCVBUF`), not the default; ordinary sockets autotune (`tcp_rmem` max ~4–6 MB, on by default since ~2.6.x/2004). And a 212 KB window supports ~17 Mbit/s at 100 ms RTT up to ~1.7 Gbit/s on a LAN — ~300×–30,000× a 56 kbit/s modem, not "modem speeds." The corpus's own Validated Chapter 16 network A/B already states "default-buffer autotuning already covers the ~6 MB BDP" and buffer tuning adds ~0%; the real win was CUBIC→BBR. Yet §2.1's Research-master note tells future editors to quote this "verbatim." | Correct the §2.1 TCP-buffer sentence (use congestion-control / governor examples the corpus actually validated); drop the "quote verbatim" instruction for this example; cross-link §2.1 to Chapter 16. See `validation/notes/2026-06-23-ch01-2.1-tcp-buffer-claim-redteam-challenge.md`. | Open — flagged, original not edited |
 
 ## Current High-Impact Claims
 
