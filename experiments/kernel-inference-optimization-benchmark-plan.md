@@ -1,12 +1,12 @@
 # Kernel Inference Optimization Benchmark Plan
 
 Date created: 2026-05-26
-Linked chapter: `chapters/03-linux-kernel-optimization.md`
+Linked chapter: `chapters/13-linux-kernel-optimization.md`
 Status: Proposed validation plan; not yet executed.
 
 ## Purpose
 
-Validate Chapter 03's Linux kernel optimization claims against CursiveOS-relevant inference workloads. Chapter 03 contains promising kernel features and performance leads, but many claims are currently extrapolated from crypto, scheduler, memory-management, database, web, or synthetic benchmarks. This plan defines how to turn those leads into CursiveOS-grade evidence.
+Validate Chapter 07's Linux kernel optimization claims against CursiveOS-relevant inference workloads. Chapter 07 contains promising kernel features and performance leads, but many claims are currently extrapolated from crypto, scheduler, memory-management, database, web, or synthetic benchmarks. This plan defines how to turn those leads into CursiveOS-grade evidence.
 
 ## Claims This Plan Must Validate
 
@@ -260,7 +260,7 @@ Recommended JSON output:
 
 ## Promotion Rules
 
-A Chapter 03 claim can move from imported claim to verified finding only if:
+A Chapter 07 claim can move from imported claim to verified finding only if:
 
 - the feature is supported by primary source documentation or upstream commit evidence;
 - the result is reproduced on target hardware;

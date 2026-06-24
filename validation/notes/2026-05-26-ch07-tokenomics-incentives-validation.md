@@ -1,14 +1,14 @@
-# Validation Note: Chapter 07 Tokenomics and Incentives
+# Validation Note: Chapter 21 Tokenomics and Incentives
 
 Date checked: 2026-05-26
 Agent / reviewer: GPT-5.5 Thinking / ChatGPT
-Scope: targeted validation of Chapter 07 protocol and design claims
+Scope: targeted validation of Chapter 21 protocol and design claims
 Status: partially verified; protocol-source validation started but not complete
 Source IDs: SRC-07-001 through SRC-07-010 in `sources/chapter-07-selected-sources.md`
 
 ## Summary
 
-Chapter 07 is strategically useful and its high-level design direction is mostly sound: avoid pure inflation, tie rewards to verified value, make customer pricing stable or predictable, and use burns/revenue linkage where possible. However, it is not yet decision-grade. Many project-specific claims require exact protocol docs, governance proposals, dashboards, and on-chain data.
+Chapter 21 is strategically useful and its high-level design direction is mostly sound: avoid pure inflation, tie rewards to verified value, make customer pricing stable or predictable, and use burns/revenue linkage where possible. However, it is not yet decision-grade. Many project-specific claims require exact protocol docs, governance proposals, dashboards, and on-chain data.
 
 The strongest verified portion is Helium's Data Credit / HNT burn-and-mint model. Render's BME framing is likely valid but exact emission parameters must be checked against RNP files. Bittensor, io.net, Hivemapper, and Grass claims still need deeper source resolution.
 
@@ -25,11 +25,11 @@ The strongest verified portion is Helium's Data Credit / HNT burn-and-mint model
 | CL-07-007 | Hivemapper HONEY burn/mint and MIP-15 mechanics are correctly summarized. | unverified in this pass | SRC-07-008 | Needs official tokenomics docs and MIP source extraction. |
 | CL-07-008 | Grass contributor economics are safer because contributor capex is low. | plausible but unverified | source pending | Needs official docs and market analysis. |
 | CL-07-009 | Pure inflationary hardware rewards are fragile if real demand does not catch up. | supported as broad economic principle | SRC-07-001, SRC-07-003, SRC-07-010 pending | Keep as strategic conclusion, but cite specific case studies carefully. |
-| CL-07-010 | CursiveOS should combine stable pricing, verified contribution rewards, demand-linked emissions, and burn/revenue linkage. | supported as provisional recommendation | SRC-07-001, SRC-07-002, SRC-07-003, Chapter 01 strategy | Good direction, but no tokenomics decision should be final until anti-gaming and verification economics are designed. |
+| CL-07-010 | CursiveOS should combine stable pricing, verified contribution rewards, demand-linked emissions, and burn/revenue linkage. | supported as provisional recommendation | SRC-07-001, SRC-07-002, SRC-07-003, Chapter 19 strategy | Good direction, but no tokenomics decision should be final until anti-gaming and verification economics are designed. |
 
 ## Required Corpus Changes
 
-- Resolve numbered citations in Chapter 07 into `SRC-07-*` records.
+- Resolve numbered citations in Chapter 21 into `SRC-07-*` records.
 - Add exact Render RNP proposal links and parameter values.
 - Verify io.net IDE and burn mechanics from current docs, not secondary summaries.
 - Verify Bittensor Dynamic TAO, emissions, subnet caps, alpha token mechanics, and current governance status from official docs.
@@ -45,7 +45,7 @@ CursiveOS should separate four economic functions:
 3. **Protocol/token value capture:** only if real usage or revenue exists.
 4. **Anti-gaming:** benchmark proof, hardware fingerprinting, repeatability, anomaly detection, and delayed rewards.
 
-Do not launch a token simply to create incentives. The early credible incentive layer from Chapter 01 can be non-token: contributor credits, allocation rights, signed contribution receipts, revenue-share commitments, or vesting agreements tied to validated submissions.
+Do not launch a token simply to create incentives. The early credible incentive layer from Chapter 19 can be non-token: contributor credits, allocation rights, signed contribution receipts, revenue-share commitments, or vesting agreements tied to validated submissions.
 
 ## Recommended Hybrid Model for Further Design
 

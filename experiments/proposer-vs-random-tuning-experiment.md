@@ -1,14 +1,14 @@
 # Experiment Proposal: Does the LLM Proposer Beat Random Search?
 
 Date created: 2026-06-20
-Linked chapters: `chapters/05-ai-guided-tuning.md`, `chapters/16-benchmark-schema-and-measurement-validity.md`, `chapters/10-seed-organism-and-sensor-array.md`
+Linked chapters: `chapters/15-ai-guided-tuning.md`, `chapters/00-benchmark-schema-and-measurement-validity.md`, `chapters/01-seed-organism-and-sensor-array.md`
 Sharpens: `experiments/ai-guided-tuning-loop-validation-plan.md` (claim CH05-BM-002)
 Status: Proposed; not yet executed.
 
 ## 0. Why this experiment, why now
 
 The central CursiveOS thesis is that a guided self-improvement loop creates
-value (Chapters 01, 05, 10). The corpus has never tested the cheapest, most
+value (Chapters 19, 05, 10). The corpus has never tested the cheapest, most
 load-bearing version of that claim: **that the intelligent proposer beats blind
 random search over the same knobs under the same evaluation budget**
 (`ai-guided-tuning-loop-validation-plan.md`, claim CH05-BM-002, still
@@ -16,7 +16,7 @@ random search over the same knobs under the same evaluation budget**
 
 Two recent corpus events make this both designable and urgent:
 
-1. **The noise floor is now measured (2026-06-16, Chapter 16 / VALIDATION).**
+1. **The noise floor is now measured (2026-06-16, Chapter 22 / VALIDATION).**
    Six identical v0.9 runs on Stardust gave per-channel CV: cold-start **0.002**
    ("rock-solid"), network 0.192 (above the 0.15 escalation threshold;
    magnitude unreliable), sustained sign-unstable, idle-power 0.83 raw → ~0.01
@@ -24,7 +24,7 @@ Two recent corpus events make this both designable and urgent:
    selection decision and how many confirmation runs each needs. You cannot run
    a powered tuning experiment without this; now you can.
 
-2. **The last "win" collapsed under scrutiny (Chapter 16 / VALIDATION).** The
+2. **The last "win" collapsed under scrutiny (Chapter 22 / VALIDATION).** The
    celebrated "+246% from our network tuning" turned out to be a loopback BDP
    artifact; the entire real-path win was a single well-known sysctl
    (`tcp_congestion_control=bbr`), and the buffer/qdisc stack added ~0%.
@@ -58,7 +58,7 @@ both are scored by the same verifier.
 
 ## 2. Why cold-start is the only fitness channel here
 
-Per the 2026-06-16 noise floor (Chapter 16 / VALIDATION), cold-start is the one
+Per the 2026-06-16 noise floor (Chapter 22 / VALIDATION), cold-start is the one
 channel solid enough to drive selection today (CV 0.002). Therefore:
 
 - **Fitness = cold-start latency delta** (GPU idle → first token), measured by
@@ -75,12 +75,12 @@ self-improvement loop safe.
 ## 3. The allowlist (designed to be diagnostic, not just safe)
 
 All knobs reversible, documented, allowlisted, and reverted between candidates
-(the harness already reverts presets at run end — Chapter 16 §1). The allowlist
+(the harness already reverts presets at run end — Chapter 22 §1). The allowlist
 is deliberately seeded with three kinds of knob so the result is interpretable:
 
 | Knob class | Examples (Stardust: Ryzen 7 5700 + Arc A750) | Expected effect on cold-start |
 | --- | --- | --- |
-| **Live lever** (≥1) | CPU governor `performance` on AC; GPU power/perf level | Plausibly real — governor change is the validated cold-start mechanism on the laptop (Chapter 16, hardware-scoped cold-start) |
+| **Live lever** (≥1) | CPU governor `performance` on AC; GPU power/perf level | Plausibly real — governor change is the validated cold-start mechanism on the laptop (Chapter 22, hardware-scoped cold-start) |
 | **Decoy / inert** (≥3) | v0.8 GPU frequency pin (`slpc_ignore_eff` + `rps_min 2000` + `rps_boost max`); other knobs validated as ~0-effect at idle | ~0 (validated dead weight) — present to detect Goodhart/knob-hoarding |
 | **Neutral-to-risky** | zram on/off, THP madvise/never, a benign sysctl | Unknown; lets the proposer reason |
 
@@ -107,7 +107,7 @@ strategy differs.
   confirmation runs resolve differences far below the effect of interest. Use
   **n = 3** confirmation runs per candidate; the resolvable paired difference is
   well under 1%, while the cold-start effect previously seen on this hardware
-  class is ~−51% (Chapter 16, hardware-scoped cold-start). The experiment is
+  class is ~−51% (Chapter 22, hardware-scoped cold-start). The experiment is
   therefore over-powered for any decision-relevant effect — by design, so a null
   result is trustworthy, not just underpowered.
 - **Ordering / counterbalancing:** randomize candidate order within each arm;
@@ -119,7 +119,7 @@ strategy differs.
   candidate_config_hash, agent_model, agent_prompt_hash, retrieval_context_hash,
   fitness_before/after, decision) so results are CursiveRoot-ready.
 - **Single machine, single session class:** Stardust only. Cold-start is
-  hardware-scoped (Chapter 16 / VALIDATION), so this experiment proves the loop
+  hardware-scoped (Chapter 22 / VALIDATION), so this experiment proves the loop
   on one machine; it does **not** claim fleet transfer. That is a deliberate
   scope boundary, not a limitation to be papered over.
 
@@ -128,7 +128,7 @@ strategy differs.
 | Outcome | Decision |
 | --- | --- |
 | C's best confirmed cold-start beats B's by > noise floor, and C beats A | H1 supported: the proposer adds value on a clean channel. Promote CH05-BM-002 from "unverified" toward "Locally reproduced." Proceed to memory (D) and harder channels. |
-| C ≈ B (within noise), both beat A | **H0 not rejected.** The *knobs* matter but the *proposer* does not — value is in the allowlist, not the intelligence. This is the BBR situation again: re-scope Chapter 05 claims, and prefer a curated allowlist + cheap search over an LLM loop until a channel is found where reasoning pays. |
+| C ≈ B (within noise), both beat A | **H0 not rejected.** The *knobs* matter but the *proposer* does not — value is in the allowlist, not the intelligence. This is the BBR situation again: re-scope Chapter 15 claims, and prefer a curated allowlist + cheap search over an LLM loop until a channel is found where reasoning pays. |
 | Neither C nor B beats A meaningfully | The allowlist has no real cold-start lever on this hardware; redesign the allowlist before testing proposers. |
 | C accumulates the inert GPU pin / decoy knobs as often as B (H2 fails) | Goodhart/knob-hoarding warning: the proposer is not reasoning from the verifier. Flag in VALIDATION; do not enable unattended tuning. |
 

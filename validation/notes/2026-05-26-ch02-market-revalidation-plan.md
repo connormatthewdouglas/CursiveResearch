@@ -1,13 +1,13 @@
-# Revalidation Plan: Chapter 02 Market and Viability
+# Revalidation Plan: Chapter 20 Market and Viability
 
 Date created: 2026-05-26
 Agent / reviewer: GPT-5.5 Thinking / ChatGPT
-Scope: `chapters/02-market-and-viability.md`
+Scope: `chapters/20-market-and-viability.md`
 Status: revalidation required before use
 
 ## Why This Chapter Needs Revalidation
 
-Chapter 02 contains highly time-sensitive claims about Bitcoin mining difficulty, network hash rate, ASIC efficiency, Bittensor subnet status, DePIN market conditions, BBR performance, Intel Arc driver behavior, and profitability logic. These claims can become stale quickly and should not be used in external materials or roadmap decisions without fresh sources.
+Chapter 20 contains highly time-sensitive claims about Bitcoin mining difficulty, network hash rate, ASIC efficiency, Bittensor subnet status, DePIN market conditions, BBR performance, Intel Arc driver behavior, and profitability logic. These claims can become stale quickly and should not be used in external materials or roadmap decisions without fresh sources.
 
 ## Claims to Revalidate
 
@@ -19,7 +19,7 @@ Chapter 02 contains highly time-sensitive claims about Bitcoin mining difficulty
 | io.net and DePIN project status | Official docs, dashboards, governance posts | Check operational status, not just marketing. |
 | BBR/BBRv3 claims | Linux kernel/networking docs, Google BBR docs, papers | Separate BBRv1/v2/v3 and kernel availability. |
 | Socket buffer defaults and BDP recommendations | Linux docs, distro defaults, controlled benchmarks | Use current distro defaults. |
-| Intel Arc sysfs and driver claims | Intel docs, Linux kernel/Mesa docs, local hardware probe | Link to Chapter 09 and Chapter 04 validation. |
+| Intel Arc sysfs and driver claims | Intel docs, Linux kernel/Mesa docs, local hardware probe | Link to Chapter 18 and Chapter 03 validation. |
 | C-state latency and power tradeoffs | CPU vendor docs and local benchmarks | Do not generalize across platforms. |
 | Profitability conclusions | Current token prices, electricity assumptions, hardware costs | Always date assumptions. |
 
@@ -33,4 +33,4 @@ Chapter 02 contains highly time-sensitive claims about Bitcoin mining difficulty
 
 ## Recommendation
 
-Do not use Chapter 02 as current truth. Treat it as a research backlog for market positioning and viability until fresh data is collected.
+Do not use Chapter 20 as current truth. Treat it as a research backlog for market positioning and viability until fresh data is collected.

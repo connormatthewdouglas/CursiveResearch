@@ -44,7 +44,9 @@ CursiveOS is explicitly about self-improving software. The corpus needs a deeper
 
 ### Desired corpus output
 
-Create or expand a chapter on **Recursive Self-Improvement and Agentic Evolution**.
+**Status (2026-06-24):** Delivered as Chapter 03 (literature digest) + Chapter 04
+(critical synthesis) + **25 papers** under `papers/`. Remaining work: source-level
+validation of individual RSI claims and graduation of experiment plans.
 
 It should answer:
 
@@ -58,7 +60,7 @@ It should answer:
 
 ### Why this matters
 
-Chapter 08 now includes a first source-backed control-surface matrix and
+Chapter 17 now includes a first source-backed control-surface matrix and
 `sources/firmware-control-surfaces-selected-sources.md` records the primary
 interfaces reviewed. The remaining work is a platform/vendor matrix and real
 hardware probing, not another abstract pass over the idea.
@@ -120,7 +122,7 @@ It should separate:
 - measurable organism properties;
 - implementation consequences for CursiveOS.
 
-Status (2026-06-22): a first literature pass landed as Chapter 15 §"Biological
+Status (2026-06-22): a first literature pass landed as Chapter 03 §"Biological
 and Artificial-Life Foundations of the Organism Framing" — autopoiesis
 (Maturana & Varela), cybernetics/VSM + Ashby's Law (Beer), artificial life
 (Langton, Tierra, Avida/Lenski 2003), and open-ended evolution (novelty search,
@@ -133,7 +135,7 @@ extraction of the cornerstone ALife papers.
 
 ### Why this matters
 
-Chapter 12 now includes a first source-backed external safety pass, and
+Chapter 15 now includes a first source-backed external safety pass, and
 `sources/local-agent-safety-selected-sources.md` records the reviewed material.
 The corpus also ingested rights-cleared full-text paper folders for SWE-bench,
 SWE-agent, and OSWorld. The daemon/shell split is supported by the literature;
@@ -152,7 +154,7 @@ agent benchmark design, and concrete containment prototypes.
 
 ### Desired corpus output
 
-Further expand Chapter 12 when new evidence changes shell memory, tool policy,
+Further expand Chapter 15 when new evidence changes shell memory, tool policy,
 confirmation UX, or containment guidance. If the topic grows beyond shell
 safety, split out a dedicated **Local Agent Safety and Operator Interfaces**
 chapter.
@@ -175,7 +177,7 @@ The existing chapters contain many optimization leads. We need more foundational
 
 ### Desired corpus output
 
-Expand Chapters 03/04/09 with explanatory foundations, not just tuning recipes.
+Expand Chapters 07/04/09 with explanatory foundations, not just tuning recipes.
 
 ## P1 — Arc B70 and Intel AI Stack Research
 
@@ -195,7 +197,7 @@ Arc B70 may be a strong workstation-tier CursiveOS accelerator, but the corpus s
 
 ### Desired corpus output
 
-Expand Chapter 09 from imported research into a durable Intel local-agent research chapter.
+Expand Chapter 18 from imported research into a durable Intel local-agent research chapter.
 
 ## P2 — Economics, Forks, and Knowledge Commons
 
@@ -214,7 +216,7 @@ CursiveOS moved away from tokenomics, but its Bitcoin-native economic layer stil
 
 ### Desired corpus output
 
-Chapter 11 already has the internal model. Add external grounding so the model knows what it is borrowing from and rejecting.
+Chapter 02 already has the internal model. Add external grounding so the model knows what it is borrowing from and rejecting.
 
 ---
 
@@ -238,7 +240,7 @@ Knowledge Gaps are questions the corpus should answer with research synthesis be
 | --- | --- | --- |
 | When does network tuning transfer from simulation to real distributed workloads? | Current network deltas are strong but isolated. | Research BBR/BDP literature and compare to real P2P/mining/inference traffic patterns. |
 | What is the right evaluation stack for OS-operating agents? | The natural-language shell needs benchmarks beyond chat quality. | Survey OSWorld, SWE-bench, AgentBench, WebArena, terminal-agent evaluations. |
-| How do current agent systems fail under privilege? | Root-capable agents are dangerous. | Initial synthesis delivered in Chapter 17 (Mutation Safety and Permission Law): least-privilege model, OWASP Excessive Agency, mutation-class → containment matrix. Remaining: deeper prompt-injection/tool-attack survey and a class-0 containment prototype. |
+| How do current agent systems fail under privilege? | Root-capable agents are dangerous. | Initial synthesis delivered in Chapter 06 (Mutation Safety and Permission Law): least-privilege model, OWASP Excessive Agency, mutation-class → containment matrix. Remaining: deeper prompt-injection/tool-attack survey and a class-0 containment prototype. |
 | Which hardware identity signals are stable enough for population confirmation? | Spoofing resistance depends on hardware fingerprints. | Research SMBIOS/DMI, GPU VBIOS, TPM, attestation, kernel version, microcode. |
 | What is the strongest non-token incentive model for open infrastructure contributors? | Layer 5 is novel and needs external grounding. | Research OSS funding, bounty systems, revenue share, credit systems, Bitcoin payments. |
 
@@ -246,7 +248,7 @@ Knowledge Gaps are questions the corpus should answer with research synthesis be
 
 | Gap | Why It Matters | Best Next Action |
 | --- | --- | --- |
-| Can fork obligation inheritance be enforced or only signaled? | Chapter 11 depends on it conceptually. | Legal/technical literature review. |
+| Can fork obligation inheritance be enforced or only signaled? | Chapter 02 depends on it conceptually. | Legal/technical literature review. |
 | Can CursiveOS become workload-native without privacy leakage? | Workload classification could be invasive. | Research local-only classification and privacy-preserving telemetry. |
 | Can open firmware meaningfully improve self-optimization? | Coreboot/OpenBMC may unlock deeper control but narrow hardware. | Research supported boards and server platforms. |
 | How should CursiveOS distinguish substrate compounding from capital compounding? | Important to the biological/economic thesis. | Research knowledge commons, institutional memory, software ecosystem growth. |
@@ -261,30 +263,30 @@ Experimental Lift items are tests proposed by the corpus. These belong in `exper
 
 | Experiment | Source Chapter(s) | Purpose | Current Status | Next Action |
 | --- | --- | --- | --- | --- |
-| Arc B70 local-agent benchmark | Chapter 09 | Validate B70 runtime/model/tool-call claims. | Plan exists. | Run on target B70 hardware; compare SYCL, Vulkan, OpenVINO, model families, tool-call reliability. |
-| Kernel inference optimization benchmark | Chapter 03 | Test sched_ext, PREEMPT_RT, zram, fscrypt, kernel versions against inference workloads. | Plan exists. | Implement runner and collect local results. |
-| AI-guided tuning loop validation | Chapter 05 | Test whether bounded agent tuning beats defaults/random/heuristics. | Superseded by sharper plan below (`proposer-vs-random-tuning-experiment.md` tests CH05-BM-002 directly). | Use the proposer-vs-random experiment as the canonical instance. |
-| Proposer vs random search (sharpened) | Chapter 05/16/10 | Single powered, falsifiable test of CH05-BM-002: does the LLM proposer beat random search over the same allowlist at equal budget, scored only on the cold-start channel? | Proposed (`experiments/proposer-vs-random-tuning-experiment.md`). | Build the arm driver in main repo; run on Stardust with n=3 cold-start confirmations; check H1 (peak fitness) and H2 (drops the inert decoy knob). |
-| GPU/accelerator tuning validation | Chapter 04 | Probe device-specific controls and test power/clock/SR-IOV/hugepage/IO claims. | Plan exists. | Start with read-only hardware capability probe. |
-| Security hardening validation | Chapter 06 | Validate firewall, SSH, monitoring, sandbox, supply-chain controls. | Plan exists. | Convert into tiered hardening baseline only after testing. |
-| Firmware/BIOS capability probe | Chapter 08 | Discover which BIOS/firmware settings are observable/changeable on target hardware. | Proposed. | Build read-only matrix first: efivarfs, firmware-attributes, Redfish, fwupd, vendor tools. |
-| Seed organism parent-vs-candidate screen | Chapter 10 / main repo | Run parent-vs-candidate screens via the one-paste seed session (current: v0.9c-cpu-retained parent, v0.10-zram candidate). | In progress in main repo (seed-session script + screen-verdict analyzer shipped 2026-06-11). | Repeat and counterbalance before any acceptance; confirm v0.9c on second machine; screen v0.10-zram. |
-| Cold-start order / page-cache confound | Chapter 16 / 10 | Test whether the −51% Arc cold-start win is partly a baseline-first / tuned-second or warm-page-cache artifact. | Proposed (`experiments/cold-start-order-cache-confound-plan.md`). | Run three-arm counterbalance + cache-control on Stardust (~1 afternoon); harden or downgrade cold-start as a selection channel per pre-registered thresholds. |
-| Idle-power selection-channel validation | Chapter 16 / 10 | Test whether the 2026-06-16 harness idle-power fix (settle + more samples) makes idle power a selection-usable channel (CV ≤ 0.15) in the production full-test path across hardware. | Proposed (`experiments/idle-power-selection-channel-validation-plan.md`). | Run on Stardust + second machine; ship `power_source` field as a side effect; decide whether idle power can gate selection. |
-| Real-path network A/B | Chapter 16 | Bound how much of the loopback CUBIC-vs-BBR signal transfers to a real LAN/WAN path. | Done (2026-06-16): whole win is BBR; buffer stack ~0% on ≤1GbE. | High-BDP (>1Gbit/high-latency WAN) path still untested before any buffer claim. |
-| Cold-start mechanism + hardware-scoping predictor | Chapter 16 / 10 | Isolate which single CPU knob (governor/EPP/C-state) carries the −51% desktop cold-start win, and test whether a cheap idle-exit pre-probe predicts which machines benefit. | Proposed (`experiments/cold-start-mechanism-and-hardware-scoping-plan.md`). | Run 2³ factorial on desktop; run pre-probe vs preset-gain across all tester machines. |
-| Power-source normalization | Chapter 16 | Make idle-power data comparable across machines. | Proposed (main repo build task). | Record `power_source`/method in structured results; only pool cross-machine power data after the field exists. |
-| Every-run detail bundles | Chapter 16 | Get per-pass variance into CursiveRoot for all runs, not just seed-path runs. | Proposed (main repo build task). | Upload `run_detail_bundles` from the plain benchmark path; then calibrate CV/N rules on variance-bearing data. |
-| Concurrent inference throughput benchmark | Chapter 16 / action plan parking lot | Measure requests/sec under parallel load, where scheduler tweaks should actually show. | Proposed. | Add a concurrency benchmark mode before claiming scheduler-tweak inference value. |
-| Population confirmation calibration | Chapter 10 | Test N-confirmation rule and CV threshold as fleet grows. | Proposed. | Use tester fleet data; calibrate CV <= 0.15 and N rule. |
-| Immune sensor prototype | Chapter 10/11 | Detect spoofing, correlated machines, fake benchmark farms, curator self-dealing. | Proposed. | Start with anomaly profiles and measurement correlation. |
-| Measurement daemon prototype | Chapter 12 / main repo | Implement deterministic sensor execution, local queue, signed submission, scoped helper. | Specified, not implemented. | Build in main repo; corpus can research daemon patterns and failure modes. |
-| Natural-language shell UX experiment | Chapter 12 | Test command preview, read/write/root modes, confirmation boundaries. | Proposed. | Prototype UI in main repo; corpus should research prior agent UX/safety. |
-| Signed preset update channel | Chapter 12 / roadmap | Test staged signed presets, local regression, rollback, divergence reporting. | Proposed. | Build after daemon prototype. |
-| Local agent containment test | Chapter 09/12 | Ensure unattended execution cannot mutate host/repo without approval. | Existing local risk found. | Keep mutating automation disabled until containment/approval boundary exists. |
-| CursiveRoot schema pressure test | Chapter 10/11 | Validate whether database can represent raw runs, sensor outputs, confirmation sets, fitness, and payout links. | Proposed. | Main repo spec/implementation task; corpus should research evidence schemas. |
-| Metabolic sensor simulation | Chapter 11 | Simulate current/lifetime split under contributor histories and attack scenarios. | Proposed. | Run synthetic contributor simulations before real payment. |
-| Fork obligation research/prototype | Chapter 11 | Explore Bitcoin anchoring, fork visibility, legal/social enforcement. | Proposed. | Treat as research-heavy before implementation. |
+| Arc B70 local-agent benchmark | Chapter 18 | Validate B70 runtime/model/tool-call claims. | Plan exists. | Run on target B70 hardware; compare SYCL, Vulkan, OpenVINO, model families, tool-call reliability. |
+| Kernel inference optimization benchmark | Chapter 07 | Test sched_ext, PREEMPT_RT, zram, fscrypt, kernel versions against inference workloads. | Plan exists. | Implement runner and collect local results. |
+| AI-guided tuning loop validation | Chapter 15 | Test whether bounded agent tuning beats defaults/random/heuristics. | Superseded by sharper plan below (`proposer-vs-random-tuning-experiment.md` tests CH05-BM-002 directly). | Use the proposer-vs-random experiment as the canonical instance. |
+| Proposer vs random search (sharpened) | Chapter 15/16/10 | Single powered, falsifiable test of CH05-BM-002: does the LLM proposer beat random search over the same allowlist at equal budget, scored only on the cold-start channel? | Proposed (`experiments/proposer-vs-random-tuning-experiment.md`). | Build the arm driver in main repo; run on Stardust with n=3 cold-start confirmations; check H1 (peak fitness) and H2 (drops the inert decoy knob). |
+| GPU/accelerator tuning validation | Chapter 03 | Probe device-specific controls and test power/clock/SR-IOV/hugepage/IO claims. | Plan exists. | Start with read-only hardware capability probe. |
+| Security hardening validation | Chapter 22 | Validate firewall, SSH, monitoring, sandbox, supply-chain controls. | Plan exists. | Convert into tiered hardening baseline only after testing. |
+| Firmware/BIOS capability probe | Chapter 06 | Discover which BIOS/firmware settings are observable/changeable on target hardware. | Proposed. | Build read-only matrix first: efivarfs, firmware-attributes, Redfish, fwupd, vendor tools. |
+| Seed organism parent-vs-candidate screen | Chapter 01 / main repo | Run parent-vs-candidate screens via the one-paste seed session (current: v0.9c-cpu-retained parent, v0.10-zram candidate). | In progress in main repo (seed-session script + screen-verdict analyzer shipped 2026-06-11). | Repeat and counterbalance before any acceptance; confirm v0.9c on second machine; screen v0.10-zram. |
+| Cold-start order / page-cache confound | Chapter 22 / 10 | Test whether the −51% Arc cold-start win is partly a baseline-first / tuned-second or warm-page-cache artifact. | Proposed (`experiments/cold-start-order-cache-confound-plan.md`). | Run three-arm counterbalance + cache-control on Stardust (~1 afternoon); harden or downgrade cold-start as a selection channel per pre-registered thresholds. |
+| Idle-power selection-channel validation | Chapter 22 / 10 | Test whether the 2026-06-16 harness idle-power fix (settle + more samples) makes idle power a selection-usable channel (CV ≤ 0.15) in the production full-test path across hardware. | Proposed (`experiments/idle-power-selection-channel-validation-plan.md`). | Run on Stardust + second machine; ship `power_source` field as a side effect; decide whether idle power can gate selection. |
+| Real-path network A/B | Chapter 22 | Bound how much of the loopback CUBIC-vs-BBR signal transfers to a real LAN/WAN path. | Done (2026-06-16): whole win is BBR; buffer stack ~0% on ≤1GbE. | High-BDP (>1Gbit/high-latency WAN) path still untested before any buffer claim. |
+| Cold-start mechanism + hardware-scoping predictor | Chapter 22 / 10 | Isolate which single CPU knob (governor/EPP/C-state) carries the −51% desktop cold-start win, and test whether a cheap idle-exit pre-probe predicts which machines benefit. | Proposed (`experiments/cold-start-mechanism-and-hardware-scoping-plan.md`). | Run 2³ factorial on desktop; run pre-probe vs preset-gain across all tester machines. |
+| Power-source normalization | Chapter 22 | Make idle-power data comparable across machines. | Proposed (main repo build task). | Record `power_source`/method in structured results; only pool cross-machine power data after the field exists. |
+| Every-run detail bundles | Chapter 22 | Get per-pass variance into CursiveRoot for all runs, not just seed-path runs. | Proposed (main repo build task). | Upload `run_detail_bundles` from the plain benchmark path; then calibrate CV/N rules on variance-bearing data. |
+| Concurrent inference throughput benchmark | Chapter 22 / action plan parking lot | Measure requests/sec under parallel load, where scheduler tweaks should actually show. | Proposed. | Add a concurrency benchmark mode before claiming scheduler-tweak inference value. |
+| Population confirmation calibration | Chapter 01 | Test N-confirmation rule and CV threshold as fleet grows. | Proposed. | Use tester fleet data; calibrate CV <= 0.15 and N rule. |
+| Immune sensor prototype | Chapter 01/11 | Detect spoofing, correlated machines, fake benchmark farms, curator self-dealing. | Proposed. | Start with anomaly profiles and measurement correlation. |
+| Measurement daemon prototype | Chapter 15 / main repo | Implement deterministic sensor execution, local queue, signed submission, scoped helper. | Specified, not implemented. | Build in main repo; corpus can research daemon patterns and failure modes. |
+| Natural-language shell UX experiment | Chapter 15 | Test command preview, read/write/root modes, confirmation boundaries. | Proposed. | Prototype UI in main repo; corpus should research prior agent UX/safety. |
+| Signed preset update channel | Chapter 15 / roadmap | Test staged signed presets, local regression, rollback, divergence reporting. | Proposed. | Build after daemon prototype. |
+| Local agent containment test | Chapter 18/12 | Ensure unattended execution cannot mutate host/repo without approval. | Existing local risk found. | Keep mutating automation disabled until containment/approval boundary exists. |
+| CursiveRoot schema pressure test | Chapter 01/11 | Validate whether database can represent raw runs, sensor outputs, confirmation sets, fitness, and payout links. | Proposed. | Main repo spec/implementation task; corpus should research evidence schemas. |
+| Metabolic sensor simulation | Chapter 02 | Simulate current/lifetime split under contributor histories and attack scenarios. | Proposed. | Run synthetic contributor simulations before real payment. |
+| Fork obligation research/prototype | Chapter 02 | Explore Bitcoin anchoring, fork visibility, legal/social enforcement. | Proposed. | Treat as research-heavy before implementation. |
 
 ## Experimental Lift Rule
 

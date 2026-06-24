@@ -84,7 +84,7 @@ interface part of the agent's intelligence.
 
 | Figure/Table | What It Shows | Important Takeaway | Should Corpus Recreate/Summarize? |
 | --- | --- | --- | --- |
-| Figure 1 | LM plus ACI loop | Interface is part of the agent system. | Summarize in Chapter 12. |
+| Figure 1 | LM plus ACI loop | Interface is part of the agent system. | Summarize in Chapter 15. |
 | Table 1 | SWE-bench and Lite results | ACI beats RAG and shell-only baselines. | Preserve key numbers. |
 | Table 3 | ACI ablations | Search, edit, file view, and context management matter. | Summarize design lessons. |
 | Search interface figure | Shell-only, iterative, summarized search | Agent-friendly search differs from human UI search. | Summarize conceptually. |
@@ -131,7 +131,7 @@ interface part of the agent's intelligence.
 
 ## 13. CursiveOS / Corpus Implications
 
-Chapter 12 should treat the natural-language shell as an agent-computer
+Chapter 15 should treat the natural-language shell as an agent-computer
 interface:
 
 ```text

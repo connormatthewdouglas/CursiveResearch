@@ -1,8 +1,8 @@
-# Chapter 17 Selected Sources
+# Chapter 06 Selected Sources
 
 Date extracted: 2026-06-22
 Agent / reviewer: claude-opus-4-8 (routine corpus-gap pass)
-Chapter: `chapters/17-mutation-safety-and-permission-law.md`
+Chapter: `chapters/06-mutation-safety-and-permission-law.md`
 Status: Selected high-priority extraction. Primary docs preferred; verify exact
 options against the man page / spec for the target kernel and distro before any
 preset becomes operational policy.
@@ -28,13 +28,13 @@ mutation-class gate enforceable.
 
 ## Cross-references within the corpus
 
-- Chapter 06 (Security and Hardening): external-attacker hardening; seccomp /
+- Chapter 22 (Security and Hardening): external-attacker hardening; seccomp /
   Landlock / systemd already appear there for the inverse threat model.
-- Chapter 08 (Firmware and BIOS Control): UEFI/Redfish staged pending-settings +
+- Chapter 06 (Firmware and BIOS Control): UEFI/Redfish staged pending-settings +
   reset-required model underpins class-6 gating.
-- Chapter 12 (Measurement Daemon and Natural-Language Shell): the daemon/shell
+- Chapter 15 (Measurement Daemon and Natural-Language Shell): the daemon/shell
   trust boundary this law makes enforceable.
-- Chapter 13 (Gap Closure): Gap 2 and "What Should Be Added Next" #1, which this
+- Chapter 07 (Gap Closure): Gap 2 and "What Should Be Added Next" #1, which this
   chapter answers.
 - papers/recursive-self-improvement/godel-agent, .../ladder, reflexion;
   STOP and Voyager (pipeline): self-modification / verifier-capture failure modes.

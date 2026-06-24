@@ -3,12 +3,12 @@
 Date run: 2026-05-26
 Operator: Codex / GPT-5
 Status: Locally reproduced smoke test; not a validated benchmark
-Related chapter: `chapters/09-local-agent-arc-b70.md`
+Related chapter: `chapters/18-local-agent-arc-b70.md`
 Related plan: `experiments/arc-b70-local-agent-benchmark-plan.md`
 
 ## Purpose
 
-Record the observation that prompted the Chapter 09 Hermes-context correction and the local tool-profile changes. This run was diagnostic: it establishes a reproducible lead for the formal benchmark plan, but it does not satisfy repeated-run, cache-control, or full environment-capture requirements.
+Record the observation that prompted the Chapter 18 Hermes-context correction and the local tool-profile changes. This run was diagnostic: it establishes a reproducible lead for the formal benchmark plan, but it does not satisfy repeated-run, cache-control, or full environment-capture requirements.
 
 ## Environment Captured
 
@@ -100,7 +100,7 @@ Not supported by this smoke test:
 - Added an explicit reduced cron tool profile and local scheduler support for it.
 - Paused the observed mutating `daily-cursiveos-repo-hygiene` cron task after it modified `~/CursiveOS` through the local terminal backend.
 
-These actions are operational mitigations, not evidence that the full Chapter 09 deployment recommendation is validated.
+These actions are operational mitigations, not evidence that the full Chapter 18 deployment recommendation is validated.
 
 ## Required Next Test
 

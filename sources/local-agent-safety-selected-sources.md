@@ -2,7 +2,7 @@
 
 Intake date: `2026-05-31`
 
-Purpose: source-backed grounding for Chapter 12's natural-language shell and
+Purpose: source-backed grounding for Chapter 15's natural-language shell and
 measurement-daemon separation. This digest focuses on agentic risk, prompt
 injection, tool authority, sandboxing, and operator approval boundaries for a
 local OS-operating assistant.
@@ -158,9 +158,9 @@ boundary than editing a Markdown file.
 
 ## Containment Primitive Deep-Dive Sources (2026-06-20)
 
-Added to ground Chapter 12's "Containment Primitive Characterization" subsection,
+Added to ground Chapter 15's "Containment Primitive Characterization" subsection,
 which deepens the previously named-only sandboxing primitives into a
-property-level selector for unattended/untrusted execution (Chapter 12 Open
+property-level selector for unattended/untrusted execution (Chapter 15 Open
 Research Gap #4; RESEARCH_PIPELINE P1 "Sandboxing and least privilege"; P0
 knowledge gap "How do current agent systems fail under privilege?").
 

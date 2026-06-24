@@ -1,14 +1,14 @@
-# Validation Note: Chapter 04 GPU and Accelerator Tuning
+# Validation Note: Chapter 03 GPU and Accelerator Tuning
 
 Date checked: 2026-05-26
 Agent / reviewer: GPT-5.5 Thinking / ChatGPT
-Scope: targeted validation of highest-impact Chapter 04 claims
+Scope: targeted validation of highest-impact Chapter 03 claims
 Status: partially verified, with significant caveats
 Source IDs: SRC-04-001 through SRC-04-009 in `sources/chapter-04-selected-sources.md`
 
 ## Summary
 
-Chapter 04 contains useful engineering leads, but it is less cleanly validated than Chapters 03, 05, 08, and 09. The broad control surfaces are real: AMDGPU exposes power/runtime controls; Linux supports sched_ext; Linux supports hugepages and Transparent Huge Pages controls; Kyber has documented target latency tunables; Intel and AMD GPU virtualization/SR-IOV ecosystems exist.
+Chapter 03 contains useful engineering leads, but it is less cleanly validated than Chapters 07, 05, 08, and 09. The broad control surfaces are real: AMDGPU exposes power/runtime controls; Linux supports sched_ext; Linux supports hugepages and Transparent Huge Pages controls; Kyber has documented target latency tunables; Intel and AMD GPU virtualization/SR-IOV ecosystems exist.
 
 However, the chapter currently mixes source-supported mechanisms with aggressive hardware-specific claims. Specific RX 580 undervolt tables, universal hugepage recommendations, Intel Arc power-control claims, SR-IOV generalizations for consumer hardware, and exact percentage improvements should be treated as hypotheses until tested on target hardware.
 
@@ -35,14 +35,14 @@ However, the chapter currently mixes source-supported mechanisms with aggressive
 
 ## Required Corpus Changes
 
-### Recommended Chapter 04 wording changes
+### Recommended Chapter 03 wording changes
 
 - Mark RX 580 undervolt values as example hypotheses, not validated recommendations.
 - Mark i915-sriov-dkms as experimental/community/lab-only unless target-hardware validation proves otherwise.
 - Replace broad consumer GPU SR-IOV claims with hardware-specific support matrices.
 - Replace universal hugepage/NUMA/IO scheduler claims with benchmark-required tuning candidates.
 - Separate GPU-driver control surfaces from scheduler/storage/memory tuning; the chapter currently blends too many layers.
-- Cross-link Chapter 04 to Chapter 09 for Arc B70 validation and Chapter 03 for sched_ext/kernel/memory validation.
+- Cross-link Chapter 03 to Chapter 18 for Arc B70 validation and Chapter 07 for sched_ext/kernel/memory validation.
 
 ## Implications for CursiveOS
 
@@ -67,7 +67,7 @@ Create `experiments/gpu-accelerator-tuning-benchmark-plan.md` with these tracks:
 
 ## Follow-up
 
-- Extract all Chapter 04 sources into the canonical `sources/extracted-source-index.md` or merge `sources/chapter-04-selected-sources.md` into it.
+- Extract all Chapter 03 sources into the canonical `sources/extracted-source-index.md` or merge `sources/chapter-04-selected-sources.md` into it.
 - Validate LACT, scx scheduler repo, AMDGPU sysfs details, NUMA docs, and RDMA/GPUDirect claims.
-- Build the GPU/accelerator benchmark plan before using Chapter 04 as operational guidance.
-- Amend Chapter 04 with explicit `Validation Caveat` sections near RX 580, Intel Arc, SR-IOV, hugepages, and Kyber claims.
+- Build the GPU/accelerator benchmark plan before using Chapter 03 as operational guidance.
+- Amend Chapter 03 with explicit `Validation Caveat` sections near RX 580, Intel Arc, SR-IOV, hugepages, and Kyber claims.

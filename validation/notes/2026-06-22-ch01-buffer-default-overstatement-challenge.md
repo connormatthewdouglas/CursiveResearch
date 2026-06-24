@@ -1,13 +1,13 @@
-# Adversarial Review: Chapter 01 §2.1/§2.2 — the "static buffer default = universal performance gap" thesis is overstated
+# Adversarial Review: Chapter 19 §2.1/§2.2 — the "static buffer default = universal performance gap" thesis is overstated
 
 Date: 2026-06-22
 Reviewer role: Red-team / adversarial review (external-evidence challenge)
-Mode: Challenge only. The original Chapter 01 text was **not** edited. This note
+Mode: Challenge only. The original Chapter 19 text was **not** edited. This note
 plus the `VALIDATION.md` "Flagged for Review" row are the deliverable.
 
 ## The claim under challenge
 
-`chapters/01-first-principles-and-strategy.md` §2.1 ("Linux Defaults Are
+`chapters/19-first-principles-and-strategy.md` §2.1 ("Linux Defaults Are
 Optimized for Compatibility, Not Performance") and §2.2 ("The Bottlenecks Are
 OS-Level, Not Workload-Specific"):
 
@@ -30,7 +30,7 @@ and cites the proof point as measured network deltas of **+454–616%**.
 This is not a peripheral number. §2.1 is presented as an *irreducible first
 principle* — "the foundational opportunity CursiveOS exploits" — and §2.2
 generalizes it into the workload-agnostic, "universal" performance gap that the
-entire moat/flywheel thesis (Chapters 01, 02, 11) and the project's headline
+entire moat/flywheel thesis (Chapters 19, 02, 11) and the project's headline
 performance numbers rest on. If the buffer-ceiling framing is wrong, the
 headline shrinks and the "universal measurable gap" is far smaller and less
 defensible than the foundational chapter asserts. The chapter explicitly asks
@@ -83,8 +83,8 @@ OS-tuning asset.
   https://www.net.in.tum.de/fileadmin/bibtex/publications/papers/IFIP-Networking-2018-TCP-BBR.pdf
 
 **4. The corpus's own most-rigorous, Validated evidence already contradicts the
-foundational framing — and the correction never propagated to Chapter 01.**
-Chapter 16 and the 2026-06-16 CHANGELOG record a real-path A/B (Stardust → 2nd
+foundational framing — and the correction never propagated to Chapter 19.**
+Chapter 22 and the 2026-06-16 CHANGELOG record a real-path A/B (Stardust → 2nd
 machine, real 1GbE, netem 50 ms + 0.5% loss): CUBIC 43.1, BBR 851.1,
 BBR+CursiveOS-stack 845.0 Mbit/s. Conclusion (status **Validated**):
 
@@ -94,10 +94,10 @@ BBR+CursiveOS-stack 845.0 Mbit/s. Conclusion (status **Validated**):
 > tuning" is "a loopback BDP artifact and does NOT transfer."
 
 That is the project's own data falsifying the buffer-ceiling-as-universal-bottleneck
-framing on real links. Yet Chapter 01 §2.1/§2.2 still presents the static buffer
+framing on real links. Yet Chapter 19 §2.1/§2.2 still presents the static buffer
 default as *the* foundational, universal gap, is labelled "core canon," and the
 in-chapter assessment still cites the "+454–616%" headline (the loopback-class
-number Chapter 16 down-scoped). The validated correction in Chapter 16 was never
+number Chapter 22 down-scoped). The validated correction in Chapter 22 was never
 reconciled with the foundational chapter, so the corpus simultaneously asserts
 and denies the same claim, with the overstated version flagged for verbatim
 white-paper reuse.
@@ -105,18 +105,18 @@ white-paper reuse.
 ## What the challenge does NOT claim
 
 - It does not claim Linux defaults are perfectly tuned. CPU-governor and
-  cold-start gains in Chapter 16 are real and hardware-scoped (−51% on the
+  cold-start gains in Chapter 22 are real and hardware-scoped (−51% on the
   Arc A750 desktop), and high-BDP/high-latency WAN buffer tuning remains
   genuinely untested and may matter. The challenge is specifically to the
   *network buffer* framing and the *"universal, structurally inherent"*
   generalization in §2.2.
-- It does not edit Chapter 01. Per `CORPUS_WORKFLOW.md` §3, a spotted
+- It does not edit Chapter 19. Per `CORPUS_WORKFLOW.md` §3, a spotted
   overstatement that needs a human/agent decision is flagged in `VALIDATION.md`,
   not silently rewritten — especially for canon text headed into the white paper.
 
 ## Suggested resolution (for a maintainer to decide)
 
-1. Reconcile Chapter 01 §2.1/§2.2 with the Validated Chapter 16 network finding:
+1. Reconcile Chapter 19 §2.1/§2.2 with the Validated Chapter 22 network finding:
    reframe the network example as "the default *congestion-control algorithm*
    (CUBIC) underperforms under loss; switching to BBR is the large, real win,"
    and stop describing a static 212KB buffer as the universal bottleneck.
@@ -124,7 +124,7 @@ white-paper reuse.
    the "defaults to 212KB" phrasing (distinguish `tcp_rmem` autotuning from the
    `net.core.rmem_max` ceiling).
 3. Quarantine the "+454–616%" headline from white-paper reuse until it is
-   restated with Chapter 16's real-path scope; do not credit buffer tuning with
+   restated with Chapter 22's real-path scope; do not credit buffer tuning with
    a transferable magnitude.
 4. Re-examine the "workload-agnostic, structurally inherent universal gap"
    generalization (§2.2): a one-line congestion-control swap is not a
@@ -138,4 +138,4 @@ white-paper reuse.
 - BBR: Congestion-Based Congestion Control — https://web.stanford.edu/class/cs244/papers/bbr.pdf
 - IETF BBR draft — https://datatracker.ietf.org/doc/html/draft-cardwell-iccrg-bbr-congestion-control
 - "Towards a Deeper Understanding of TCP BBR" (TUM) — https://www.net.in.tum.de/fileadmin/bibtex/publications/papers/IFIP-Networking-2018-TCP-BBR.pdf
-- Internal: `chapters/16-benchmark-schema-and-measurement-validity.md`; `VALIDATION.md` (Chapter 16 network headline, status Validated 2026-06-16); `CHANGELOG.md` 2026-06-16 "Real-Path A/B Overturns the Stack-Delta Magnitude".
+- Internal: `chapters/00-benchmark-schema-and-measurement-validity.md`; `VALIDATION.md` (Chapter 22 network headline, status Validated 2026-06-16); `CHANGELOG.md` 2026-06-16 "Real-Path A/B Overturns the Stack-Delta Magnitude".

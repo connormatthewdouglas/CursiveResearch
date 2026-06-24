@@ -1,13 +1,13 @@
-# Chapter 04 Selected Sources
+# Chapter 03 Selected Sources
 
 Date extracted: 2026-05-26  
 Agent / reviewer: GPT-5.5 Thinking / ChatGPT  
-Chapter: `chapters/04-gpu-and-accelerator-tuning.md`  
+Chapter: `chapters/14-gpu-and-accelerator-tuning.md`  
 Status: Selected high-priority extraction only. Full works-cited extraction remains open.
 
 ## Purpose
 
-This file captures the first selected source extraction for Chapter 04. It should eventually be merged or mirrored into `sources/extracted-source-index.md`, but is kept separate for now to avoid blocking the validation pass on a large canonical-index rewrite.
+This file captures the first selected source extraction for Chapter 03. It should eventually be merged or mirrored into `sources/extracted-source-index.md`, but is kept separate for now to avoid blocking the validation pass on a large canonical-index rewrite.
 
 ## Selected Sources
 
@@ -21,10 +21,10 @@ This file captures the first selected source extraction for Chapter 04. It shoul
 | SRC-04-006 | strongtz/i915-sriov-dkms README | strongtz / GitHub | https://github.com/strongtz/i915-sriov-dkms | community repo | rolling repo; latest release noted 2026-05-06 at extraction | 2026-05-26 | Intel SR-IOV section | Community i915/xe DKMS module with SR-IOV support, required kernel parameters, up to 7 VFs on Intel UHD Graphics, Secure Boot caveat, and host/guest module guidance | C | partially verified | Repo explicitly says it is experimental and not affiliated with Intel. Do not treat as production-grade Intel Arc support without hardware-specific proof. |
 | SRC-04-007 | AMD MxGPU-Virtualization README | AMD / GitHub | https://github.com/amd/MxGPU-Virtualization | official vendor repo | rolling repo | 2026-05-26 | AMD MxGPU / GIM section | GIM is a Linux kernel module for AMD SR-IOV-based MxGPU virtualization; handles GPU IOV init, VF config, world-switch scheduling, hang detection, VF reset, and PF/VF utilities | A | verified for GIM role | Hardware support must be checked against current release notes and AMD Instinct docs. |
 | SRC-04-008 | AMD Instinct Virtualization Driver: Getting started with MxGPU | AMD Instinct Documentation | https://instinct.docs.amd.com/projects/virt-drv/en/latest/userguides/Getting_started_with_MxGPU.html | official vendor docs | 2025 docs page | 2026-05-26 | AMD MxGPU / supported GPU claims | Documents MxGPU/SR-IOV concept and supported GPU models: MI210X, MI300X, MI325X, MI350X/MI355X, Radeon PRO V710 | A | verified | This weakens any broad claim that community MxGPU support extends cleanly to arbitrary consumer cards. |
-| SRC-04-009 | Towards Agentic OS: An LLM Agent Framework for Linux Schedulers | Zheng et al. / arXiv | https://arxiv.org/abs/2509.01245 | paper/preprint | 2025-09-01 | 2026-05-26 | sched_ext / agentic OS overlap | Supports SchedCP as an agentic scheduler-control framework on sched_ext | B | partially verified | Reused from Chapters 03 and 05. Relevant but not GPU-specific. |
+| SRC-04-009 | Towards Agentic OS: An LLM Agent Framework for Linux Schedulers | Zheng et al. / arXiv | https://arxiv.org/abs/2509.01245 | paper/preprint | 2025-09-01 | 2026-05-26 | sched_ext / agentic OS overlap | Supports SchedCP as an agentic scheduler-control framework on sched_ext | B | partially verified | Reused from Chapters 07 and 05. Relevant but not GPU-specific. |
 
 ## Extraction Caveats
 
-- Chapter 04 contains many Reddit/forum/blog sources. These should be treated as leads, not decision-grade evidence.
+- Chapter 03 contains many Reddit/forum/blog sources. These should be treated as leads, not decision-grade evidence.
 - Hardware-specific claims must be validated on the exact target device, kernel, driver, firmware, and runtime stack.
 - RX 580 undervolt values, Intel Arc power-control claims, and consumer GPU SR-IOV claims should not be promoted without local hardware tests.

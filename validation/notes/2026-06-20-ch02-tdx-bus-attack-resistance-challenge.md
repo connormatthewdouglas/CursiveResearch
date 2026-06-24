@@ -1,4 +1,4 @@
-# Adversarial Review — Chapter 02 TDX "hardened against physical bus-level attacks"
+# Adversarial Review — Chapter 20 TDX "hardened against physical bus-level attacks"
 
 Date: 2026-06-20
 Reviewer role: Red-team / adversarial review
@@ -7,7 +7,7 @@ Disposition: **Challenge filed. Original chapter wording NOT edited.** Flagged i
 
 ## The challenged claim
 
-`chapters/02-market-and-viability.md`, section *Security, Attestation, and the
+`chapters/20-market-and-viability.md`, section *Security, Attestation, and the
 DePIN "Oracle Problem"* → *Transitioning from SGX to Intel TDX*:
 
 > "For several years, Intel SGX … was the standard … However, research into the
@@ -110,8 +110,8 @@ not.**
    (TEE.Fail, 2025); vendors treat physical access as out of scope**."
 3. Re-anchor the DePIN oracle-problem answer on defenses the project **already
    owns** and that do not assume an honest operator: population / redundant
-   confirmation, hardware-fingerprint cross-checks (Chapter 02 already proposes
+   confirmation, hardware-fingerprint cross-checks (Chapter 20 already proposes
    microarchitectural fingerprinting), statistical anomaly detection in the
-   sensor array (Chapters 10/16), and economic slashing (Chapter 11). TEEs can
+   sensor array (Chapters 01/16), and economic slashing (Chapter 02). TEEs can
    raise the cost of cheating but cannot be the root of trust against a hardware
    owner.

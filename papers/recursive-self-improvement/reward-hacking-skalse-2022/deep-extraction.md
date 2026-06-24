@@ -89,11 +89,11 @@ Reward hacking = proxy optimization produces policies that game the proxy (e.g.,
 
 - Exact MDP proofs do not directly give construction rules for CursiveOS multi-channel fitness (network + cold-start + power + stability).
 - Toy deterministic policies vs noisy, stochastic, hardware-scoped runs in real benchmarks.
-- No guidance on combining multiple proxies or adding confirmation gates (Chapter 10 population confirmation).
+- No guidance on combining multiple proxies or adding confirmation gates (Chapter 01 population confirmation).
 
 ## 13. CursiveOS / Corpus Implications
 
-Directly supports and strengthens Chapter 16 §4 Goodhart exposure: weighting network 0.40 creates incentive to game the emulation channel. The formal results explain *why* narrow proxies fail and when they might be safe. Reinforces RESEARCH_PIPELINE.md gaps on Goodhart/measurement in RSI and software organisms. Suggests future work on robust combined fitness functions that approximate unhackability (e.g., via hardware scoping, per-channel confirmation, variance-aware thresholds). For local agents: self-improvement loops using LLM self-judgment or benchmark proxies inherit these risks; verifier-grounded (like Gödel Agent) or multi-signal confirmation helps mitigate.
+Directly supports and strengthens Chapter 22 §4 Goodhart exposure: weighting network 0.40 creates incentive to game the emulation channel. The formal results explain *why* narrow proxies fail and when they might be safe. Reinforces RESEARCH_PIPELINE.md gaps on Goodhart/measurement in RSI and software organisms. Suggests future work on robust combined fitness functions that approximate unhackability (e.g., via hardware scoping, per-channel confirmation, variance-aware thresholds). For local agents: self-improvement loops using LLM self-judgment or benchmark proxies inherit these risks; verifier-grounded (like Gödel Agent) or multi-signal confirmation helps mitigate.
 
 ## 14. Open Questions
 

@@ -2,7 +2,7 @@
 
 Intake date: `2026-05-30`
 
-Purpose: source-backed grounding for Chapter 08's claim that firmware/BIOS
+Purpose: source-backed grounding for Chapter 06's claim that firmware/BIOS
 control can be modeled as a practical, mostly reboot-staged mutation layer.
 This is not a complete vendor survey. It is a first pass over primary interfaces
 that CursiveOS can inspect before any platform-specific adapter work.

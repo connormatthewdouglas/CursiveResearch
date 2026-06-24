@@ -182,4 +182,12 @@ A useful paper extraction lets a future agent answer:
 | `agent-evaluation/` | Benchmarks and evaluation methods for software agents, computer-use agents, OS agents, and grounded task success. |
 | `software-engineering-agents/` | Agent-computer interfaces, software-fixing agents, repository navigation, and code-editing workflows. |
 
+**Corpus total (2026-06-24):** 25 paper folders — extraction-only unless rights-cleared full text is stored.
+
+| Slug | Area |
+| --- | --- |
+| ladder, reward-hacking-skalse-2022, godel-agent, stop-self-taught-optimizer, voyager, funsearch, alphaevolve, self-rewarding-language-models, gptswarm, alphadev, os-r1, sematune, branchfs-fec, schedcp, poet, map-elites, open-endedness-icml-2024, darwin-godel-machine, codeevolve | recursive-self-improvement |
+| ai-agents-that-matter, agent-as-a-judge, osworld | agent-evaluation |
+| swe-agent, swe-bench, reflexion | software-engineering-agents |
+
 Add new areas as the corpus grows.

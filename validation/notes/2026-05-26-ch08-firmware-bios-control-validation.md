@@ -1,14 +1,14 @@
-# Validation Note: Chapter 08 Firmware and BIOS Control
+# Validation Note: Chapter 06 Firmware and BIOS Control
 
 Date checked: 2026-05-26
 Agent / reviewer: GPT-5.5 Thinking / ChatGPT
-Scope: `chapters/08-firmware-and-bios-control.md`
+Scope: `chapters/17-firmware-and-bios-control.md`
 Status: supported with minor caveats
 Source IDs: SRC-08-001, SRC-08-002, SRC-08-003, SRC-08-004, SRC-08-005
 
 ## Summary
 
-Chapter 08's core architectural claim is supported: firmware/BIOS/UEFI control should be modeled as a separate, slower, reboot-staged mutation layer rather than as ordinary live OS tuning. The strongest evidence comes from primary sources: Linux kernel documentation for `efivarfs`, Linux ABI documentation for `firmware-attributes`, the UEFI 2.10 Runtime Services specification, the Redfish BIOS schema, and the flashrom manual.
+Chapter 06's core architectural claim is supported: firmware/BIOS/UEFI control should be modeled as a separate, slower, reboot-staged mutation layer rather than as ordinary live OS tuning. The strongest evidence comes from primary sources: Linux kernel documentation for `efivarfs`, Linux ABI documentation for `firmware-attributes`, the UEFI 2.10 Runtime Services specification, the Redfish BIOS schema, and the flashrom manual.
 
 The chapter should remain marked as platform-validation-required because support is highly hardware/vendor-specific. The sources validate the existence and shape of the control surfaces, not universal availability on every motherboard or safety of automated mutation.
 

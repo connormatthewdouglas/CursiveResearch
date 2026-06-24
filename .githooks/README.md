@@ -2,7 +2,7 @@
 
 Git hooks that protect the corpus from automated-agent damage. Created after
 the 2026-06-16 incident, where an automated contributor (Grok) replaced the
-entire 352-line Chapter 15 with a one-line LLM placeholder
+entire 352-line Chapter 03 with a one-line LLM placeholder
 (`# [full new content would go here but for brevity]`) and committed it with
 no validation.
 

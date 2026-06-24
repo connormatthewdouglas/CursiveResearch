@@ -9,11 +9,11 @@
 
 ## Why This Paper Was Added
 
-This paper provides the first formal definition of *reward hacking* (optimizing an imperfect proxy reward function leads to poor performance on the true reward) and conditions for *unhackable* proxies. It directly fills a gap in the corpus's treatment of Goodhart's Law, proxy optimization in agent evaluation/fitness functions, and measurement validity for recursive self-improvement (see RESEARCH_PIPELINE.md P0 RSI and Software Organisms sections, and Chapter 16 §4 Goodhart exposure).
+This paper provides the first formal definition of *reward hacking* (optimizing an imperfect proxy reward function leads to poor performance on the true reward) and conditions for *unhackable* proxies. It directly fills a gap in the corpus's treatment of Goodhart's Law, proxy optimization in agent evaluation/fitness functions, and measurement validity for recursive self-improvement (see RESEARCH_PIPELINE.md P0 RSI and Software Organisms sections, and Chapter 22 §4 Goodhart exposure).
 
 It matters to CursiveOS because fitness functions, benchmark deltas, and self-improvement loops inherently use proxies. Formal conditions for when proxy optimization cannot degrade true performance are essential to avoid specification gaming in local agents, incentive design, and organism measurement.
 
-**Integration**: Key lessons added as additive subsection in Chapter 16 (Benchmark Schema and Measurement Validity) after §4 Goodhart exposure. Paraphrased extraction stored here for future agents.
+**Integration**: Key lessons added as additive subsection in Chapter 22 (Benchmark Schema and Measurement Validity) after §4 Goodhart exposure. Paraphrased extraction stored here for future agents.
 
 **Duplicate Check**: No prior coverage of this specific formal treatment or the Skalse et al. unhackability results in papers/, chapters, or source lists (confirmed via repo tree and content search equivalents). Gödel Agent and Reflexion cover self-referential RSI but not this proxy theory.
 

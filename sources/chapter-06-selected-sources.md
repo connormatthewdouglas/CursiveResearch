@@ -1,13 +1,13 @@
-# Chapter 06 Selected Sources
+# Chapter 22 Selected Sources
 
 Date extracted: 2026-05-26  
 Agent / reviewer: GPT-5.5 Thinking / ChatGPT  
-Chapter: `chapters/06-security-and-hardening.md`  
+Chapter: `chapters/16-security-and-hardening.md`  
 Status: Selected high-priority extraction only. Full works-cited extraction remains open.
 
 ## Purpose
 
-This file captures the first selected source extraction for Chapter 06. Security guidance ages quickly, so every source in this chapter should be rechecked before it becomes operational policy.
+This file captures the first selected source extraction for Chapter 22. Security guidance ages quickly, so every source in this chapter should be rechecked before it becomes operational policy.
 
 ## Selected Sources
 
@@ -30,6 +30,6 @@ This file captures the first selected source extraction for Chapter 06. Security
 
 ## Extraction Caveats
 
-- Several Chapter 06 sources are blogs, vendor marketing, or news articles. These should be demoted unless corroborated by primary documentation, official postmortems, or reproducible tests.
+- Several Chapter 22 sources are blogs, vendor marketing, or news articles. These should be demoted unless corroborated by primary documentation, official postmortems, or reproducible tests.
 - Security claims should include freshness dates because recommendations can change quickly.
 - Operational firewall and SSH settings should be validated against the exact distro, network topology, and access model before deployment.

@@ -70,7 +70,7 @@ task feedback → iterate. The exact representation of the agent's modifiable
 ## 6. Corpus Synthesis (CursiveOS mapping)
 
 This paper is the cleanest published example of the *most aggressive* point on
-Chapter 15's self-improvement taxonomy: an agent that rewrites its own
+Chapter 03's self-improvement taxonomy: an agent that rewrites its own
 reasoning code at runtime. CursiveOS deliberately sits at a **different and
 safer** point on that taxonomy, and the contrast is the lesson:
 
@@ -79,10 +79,10 @@ safer** point on that taxonomy, and the contrast is the lesson:
   verifier** (the sensor array), which the proposing agent cannot edit. The
   Gödel Agent has no such frozen external verifier: the same LLM that proposes
   changes also judges and re-architects itself. That is exactly the
-  "evaluator drift / self-delusion" failure mode catalogued in Chapter 15's
-  Goodhart section, and the reason Chapter 12's daemon/shell split keeps the
+  "evaluator drift / self-delusion" failure mode catalogued in Chapter 03's
+  Goodhart section, and the reason Chapter 15's daemon/shell split keeps the
   measurement domain outside the probabilistic agent.
-- It is direct evidence for Chapter 15's "Runtime Self-Modification Is
+- It is direct evidence for Chapter 03's "Runtime Self-Modification Is
   Powerful but Volatile" claim: capability gains are real, but the absence of
   a ground-truth verifier outside the loop is the structural vulnerability.
 

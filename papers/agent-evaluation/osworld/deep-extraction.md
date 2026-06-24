@@ -147,7 +147,7 @@ VM snapshot
 -> rollback / reset
 ```
 
-For live CursiveOS, this must be paired with the safety rules from Chapter 12:
+For live CursiveOS, this must be paired with the safety rules from Chapter 15:
 deterministic policy, explicit confirmation, containment, and no LLM write path
 to measurement truth.
 

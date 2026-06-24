@@ -8,4 +8,4 @@
 
 **Field:** recursive-self-improvement
 
-**Relevance:** Directly addresses recursive self-improvement in LLM agents via self-referential code modification, relevant to Chapters 14 and 15 on software organisms and agent evolution.
+**Relevance:** Directly addresses recursive self-improvement in LLM agents via self-referential code modification, relevant to Chapters 03 and 15 on software organisms and agent evolution.

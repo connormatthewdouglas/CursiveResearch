@@ -1,14 +1,14 @@
-# Validation Note: Chapter 03 Linux Kernel Optimization
+# Validation Note: Chapter 07 Linux Kernel Optimization
 
 Date checked: 2026-05-26
 Agent / reviewer: GPT-5.5 Thinking / ChatGPT
-Scope: targeted validation of highest-impact Chapter 03 claims
+Scope: targeted validation of highest-impact Chapter 07 claims
 Status: partially verified
 Source IDs: SRC-03-001 through SRC-03-006
 
 ## Summary
 
-Chapter 03 contains several real and important Linux-kernel features relevant to CursiveOS, but it currently overstates the decision-grade certainty of some performance claims. The strongest validated pieces are the existence and shape of `sched_ext`, PREEMPT_RT in Linux 6.12, fscrypt cipher-mode details, and zram sysfs controls such as `algorithm_params`, `compressed_writeback`, and `writeback_batch_size`.
+Chapter 07 contains several real and important Linux-kernel features relevant to CursiveOS, but it currently overstates the decision-grade certainty of some performance claims. The strongest validated pieces are the existence and shape of `sched_ext`, PREEMPT_RT in Linux 6.12, fscrypt cipher-mode details, and zram sysfs controls such as `algorithm_params`, `compressed_writeback`, and `writeback_batch_size`.
 
 The weaker pieces are exact speedup numbers, kernel-version projections such as 6.19/7.0, and broad inference-specific extrapolations from web/server/database/HPC benchmarks. These may be useful leads, but they should be treated as hypotheses until reproduced on CursiveOS hardware.
 
@@ -31,13 +31,13 @@ The weaker pieces are exact speedup numbers, kernel-version projections such as 
 
 ## Required Corpus Changes
 
-### Recommended Chapter 03 wording changes
+### Recommended Chapter 07 wording changes
 
 - Replace `cut tail latency by 75%` with `some sched_ext schedulers and research workloads report large tail-latency reductions; CursiveOS must reproduce this on inference workloads before adopting it as a validated finding`.
 - Replace `kernel 7.0 brought` claims with dated, source-backed wording unless the exact kernel release/merge status is verified.
 - Treat zram writeback speedups as memory-pressure hypotheses, not guaranteed inference wins.
 - Separate upstream kernel features from Phoronix/LWN/news/benchmark leads.
-- Add an experiment plan before using Chapter 03 as tuning guidance.
+- Add an experiment plan before using Chapter 07 as tuning guidance.
 
 ## Implications for CursiveOS
 
@@ -70,7 +70,7 @@ Create `experiments/kernel-inference-optimization-benchmark-plan.md` with at lea
 
 ## Follow-up
 
-- Extract all Chapter 03 sources fully into `sources/extracted-source-index.md`.
+- Extract all Chapter 07 sources fully into `sources/extracted-source-index.md`.
 - Add upstream commit references for sched_ext, PREEMPT_RT, zram attributes, and any GPU SVM claims.
 - Create and link a kernel inference benchmark plan.
-- After local benchmarks, amend Chapter 03 with `Verified Finding` sections instead of imported performance claims.
+- After local benchmarks, amend Chapter 07 with `Verified Finding` sections instead of imported performance claims.

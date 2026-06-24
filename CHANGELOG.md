@@ -4,6 +4,32 @@ This file records meaningful changes to research guidance, validation status,
 and corpus process. It is intended to be readable without reconstructing a
 chain of supporting documents.
 
+## 2026-06-24 - Strategic Corpus Reorganization + 5 New Chapters + 25 Papers
+
+Changed:
+- **Chapter renumbering (23 chapters, strategic order 00–22):** measurement and
+  organism architecture first (00–08), literature and platform depth (09–18),
+  historical DOCX imports last (19–22). See `INDEX.md` for the full map.
+- **Five new chapters:** 08 Population Confirmation & Fleet Statistics; 09
+  Network Transport & Congestion Control; 10 Local LLM Inference Runtime; 11
+  Hardware Identity & Anti-Spoofing; 12 Open-Source Funding & Contributor
+  Incentives.
+- **Paper library:** 18 new peer intakes → **25 total** under `papers/` per
+  `CORPUS_WORKFLOW.md` (extraction-only unless rights-cleared).
+- All chapters: `## Reinforced research (2026-06-24)` pass with credible
+  2024–2026 sources; cross-links updated to new numbering.
+- `INDEX.md`: full 00–22 table, cohesive reading path, paper count.
+- `VALIDATION.md`: chapter numbers aligned (measurement rows → Ch00; daemon →
+  Ch05; firmware → Ch17); added Ch08/09/11 rows.
+- `README.md`, `CORPUS_WORKFLOW.md`, `papers/README.md`: onboarding and paper
+  inventory updated.
+- Cross-reference repair across chapters, experiments, sources, validation notes.
+
+Reason:
+- Goal pass: review and reinforce the corpus, close high-value gaps with new
+  chapters, intake peer papers to target count, and order chapters for
+  measurement-first agent onboarding.
+
 ## 2026-06-24 - Early Chapter Cohesion + Workflow Upgrades
 
 Changed:
@@ -13,11 +39,11 @@ Changed:
 - Chapters **00–07**: each gained a `## Corpus status (living layer)` section
   cross-linking Ch10–17 and marking superseded import passages (do-not-cite
   externally) without deleting DOCX intake text.
-- **Chapter 01**: reconciled §2.1/§2.2 and Research-master network canon with
-  Validated Chapter 16 (BBR win, not buffer ceiling; hardware-scoped magnitude).
-- **Chapter 02**: reconciled TDX bus-hardening and Covenant-72B overclaims via
+- **Chapter 19**: reconciled §2.1/§2.2 and Research-master network canon with
+  Validated Chapter 22 (BBR win, not buffer ceiling; hardware-scoped magnitude).
+- **Chapter 20**: reconciled TDX bus-hardening and Covenant-72B overclaims via
   living layer; noted TAO-OS → CursiveOS rename.
-- **Chapter 07**: explicit Superseded-by-Chapter-11 banner for product economics.
+- **Chapter 21**: explicit Superseded-by-Chapter-11 banner for product economics.
 - `INDEX.md`: added cohesive reading path for new agents; refreshed confidence
   labels for Ch00–07.
 - `VALIDATION.md`: cleared three resolved Flagged-for-Review rows; added
@@ -38,19 +64,19 @@ Changed:
   order/page-cache confound test and the idle-power selection-channel validation
   plan (both were merged without pipeline entries); updated the seed-organism
   screen row to reflect current parent/candidate work (v0.9c, v0.10-zram).
-- `VALIDATION.md`: consolidated the duplicate Chapter 01 TCP-buffer flags
+- `VALIDATION.md`: consolidated the duplicate Chapter 19 TCP-buffer flags
   (2026-06-22 broad + 2026-06-23 narrow) into a single row referencing both
   evidence notes.
 - `CHANGELOG.md`: restored the orphan Goodhart subsection entry (missing `##`
   header from a prior union merge); backfilled the missing order-cache confound
   entry; fixed section spacing in recent entries.
-- `chapters/13-main-repo-gap-closure-and-research-backlog.md`: repo is public,
+- `chapters/07-main-repo-gap-closure-and-research-backlog.md`: repo is public,
   not private.
-- `chapters/16-benchmark-schema-and-measurement-validity.md` §2.3, §5, §6: linked
+- `chapters/00-benchmark-schema-and-measurement-validity.md` §2.3, §5, §6: linked
   the open fixed-order/page-cache confound to
   `experiments/cold-start-order-cache-confound-plan.md`; softened cold-start
   from "acceptance-grade" to "repeatable but not yet order-robust."
-- `VALIDATION.md`: added Chapter 16 cold-start order-robustness row (Supported).
+- `VALIDATION.md`: added Chapter 22 cold-start order-robustness row (Supported).
 
 Reason:
 - Post-consolidation hygiene pass: close workflow gaps left by the 11-branch
@@ -65,7 +91,7 @@ Changed:
   test of whether the −51% Arc cold-start win is partly a baseline-first /
   tuned-second run-order or warm-page-cache artifact. Three arms (replicate,
   counterbalanced, cache-controlled); pre-registered decision thresholds.
-- Linked from Chapter 16 §2.3 and §5 (cleanup pass).
+- Linked from Chapter 22 §2.3 and §5 (cleanup pass).
 
 Reason:
 - Cold-start is the only selection-grade channel (CV 0.002), yet every paired
@@ -88,16 +114,16 @@ Added:
   validation at this sharper, runnable instance.
 
 Reason:
-- The corpus has empirically grounded its measurement layer (Chapter 16) but has
+- The corpus has empirically grounded its measurement layer (Chapter 22) but has
   never tested whether the *proposer*, not just the knobs, creates value. The
   recent network result (the whole win was one sysctl) and the inert GPU pin
   show exactly the failure mode this would catch. The 2026-06-16 noise floor is
   the missing input that finally makes the test powered and worth running.
 
-## 2026-06-20 - Adversarial Review: Flagged Chapter 02 TDX Bus-Attack Claim
+## 2026-06-20 - Adversarial Review: Flagged Chapter 20 TDX Bus-Attack Claim
 
 Changed:
-- Filed a "Flagged for Review" item in `VALIDATION.md` against Chapter 02's
+- Filed a "Flagged for Review" item in `VALIDATION.md` against Chapter 20's
   claim that "TDX, built for the DDR5 era, is hardened against physical bus-level
   attacks" (and the attestation table's "Bus Attack Resistance: Hardened
   (DDR5)"). Original chapter wording left untouched (it is a preserved DOCX
@@ -125,7 +151,7 @@ Reason:
 ## 2026-06-20 - Containment Primitive Characterization for Unattended Execution
 
 Changed:
-- Chapter 12: added a "Containment Primitive Characterization" subsection
+- Chapter 15: added a "Containment Primitive Characterization" subsection
   (additive, after "Risk-Based Execution Tiers") that turns the previously
   named-only sandboxing primitives into a property-level selector. Characterizes
   namespaces+cgroups, seccomp-BPF, Landlock, bubblewrap, gVisor, and Firecracker
@@ -141,12 +167,12 @@ Changed:
   Primitive Deep-Dive Sources" table with the retrieved facts and URLs (kernel
   seccomp/Landlock docs, Phoronix, bubblewrap, gVisor platform/systrap, and
   Firecracker spec).
-- VALIDATION.md: added a Chapter 12 claims-table row stating that containment
+- VALIDATION.md: added a Chapter 15 claims-table row stating that containment
   primitive choice should follow input-trust/blast-radius and that no single
   primitive is a complete sandbox.
 
 Reason:
-- Directly answers Chapter 12 Open Research Gap #4 ("build risk-based
+- Directly answers Chapter 15 Open Research Gap #4 ("build risk-based
   containment for unattended tool execution") and RESEARCH_PIPELINE P1
   "Sandboxing and least privilege" / P0 knowledge gap "How do current agent
   systems fail under privilege?". The prior chapter text only listed these
@@ -176,10 +202,10 @@ Reason:
   and a predictor, reusing the factorial-decomposition discipline that already
   paid off on the network thread (§5.6).
 
-## 2026-06-21 - Red-Team Flag: Covenant-72B "GPT-4-class" Claim Overstated (Chapter 02)
+## 2026-06-21 - Red-Team Flag: Covenant-72B "GPT-4-class" Claim Overstated (Chapter 20)
 
 Changed:
-- Flagged (did **not** edit) the Chapter 02 claim that Covenant-72B's 67.1 MMLU
+- Flagged (did **not** edit) the Chapter 20 claim that Covenant-72B's 67.1 MMLU
   is "competitive with early GPT-4-class models" and demonstrates that
   "decentralized compute can achieve data-center-level results." Added a row to
   the `VALIDATION.md` "Flagged for Review" table and a full evidence note at
@@ -209,13 +235,13 @@ Changed:
 - Added `experiments/idle-power-selection-channel-validation-plan.md`. A
   pre-registered, falsifiable plan to test whether the 2026-06-16 harness
   idle-power fix (settle delay + more samples) actually makes idle power a
-  selection-usable channel (CV ≤ 0.15 per Chapter 10) in the **production
+  selection-usable channel (CV ≤ 0.15 per Chapter 01) in the **production
   full-test path** and across hardware — not just in the one-off Phase-D probe
   on the Arc A750 desktop where it was demonstrated.
 
 Reason:
-- Chapter 16 §5 items 7–8 left a tension on the record: idle power was CV ≈ 0.83
-  in the production noise floor but CV ≈ 0.01 in a bespoke probe. Chapter 10's
+- Chapter 22 §5 items 7–8 left a tension on the record: idle power was CV ≈ 0.83
+  in the production noise floor but CV ≈ 0.01 in a bespoke probe. Chapter 01's
   confirmation rule and the live v0.9 screen's power term both depend on which
   is true in the path operators actually run, on more than one machine. The plan
   also ships the §3 item-1 `power_source` field as a side effect and keeps the
@@ -224,7 +250,7 @@ Reason:
 ## 2026-06-22 - Red-Team Flag: Ch01 Static-Buffer "Universal Gap" Thesis Overstated
 
 Changed:
-- Flagged `chapters/01-first-principles-and-strategy.md` §2.1/§2.2 in
+- Flagged `chapters/19-first-principles-and-strategy.md` §2.1/§2.2 in
   `VALIDATION.md` (Flagged for Review) as an overstated, load-bearing claim,
   **without editing the chapter text**. The chapter frames a static 212KB TCP
   buffer default ("appropriate for 1990s modem speeds") as the universal
@@ -245,14 +271,14 @@ Challenge (external + internal evidence):
   congestion-control swap (BBR literature: the advantage holds across bandwidths
   and is "due to the fundamental algorithm design rather than buffer-specific
   behavior"; it is a one-line sysctl any operator can set).
-- The corpus's own **Validated** Chapter 16 real-path A/B already found the
+- The corpus's own **Validated** Chapter 22 real-path A/B already found the
   CursiveOS buffer/qdisc stack adds ~0% (−0.7%) on ordinary ≤1GbE links, with
   the loopback "+246%" called a non-transferable artifact. That validated
-  correction was never reconciled with the still-canon Chapter 01 thesis.
+  correction was never reconciled with the still-canon Chapter 19 thesis.
 
 Reason:
 - §2.1/§2.2 is an irreducible first principle that the moat/flywheel thesis
-  (Chapters 01, 02, 11) and the project's headline performance numbers rest on,
+  (Chapters 19, 02, 11) and the project's headline performance numbers rest on,
   and it is slated for verbatim white-paper reuse. If the real lever is a
   portable one-line BBR swap and autotuning already covers ordinary links, the
   "universal, structurally inherent" gap — and the defensibility argument built
@@ -261,12 +287,12 @@ Reason:
   headed into an outward-facing document and the reconciliation is a maintainer
   decision.
 
-## 2026-06-22 - New Chapter 17: Mutation Safety and Permission Law
+## 2026-06-22 - New Chapter 06: Mutation Safety and Permission Law
 
 Changed:
-- Added `chapters/17-mutation-safety-and-permission-law.md`, the source-backed
+- Added `chapters/06-mutation-safety-and-permission-law.md`, the source-backed
   "permission law" the corpus had flagged as the #1 missing expansion
-  (Chapter 13 Gap 2 / "What Should Be Added Next"). It binds the existing
+  (Chapter 07 Gap 2 / "What Should Be Added Next"). It binds the existing
   seven-class mutation taxonomy to the *specific* enforcement primitive that
   makes each gate real (capabilities, seccomp, Landlock, systemd sandboxing,
   polkit-mediated escalation, firmware staging) and states the core rule:
@@ -278,21 +304,21 @@ Changed:
   2025 LLM06 (Excessive Agency → separate decision from execution), plus
   kernel.org / man-page / freedesktop primary docs for the containment
   mechanisms. Added `sources/chapter-17-selected-sources.md` (7 sources).
-- Updated `INDEX.md` (Chapter 17 row), and marked the gap addressed in
+- Updated `INDEX.md` (Chapter 06 row), and marked the gap addressed in
   `RESEARCH_PIPELINE.md` (P0 knowledge gap "How do current agent systems fail
-  under privilege?") and Chapter 13 Gap 2.
+  under privilege?") and Chapter 07 Gap 2.
 
 Reason:
-- Chapter 06 hardens the host against external attackers; nothing consolidated
+- Chapter 22 hardens the host against external attackers; nothing consolidated
   the inverted threat — the organism's own self-improvement loop mutating the
   host under a probabilistic agent. This closes the highest-value, well-sourced
   research gap and moves the corpus from "we have the pieces" to a single
   enforceable rulebook for self-mutation.
 
-## 2026-06-22 - Chapter 15: Autopoiesis / Artificial-Life Grounding of the Organism Framing
+## 2026-06-22 - Chapter 03: Autopoiesis / Artificial-Life Grounding of the Organism Framing
 
 Changed:
-- Chapter 15: added section "Biological and Artificial-Life Foundations of the
+- Chapter 03: added section "Biological and Artificial-Life Foundations of the
   Organism Framing" (additive, inserted after "What Remains Speculative"). It
   grounds the corpus's "organism" language in autopoiesis (Maturana & Varela,
   1972/1980), cybernetics (Beer's Viable System Model 1972; Ashby's Law of
@@ -307,7 +333,7 @@ Changed:
 
 Reason:
 - Closes the explicit "artificial life and open-ended evolution" follow-up
-  flagged at the end of Chapters 14 and 15, and addresses RESEARCH_PIPELINE.md
+  flagged at the end of Chapters 03 and 15, and addresses RESEARCH_PIPELINE.md
   P0 item "Software Organisms, Autopoiesis, and Evolutionary Systems" and the P0
   knowledge gap "What makes a software system an organism rather than an
   automation pipeline?" Key takeaways for CursiveOS: today the system is closer
@@ -320,11 +346,11 @@ Reason:
   plateaus should be expected and designed for. Sources cited are those actually
   retrieved via web search (2026-06-22); no full-text paper mirroring.
 
-## 2026-06-23 - Red-Team Flag: Chapter 01 §2.1 TCP-buffer claim challenged
+## 2026-06-23 - Red-Team Flag: Chapter 19 §2.1 TCP-buffer claim challenged
 
 Changed:
 - VALIDATION.md "Flagged for Review": added a flag against
-  `chapters/01-first-principles-and-strategy.md` §2.1, the First Principle #1
+  `chapters/19-first-principles-and-strategy.md` §2.1, the First Principle #1
   flagship example "TCP socket buffers default to 212KB (appropriate for 1990s
   modem speeds)." The original claim was **not** edited.
 - Added `validation/notes/2026-06-23-ch01-2.1-tcp-buffer-claim-redteam-challenge.md`
@@ -341,7 +367,7 @@ Reason:
 - This matters because §2.1 is the corpus's most load-bearing technical sentence:
   it is named "the foundational opportunity CursiveOS exploits" and the chapter's
   Research-master note canonizes it as "rock-solid"/"now canon"/"quoted verbatim."
-  The corpus's own Validated Chapter 16 network A/B (2026-06-16) already
+  The corpus's own Validated Chapter 22 network A/B (2026-06-16) already
   contradicts it — "default-buffer autotuning already covers the ~6 MB BDP,"
   buffer tuning adds ~0%, and the real network win is CUBIC→BBR.
 - Scope is narrow: First Principle #1 stays Supported in general (governor/GPU
@@ -350,7 +376,7 @@ Reason:
 ## 2026-06-16 - Noise Floor Measured + GPU Power Now Visible
 
 Changed:
-- Chapter 16 §5 item 7 + VALIDATION: first per-channel within-machine noise
+- Chapter 22 §5 item 7 + VALIDATION: first per-channel within-machine noise
   floor (6 identical v0.9 runs on Stardust). Cold-start CV 0.002 (rock-solid),
   network CV 0.192 (above 0.15 escalation threshold; range 602–970%), sustained
   sign-unstable (signal<noise), idle-power(CPU) CV 0.83 (near-random). Argues
@@ -362,14 +388,14 @@ Changed:
 
 Reason:
 - Closes the 2026-06-16 hardware sprint. The noise floor is the empirical input
-  Chapter 10's population-confirmation model lacked; it also explains why power
+  Chapter 01's population-confirmation model lacked; it also explains why power
   and sustained deltas have swung wildly across past runs. Cold-start is the one
   channel solid enough to drive selection today.
 
 ## 2026-06-16 - Real-Path A/B Overturns the Stack-Delta Magnitude
 
 Changed:
-- Chapter 16 §5 item 6 + VALIDATION: the real-path network A/B finally ran
+- Chapter 22 §5 item 6 + VALIDATION: the real-path network A/B finally ran
   (Stardust → 2nd machine over real 1GbE, netem 50ms + 0.5% loss). Result:
   CUBIC 43.1, BBR 851.1, BBR+our-stack 845.0 Mbit/s. The whole real-world win
   is the CUBIC→BBR swap (+1875%); our buffer/qdisc stack adds ~0% (−0.7%).
@@ -387,10 +413,10 @@ Reason:
   credit ourselves with a loopback artifact. Part of the 2026-06-16 hardware
   sprint (also: v0.9 parent promotion, GPU power sensor, parsimony fitness).
 
-## 2026-06-16 - Corpus Guardrail Hooks + Chapter 15 Restore + Gödel Extraction
+## 2026-06-16 - Corpus Guardrail Hooks + Chapter 03 Restore + Gödel Extraction
 
 Changed:
-- **Restored Chapter 15**, which an automated contributor (Grok) had wiped to
+- **Restored Chapter 03**, which an automated contributor (Grok) had wiped to
   a one-line placeholder (`# [full new content would go here but for brevity]`)
   in commit 3b71797 while claiming to "deepen" it. Restored to the last-good
   state (8b427e7, 352 lines), preserving Grok's two genuinely useful additions
@@ -399,7 +425,7 @@ Changed:
   `git config core.hooksPath .githooks`): `pre-commit` blocks lazy-elision
   placeholder text; `commit-msg` blocks any tracked markdown losing >40% of its
   lines without a `REWRITE:` prefix (the rule that would have caught the
-  Chapter 15 wipe). Both tested: placeholder and shrink correctly blocked,
+  Chapter 03 wipe). Both tested: placeholder and shrink correctly blocked,
   `REWRITE:` override correctly allowed.
 - **Completed the Gödel Agent paper entry** with `deep-extraction.md`
   (previously only a README stub). Grounded in the arXiv abstract; specifics
@@ -411,29 +437,29 @@ Reason:
   The hooks let automated contribution continue safely; the daily encrypted
   backup remains the last-resort net.
 
-## 2026-06-16 - Chapter 15 Goodhart's Law Deep-Dive (Grok)
+## 2026-06-16 - Chapter 03 Goodhart's Law Deep-Dive (Grok)
 
 Changed:
-- Added a substantial new subsection to Chapter 15 (`chapters/15-foundations-of-software-organisms-rsi-critical-synthesis.md`) on Goodhart's Law, reward hacking mechanisms, benchmark overfitting, and robust fitness design patterns specifically for software organisms and CursiveOS measurement/selection loops.
-- Synthesized from recent literature (including reward hacking taxonomy in large models, ICLR 2024 Goodhart in RL empirical work, agent exploit examples in coding/tool-use benchmarks, and existing corpus coverage in Chapters 14 and 16).
+- Added a substantial new subsection to Chapter 03 (`chapters/04-foundations-of-software-organisms-rsi-critical-synthesis.md`) on Goodhart's Law, reward hacking mechanisms, benchmark overfitting, and robust fitness design patterns specifically for software organisms and CursiveOS measurement/selection loops.
+- Synthesized from recent literature (including reward hacking taxonomy in large models, ICLR 2024 Goodhart in RL empirical work, agent exploit examples in coding/tool-use benchmarks, and existing corpus coverage in Chapters 03 and 16).
 - The section provides taxonomy of how Goodhart manifests in recursive self-improvement loops, concrete CursiveOS-relevant examples (network sim vs real-path, hardware-scoped cold-start, power measurement artifacts, benchmark gaming), and actionable mitigation patterns (multi-objective fitness bundles, independent confirmation, holdouts, negative memory, canary/rollback, sandbox structured feedback, rotating tests, cost/reliability gates).
 - Directly addresses P0 pipeline item on Goodhart and measurement under software organisms research targets, and supports current Phase 0 benchmark validity and candidate screening work.
 - Updated `VALIDATION.md` with related decision-driving claims on fitness design and confirmation rules (if applicable after review).
 - No new full paper folders created (synthesis from multiple sources; rights-cleared papers already in corpus used as reference where relevant). 
 
 Reason:
-- The existing brief mention of Goodharting in Chapter 15 failure modes was high-level. A deeper, CursiveOS-mapped treatment with taxonomy, recent empirical examples, and concrete design recommendations provides immediate value for the organism's sensor array, fitness function, metabolic sensor, and confirmation logic. This is one of the most actionable research gaps for the current empirical validation phase and future Layer 5 implementation.
+- The existing brief mention of Goodharting in Chapter 03 failure modes was high-level. A deeper, CursiveOS-mapped treatment with taxonomy, recent empirical examples, and concrete design recommendations provides immediate value for the organism's sensor array, fitness function, metabolic sensor, and confirmation logic. This is one of the most actionable research gaps for the current empirical validation phase and future Layer 5 implementation.
 - Follows CORPUS_WORKFLOW.md fast path for important claim synthesis and chapter editing (living document). No single paper full-text intake required.
 
 ## 2026-06-13 - Cold-Start Optimization Is Hardware-Scoped (Second Machine)
 
 Changed:
-- Chapter 16 §5 item 5 + VALIDATION: second-machine run (i5-11300H laptop)
+- Chapter 22 §5 item 5 + VALIDATION: second-machine run (i5-11300H laptop)
   shows the cold-start optimization gives ~0% there vs −51% on the Arc A750
   desktop. Phase-context telemetry confirms the governor changed to
   performance on AC power, so it is a genuine hardware difference, not a
   failed apply. First empirical instance of hardware-scoped fitness
-  (Chapter 10). v0.9c ≡ v0.8 on both machines, so it remains a safe global
+  (Chapter 01). v0.9c ≡ v0.8 on both machines, so it remains a safe global
   parent replacement; the cold-start benefit is desktop-Arc-specific.
 
 Reason:
@@ -445,7 +471,7 @@ than ambiguous.
 ## 2026-06-13 - Stack-Delta Result Corrects Network Attribution
 
 Changed:
-- Chapter 16 §5 item 4 + VALIDATION: the stack-delta benchmark (BBR held
+- Chapter 22 §5 item 4 + VALIDATION: the stack-delta benchmark (BBR held
   constant, only CursiveOS buffer/qdisc tuning toggled) measured +245.8% on
   the founder rig (BBR-only 395.5 → BBR+our-stack 1367.5 Mbit/s, netem
   verified). Decomposing the ~+800% legacy total: CUBIC→BBR ≈ 2.6×, our
@@ -460,10 +486,10 @@ constant gave an honest, decomposable answer that happens to be more
 favorable to the project than the conservative prior assumption — while
 keeping the loopback magnitude caveat explicit.
 
-## 2026-06-12 - Chapter 16 Empirical Follow-Ups
+## 2026-06-12 - Chapter 22 Empirical Follow-Ups
 
 Changed:
-- Added §5 to Chapter 16 recording the v0.9b/v0.9c complementary ablation on
+- Added §5 to Chapter 22 recording the v0.9b/v0.9c complementary ablation on
   the rebuilt founder rig: the Arc cold-start win (−51%) is CPU-side; the GPU
   frequency pin contributes nothing (verified active via phase telemetry) and
   leaves the lineage. v0.9c is the first real acceptance candidate.
@@ -482,7 +508,7 @@ and second-machine confirmation before acceptance.
 ## 2026-06-11 - Benchmark Schema and Measurement Validity Assessment
 
 Changed:
-- Added Chapter 16 (`chapters/16-benchmark-schema-and-measurement-validity.md`):
+- Added Chapter 22 (`chapters/00-benchmark-schema-and-measurement-validity.md`):
   a first assessment of the deployed benchmark suite and CursiveRoot schema,
   grounded in the actual harness code (wrapper v1.4.1), the live schema, and
   77 production run rows.
@@ -516,7 +542,7 @@ Changed:
   all three arXiv pages carry CC BY 4.0 license links.
 - Added `README.md`, `deep-extraction.md`, and `claims-and-results.md` for each
   paper.
-- Updated Chapter 12 so the natural-language shell research incorporates
+- Updated Chapter 15 so the natural-language shell research incorporates
   lessons from execution-based software benchmarks, agent-computer interfaces,
   and VM-backed real-computer agent evaluation.
 - Updated `papers/README.md`, `VALIDATION.md`, and `sources/source-register.md`
@@ -534,7 +560,7 @@ Changed:
 - Added `sources/local-agent-safety-selected-sources.md` as a detailed
   selected-source digest for prompt injection, agentic skills, tool authority,
   memory boundaries, sandboxing, and operator confirmation.
-- Expanded Chapter 12 with an external safety research section covering
+- Expanded Chapter 15 with an external safety research section covering
   prompt-injection boundaries, tool/skill authority, risk-based execution tiers,
   shell memory risk, and concrete confirmation UX.
 - Updated `INDEX.md`, `RESEARCH_PIPELINE.md`, `VALIDATION.md`, and
@@ -552,7 +578,7 @@ authority.
 Changed:
 - Added `sources/firmware-control-surfaces-selected-sources.md` as a selected
   primary-source digest for firmware/BIOS control interfaces.
-- Expanded Chapter 08 with a practical control-surface matrix covering UEFI
+- Expanded Chapter 06 with a practical control-surface matrix covering UEFI
   variables, Linux firmware attributes, Redfish BIOS attributes, Redfish
   attribute registries, fwupd capsule updates, raw flash, and KVM/BIOS UI
   automation.
@@ -617,13 +643,13 @@ Reason:
 ## 2026-05-27 - Properly Incorporated Software Organisms RSI Research Packet
 
 Changed:
-- Added `chapters/15-foundations-of-software-organisms-rsi-critical-synthesis.md`.
-- Added Chapter 15 to `INDEX.md`.
-- Promoted more of the uploaded `Software Organisms_ Self-Improvement Research.md` into the corpus as a dedicated critical-synthesis chapter rather than leaving it only as an intake note plus Chapter 14 expansion.
+- Added `chapters/04-foundations-of-software-organisms-rsi-critical-synthesis.md`.
+- Added Chapter 03 to `INDEX.md`.
+- Promoted more of the uploaded `Software Organisms_ Self-Improvement Research.md` into the corpus as a dedicated critical-synthesis chapter rather than leaving it only as an intake note plus Chapter 03 expansion.
 - Preserved the uploaded document's stronger software-organism framing: what is demonstrated, what remains speculative, what is overhyped, layered taxonomy of self-improvement loops, verifier/fitness framing, sandboxing-as-feedback, runtime self-modification risks, maturity-aware gating, multi-objective fitness, and adopt/avoid/caution guidance.
 
 Reason:
-- The corpus intake policy now favors substantial incorporation of useful non-overlapping research. The first intake pass compressed the document too aggressively. Chapter 15 keeps Chapter 14 as the paper/system digest while preserving the uploaded document's broader conceptual and organism-specific synthesis.
+- The corpus intake policy now favors substantial incorporation of useful non-overlapping research. The first intake pass compressed the document too aggressively. Chapter 03 keeps Chapter 03 as the paper/system digest while preserving the uploaded document's broader conceptual and organism-specific synthesis.
 
 ## 2026-05-27 - Added Document Intake Policy
 
@@ -639,12 +665,12 @@ Reason:
 
 Changed:
 - Added `sources/intake/software-organisms-self-improvement-research-intake.md`.
-- Expanded `chapters/14-peer-reviewed-research-recursive-self-improvement-and-agentic-evolution.md` using the uploaded `Software Organisms_ Self-Improvement Research.md` document.
+- Expanded `chapters/03-peer-reviewed-research-recursive-self-improvement-and-agentic-evolution.md` using the uploaded `Software Organisms_ Self-Improvement Research.md` document.
 - Expanded `sources/peer-reviewed-rsi-selected-sources.md` with additional systems and papers from the intake packet, including Gödel Agent, Polaris, Programmatic Skill Networks, Darwin Gödel Machine, CodeEvolve, Process-Based Self-Rewarding, Noise-to-Meaning RSI, TerraLingua, and open-ended AI safety research.
-- Strengthened Chapter 14's taxonomy, verifier/fitness discussion, sandboxing section, failure-mode table, and software-organism lessons.
+- Strengthened Chapter 03's taxonomy, verifier/fitness discussion, sandboxing section, failure-mode table, and software-organism lessons.
 
 Reason:
-- The uploaded document provided a richer research synthesis than the initial Chapter 14 seed. The corpus now captures the document's strongest findings as compressed research memory while avoiding verbatim mirroring of the full uploaded text.
+- The uploaded document provided a richer research synthesis than the initial Chapter 03 seed. The corpus now captures the document's strongest findings as compressed research memory while avoiding verbatim mirroring of the full uploaded text.
 
 Caveat:
 - Some numeric claims and newer/preprint sources in the uploaded packet still require source-level validation before they become decision-driving claims.
@@ -652,9 +678,9 @@ Caveat:
 ## 2026-05-27 - Added Peer-Reviewed Research Digest for Recursive Self-Improvement
 
 Changed:
-- Added `chapters/14-peer-reviewed-research-recursive-self-improvement-and-agentic-evolution.md`.
+- Added `chapters/03-peer-reviewed-research-recursive-self-improvement-and-agentic-evolution.md`.
 - Added `sources/peer-reviewed-rsi-selected-sources.md` with the initial paper/source set.
-- Added Chapter 14 to `INDEX.md`.
+- Added Chapter 03 to `INDEX.md`.
 - Framed the new chapter as a structured digest of published research rather than an implementation spec or verbatim paper archive.
 
 Reason:
@@ -677,17 +703,17 @@ Reason:
 ## 2026-05-27 - Added Main Repo Gap Closure Synthesis
 
 Changed:
-- Added `chapters/13-main-repo-gap-closure-and-research-backlog.md`.
+- Added `chapters/07-main-repo-gap-closure-and-research-backlog.md`.
 - Mapped earlier research gaps against the current main `CursiveOS` architecture.
 - Clarified which gaps are already answered by the seed organism, sensor array,
   Layer 5 economics, and agent architecture.
 - Reframed the highest-value next research targets as implementation-level specs:
   mutation safety law, CursiveRoot schema, shell implementation, signed preset
   update channel, and fork obligation/Bitcoin ledger research.
-- Updated `INDEX.md` so Chapter 13 is part of the reading path.
+- Updated `INDEX.md` so Chapter 07 is part of the reading path.
 
 Reason:
-- The corpus had just absorbed major main-repo architecture in Chapters 10-12, but
+- The corpus had just absorbed major main-repo architecture in Chapters 01-12, but
 needed a synthesis layer explaining what that architecture closes and what still
 needs research. The project has moved from basic discovery questions toward
 implementation specification questions.
@@ -695,15 +721,15 @@ implementation specification questions.
 ## 2026-05-27 - Integrated Missing Architecture from Main CursiveOS Repo
 
 Changed:
-- Added `chapters/10-seed-organism-and-sensor-array.md` from the current main
+- Added `chapters/01-seed-organism-and-sensor-array.md` from the current main
   `CursiveOS` repo architecture.
-- Added `chapters/11-bitcoin-native-economics-and-proof-of-useful-optimization.md`
+- Added `chapters/02-bitcoin-native-economics-and-proof-of-useful-optimization.md`
   from Layer 5 Economics v3.3.
-- Added `chapters/12-measurement-daemon-and-natural-language-shell.md` from the
+- Added `chapters/05-measurement-daemon-and-natural-language-shell.md` from the
   main repo agent architecture.
 - Updated `INDEX.md` so the new chapters are first-class corpus entries.
-- Marked Chapter 07's tokenomics research as comparison material superseded for
-  CursiveOS's own design by the Bitcoin-native v3.3 architecture in Chapter 11.
+- Marked Chapter 21's tokenomics research as comparison material superseded for
+  CursiveOS's own design by the Bitcoin-native v3.3 architecture in Chapter 02.
 
 Reason:
 - The research corpus had validation and external research, but it had not fully
@@ -740,7 +766,7 @@ follow. The project needs clear current guidance, a detailed edit history, and
 a visible distinction between confirmed and uncertain claims, without mandatory
 paperwork for every correction.
 
-## 2026-05-26 - Chapter 09 Hermes Context and Tooling Guidance
+## 2026-05-26 - Chapter 18 Hermes Context and Tooling Guidance
 
 Changed:
 - Recorded that the current local Hermes deployment cannot use an approximately
@@ -767,16 +793,16 @@ Supporting detail retained for reference:
 - `validation/notes/2026-05-26-ch09-local-hermes-deployment-inspection.md`
 - `experiments/arc-b70-local-agent-benchmark-plan.md`
 
-Note: before the workflow was simplified, Chapter 09 was first edited in a way
+Note: before the workflow was simplified, Chapter 18 was first edited in a way
 that treated its imported wording as immutable, then restored with a dated
 correction appendix. That appendix remains an accurate record of the Hermes
 finding; future chapter improvements may directly rewrite guidance while being
 recorded here.
 
-## 2026-05-26 - Chapter 09 Imported
+## 2026-05-26 - Chapter 18 Imported
 
 Changed:
-- Added `chapters/09-local-agent-arc-b70.md` from the uploaded Arc B70 local
+- Added `chapters/18-local-agent-arc-b70.md` from the uploaded Arc B70 local
   agent research document.
 - Preserved the submitted document under `sources/original-docx/` and recorded
   its provenance in the existing source records.

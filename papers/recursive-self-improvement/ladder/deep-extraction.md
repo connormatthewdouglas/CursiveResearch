@@ -110,7 +110,7 @@ This creates a self-bootstrapping curriculum entirely from the model's own gener
 
 LADDER is an excellent concrete reference for the "test-time self-improvement" and "self-taught optimizer" directions in the P0 RSI pipeline. It strengthens the argument for keeping proposer and verifier separate and for using grounded, verifiable signals even in self-improvement loops. It suggests that CursiveOS could benefit from similar recursive decomposition patterns when an agent faces a hard task that can be broken into verifiable sub-tasks.
 
-Strong candidate for citation in Chapter 14 and for future experiments in agent curriculum / test-time adaptation on verifiable OS or benchmark tasks.
+Strong candidate for citation in Chapter 03 and for future experiments in agent curriculum / test-time adaptation on verifiable OS or benchmark tasks.
 
 ## 14. Open Questions
 

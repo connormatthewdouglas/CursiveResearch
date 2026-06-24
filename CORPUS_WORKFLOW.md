@@ -193,7 +193,7 @@ CORPUS_WORKFLOW.md
 
 Chapters converted from `sources/original-docx/` keep their imported wording
 below the HTML comment header. That text is an **intake snapshot**, not current
-project truth. When later chapters (especially Chapter 16) or `VALIDATION.md`
+project truth. When later chapters (especially Chapters 00–08) or `VALIDATION.md`
 supersede a passage:
 
 1. **Do not delete** the imported block unless doing a deliberate `REWRITE:`
@@ -232,7 +232,7 @@ Template for the living layer:
 
 ## Cohesion Pass Checklist
 
-Run this when early chapters (00–07) drift from Chapters 10–17 or after a
+Run this when early chapters (00–07) drift from Chapters 01–17 or after a
 major measurement update:
 
 | Step | Action |
@@ -258,6 +258,6 @@ These extend the fast paths above without new mandatory files:
 
 Optional next steps (not required for every edit):
 
-- Add `chapters/00-research-master.md` deprecation banner pointing to Ch10–13 for current architecture.
+- Add `chapters/22-research-master.md` deprecation banner pointing to Ch10–13 for current architecture.
 - Periodic `extracted-source-index.md` refresh when red-team or Ch16 updates a chapter's validation status.
 - CI: run corpus-guard on every push to `main` (workflow already exists under `.github/workflows/`).

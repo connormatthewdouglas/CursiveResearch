@@ -1,12 +1,12 @@
 # Security Hardening Validation Plan
 
 Date created: 2026-05-26
-Linked chapter: `chapters/06-security-and-hardening.md`
+Linked chapter: `chapters/16-security-and-hardening.md`
 Status: Proposed validation plan; not yet executed.
 
 ## Purpose
 
-Validate Chapter 06's security guidance before converting any recommendations into CursiveOS deployment policy. Security advice must be current, distro-aware, workload-aware, and tested against the specific mutation depth CursiveOS allows.
+Validate Chapter 22's security guidance before converting any recommendations into CursiveOS deployment policy. Security advice must be current, distro-aware, workload-aware, and tested against the specific mutation depth CursiveOS allows.
 
 ## Core Principle
 
@@ -132,7 +132,7 @@ fitness_or_security_check
 
 ## Promotion Rules
 
-A Chapter 06 recommendation can become CursiveOS policy only if:
+A Chapter 22 recommendation can become CursiveOS policy only if:
 
 - source-backed by primary or strong documentation;
 - tested on the target distro/kernel/deployment type;

@@ -1,8 +1,8 @@
 # Idle-Power Selection-Channel Validation Plan
 
 Date created: 2026-06-22
-Linked chapters: `chapters/16-benchmark-schema-and-measurement-validity.md`
-(§2.2, §5 items 7–8), `chapters/10-seed-organism-and-sensor-array.md`
+Linked chapters: `chapters/00-benchmark-schema-and-measurement-validity.md`
+(§2.2, §5 items 7–8), `chapters/01-seed-organism-and-sensor-array.md`
 (Population Confirmation, CV ≤ 0.15 rule).
 Status: Proposed validation plan; not yet executed.
 
@@ -16,16 +16,16 @@ On 2026-06-16 two facts were recorded and are currently in tension:
 
 1. The 6× v0.9 full-test noise floor showed idle-power (CPU) **CV ≈ 0.83**
    ("near-random as currently measured"), so the fitness idle-power penalty
-   term was being fed near-random input (Chapter 16 §5 item 7; VALIDATION).
+   term was being fed near-random input (Chapter 22 §5 item 7; VALIDATION).
 2. A dedicated **Phase-D total-power probe** (settle delay + 12 samples per
    state) on the same Arc A750 desktop showed idle power is actually
    **CV ≈ 0.01** when sampled after settling, and concluded the 0.83 was a
    *sampling artifact* fixed by adding a settle delay + more samples to the
-   harness (Chapter 16 §5 item 8; VALIDATION "idle-power noise is sampling").
+   harness (Chapter 22 §5 item 8; VALIDATION "idle-power noise is sampling").
 
 The gap this plan closes: claim (2) was demonstrated by a **bespoke probe on
 one machine**, not by the **production full-test path**, and never on a second
-hardware class. Chapter 10's confirmation rule (CV ≤ 0.15) and the live v0.9
+hardware class. Chapter 01's confirmation rule (CV ≤ 0.15) and the live v0.9
 screen's idle-power term both depend on this channel being trustworthy, so the
 fix must be validated where decisions are actually made.
 
@@ -125,7 +125,7 @@ place even on a positive H1.
 
 - **If H1 holds (per machine):** idle power graduates from "same-machine
   directional only" to a per-channel selection signal with its own (small)
-  confirmation count under Chapter 10's per-channel-CV model, and the v0.9
+  confirmation count under Chapter 01's per-channel-CV model, and the v0.9
   screen's power term becomes selection-usable *within a machine*.
 - **If H1 fails on some hardware:** idle power stays a per-hardware-class
   channel; it must not gate global decisions — consistent with the project's
@@ -142,7 +142,7 @@ An idle-power VALIDATION claim may move only if:
 - **variance (CV) is reported per cohort**, not pooled;
 - exact wrapper version and `power_source` are captured for every run;
 - the result is stated with its hardware/condition scope (no universal claim);
-- the relevant Chapter 16 §5 items 7–8 / §2.2 VALIDATION rows are updated.
+- the relevant Chapter 22 §5 items 7–8 / §2.2 VALIDATION rows are updated.
 
 ## Scope boundary (graduate to main repo)
 

@@ -1,4 +1,4 @@
-# Validation Note: Chapter 09 Local Hermes Deployment Inspection
+# Validation Note: Chapter 18 Local Hermes Deployment Inspection
 
 Date checked: 2026-05-26
 Agent / reviewer: Codex / GPT-5
@@ -13,7 +13,7 @@ Source IDs: SRC-09-003, SRC-09-004, SRC-09-005, SRC-09-010
 | CL-09-013 | The currently deployed Hermes build can be configured for an approximately 8k context window as an interactive operating target. | disputed for current deployment | SRC-09-010: local source and configuration inspection | Current code defines `MINIMUM_CONTEXT_LENGTH = 64_000`, rejects smaller contexts, and the deployment uses `65536`. Preserve the imported recommendation but append a correction distinguishing configured context from active request footprint. |
 | CL-09-014 | Smaller injected tool-schema and history payloads materially improve the responsiveness of the local Hermes/OVMS work path. | locally reproduced once; not yet validated | SRC-09-010: direct OpenAI-compatible calls to local OVMS on 2026-05-26 | A no-tool trivial response completed in approximately 0.50 seconds. A broad Hermes tool-envelope trivial request was canceled after more than 120 seconds. Reduced interactive profiles emitted valid tool calls, including `read_file` in 1.024 seconds after one profile pass and `skills_list` in 0.831 seconds on a warm prefix. Repeat under a controlled harness before treating as decision-grade. |
 | CL-09-015 | The deployed local model endpoint supports structured tool invocation through the selected parser path. | locally reproduced once | SRC-09-010; OVMS service command and live parser probes | OVMS uses `--tool_parser qwen3coder --enable_tool_guided_generation true`; reduced-profile probes returned valid structured `read_file`, `skills_list`, and `session_search` calls. This does not establish broad tool-call reliability or long-argument correctness. |
-| CL-09-016 | The current execution path satisfies Chapter 09 containment recommendations for shell/code work. | disputed for current deployment | SRC-09-010: local configuration and enabled cron/job inspection | `terminal.backend` is `local`, not a hardened container or VM. A scheduled repo-hygiene task modified `~/CursiveOS`; it was paused during this inspection. Containerization and task-level safety testing remain required. |
+| CL-09-016 | The current execution path satisfies Chapter 18 containment recommendations for shell/code work. | disputed for current deployment | SRC-09-010: local configuration and enabled cron/job inspection | `terminal.backend` is `local`, not a hardened container or VM. A scheduled repo-hygiene task modified `~/CursiveOS`; it was paused during this inspection. Containerization and task-level safety testing remain required. |
 | CL-09-017 | Arc Pro B70 memory is exposed on the current host and the deployed OVMS path is operational. | locally reproduced once | SRC-09-010: kernel, service, and endpoint observations | Kernel `xe` reported physical VRAM `0x0000000800000000`; OVMS `/v3/models` returned `Qwen3-Coder-30B-A3B-Instruct`. The kernel also recommended newer GuC firmware (`70.45.2` versus installed `70.44.1`), which should be resolved before formal performance benchmarking. |
 
 ## Local Evidence Captured
@@ -42,8 +42,8 @@ These are deployment changes, not imported research findings:
 
 ## Corpus Changes Required and Applied
 
-- Restored the unchanged imported Chapter 09 wording after an initial correction was incorrectly written into the `Source Import` body.
-- Appended `Correction: Hermes Context Guidance for the Current Deployment (2026-05-26)` to Chapter 09, keeping the imported 8k recommendation visible while narrowing its applicability for current Hermes.
+- Restored the unchanged imported Chapter 18 wording after an initial correction was incorrectly written into the `Source Import` body.
+- Appended `Correction: Hermes Context Guidance for the Current Deployment (2026-05-26)` to Chapter 18, keeping the imported 8k recommendation visible while narrowing its applicability for current Hermes.
 - Updated `experiments/arc-b70-local-agent-benchmark-plan.md` to separate general 8k/16k/32k runtime capacity testing from Hermes testing at a configured context of at least 64,000 tokens with varied active prompt/tool/history footprints.
 - Added this dated validation note, registered SRC-09-010, preserved the smoke-test artifact, and added a corresponding entry in `validation/validation-ledger.md`.
 

@@ -1,13 +1,13 @@
-# Chapter 02 Selected Sources
+# Chapter 20 Selected Sources
 
 Date extracted: 2026-05-26  
 Agent / reviewer: GPT-5.5 Thinking / ChatGPT  
-Chapter: `chapters/02-market-and-viability.md`  
+Chapter: `chapters/20-market-and-viability.md`  
 Status: Selected high-priority extraction only. Full source extraction remains open.
 
 ## Purpose
 
-This file captures the first selected source extraction for Chapter 02. The chapter contains many time-sensitive market and protocol claims, so sources should be refreshed before public use.
+This file captures the first selected source extraction for Chapter 20. The chapter contains many time-sensitive market and protocol claims, so sources should be refreshed before public use.
 
 ## Selected Sources
 
@@ -21,12 +21,12 @@ This file captures the first selected source extraction for Chapter 02. The chap
 | SRC-02-006 | IP Sysctl | Linux Kernel Documentation | https://www.kernel.org/doc/html/latest/networking/ip-sysctl.html | primary documentation | rolling kernel docs | 2026-05-26 | TCP/socket/network tuning section | Supports existence and semantics of TCP congestion-control and networking sysctls | A | verified for mechanism | Does not validate exact CursiveOS values or performance uplift. |
 | SRC-02-007 | BBR FAQ | Google BBR GitHub repository | https://github.com/google/bbr/blob/master/Documentation/bbr-faq.md | project documentation | rolling | 2026-05-26 | BBR section | Supports BBR as model-based congestion control and documents deployment caveats | A/B | needs verification | Use with kernel availability checks. Does not validate imported extreme speedup numbers. |
 | SRC-02-008 | BBR: Congestion-Based Congestion Control | ACM Queue | https://queue.acm.org/detail.cfm?id=3022184 | technical article | 2016 | 2026-05-26 | BBR theory | Supports BBR design rationale: model bottleneck bandwidth and RTT rather than loss-only control | B | verified for background | Older but foundational; not BBRv3-specific. |
-| SRC-02-009 | Helium Network Token | Helium Documentation | https://docs.helium.com/tokens/hnt-token/ | official protocol docs | 2026 page | 2026-05-26 | DePIN economics overlap | Supports Helium HNT, Data Credits, burn-and-mint, max supply schedule, and net emissions | A | verified | More relevant to Chapter 07 but useful market context. |
-| SRC-02-010 | Data Credit | Helium Documentation | https://docs.helium.com/tokens/data-credit/ | official protocol docs | 2026 page | 2026-05-26 | DePIN economics overlap | Supports Data Credit USD peg, DC usage, HNT-to-DC conversion, and non-transferability | A | verified | More relevant to Chapter 07 but supports DePIN pricing conclusions. |
+| SRC-02-009 | Helium Network Token | Helium Documentation | https://docs.helium.com/tokens/hnt-token/ | official protocol docs | 2026 page | 2026-05-26 | DePIN economics overlap | Supports Helium HNT, Data Credits, burn-and-mint, max supply schedule, and net emissions | A | verified | More relevant to Chapter 21 but useful market context. |
+| SRC-02-010 | Data Credit | Helium Documentation | https://docs.helium.com/tokens/data-credit/ | official protocol docs | 2026 page | 2026-05-26 | DePIN economics overlap | Supports Data Credit USD peg, DC usage, HNT-to-DC conversion, and non-transferability | A | verified | More relevant to Chapter 21 but supports DePIN pricing conclusions. |
 
 ## Validation Caveats
 
-- Chapter 02 should not use any single news article as decision-grade evidence.
+- Chapter 20 should not use any single news article as decision-grade evidence.
 - Market figures should always include exact date, data source, and measurement method.
 - Technical network tuning claims should be separated from market positioning claims.
-- Intel Arc and GPU claims should defer to Chapters 04 and 09.
+- Intel Arc and GPU claims should defer to Chapters 03 and 09.

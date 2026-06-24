@@ -1,7 +1,7 @@
 # Cold-Start Mechanism Isolation and Hardware-Scoping Predictor Plan
 
 Date created: 2026-06-21
-Linked chapters: `chapters/16-benchmark-schema-and-measurement-validity.md` (§5.1, §5.5, §5.7), `chapters/10-seed-organism-and-sensor-array.md`
+Linked chapters: `chapters/00-benchmark-schema-and-measurement-validity.md` (§5.1, §5.5, §5.7), `chapters/01-seed-organism-and-sensor-array.md`
 Status: Proposed experiment; not yet executed.
 
 ## Why this experiment, now
@@ -147,7 +147,7 @@ session_id, cell_order_index
 | One factor ≥ 80% of −51%, others < 10% | **H1 supported.** Ship that single knob as the cold-start preset; drop the rest as dead weight (the "it's just BBR" outcome for cold-start). |
 | No factor > 50%; win needs ≥ 2 knobs together | **H1 falsified.** Cold-start preset must stay a small *bundle*; document the interaction. |
 | Pre-probe penalty tracks preset gain in sign + rough magnitude across ≥ 3 machines | **H2 directionally supported.** Cheap pre-probe becomes the gate for "should this machine even run the cold-start preset" — the seed of hardware-scoped fitness. |
-| Penalty and gain decouple on any machine | **H2 falsified.** Cold-start value is not predictable from idle-exit penalty alone; hardware-scoping needs a richer fingerprint (escalate to Chapter 10 backlog). |
+| Penalty and gain decouple on any machine | **H2 falsified.** Cold-start value is not predictable from idle-exit penalty alone; hardware-scoping needs a richer fingerprint (escalate to Chapter 01 backlog). |
 
 ## Expected outcome (prediction on record)
 
@@ -170,5 +170,5 @@ got nothing), which would itself be the most informative result.
   config (governor/EPP/C-state limit), not firmware, kernel build, or generated
   code. Keep within the existing reversible-preset envelope (`chapters/10`).
 - Outcomes update `chapters/16` §5 and the VALIDATION.md cold-start rows; a
-  confirmed predictor (H2) would graduate into Chapter 10's hardware-scoped
+  confirmed predictor (H2) would graduate into Chapter 01's hardware-scoped
   fitness work.

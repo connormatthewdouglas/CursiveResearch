@@ -1,10 +1,10 @@
-# Red-Team Challenge: Covenant-72B "GPT-4-class" Claim (Chapter 02)
+# Red-Team Challenge: Covenant-72B "GPT-4-class" Claim (Chapter 20)
 
 - Date: 2026-06-21
 - Type: Adversarial corpus review (red-team). Challenge only; the original
-  claim was **not** edited (Chapter 02 is a preserved-DOCX source, and the
+  claim was **not** edited (Chapter 20 is a preserved-DOCX source, and the
   red-team task forbids editing the challenged claim in place).
-- Target file/section: `chapters/02-market-and-viability.md` →
+- Target file/section: `chapters/20-market-and-viability.md` →
   "The Bittensor (TAO) Ecosystem: Performance Benchmarks" → "Model Benchmarks:
   Covenant-72B".
 - Cross-reference: same chapter's summary table row "Average Model MMLU |
@@ -104,7 +104,7 @@ not selected as the challenge.
 - Treat the "competitive with early GPT-4-class models" / "data-center-level
   results" comparison as **Disproven** and do **not** reuse it in any external,
   investor, or marketing claim.
-- When Chapter 02 is next revised, replace the GPT-4 comparison with the
+- When Chapter 20 is next revised, replace the GPT-4 comparison with the
   accurate Llama-2-70B / open-base-model framing above, and (optionally) update
   the summary table's "High Performance" trend label accordingly.
 

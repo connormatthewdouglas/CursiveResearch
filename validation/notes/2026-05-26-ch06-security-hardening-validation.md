@@ -1,14 +1,14 @@
-# Validation Note: Chapter 06 Security and Hardening
+# Validation Note: Chapter 22 Security and Hardening
 
 Date checked: 2026-05-26
 Agent / reviewer: GPT-5.5 Thinking / ChatGPT
-Scope: targeted validation of highest-impact Chapter 06 claims
+Scope: targeted validation of highest-impact Chapter 22 claims
 Status: partially verified, with safety-critical caveats
 Source IDs: SRC-06-001 through SRC-06-014 in `sources/chapter-06-selected-sources.md`
 
 ## Summary
 
-Chapter 06 has the right strategic instinct: CursiveOS systems that control GPUs, local agents, firmware, kernels, and DePIN/mining workloads need defense-in-depth. The broad categories are well chosen: kernel hardening, firewalling, SSH access control, monitoring/IDS, sandboxing, supply-chain protection, and DePIN trust validation.
+Chapter 22 has the right strategic instinct: CursiveOS systems that control GPUs, local agents, firmware, kernels, and DePIN/mining workloads need defense-in-depth. The broad categories are well chosen: kernel hardening, firewalling, SSH access control, monitoring/IDS, sandboxing, supply-chain protection, and DePIN trust validation.
 
 However, the chapter is currently too confident in several places. Security guidance must be treated as deployment-specific and date-sensitive. Some claims rely on blogs, vendor marketing, or news reporting. The chapter should be rewritten around policy tiers and validation gates rather than one universal hardening recipe.
 
@@ -34,7 +34,7 @@ However, the chapter is currently too confident in several places. Security guid
 
 ## Required Corpus Changes
 
-### Recommended Chapter 06 wording changes
+### Recommended Chapter 22 wording changes
 
 - Replace absolute claims with policy levels: baseline, hardened, high-assurance, lab-only.
 - Replace “CrowdSec has displaced Fail2ban” with “CrowdSec is a strong candidate for collaborative brute-force and reputation-based blocking; Fail2ban remains acceptable for simple hosts.”
@@ -70,7 +70,7 @@ Create `experiments/security-hardening-validation-plan.md` with tests for:
 
 ## Follow-up
 
-- Extract all Chapter 06 sources into canonical source index or keep this selected file until merged.
+- Extract all Chapter 22 sources into canonical source index or keep this selected file until merged.
 - Add official docs for OpenSSH, nftables, Wazuh, Suricata, Falco, Firecracker, gVisor, Sigstore, and Bittensor postmortems where available.
 - Build a CursiveOS-specific hardening baseline instead of importing generic Linux hardening wholesale.
-- Revisit Chapter 06 after the first local-agent deployment architecture is known.
+- Revisit Chapter 22 after the first local-agent deployment architecture is known.

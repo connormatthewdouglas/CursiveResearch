@@ -1,14 +1,14 @@
-# Validation Note: Chapter 09 Local Agent Setup for Arc B70
+# Validation Note: Chapter 18 Local Agent Setup for Arc B70
 
 Date checked: 2026-05-26
 Agent / reviewer: GPT-5.5 Thinking / ChatGPT
-Scope: targeted validation of highest-risk Chapter 09 claims
+Scope: targeted validation of highest-risk Chapter 18 claims
 Status: partially supported; several benchmark/model/tool-calling claims require local reproduction
 Source IDs: SRC-09-001 through SRC-09-009
 
 ## Summary
 
-Chapter 09 is valuable and directly relevant to the CursiveOS local-agent/home-rack roadmap, but it is not yet decision-grade. The broad software architecture is supported: Intel Arc local inference requires non-CUDA backends such as llama.cpp SYCL, Vulkan, OpenVINO, oneAPI, Level Zero, or IPEX-LLM. The llama.cpp SYCL documentation supports Intel GPU / Arc-family backend claims, and llama.cpp function-calling docs support the use of `llama-server --jinja` for OpenAI-style tool/function calling.
+Chapter 18 is valuable and directly relevant to the CursiveOS local-agent/home-rack roadmap, but it is not yet decision-grade. The broad software architecture is supported: Intel Arc local inference requires non-CUDA backends such as llama.cpp SYCL, Vulkan, OpenVINO, oneAPI, Level Zero, or IPEX-LLM. The llama.cpp SYCL documentation supports Intel GPU / Arc-family backend claims, and llama.cpp function-calling docs support the use of `llama-server --jinja` for OpenAI-style tool/function calling.
 
 However, several of the chapter's most specific claims depend on community benchmarks, Reddit/Medium reports, or unverified model-specific behavior. Those should be treated as hypotheses until reproduced on the actual CursiveOS B70 hardware.
 
@@ -31,7 +31,7 @@ However, several of the chapter's most specific claims depend on community bench
 
 ## Required Corpus Changes
 
-### Wording changes recommended for Chapter 09
+### Wording changes recommended for Chapter 18
 
 1. Replace hard claims like `SYCL is 2.2x faster than Vulkan` with `one cited B70 benchmark repository reports a 2.2x decode advantage for SYCL in a specific test; this requires reproduction on target hardware`.
 2. Replace `Qwen 3.5-35B-A3B should be deployed` with `Qwen 3.5-35B-A3B is a strong candidate for evaluation`.
@@ -41,9 +41,9 @@ However, several of the chapter's most specific claims depend on community bench
 
 ## Implications for CursiveOS
 
-- Chapter 09 should remain in the P0 validation queue because it affects hardware and local-agent architecture decisions.
+- Chapter 18 should remain in the P0 validation queue because it affects hardware and local-agent architecture decisions.
 - The immediate engineering experiment should be a reproducible B70 benchmark matrix: llama.cpp SYCL vs Vulkan, Qwen dense vs MoE, 8k/16k/32k context, tool-call reliability, and power draw.
-- The corpus should not use Chapter 09 performance numbers as design baselines until they are reproduced internally or validated from a well-documented benchmark repo.
+- The corpus should not use Chapter 18 performance numbers as design baselines until they are reproduced internally or validated from a well-documented benchmark repo.
 
 ## Suggested Benchmark Matrix
 

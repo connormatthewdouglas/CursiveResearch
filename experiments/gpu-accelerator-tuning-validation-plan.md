@@ -1,14 +1,14 @@
 # GPU and Accelerator Tuning Validation Plan
 
 Date created: 2026-05-26
-Linked chapter: `chapters/04-gpu-and-accelerator-tuning.md`
+Linked chapter: `chapters/14-gpu-and-accelerator-tuning.md`
 Status: Proposed validation plan; not yet executed.
 
 ## Purpose
 
-Validate Chapter 04's GPU, accelerator, memory, virtualization, and mixed-workload tuning claims before any of them become operational CursiveOS presets.
+Validate Chapter 03's GPU, accelerator, memory, virtualization, and mixed-workload tuning claims before any of them become operational CursiveOS presets.
 
-Chapter 04 contains many real mechanisms but several hardware-specific recommendations. This plan treats every device-specific claim as untrusted until the exact hardware, driver, kernel, firmware, runtime, and workload are measured.
+Chapter 03 contains many real mechanisms but several hardware-specific recommendations. This plan treats every device-specific claim as untrusted until the exact hardware, driver, kernel, firmware, runtime, and workload are measured.
 
 ## Core Principle
 
@@ -26,7 +26,7 @@ A setting that is safe and useful on one GPU can be unstable, unavailable, or ha
 | CH04-BM-004 | Consumer GPU SR-IOV is viable for CursiveOS | unverified / lab-only | Test only in isolated lab systems and record support matrix. |
 | CH04-BM-005 | Hugepages/THP/NUMA changes improve LLM inference | unverified | Measure model load, TTFT, decode, memory pressure, and tail latency. |
 | CH04-BM-006 | Kyber or other I/O schedulers improve mixed storage/inference workloads | unverified | Compare under controlled mixed read/write contention. |
-| CH04-BM-007 | sched_ext/scx schedulers improve mixed mining+inference workloads | unverified | Use Chapter 03 kernel benchmark plan with GPU/mixed workloads. |
+| CH04-BM-007 | sched_ext/scx schedulers improve mixed mining+inference workloads | unverified | Use Chapter 07 kernel benchmark plan with GPU/mixed workloads. |
 
 ## Phase 0: Hardware Capability Probe
 
@@ -189,13 +189,13 @@ foreground_task_success
 background_task_throughput
 ```
 
-This is the real Chapter 04 target: keeping latency-sensitive inference responsive while throughput-oriented background work consumes spare resources.
+This is the real Chapter 03 target: keeping latency-sensitive inference responsive while throughput-oriented background work consumes spare resources.
 
 ## Promotion Levels
 
 | Level | Meaning |
 | --- | --- |
-| Imported claim | Present in Chapter 04, not trusted yet. |
+| Imported claim | Present in Chapter 03, not trusted yet. |
 | Source-supported mechanism | Supported by docs or repo, but not tested locally. |
 | Hardware-probed | Control exists on target machine. |
 | Locally reproduced | One successful controlled test. |

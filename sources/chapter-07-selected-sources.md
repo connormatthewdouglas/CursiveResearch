@@ -1,13 +1,13 @@
-# Chapter 07 Selected Sources
+# Chapter 21 Selected Sources
 
 Date extracted: 2026-05-26  
 Agent / reviewer: GPT-5.5 Thinking / ChatGPT  
-Chapter: `chapters/07-tokenomics-and-incentives.md`  
+Chapter: `chapters/21-tokenomics-and-incentives.md`  
 Status: Selected high-priority extraction only. Full citation resolution remains open.
 
 ## Purpose
 
-This file captures the first protocol-source extraction for Chapter 07. Tokenomics claims should be based on official docs, governance proposals, and current dashboards wherever possible.
+This file captures the first protocol-source extraction for Chapter 21. Tokenomics claims should be based on official docs, governance proposals, and current dashboards wherever possible.
 
 ## Selected Sources
 

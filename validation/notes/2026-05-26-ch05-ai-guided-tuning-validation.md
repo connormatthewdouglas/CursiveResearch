@@ -1,14 +1,14 @@
-# Validation Note: Chapter 05 AI-Guided Tuning
+# Validation Note: Chapter 15 AI-Guided Tuning
 
 Date checked: 2026-05-26
 Agent / reviewer: GPT-5.5 Thinking / ChatGPT
-Scope: targeted validation of highest-impact Chapter 05 claims
+Scope: targeted validation of highest-impact Chapter 15 claims
 Status: partially verified
 Source IDs: SRC-05-001 through SRC-05-008
 
 ## Summary
 
-Chapter 05 is directionally strong and directly relevant to CursiveOS. Its core thesis is supported: AI-guided OS tuning is a real emerging research line, and several systems already explore LLM/RL/search loops for scheduler policy, kernel configuration, heuristic synthesis, and online parameter tuning.
+Chapter 15 is directionally strong and directly relevant to CursiveOS. Its core thesis is supported: AI-guided OS tuning is a real emerging research line, and several systems already explore LLM/RL/search loops for scheduler policy, kernel configuration, heuristic synthesis, and online parameter tuning.
 
 However, the chapter should not yet be treated as decision-grade implementation guidance. It blends validated architecture patterns with unverified performance numbers, optimistic timelines, incomplete license/maturity claims, and speculative CursiveOS/TAO integration estimates. The right next step is not to pick a winner blindly; it is to prototype a small, safe, reversible CursiveOS tuning loop and compare the approaches experimentally.
 
@@ -30,7 +30,7 @@ A notable update from validation: the imported chapter's “LLM Agents for Alway
 
 ## Required Corpus Changes
 
-### Recommended Chapter 05 wording changes
+### Recommended Chapter 15 wording changes
 
 - Mark all reported improvements as `paper-reported`, not validated CursiveOS performance.
 - Add SemaTune as the current/stronger always-on tuning source.
@@ -67,6 +67,6 @@ Create `experiments/ai-guided-tuning-loop-benchmark-plan.md` with these phases:
 
 - Inspect SchedCP, OS-R1, PolicySmith, AutoOS repos for license, activity, installability, and reproducibility.
 - Validate AutoOS with primary paper/repo source.
-- Add SemaTune to Chapter 05 as an update/supersession note.
+- Add SemaTune to Chapter 15 as an update/supersession note.
 - Build a minimal CursiveOS tuning-loop experiment before committing to OS-R1 or PolicySmith.
 - Convert any successful local experiment into a decision record.

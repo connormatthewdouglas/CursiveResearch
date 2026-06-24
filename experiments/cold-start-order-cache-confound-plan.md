@@ -1,10 +1,10 @@
 # Cold-Start Order / Page-Cache Confound Test
 
 Date created: 2026-06-23
-Linked chapters: `chapters/16-benchmark-schema-and-measurement-validity.md` (§2.3, §5 item 7),
-`chapters/10-seed-organism-and-sensor-array.md` (evidence / confirmation model)
-Linked VALIDATION rows: "Chapter 16 / cold-start is hardware-scoped" (Validated),
-"Chapter 16 / measurement noise floor" (Validated)
+Linked chapters: `chapters/00-benchmark-schema-and-measurement-validity.md` (§2.3, §5 item 7),
+`chapters/01-seed-organism-and-sensor-array.md` (evidence / confirmation model)
+Linked VALIDATION rows: "Chapter 22 / cold-start is hardware-scoped" (Validated),
+"Chapter 22 / measurement noise floor" (Validated)
 Status: Proposed; not yet executed. Single-machine, ~1 afternoon of run time.
 
 ## Why this experiment
@@ -17,7 +17,7 @@ decision recorded so far (v0.9b ablation, v0.9c promotion as global parent, the
 hardware-scoped −51% Arc win) rests on the cold-start delta.
 
 But the benchmark measures that delta with a **fixed internal order**: within each
-run the **baseline condition runs first, the tuned condition second** (Chapter 16
+run the **baseline condition runs first, the tuned condition second** (Chapter 22
 §2.3, §5 item 1). The same section also records that **"page-cache state strongly
 affects model load: the first cold-start of a session reads from disk, later ones
 from cache. Not recorded."** Putting those two facts together exposes an untested
@@ -59,7 +59,7 @@ direction and an order main-effect that the current fixed-order design cannot se
 
 ## Method
 
-Run on the founder rig already characterized in Chapter 16 (Ryzen 7 5700 + Arc
+Run on the founder rig already characterized in Chapter 22 (Ryzen 7 5700 + Arc
 A750, fingerprint `3e6b165ddf112a75`) so results are directly comparable to the
 existing −51% and CV-0.002 numbers. Use the existing harness
 (`cursiveos-full-test-v1.x`) cold-start phase as the measurement primitive; only
@@ -79,7 +79,7 @@ Three arms, each a set of paired baseline/tuned cold-start measurements:
   load duration, not just the collapsed delta.
 - **Record the §3 phase context every condition**: page-cache hot/cold for the model
   file, governor, AC/battery, CPU/GPU temp at phase start, GPU freq. The whole point
-  is to convert "mystery variance" into attributable variance, per Chapter 16 §3.
+  is to convert "mystery variance" into attributable variance, per Chapter 22 §3.
 - Keep everything else fixed: same model + quantization + ollama version (record
   them — §2.3 notes they are not in `runs` columns), same ambient conditions, no
   other load. Insert the existing settle delay before idle/cold capture.
@@ -131,4 +131,4 @@ This is a measurement-validity experiment for the corpus, not an implementation 
 The counterbalancing/cache-control scheduling and the new page-cache schema field
 graduate to the main `CursiveOS` repo as harness build tasks once the design is
 confirmed here (normal `RESEARCH_PIPELINE.md` graduation rule). Results worth keeping
-land in `experiments/results/` and update Chapter 16 §5 + the relevant VALIDATION rows.
+land in `experiments/results/` and update Chapter 22 §5 + the relevant VALIDATION rows.

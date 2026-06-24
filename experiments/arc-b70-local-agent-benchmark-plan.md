@@ -1,12 +1,12 @@
 # Arc B70 Local Agent Benchmark Plan
 
 Date created: 2026-05-26
-Linked chapter: `chapters/09-local-agent-arc-b70.md`
+Linked chapter: `chapters/18-local-agent-arc-b70.md`
 Status: Proposed validation plan; not yet executed.
 
 ## Purpose
 
-Convert Chapter 09 from imported/partially validated research into CursiveOS-grade evidence. This plan should be executed before Chapter 09 is used as a build guide, purchasing justification, model-selection baseline, or local-agent deployment recipe.
+Convert Chapter 18 from imported/partially validated research into CursiveOS-grade evidence. This plan should be executed before Chapter 18 is used as a build guide, purchasing justification, model-selection baseline, or local-agent deployment recipe.
 
 The key principle: no B70 performance, model, backend, tool-calling, or long-context claim becomes decision-grade until it is reproduced on target hardware with environment metadata, commands, model hashes, and variance captured.
 
@@ -216,7 +216,7 @@ high max output tokens
 low/default max output tokens
 ```
 
-Any parser/template recommendation in Chapter 09 must be backed by this harness before being promoted to `Verified Finding`.
+Any parser/template recommendation in Chapter 18 must be backed by this harness before being promoted to `Verified Finding`.
 
 ## Agentic Task Harness
 
@@ -268,7 +268,7 @@ nft list ruleset || true
 
 ## Pass / Fail Promotion Rules
 
-A Chapter 09 claim can be promoted only if it has:
+A Chapter 18 claim can be promoted only if it has:
 
 - exact source or command provenance;
 - repeatable benchmark command;

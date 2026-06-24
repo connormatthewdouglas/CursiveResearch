@@ -1,12 +1,12 @@
 # AI-Guided Tuning Loop Validation Plan
 
 Date created: 2026-05-26
-Linked chapter: `chapters/05-ai-guided-tuning.md`
+Linked chapter: `chapters/15-ai-guided-tuning.md`
 Status: Proposed validation plan; not yet executed.
 
 ## Purpose
 
-Validate the core Chapter 05 thesis: an AI-guided tuning loop can improve a CursiveOS system by observing telemetry, proposing bounded changes, evaluating results, and preserving only changes that improve measured fitness.
+Validate the core Chapter 15 thesis: an AI-guided tuning loop can improve a CursiveOS system by observing telemetry, proposing bounded changes, evaluating results, and preserving only changes that improve measured fitness.
 
 This plan intentionally begins with low-risk, reversible configuration experiments. It should not begin with kernel recompilation, generated kernel code, firmware control, or production-host mutation. The first goal is to prove that the control loop itself creates value.
 
@@ -135,7 +135,7 @@ Add retrieval from the prior mutation ledger and test whether history improves p
 
 ### Phase 3 — Scheduler Experiment
 
-Introduce scheduler-related experiments only after Phase 1 is stable. Use Chapter 03's kernel benchmark plan as the evaluation harness.
+Introduce scheduler-related experiments only after Phase 1 is stable. Use Chapter 07's kernel benchmark plan as the evaluation harness.
 
 ### Phase 4 — Kernel Configuration Experiment
 
@@ -149,7 +149,7 @@ Evaluate PolicySmith-style generated heuristics only after static review, test r
 
 | Level | Meaning |
 | --- | --- |
-| Imported claim | Mentioned in Chapter 05, not independently trusted. |
+| Imported claim | Mentioned in Chapter 15, not independently trusted. |
 | Source-supported claim | Supported by paper/repo documentation. |
 | Locally reproduced claim | Reproduced once in CursiveOS environment. |
 | Validated finding | Reproduced across repeated runs with captured metadata. |
