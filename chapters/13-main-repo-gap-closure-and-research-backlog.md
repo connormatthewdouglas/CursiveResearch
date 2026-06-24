@@ -1,6 +1,6 @@
 # Main Repo Gap Closure and Research Backlog
 
-Status: Current synthesis from the main `CursiveOS` repo and the private `CursiveResearch` corpus. Use this as the bridge between research questions and active project architecture.
+Status: Current synthesis from the main `CursiveOS` repo and the `CursiveResearch` corpus. Use this as the bridge between research questions and active project architecture.
 
 ## Why this chapter exists
 

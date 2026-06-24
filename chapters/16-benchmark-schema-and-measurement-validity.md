@@ -88,6 +88,11 @@ hypothesis is "keep network, recover the idle-power cost."
   counterbalanced repeats before acceptance — correct, keep it.
 - Page-cache state strongly affects model load: the first cold-start of a
   session reads from disk, later ones from cache. Not recorded.
+- **Open validity gap:** because the tuned condition always runs second, part
+  of the measured cold-start delta may be run-order or warm-cache warmth rather
+  than a preset effect. Repeatability under one fixed order does not prove
+  order-robustness. See
+  `experiments/cold-start-order-cache-confound-plan.md` (proposed 2026-06-23).
 - Sustained tok/s is single-stream only; scheduler tweaks mostly pay off
   under concurrency, which is unmeasured (acknowledged in the action plan).
 - The Ollama model, quantization, and version are recorded only in
@@ -317,8 +322,21 @@ three results worth recording:
    capture (applied to the harness). This makes idle power a usable selection
    channel after all — once measured correctly.
 
+9. **Cold-start order/page-cache confound — open, highest-leverage validity gap (2026-06-23).**
+   Item 7 established cold-start as the project's most reliable signal (CV 0.002),
+   but all six noise-floor runs used the same fixed order (baseline first, tuned
+   second) and did not record page-cache state. That measures repeatability of a
+   potentially confounded quantity, not order-robustness. A dedicated
+   counterbalance + cache-control experiment is proposed in
+   `experiments/cold-start-order-cache-confound-plan.md`. Until it runs, treat
+   cold-start magnitude as **repeatable but not yet order-robust** for acceptance
+   decisions.
+
 ## 6. What this changes for decisions
 
+- Cold-start is repeatable (CV 0.002) but **not yet order-robust** (§5 item 9).
+  Run the counterbalance/cache-control experiment before treating magnitude as
+  acceptance-grade.
 - Marketing/README numbers should keep the "WAN simulation" qualifier
   prominently; "network throughput +5xx%" without scope is overclaiming.
 - The v0.9 screen verdict logic (analyzer) is sound, but its power term

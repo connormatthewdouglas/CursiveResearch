@@ -4,6 +4,48 @@ This file records meaningful changes to research guidance, validation status,
 and corpus process. It is intended to be readable without reconstructing a
 chain of supporting documents.
 
+## 2026-06-23 - Corpus Cleanup Pass
+
+Changed:
+- `RESEARCH_PIPELINE.md` §3 Experimental Lift: added rows for the cold-start
+  order/page-cache confound test and the idle-power selection-channel validation
+  plan (both were merged without pipeline entries); updated the seed-organism
+  screen row to reflect current parent/candidate work (v0.9c, v0.10-zram).
+- `VALIDATION.md`: consolidated the duplicate Chapter 01 TCP-buffer flags
+  (2026-06-22 broad + 2026-06-23 narrow) into a single row referencing both
+  evidence notes.
+- `CHANGELOG.md`: restored the orphan Goodhart subsection entry (missing `##`
+  header from a prior union merge); backfilled the missing order-cache confound
+  entry; fixed section spacing in recent entries.
+- `chapters/13-main-repo-gap-closure-and-research-backlog.md`: repo is public,
+  not private.
+- `chapters/16-benchmark-schema-and-measurement-validity.md` §2.3, §5, §6: linked
+  the open fixed-order/page-cache confound to
+  `experiments/cold-start-order-cache-confound-plan.md`; softened cold-start
+  from "acceptance-grade" to "repeatable but not yet order-robust."
+- `VALIDATION.md`: added Chapter 16 cold-start order-robustness row (Supported).
+
+Reason:
+- Post-consolidation hygiene pass: close workflow gaps left by the 11-branch
+  merge, remove redundant validation rows, and cross-link the highest-leverage
+  open measurement question (cold-start order confound) where the corpus already
+  names the risk.
+
+## 2026-06-23 - Experiment Proposed: Cold-Start Order / Page-Cache Confound
+
+Changed:
+- Added `experiments/cold-start-order-cache-confound-plan.md`: a pre-registered
+  test of whether the −51% Arc cold-start win is partly a baseline-first /
+  tuned-second run-order or warm-page-cache artifact. Three arms (replicate,
+  counterbalanced, cache-controlled); pre-registered decision thresholds.
+- Linked from Chapter 16 §2.3 and §5 (cleanup pass).
+
+Reason:
+- Cold-start is the only selection-grade channel (CV 0.002), yet every paired
+  screen runs baseline then tuned and does not record page-cache state. Repeatable
+  under one fixed order ≠ order-robust. This is the cheapest falsifier before any
+  further acceptance decision rests on cold-start magnitude.
+
 ## 2026-06-20 - Experiment Proposed: Proposer vs Random Search
 
 Added:
@@ -24,6 +66,7 @@ Reason:
   recent network result (the whole win was one sysctl) and the inert GPU pin
   show exactly the failure mode this would catch. The 2026-06-16 noise floor is
   the missing input that finally makes the test powered and worth running.
+
 ## 2026-06-20 - Adversarial Review: Flagged Chapter 02 TDX Bus-Attack Claim
 
 Changed:
@@ -51,6 +94,7 @@ Reason:
   effectively Disproven; the oracle problem must rest on the project's own
   non-TEE defenses (population confirmation, fingerprint cross-checks, anomaly
   detection, economic slashing), not on TEE bus integrity.
+
 ## 2026-06-20 - Containment Primitive Characterization for Unattended Execution
 
 Changed:
@@ -81,6 +125,7 @@ Reason:
   systems fail under privilege?". The prior chapter text only listed these
   primitives; the corpus lacked a property-level basis for choosing among them
   before enabling unattended host mutation.
+
 ## 2026-06-21 - Cold-Start Mechanism + Hardware-Scoping Experiment Proposed
 
 Changed:
@@ -103,6 +148,7 @@ Reason:
   preset claim"; this experiment is the cheapest path to both the causal knob
   and a predictor, reusing the factorial-decomposition discipline that already
   paid off on the network thread (§5.6).
+
 ## 2026-06-21 - Red-Team Flag: Covenant-72B "GPT-4-class" Claim Overstated (Chapter 02)
 
 Changed:
@@ -129,6 +175,7 @@ Reason:
   evidence. (For contrast, the chapter's "BBR ... 2700x faster than CUBIC"
   figure was checked and found to be Google's own published benchmark, so it was
   not flagged.)
+
 ## 2026-06-22 - Experiment Plan: Idle-Power Selection-Channel Validation
 
 Changed:
@@ -146,6 +193,7 @@ Reason:
   is true in the path operators actually run, on more than one machine. The plan
   also ships the §3 item-1 `power_source` field as a side effect and keeps the
   §2.2 cross-machine pooling bar explicit (H3).
+
 ## 2026-06-22 - Red-Team Flag: Ch01 Static-Buffer "Universal Gap" Thesis Overstated
 
 Changed:
@@ -185,6 +233,7 @@ Reason:
   rather than edited per CORPUS_WORKFLOW.md §3 because the wording is canon
   headed into an outward-facing document and the reconciliation is a maintainer
   decision.
+
 ## 2026-06-22 - New Chapter 17: Mutation Safety and Permission Law
 
 Changed:
@@ -212,6 +261,7 @@ Reason:
   host under a probabilistic agent. This closes the highest-value, well-sourced
   research gap and moves the corpus from "we have the pieces" to a single
   enforceable rulebook for self-mutation.
+
 ## 2026-06-22 - Chapter 15: Autopoiesis / Artificial-Life Grounding of the Organism Framing
 
 Changed:
@@ -242,6 +292,7 @@ Reason:
   open-ended improvement is unproven even in purpose-built ALife systems, so
   plateaus should be expected and designed for. Sources cited are those actually
   retrieved via web search (2026-06-22); no full-text paper mirroring.
+
 ## 2026-06-23 - Red-Team Flag: Chapter 01 §2.1 TCP-buffer claim challenged
 
 Changed:
@@ -333,7 +384,7 @@ Reason:
   The hooks let automated contribution continue safely; the daily encrypted
   backup remains the last-resort net.
 
-
+## 2026-06-16 - Chapter 15 Goodhart's Law Deep-Dive (Grok)
 
 Changed:
 - Added a substantial new subsection to Chapter 15 (`chapters/15-foundations-of-software-organisms-rsi-critical-synthesis.md`) on Goodhart's Law, reward hacking mechanisms, benchmark overfitting, and robust fitness design patterns specifically for software organisms and CursiveOS measurement/selection loops.
