@@ -37,6 +37,16 @@ Git blob SHA: 726912342c92bec12771ffcf36db5ecf8231033d
 
 # GPU and Accelerator Tuning
 
+## Corpus integration notes (2026-06-24)
+
+Targeted narrowing for the DOCX import below — do not promote import magnitudes without Ch00 harness validation on the target hardware class (Ch08 §3).
+
+1. **Arc A750 GPU frequency pin (v0.8):** Phase D probe measured ~0 W idle and ~0 cold-start contribution (Ch00 §5 items 1, 8). v0.9 drops the pin on parsimony, not measured power savings.
+2. **Total GPU power:** v1.4.3 reads Arc `hwmon4/energy1_input` (~37 W idle); use CPU+GPU package for power claims. Cross-machine pooling needs `power_source` in structured output (VALIDATION Ch00 row).
+3. **sched_ext / SchedCP:** Corpus intake `papers/recursive-self-improvement/schedcp/` (Zheng et al., arXiv:2509.01245, 2025) — MCP control plane + execution verifier pattern. Requires Ch06 class-4 gates before unattended deploy; sustained-inference channel remains signal<noise on current harness (Ch00 §5 item 7).
+4. **SR-IOV / Polaris / Arc tables:** Mechanism and experiment backlog only — run `experiments/gpu-accelerator-tuning-validation-plan.md` before fleet preset promotion.
+5. **Intel Arc driver (2025):** Battlemage Xe2 via i915/Xe + Level Zero — workstation path documented in Ch18; B70 claims need local benchmark plan reproduction.
+
 ## Comprehensive Systems Optimization for Heterogeneous Workloads: Kernel Tuning, Power Scaling, and GPU Multiplexing in 2026
 
 The operational landscape of 2026 is characterized by a profound shift toward localized high-performance computing, driven by the dual demands of decentralized cryptographic validation and local large language model (LLM) inference. The Linux kernel, serving as the primary orchestration layer for these workloads, has undergone significant architectural evolution to accommodate the distinct resource profiles required by these tasks. While cryptographic mining emphasizes sustained, high-throughput compute cycles and memory bandwidth, LLM inference is characterized by extreme sensitivity to tail latency, requiring rapid "Time to First Token" (TTFT) and consistent inter-token latency (ITL). To optimize a single system for these often-conflicting objectives, a nuanced application of reversible kernel tweaks is necessary. This report evaluates the state of kernel-level performance tuning, focusing on the hardware-specific optimizations for AMD Polaris and Intel Arc architectures, the implementation of Single Root I/O Virtualization (SR-IOV) for GPU multiplexing, and the critical adjustments to the memory subsystem through hugepage management and Non-Uniform Memory Access (NUMA) balancing.

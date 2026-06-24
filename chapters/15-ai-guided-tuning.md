@@ -32,10 +32,24 @@ Historical note: import text references **TAO-Forge**; current names are Cursive
 
 ## Reinforced research (2026-06-24)
 
-- **Proposer value test:** experiments/proposer-vs-random-tuning-experiment.md + STOP/CodeEvolve/SchedCP intakes â€” CH05-BM-002 still **Unvalidated**.
-- **BranchFS rollback:** papers/recursive-self-improvement/branchfs-fec â€” aligns with reversible preset design (Ch01 organism loop).
+- **Proposer value test:** `experiments/proposer-vs-random-tuning-experiment.md` — CH05-BM-002 still **Unvalidated**; import 5–25% claims not locally reproduced.
+- **SchedCP (2025):** Zheng et al., arXiv:2509.01245 — `papers/recursive-self-improvement/schedcp/`; MCP + execution verifier; kernel ≥6.12 sched_ext.
+- **OS-R1 (2025):** Lin et al., arXiv:2508.12551 — `papers/recursive-self-improvement/os-r1/`; rule-based RL rewards for valid kernel configs.
+- **SemaTune:** `papers/recursive-self-improvement/sematune/` — online tuning pattern; Ch06 permission law before deployment.
+- **BranchFS rollback:** `papers/recursive-self-improvement/branchfs-fec/` — transactional branches align with Ch01 reversible presets.
+- **Verifier pattern:** AlphaEvolve, CodeEvolve, FunSearch intakes (Ch03) — external measurement daemon must judge improvements, not the proposer LLM.
 
 # AI-Guided Tuning
+
+## Corpus integration notes (2026-06-24)
+
+Targeted narrowing for the DOCX import below. TAO-Forge references in the import map to **CursiveOS / CursiveRoot**.
+
+1. **Performance magnitudes (5–25%, 1.79×, ranking table):** Import survey claims — **Unvalidated** on CursiveOS harness. Run `experiments/proposer-vs-random-tuning-experiment.md` before trusting proposer over random search (CH05-BM-002).
+2. **Continuous always-on tuning:** Disproven safe for current local agent stack (VALIDATION Ch18 unattended execution). Online agents (Liargkovas et al., NeurIPS ML-Systems 2025 workshop) require MCP commit/revert + Ch06 containment before production.
+3. **Daemon/shell boundary:** Tuning agents may *propose* presets; only the measurement daemon may write sensor truth to CursiveRoot (Ch05). Shell LLM must not grade its own mutations.
+4. **Paper intakes aligned to import systems:** SchedCP, OS-R1, SemaTune, BranchFS — see `papers/recursive-self-improvement/` and Ch03 cross-link table.
+5. **Selection-grade channel:** Cold-start (CV 0.002 on Stardust) is the current highest-confidence tuning target; network magnitude is not quoteable (Ch00/Ch09).
 
 5. Ai guided Linux tuning Executive Summary
 

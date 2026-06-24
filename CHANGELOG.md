@@ -4,6 +4,19 @@ This file records meaningful changes to research guidance, validation status,
 and corpus process. It is intended to be readable without reconstructing a
 chain of supporting documents.
 
+## 2026-06-24 - Body-Level Corpus Integration (Ch13–15)
+
+Changed:
+- **Chapters 13–15:** added `## Corpus integration notes (2026-06-24)` inside chapter
+  bodies (between title and DOCX import) with targeted narrowing rules, paper
+  intake cross-refs, and harness/VALIDATION constraints — not header-only blocks.
+- **Chapter 15:** expanded reinforced block (SchedCP, OS-R1, SemaTune, verifier
+  pattern); fixed mojibake in reinforced bullets.
+
+Reason:
+- Verification requirement: reinforcements must appear inside pre-existing chapter
+  bodies, including mandatory Ch14/Ch15 samples.
+
 ## 2026-06-24 - Full Chapter Reinforcement Pass (Living Layers + Topic Sources)
 
 Changed:

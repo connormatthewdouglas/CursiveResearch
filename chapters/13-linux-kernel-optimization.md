@@ -36,6 +36,15 @@ Git blob SHA: e54cb50b4cfaa93aedbf07f50f4a5dbd7bf8c51e
 
 # Linux Kernel Optimization
 
+## Corpus integration notes (2026-06-24)
+
+Targeted narrowing for the import below. Phoronix percentages are **leads**, not CursiveOS-validated magnitudes.
+
+1. **BBR preset:** Validated on real ≤1GbE lossy path via Ch00/Ch09 — dominant win is CUBIC→BBR, not buffer ceiling. Not every sysctl here is in the active v0.9 preset stack.
+2. **sched_ext tail-latency claims:** sched_ext merged in kernel 6.12; SchedCP intake `papers/recursive-self-improvement/schedcp/` documents MCP + verifier pattern. Sustained-inference harness channel still signal<noise (Ch00 §5 item 7) — concurrent-load benchmark still required.
+3. **AES-CTR / fscrypt speedups:** Plausible for encrypted model load paths; measure cold-start channel with `page_cache_state` logged (Ch00 §3) before fleet claims.
+4. **Permission gates:** Class 4–5 mutations (eBPF, sched_ext policies) require Ch06 approval before unattended deployment.
+
 ## Linux kernel optimizations that actually move the needle for GPU inference
 
 **The most impactful 2025–2026 kernel changes for GPU inference on AMD Ryzen and Intel Arc come from three unexpected places: the crypto subsystem, the new extensible scheduler framework, and memory management plumbing.** Eric Biggers' sustained AES rewrite campaign [Phoronix](https://www.phoronix.com/news/3.3x-AES-CTR-AMD-Zen-5-Patches) delivers up to **3.3× faster encrypted model loading** on AMD Zen 5. [Phoronix](https://www.phoronix.com/forums/forum/phoronix/latest-phoronix-articles/1524195-new-linux-patches-yield-up-to-3-3x-faster-aes-ctr-performance-on-amd-zen-5-cpus) The sched_ext framework, merged in kernel 6.12, enables custom BPF schedulers that cut tail latency by 75%. And a quiet series of ZRAM and GPU shared virtual memory patches fundamentally change how inference workloads manage memory pressure. Together, these changes span kernels 6.10 through 7.0 and represent a step-function improvement for anyone running local LLM inference on consumer AMD or Intel hardware.
