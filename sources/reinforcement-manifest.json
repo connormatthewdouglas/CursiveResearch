@@ -1,0 +1,109 @@
+{
+  "version": "2026-06-24",
+  "inline_marker_prefix": "> **Corpus inline (2026-06-24):**",
+  "chapters": [
+    {
+      "id": "00",
+      "file": "00-benchmark-schema-and-measurement-validity.md",
+      "skip_if_inline_present": true,
+      "anchor": "That chain is only as strong as the measurement at its base.",
+      "inline": "> **Corpus inline (2026-06-24):** Loopback +246% stack-delta is **not** transferable WAN evidence (Ch09); dominant ≤1GbE win is CUBIC→BBR (Cardwell et al. 2017). Cold-start magnitudes are hardware-scoped (Ch00 §5 item 5; Ch08)."
+    },
+    {
+      "id": "01",
+      "file": "01-seed-organism-and-sensor-array.md",
+      "anchor": "The main `CursiveOS` repo already answers this gap: the seed organism is not a metaphorical future plan. It is a concrete Phase 0 loop built around reversible presets, paired measurement, CursiveRoot submission, sensor evaluation, and candidate selection.",
+      "inline": "> **Corpus inline (2026-06-24):** Fleet N-rule and CV escalation are formalized in **Ch08**; population confirmation requires Ch11 hardware fingerprints — magnitudes from kernel/GPU chapters remain hardware-scoped until Ch00 harness confirms."
+    },
+    {
+      "id": "02",
+      "file": "02-bitcoin-native-economics-and-proof-of-useful-optimization.md",
+      "anchor": "The live CursiveOS design is not a token model. It is Bitcoin-native, contributor-fitness-based, and sensor-driven.",
+      "inline": "> **Corpus inline (2026-06-24):** Ch21 DePIN token models are **comparison only** — Layer 5 v3.3 (this chapter) is authoritative for product. Payout rails remain **Unvalidated** until deployed; fitness must trace to Ch00-validated sensors."
+    },
+    {
+      "id": "03",
+      "file": "03-rsi-literature-and-organism-synthesis.md",
+      "anchor": "The strongest demonstrated systems use language models or reinforcement learning to propose candidate programs, policies, or skills, then rely on an external evaluator to decide whether a change is useful.",
+      "inline": "> **Corpus inline (2026-06-24):** **Merged Ch03+Ch04 (2026-06-24):** Part A = paper digest + 25 `papers/` intakes; Part B = uploaded organism framework (definitions, ALife, failure modes). Unbounded RSI / fast-takeoff narratives remain **unsupported** by cited literature."
+    },
+    {
+      "id": "05",
+      "file": "05-measurement-daemon-and-natural-language-shell.md",
+      "anchor": "This separation is load-bearing. It preserves the integrity of the organism's fitness ledger while still allowing a powerful local agent interface for human operators.",
+      "inline": "> **Corpus inline (2026-06-24):** Shell implementation **Unvalidated**; evaluation must follow SWE-bench/OSWorld execution patterns (papers intakes). Proposer/shell may suggest mutations — **only the measurement daemon writes CursiveRoot sensor truth** (Ch06 gates)."
+    },
+    {
+      "id": "06",
+      "file": "06-mutation-safety-and-permission-law.md",
+      "anchor": "The danger is not only an intruder but the organism corrupting itself or its measurement substrate.",
+      "inline": "> **Corpus inline (2026-06-24):** Ch16 external hardening is **not** sufficient for self-mutation. Class 4–6 mutations (eBPF, kernel, firmware) require staged rollback + Ch00 regression sensors before fleet deploy."
+    },
+    {
+      "id": "07",
+      "file": "07-main-repo-gap-closure.md",
+      "anchor": "After reviewing the main `CursiveOS` repo, several of those gaps are no longer empty.",
+      "inline": "> **Corpus inline (2026-06-24):** **Split from former Ch07 (2026-06-24):** this file = gap-closure status (Gaps 1–5). Research backlog and pipeline priorities → **Ch07b**. Repo is public as of 2026-06-23."
+    },
+    {
+      "id": "07b",
+      "file": "07b-research-backlog-and-pipeline.md",
+      "anchor": "Based on the main repo, the highest-value new research expansions are now:",
+      "inline": "> **Corpus inline (2026-06-24):** **Split from former Ch07 (2026-06-24):** tracks `RESEARCH_PIPELINE.md` experimental lift — cold-start confound, proposer-vs-random (CH05-BM-002), idle-power channel. Runnable scripts graduate to main `CursiveOS` repo per CORPUS_WORKFLOW."
+    },
+    {
+      "id": "13",
+      "file": "13-linux-kernel-optimization.md",
+      "anchor": "**The most impactful 2025–2026 kernel changes for GPU inference on AMD Ryzen and Intel Arc come from three unexpected places: the crypto subsystem, the new extensible scheduler framework, and memory management plumbing.**",
+      "inline": "> **Corpus inline (2026-06-24):** Phoronix percentage claims (3.3× AES, 75% sched_ext latency) are **Unvalidated** on CursiveOS harness — treat as experiment leads. BBR preset win is **Validated** per Ch00/Ch09; sched_ext requires Ch06 class-4 gates."
+    },
+    {
+      "id": "14",
+      "file": "14-gpu-and-accelerator-tuning.md",
+      "skip_if_inline_present": true
+    },
+    {
+      "id": "15",
+      "file": "15-ai-guided-tuning.md",
+      "skip_if_inline_present": true
+    },
+    {
+      "id": "16",
+      "file": "16-security-and-hardening.md",
+      "anchor": "**Defense-in-depth is no longer optional for mining rigs and AI inference nodes.**",
+      "inline": "> **Corpus inline (2026-06-24):** External-threat hardening (this import) ≠ organism self-mutation law (**Ch06**). TEE/bus attestation **Disproven** as CursiveOS oracle (Ch20); use Ch01–11 population confirmation + Ch11 fingerprints."
+    },
+    {
+      "id": "17",
+      "file": "17-firmware-and-bios-control.md",
+      "anchor": "Therefore, CursiveOS should eventually include a firmware control layer.",
+      "inline": "> **Corpus inline (2026-06-24):** Firmware mutation is **class 6–7** per Ch06 — API-gated staging (Redfish/fwupd) only; blind BIOS menu automation rejected. Platform-specific magnitudes **Unvalidated** until measured rollback on target hardware."
+    },
+    {
+      "id": "18",
+      "file": "18-local-agent-arc-b70.md",
+      "skip_if_inline_present": true
+    },
+    {
+      "id": "19",
+      "file": "19-first-principles-and-strategy.md",
+      "skip_if_inline_present": true
+    },
+    {
+      "id": "20",
+      "file": "20-market-and-viability.md",
+      "skip_if_inline_present": true
+    },
+    {
+      "id": "21",
+      "file": "21-tokenomics-and-incentives.md",
+      "anchor": "The most resilient DePIN tokenomics in 2026 converge on a common pattern:",
+      "inline": "> **Corpus inline (2026-06-24):** **Superseded for CursiveOS product** — Ch02 Layer 5 v3.3 is authoritative (no custom token). This import is DePIN comparison only; refresh subnet/APY tables before investor use."
+    },
+    {
+      "id": "22",
+      "file": "22-research-master.md",
+      "skip_if_inline_present": true
+    }
+  ]
+}

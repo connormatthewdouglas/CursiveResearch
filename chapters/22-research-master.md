@@ -8,7 +8,7 @@ Git blob SHA: 081d0d5e31f2f3f8d3230e9c8db0ece7e50456f1
 
 **Last reconciled:** 2026-06-24
 **Confidence:** Historical snapshot (March 2026); superseded for architecture and measurement
-**Read with:** [INDEX.md](../INDEX.md) reading path; [Chapter 07](07-main-repo-gap-closure-and-research-backlog.md) for current gaps; Chapters 01–12 for organism, economics, and agent architecture
+**Read with:** [INDEX.md](../INDEX.md) reading path; [Chapter 07](07-main-repo-gap-closure.md) + [Chapter 07b](07b-research-backlog-and-pipeline.md) for current gaps; Chapters 01–12 for organism, economics, and agent architecture
 
 This file is a **point-in-time repo observation log** from March 2026. It is useful for understanding how the project looked during the TAO-OS → CursiveOS rebrand and early CursiveRoot schema work. It is **not** the current architecture spec.
 
@@ -49,6 +49,8 @@ This file is a **point-in-time repo observation log** from March 2026. It is use
 Block 1:
 
 ### GitHub Repo State – CursiveOS (formerly TAO-OS) – 26 March 2026
+
+> **Corpus inline (2026-06-24):** March 2026 commit list below is **historical audit only**. Current harness/schema: main `CursiveOS` repo + **Ch00**. Measurement canon (BBR, noise floor, cold-start) migrated to Ch00/VALIDATION — do not cite unscoped deltas from this block externally.
 
 Repo URL: https://github.com/connormatthewdouglas/TAO-OS (now redirects / contains CursiveOS rebrand; official rename complete per commit e660e46).
 

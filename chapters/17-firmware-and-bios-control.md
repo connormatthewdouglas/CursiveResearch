@@ -37,7 +37,11 @@ Status: Original synthesis; requires platform validation. This chapter is not a 
 
 The recent CursiveOS architecture revelation is simple but important: a truly self-optimizing compute system cannot stop at userspace, services, sysctl, drivers, and kernel parameters. Some of the highest-leverage performance and reliability decisions are made before the operating system exists. Firmware initializes DRAM, enumerates PCIe, exposes CPU and device capabilities, configures Secure Boot state, defines boot targets, constructs ACPI/SMBIOS/UEFI tables, and decides which hardware topology Linux receives.
 
-Therefore, CursiveOS should eventually include a firmware control layer. The correct design is not an agent blindly opening BIOS menus. The correct design is a controlled subsystem, here named `CursiveFirmware`, that can discover firmware capabilities, stage firmware mutations, reboot into a trial state, measure the result, and record the outcome in CursiveRoot.
+Therefore, CursiveOS should eventually include a firmware control layer.
+
+> **Corpus inline (2026-06-24):** Firmware mutation is **class 6–7** per Ch06 — API-gated staging (Redfish/fwupd) only; blind BIOS menu automation rejected. Platform-specific magnitudes **Unvalidated** until measured rollback on target hardware.
+
+ The correct design is not an agent blindly opening BIOS menus. The correct design is a controlled subsystem, here named `CursiveFirmware`, that can discover firmware capabilities, stage firmware mutations, reboot into a trial state, measure the result, and record the outcome in CursiveRoot.
 
 The core conclusion:
 

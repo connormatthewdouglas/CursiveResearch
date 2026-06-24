@@ -49,6 +49,8 @@ scheduler/eBPF, kernel, firmware) under the direction of a probabilistic agent.
 The danger is not only an intruder but the organism corrupting itself or its
 measurement substrate. This chapter is the missing rulebook for that risk.
 
+> **Corpus inline (2026-06-24):** Ch16 external hardening is **not** sufficient for self-mutation. Class 4–6 mutations (eBPF, kernel, firmware) require staged rollback + Ch00 regression sensors before fleet deploy.
+
 ## 1. The self-mutation threat model
 
 A self-improving system that can change the machine it runs on collapses the

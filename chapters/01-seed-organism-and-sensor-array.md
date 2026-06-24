@@ -37,6 +37,8 @@ The research corpus had strong chapters on firmware control, kernel tuning, GPU/
 
 The main `CursiveOS` repo already answers this gap: the seed organism is not a metaphorical future plan. It is a concrete Phase 0 loop built around reversible presets, paired measurement, CursiveRoot submission, sensor evaluation, and candidate selection.
 
+> **Corpus inline (2026-06-24):** Fleet N-rule and CV escalation are formalized in **Ch08**; population confirmation requires Ch11 hardware fingerprints — magnitudes from kernel/GPU chapters remain hardware-scoped until Ch00 harness confirms.
+
 ## Current Seed Organism State
 
 The main repo describes CursiveOS as a measurement-first Linux optimization layer for local compute, with two current core audiences: decentralized compute/mining operators and local AI/LLM users. Its current operational loop benchmarks a host, applies reversible presets, benchmarks again, reports the measured delta, and reverts automatically unless the operator chooses otherwise.

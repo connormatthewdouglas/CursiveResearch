@@ -50,7 +50,9 @@ CursiveOS Layer 5 v3.3 is **Bitcoin-native**: no custom token, no yield pool, no
 
 4. Research the best DePIN tokenomics models in 2026 from Helium Render io.net Bittensor and any new projects. Compare their incentive engines reward vaults burn mechanisms and demand-driven emissions. Highlight what worked what failed and recommend a hybrid model that fits our data-contribution → optimization-reward loop without high inflation risk.
 
-The most resilient DePIN tokenomics in 2026 converge on a common pattern: usage-priced in fiat or stable credits, strong buy-and-burn from real revenue, capped or sharply declining emissions, and rewards that are at least partly demand- or performance-weighted rather than purely time-based inflation.[1][2][3] Helium, Render, io.net, and Bittensor each implement pieces of this, while Hivemapper and Grass illustrate both improvements and failure modes; a hybrid model for your “data-contribution → optimization → reward” loop should combine Helium/Render-style burn-and-mint, io.net-style USD-denominated payouts with protocol-level burn, and Bittensor-style performance- and flow-weighted emissions, all under a strict net-emission budget.
+The most resilient DePIN tokenomics in 2026 converge on a common pattern: usage-priced in fiat or stable credits, strong buy-and-burn from real revenue, capped or sharply declining emissions, and rewards that are at least partly demand- or performance-weighted rather than purely time-based inflation.[1][2][3]
+
+> **Corpus inline (2026-06-24):** **Superseded for CursiveOS product** — Ch02 Layer 5 v3.3 is authoritative (no custom token). This import is DePIN comparison only; refresh subnet/APY tables before investor use. Helium, Render, io.net, and Bittensor each implement pieces of this, while Hivemapper and Grass illustrate both improvements and failure modes; a hybrid model for your “data-contribution → optimization → reward” loop should combine Helium/Render-style burn-and-mint, io.net-style USD-denominated payouts with protocol-level burn, and Bittensor-style performance- and flow-weighted emissions, all under a strict net-emission budget.
 
 ***
 

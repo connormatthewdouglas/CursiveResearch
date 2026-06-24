@@ -4,6 +4,18 @@ This file records meaningful changes to research guidance, validation status,
 and corpus process. It is intended to be readable without reconstructing a
 chain of supporting documents.
 
+## 2026-06-24 - Structural Org: Ch03+Ch04 Merge, Ch07 Split, Inline Body Reinforcement
+
+Changed:
+- **Merged Ch03+Ch04** → `chapters/03-rsi-literature-and-organism-synthesis.md` (Part A literature digest + Part B organism framework); deleted `04-foundations-of-software-organisms-rsi-critical-synthesis.md`.
+- **Split Ch07** → `07-main-repo-gap-closure.md` (Gaps 1–5) + `07b-research-backlog-and-pipeline.md` (backlog/pipeline); deleted `07-main-repo-gap-closure-and-research-backlog.md`.
+- **Inline reinforcement:** `sources/reinforcement-manifest.json` + `tools/apply-reinforcement-manifest.ps1`; Corpus inline blocks inserted in body paragraphs of all 18 original chapter files (below reinforced headers).
+- **Verification gates:** `tools/verification-contract.json` `acceptance_gates` (baseline commit, merge/split file checks, per-original inline minimum); `run-verification.ps1` emits `MODIFIED FILES` from `git diff`.
+- `INDEX.md`, `sources/corpus-organization-decisions-2026-06-24.md`, `REINFORCEMENT_LOG.md`, `RESEARCH_PIPELINE.md` updated for merge/split.
+
+Reason:
+- Skeptic gap closure: execute RSI overlap merge (not document-only), split multi-topic Ch07, auditable in-body reinforcement on every original chapter, honest changed-files evidence.
+
 ## 2026-06-24 - Inline DOCX Reinforcement + Verification Harness Fix
 
 Changed:

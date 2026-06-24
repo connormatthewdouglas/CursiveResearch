@@ -161,6 +161,8 @@ For several years, Intel SGX (Software Guard Extensions) was the standard for Tr
 
 In response, TAO-OS facilitates a strategic migration toward Intel TDX (Trust Domain Extensions) and NVIDIA Confidential Computing (CC). TDX, built for the DDR5 era, is hardened against physical bus-level attacks and enables secure virtual machine isolation with minimal overhead. By integrating with Intel Trust Authority—a zero-trust attestation SaaS—TAO-OS allows nodes to independently verify the integrity of their compute environments to remote validators.
 
+> **Corpus inline (2026-06-24):** TDX "hardened against physical bus-level attacks" is **Disproven** for operator physical-access oracle threat model (`validation/notes/2026-06-20-ch02-tdx-bus-attack-resistance-challenge.md`). CursiveOS oracle defense: Ch01–11 population confirmation + Ch11 fingerprints — not TEE bus integrity alone.
+
 | Attestation Feature | SGX (Legacy) | TDX (Next-Gen) | TAO-OS Implementation |
 | --- | --- | --- | --- |
 | Integrity Protection | Enclave-based | TD Partition-based | Memory Isolation |

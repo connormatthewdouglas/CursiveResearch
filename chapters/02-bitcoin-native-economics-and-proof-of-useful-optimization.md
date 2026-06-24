@@ -36,6 +36,8 @@ The research corpus previously contained a broad tokenomics chapter comparing De
 
 The live CursiveOS design is not a token model. It is Bitcoin-native, contributor-fitness-based, and sensor-driven.
 
+> **Corpus inline (2026-06-24):** Ch21 DePIN token models are **comparison only** — Layer 5 v3.3 (this chapter) is authoritative for product. Payout rails remain **Unvalidated** until deployed; fitness must trace to Ch00-validated sensors.
+
 This chapter turns that design into corpus guidance.
 
 ## Core conclusion

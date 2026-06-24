@@ -108,6 +108,44 @@ if ($inlineCount -lt $contract.marker_expectations.docx_chapters_inline_minimum)
     Fail "Inline marker count $inlineCount < $($contract.marker_expectations.docx_chapters_inline_minimum)"
 }
 
+# --- Acceptance gates (plan criteria 1-2) ---
+if ($contract.acceptance_gates) {
+    $gates = $contract.acceptance_gates
+    $mergedPath = Join-Path $RepoRoot "chapters\$($gates.merged_rsi_file)"
+    if (-not (Test-Path $mergedPath)) {
+        Fail "Merged RSI file missing: $($gates.merged_rsi_file)"
+    }
+    $deletedRsi = Join-Path $RepoRoot "chapters\$($gates.deleted_rsi_file)"
+    if (Test-Path $deletedRsi) {
+        Fail "Deleted RSI file still present: $($gates.deleted_rsi_file)"
+    }
+    $splitGap = Join-Path $RepoRoot "chapters\$($gates.split_gap_file)"
+    $splitBacklog = Join-Path $RepoRoot "chapters\$($gates.split_backlog_file)"
+    if (-not (Test-Path $splitGap)) { Fail "Split gap file missing: $($gates.split_gap_file)" }
+    if (-not (Test-Path $splitBacklog)) { Fail "Split backlog file missing: $($gates.split_backlog_file)" }
+    $deletedGap = Join-Path $RepoRoot "chapters\$($gates.deleted_combined_gap_file)"
+    if (Test-Path $deletedGap) {
+        Fail "Combined gap file still present: $($gates.deleted_combined_gap_file)"
+    }
+
+    foreach ($origFile in $gates.original_chapter_files) {
+        $origPath = Join-Path $RepoRoot "chapters\$origFile"
+        if (-not (Test-Path $origPath)) {
+            Fail "Original chapter file missing: $origFile"
+        }
+        $origContent = Get-Content $origPath -Raw
+        $reinforcedIdx = $origContent.IndexOf($contract.markers.reinforced_research)
+        if ($reinforcedIdx -lt 0) {
+            Fail "$origFile missing reinforced research block"
+        }
+        $bodyAfterReinforced = $origContent.Substring($reinforcedIdx)
+        $inlineInBody = ([regex]::Matches($bodyAfterReinforced, [regex]::Escape($contract.markers.corpus_inline))).Count
+        if ($inlineInBody -lt $gates.min_corpus_inline_per_original) {
+            Fail "$origFile has $inlineInBody corpus inline below reinforced block; need >= $($gates.min_corpus_inline_per_original)"
+        }
+    }
+}
+
 # --- Contract passed: emit evidence ---
 $scriptPath = $PSCommandPath
 $contractHash = (Get-FileHash $contractPath -Algorithm SHA256).Hash
@@ -225,9 +263,29 @@ $sb5 = New-Object System.Text.StringBuilder
 [void]$sb5.AppendLine('Recent commits:')
 git log -5 --oneline | ForEach-Object { [void]$sb5.AppendLine("  $_") }
 [void]$sb5.AppendLine('')
-[void]$sb5.AppendLine('Uncommitted:')
-$st = git status --short
-if ($st) { $st | ForEach-Object { [void]$sb5.AppendLine($_) } } else { [void]$sb5.AppendLine('  (clean)') }
+$baseline = $contract.acceptance_gates.goal_baseline_commit
+if ($baseline) {
+    [void]$sb5.AppendLine("MODIFIED FILES (git diff --name-status $baseline..HEAD):")
+    $diffNames = git diff --name-status $baseline..HEAD 2>$null
+    if ($diffNames) {
+        $diffNames | ForEach-Object { [void]$sb5.AppendLine("  $_") }
+    } else {
+        [void]$sb5.AppendLine('  (no committed changes since baseline)')
+    }
+    [void]$sb5.AppendLine('')
+}
+[void]$sb5.AppendLine('Uncommitted (git diff --name-only):')
+$uncommitted = git diff --name-only 2>$null
+$untracked = git ls-files --others --exclude-standard 2>$null
+if ($uncommitted) {
+    $uncommitted | ForEach-Object { [void]$sb5.AppendLine("  M $_") }
+}
+if ($untracked) {
+    $untracked | ForEach-Object { [void]$sb5.AppendLine("  ?? $_") }
+}
+if (-not $uncommitted -and -not $untracked) {
+    [void]$sb5.AppendLine('  (clean)')
+}
 Pop-Location
 $sb5.ToString() | Set-Content (Join-Path $ScratchDir 'changed-files-evidence.txt') -Encoding UTF8
 

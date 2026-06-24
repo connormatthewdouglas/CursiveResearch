@@ -47,7 +47,11 @@ Targeted narrowing for the import below. Phoronix percentages are **leads**, not
 
 ## Linux kernel optimizations that actually move the needle for GPU inference
 
-**The most impactful 2025–2026 kernel changes for GPU inference on AMD Ryzen and Intel Arc come from three unexpected places: the crypto subsystem, the new extensible scheduler framework, and memory management plumbing.** Eric Biggers' sustained AES rewrite campaign [Phoronix](https://www.phoronix.com/news/3.3x-AES-CTR-AMD-Zen-5-Patches) delivers up to **3.3× faster encrypted model loading** on AMD Zen 5. [Phoronix](https://www.phoronix.com/forums/forum/phoronix/latest-phoronix-articles/1524195-new-linux-patches-yield-up-to-3-3x-faster-aes-ctr-performance-on-amd-zen-5-cpus) The sched_ext framework, merged in kernel 6.12, enables custom BPF schedulers that cut tail latency by 75%. And a quiet series of ZRAM and GPU shared virtual memory patches fundamentally change how inference workloads manage memory pressure. Together, these changes span kernels 6.10 through 7.0 and represent a step-function improvement for anyone running local LLM inference on consumer AMD or Intel hardware.
+**The most impactful 2025–2026 kernel changes for GPU inference on AMD Ryzen and Intel Arc come from three unexpected places: the crypto subsystem, the new extensible scheduler framework, and memory management plumbing.**
+
+> **Corpus inline (2026-06-24):** Phoronix percentage claims (3.3× AES, 75% sched_ext latency) are **Unvalidated** on CursiveOS harness — treat as experiment leads. BBR preset win is **Validated** per Ch00/Ch09; sched_ext requires Ch06 class-4 gates.
+
+ Eric Biggers' sustained AES rewrite campaign [Phoronix](https://www.phoronix.com/news/3.3x-AES-CTR-AMD-Zen-5-Patches) delivers up to **3.3× faster encrypted model loading** on AMD Zen 5. [Phoronix](https://www.phoronix.com/forums/forum/phoronix/latest-phoronix-articles/1524195-new-linux-patches-yield-up-to-3-3x-faster-aes-ctr-performance-on-amd-zen-5-cpus) The sched_ext framework, merged in kernel 6.12, enables custom BPF schedulers that cut tail latency by 75%. And a quiet series of ZRAM and GPU shared virtual memory patches fundamentally change how inference workloads manage memory pressure. Together, these changes span kernels 6.10 through 7.0 and represent a step-function improvement for anyone running local LLM inference on consumer AMD or Intel hardware.
 
 ---
 

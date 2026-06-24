@@ -44,7 +44,7 @@ CursiveOS is explicitly about self-improving software. The corpus needs a deeper
 
 ### Desired corpus output
 
-**Status (2026-06-24):** Delivered as Chapter 03 (literature digest) + Chapter 04
+**Status (2026-06-24):** Delivered as merged Chapter 03 (`03-rsi-literature-and-organism-synthesis.md`, former Ch03+Ch04)
 (critical synthesis) + **25 papers** under `papers/`. Remaining work: source-level
 validation of individual RSI claims and graduation of experiment plans.
 

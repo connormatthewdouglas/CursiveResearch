@@ -49,7 +49,11 @@ Targeted narrowing for the DOCX import below. External-threat hardening is disti
 
 ## Hardening Linux servers for crypto mining and AI agent infrastructure in 2026
 
-**Defense-in-depth is no longer optional for mining rigs and AI inference nodes.** The convergence of cryptojacking campaigns, DePIN supply chain attacks (Bittensor's $8M PyPi incident), [The Block](https://www.theblock.co/post/303547/bittensor-exploit) and increasingly sophisticated exploitation of GPU-enabled servers demands a layered security posture spanning kernel, network, access control, monitoring, and decentralized trust verification. This guide synthesizes the most current 2025–2026 hardening practices across five critical domains: kernel hardening, firewall configuration, SSH access control, intrusion detection, and DePIN subnet security. The threat landscape has shifted — attackers now target not just the software stack but the entire trust chain, from kernel modules through package managers to consensus weight manipulation. [Bittensor](https://docs.learnbittensor.org/concepts/weight-copying-in-bittensor)
+**Defense-in-depth is no longer optional for mining rigs and AI inference nodes.**
+
+> **Corpus inline (2026-06-24):** External-threat hardening (this import) ≠ organism self-mutation law (**Ch06**). TEE/bus attestation **Disproven** as CursiveOS oracle (Ch20); use Ch01–11 population confirmation + Ch11 fingerprints.
+
+ The convergence of cryptojacking campaigns, DePIN supply chain attacks (Bittensor's $8M PyPi incident), [The Block](https://www.theblock.co/post/303547/bittensor-exploit) and increasingly sophisticated exploitation of GPU-enabled servers demands a layered security posture spanning kernel, network, access control, monitoring, and decentralized trust verification. This guide synthesizes the most current 2025–2026 hardening practices across five critical domains: kernel hardening, firewall configuration, SSH access control, intrusion detection, and DePIN subnet security. The threat landscape has shifted — attackers now target not just the software stack but the entire trust chain, from kernel modules through package managers to consensus weight manipulation. [Bittensor](https://docs.learnbittensor.org/concepts/weight-copying-in-bittensor)
 
 ---
 

@@ -58,6 +58,8 @@ The source document analyzes the Intel Arc Pro B70 as a local AI and autonomous-
 
 The document claims the Arc Pro B70 is built on TSMC 5 nm using the BMG-G31 Xe2-HPG Battlemage GPU, with 32 Xe-cores, 4,096 shading units, 256 XMX AI engines, 608 GB/s bandwidth, 22.94 TFLOPS FP32, and up to 367 TOPS INT8 matrix throughput. These hardware claims must be validated against Intel, vendor, and independent benchmark sources before being used as decision-grade facts.
 
+> **Corpus inline (2026-06-24):** Spec table below is **Unvalidated** until `experiments/arc-b70-local-agent-benchmark-plan.md` runs. Hermes 64k context **Validated** for inspected deployment only (VALIDATION Ch18). Unattended repo mutation **Disproven** — Ch06 containment required. Workstation stack: Ch10.
+
 | Architectural Feature | Intel Arc Pro B70 Specification |
 | --- | --- |
 | Graphics Processor / Die Area | BMG-G31 (Xe2-HPG Battlemage) / 368 mm² |

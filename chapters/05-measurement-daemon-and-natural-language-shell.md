@@ -42,6 +42,8 @@ measurement daemon != natural-language shell
 
 This separation is load-bearing. It preserves the integrity of the organism's fitness ledger while still allowing a powerful local agent interface for human operators.
 
+> **Corpus inline (2026-06-24):** Shell implementation **Unvalidated**; evaluation must follow SWE-bench/OSWorld execution patterns (papers intakes). Proposer/shell may suggest mutations — **only the measurement daemon writes CursiveRoot sensor truth** (Ch06 gates).
+
 ## Core conclusion
 
 CursiveOS should run two separate agent-like components:

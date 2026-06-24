@@ -1,15 +1,17 @@
 # Research Index
 
 This index is the primary navigation page for the CursiveOS research corpus.
-Chapters are living documents numbered **00–22** in strategic reading order:
-measurement and organism architecture first, then literature and platform depth,
-then historical strategy imports last.
+Chapters are living documents in strategic reading order (23 files, **00–22**
+logical slots): measurement and organism architecture first, then literature and
+platform depth, then historical strategy imports last.
 
 Use [CORPUS_WORKFLOW.md](CORPUS_WORKFLOW.md) for intake and maintenance,
 [VALIDATION.md](VALIDATION.md) for the status of important claims, and
 [CHANGELOG.md](CHANGELOG.md) for the record of material edits.
 
 **Paper library:** 25 peer-research intakes under `papers/` (see [papers/README.md](papers/README.md)).
+
+**Organization decisions (merges/splits/order):** [sources/corpus-organization-decisions-2026-06-24.md](sources/corpus-organization-decisions-2026-06-24.md) — documents Ch03+Ch04 RSI merge, Ch07 split, strategic order, and five new chapter rationale.
 
 ## Reading Path
 
@@ -21,24 +23,25 @@ Use [CORPUS_WORKFLOW.md](CORPUS_WORKFLOW.md) for intake and maintenance,
 4. [01 - Seed Organism](chapters/01-seed-organism-and-sensor-array.md) + [08 - Population Confirmation](chapters/08-population-confirmation-and-fleet-statistics.md) — evidence model and fleet statistics
 5. [02 - Bitcoin-Native Economics](chapters/02-bitcoin-native-economics-and-proof-of-useful-optimization.md) + [12 - OSS Funding](chapters/12-open-source-funding-and-contributor-incentives.md) — incentives without token emissions
 6. [05 - Measurement Daemon & NL Shell](chapters/05-measurement-daemon-and-natural-language-shell.md) + [06 - Mutation Safety](chapters/06-mutation-safety-and-permission-law.md) — trust boundaries
-7. [07 - Gap Closure](chapters/07-main-repo-gap-closure-and-research-backlog.md) — what to research or build next
-8. [19 - First Principles](chapters/19-first-principles-and-strategy.md) + [20 - Market](chapters/20-market-and-viability.md) — **read the living layer first**, then the DOCX import below it
-9. [22 - Research Master](chapters/22-research-master.md) — March 2026 historical snapshot only
+7. [03 - RSI Literature & Organism Synthesis](chapters/03-rsi-literature-and-organism-synthesis.md) — merged literature digest + organism framework
+8. [07 - Gap Closure](chapters/07-main-repo-gap-closure.md) + [07b - Research Backlog](chapters/07b-research-backlog-and-pipeline.md) — what is closed vs what to research next
+9. [19 - First Principles](chapters/19-first-principles-and-strategy.md) + [20 - Market](chapters/20-market-and-viability.md) — **read the living layer first**, then the DOCX import below it
+10. [22 - Research Master](chapters/22-research-master.md) — March 2026 historical snapshot only
 
 Chapters **19–22** preserve DOCX imports with living layers. Chapters **13–18** are platform and agent implementation leads constrained by **00**, **06**, and **VALIDATION.md**.
 
-### Full chapter index (strategic order 00–22)
+### Full chapter index (strategic order)
 
 | # | Chapter | Topic | Use It For | Confidence |
 | --- | --- | --- | --- | --- |
 | 00 | [Benchmark Schema and Measurement Validity](chapters/00-benchmark-schema-and-measurement-validity.md) | Harness schema, per-channel validity, telemetry gaps | Interpreting CursiveRoot numbers honestly | Grounded in harness code (2026-06); fixes not all implemented |
 | 01 | [Seed Organism and Sensor Array](chapters/01-seed-organism-and-sensor-array.md) | Phase 0 loop, sensors, population confirmation, fitness | Evidence model and selection pressure | Supported architecture; fleet calibration open |
 | 02 | [Bitcoin-Native Economics](chapters/02-bitcoin-native-economics-and-proof-of-useful-optimization.md) | Layer 5 v3.3, no-token design, BTC contributor payouts | Current CursiveOS economic metabolism | Specified; real payments not deployed |
-| 03 | [Peer-Reviewed RSI and Agentic Evolution](chapters/03-peer-reviewed-research-recursive-self-improvement-and-agentic-evolution.md) | RSI literature digest | Verifier-grounded discovery, benchmark discipline | Structured digest; not exhaustive |
-| 04 | [Software Organisms: RSI Critical Synthesis](chapters/04-foundations-of-software-organisms-rsi-critical-synthesis.md) | Uploaded organism theory packet synthesis | Fitness framing, failure modes, adoption lessons | Substantial intake; some claims need source validation |
+| 03 | [RSI Literature and Organism Synthesis](chapters/03-rsi-literature-and-organism-synthesis.md) | **Merged** peer-reviewed digest + organism framework (former Ch03+Ch04) | Verifier-grounded discovery, fitness framing, failure modes | Structured digest + intake synthesis |
 | 05 | [Measurement Daemon and NL Shell](chapters/05-measurement-daemon-and-natural-language-shell.md) | Deterministic daemon vs probabilistic shell | Agent trust boundaries, containment, tool policy | Daemon specified; shell not implemented |
 | 06 | [Mutation Safety and Permission Law](chapters/06-mutation-safety-and-permission-law.md) | Least-privilege law for self-mutation | Mutation-class → containment matrix | Research synthesis; gates not implemented |
-| 07 | [Main Repo Gap Closure](chapters/07-main-repo-gap-closure-and-research-backlog.md) | Architecture → research gaps | Backlog prioritization | Current synthesis |
+| 07 | [Main Repo Gap Closure](chapters/07-main-repo-gap-closure.md) | Architecture → gap status (Gaps 1–5) | What main repo already answers | Current synthesis |
+| 07b | [Research Backlog and Pipeline](chapters/07b-research-backlog-and-pipeline.md) | **Split** from former Ch07 — backlog + `RESEARCH_PIPELINE.md` lift | Next research targets and experiments | Current synthesis |
 | 08 | [Population Confirmation and Fleet Statistics](chapters/08-population-confirmation-and-fleet-statistics.md) | N-rule, CV escalation, hardware-scoped fitness | Fleet truth without false positives | Partly Supported; multi-machine calibration open |
 | 09 | [Network Transport and Congestion Control](chapters/09-network-transport-and-congestion-control.md) | BBR, BDP, loopback vs real-path | Network sensor interpretation | BBR win Validated on ≤1GbE loss; buffer magnitude Disproven |
 | 10 | [Local LLM Inference Runtime](chapters/10-local-llm-inference-runtime-architecture.md) | Ollama, llama.cpp, daemon/shell split | Inference stack architecture | Supported direction; Arc B70 defaults Unvalidated |

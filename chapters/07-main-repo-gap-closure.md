@@ -1,34 +1,31 @@
-## Corpus status (living layer)
+﻿## Corpus status (living layer)
 
 **Last reconciled:** 2026-06-24
 **Confidence:** Current synthesis Supported; backlog priorities evolve with main-repo releases
-**Read with:** [Chapter 01](01-seed-organism-and-sensor-array.md), [Chapter 06](06-mutation-safety-and-permission-law.md), [RESEARCH_PIPELINE.md](../RESEARCH_PIPELINE.md)
+**Read with:** [Chapter 07b](07b-research-backlog-and-pipeline.md), [Chapter 01](01-seed-organism-and-sensor-array.md), [Chapter 06](06-mutation-safety-and-permission-law.md), `RESEARCH_PIPELINE.md`
 
 ### Authoritative for
-- Which original five gaps are closed vs open in main `CursiveOS` repo
-- Next research targets: fleet statistics, firmware probes, shell containment
+- Which original five gaps are closed vs open in main `CursiveOS` repo (Gaps 1â€“5)
 - Boundary: research here; runnable scripts graduate to main repo
 
 ### Superseded or narrowed
-- "Repo is private" — public as of 2026-06-23 cleanup
+- "Repo is private" â€” public as of 2026-06-23 cleanup
 
 ### Open until experiment/hardware
-- Items in RESEARCH_PIPELINE §3 Experimental Lift (cold-start confound, proposer test, idle-power channel)
+- See Ch07b for pipeline experimental lift items
 
 ---
 
 ## Reinforced research (2026-06-24)
 
-- **Gap closure status:** Ch01/02/05/06 now document main-repo architecture; Ch08/09/10/11/12 close fleet-stats, network, LLM runtime, identity, and OSS-funding gaps identified here.
-- **RSI literature:** Ch03 + 25 paper intakes — pipeline P0 RSI targets substantially delivered; remaining work is validation and experiments.
-- **Measurement priority:** Ch00 §3 schema gaps (`power_source`, `page_cache_state`) remain highest-leverage open items for fleet truth.
+- **Gap closure status:** Ch01/02/05/06 document main-repo architecture; Ch08/09/10/11/12 close fleet-stats, network, LLM runtime, identity, and OSS-funding gaps.
+- **RSI literature:** Ch03 merged digest + 25 paper intakes â€” pipeline P0 RSI targets substantially delivered.
+- **Measurement priority:** Ch00 Â§3 schema gaps (`power_source`, `page_cache_state`) remain highest-leverage open items for fleet truth.
 
 ---
+# Main Repo Gap Closure
 
-# Main Repo Gap Closure and Research Backlog
-
-Status: Current synthesis from the main `CursiveOS` repo and the `CursiveResearch` corpus. Use this as the bridge between research questions and active project architecture.
-
+Status: Gap-closure synthesis (split from former Ch07, 2026-06-24). Research backlog â†’ [Chapter 07b](07b-research-backlog-and-pipeline.md).
 ## Why this chapter exists
 
 Earlier corpus work identified five high-value research gaps:
@@ -41,12 +38,14 @@ Earlier corpus work identified five high-value research gaps:
 
 After reviewing the main `CursiveOS` repo, several of those gaps are no longer empty. The repo already contains active architecture for the seed organism, sensor array, measurement daemon, natural-language shell, Layer 5 economics, and biological design rationale. This chapter records what has been answered, what remains open, and what should be researched next.
 
+> **Corpus inline (2026-06-24):** **Split from former Ch07 (2026-06-24):** this file = gap-closure status (Gaps 1–5). Research backlog and pipeline priorities → **Ch07b**. Repo is public as of 2026-06-23.
+
 ## Main Repo Sources Reviewed
 
 | Source | What it contributes |
 | --- | --- |
 | `README.md` | Current public summary, one-command test path, v0.8/v0.9 status, CursiveRoot upload behavior, initial benchmark results, Layer 5 summary. |
-| `ROADMAP.md` | Four transitions: tweak stack → tuned distribution → measurement-native → workload-native → substrate. |
+| `ROADMAP.md` | Four transitions: tweak stack â†’ tuned distribution â†’ measurement-native â†’ workload-native â†’ substrate. |
 | `docs/architecture/sensor-array.md` | Sensor families, genesis sensor suite, population confirmation, independence criteria, curator model. |
 | `docs/architecture/agent-architecture.md` | Measurement daemon vs natural-language shell trust boundary, permission model, model tiers. |
 | `docs/specs/layer5-economics-v3.3.md` | Bitcoin-native economics, current/lifetime streams, metabolic sensor, tester/contributor role split. |
@@ -140,7 +139,7 @@ The corpus still needs a formal mutation classification model:
 | 5 | Kernel/package/base image | kernel config, ISO build | VM/lab validation, boot test, signed artifact |
 | 6 | Firmware/BMC/BIOS | UEFI/Redfish setting | staged reboot, OOB recovery, human approval |
 
-Recommended expansion: **done (2026-06-22)** — see
+Recommended expansion: **done (2026-06-22)** â€” see
 [Chapter 06 - Mutation Safety and Permission Law](06-mutation-safety-and-permission-law.md),
 which binds this seven-class taxonomy to the enforcement primitive for each gate
 and adds external grounding (least privilege, OWASP Excessive Agency, Linux
@@ -170,10 +169,10 @@ The main repo says current CursiveOS is still pre-Transition-One: it is a set of
 
 Roadmap sequence:
 
-1. **Tweak stack → tuned distribution**: v0.9 ISO alpha to v1.0 stable.
-2. **Tuned distribution → measurement-native**: sensor daemon and signed preset channel make self-improvement empirical.
-3. **Measurement-native → workload-native**: workload detection and per-workload preset families.
-4. **Workload-native → substrate**: CursiveOS becomes a reference platform others build on.
+1. **Tweak stack â†’ tuned distribution**: v0.9 ISO alpha to v1.0 stable.
+2. **Tuned distribution â†’ measurement-native**: sensor daemon and signed preset channel make self-improvement empirical.
+3. **Measurement-native â†’ workload-native**: workload detection and per-workload preset families.
+4. **Workload-native â†’ substrate**: CursiveOS becomes a reference platform others build on.
 
 ### Remaining research needed
 
@@ -262,57 +261,3 @@ The economic design also answers why testers should not earn lifetime revenue: t
 4. Research fork obligation inheritance technically and legally.
 5. Build anti-Sybil and anti-spoofing economics around hardware fingerprints, wallets, anomaly profiles, and delayed rewards.
 6. Define how accepted non-code contributions, such as benchmark methods or sensors, earn fitness.
-
-## What Should Be Added Next
-
-Based on the main repo, the highest-value new research expansions are now:
-
-### 1. Mutation Safety and Permission Law — done (2026-06-22)
-
-Delivered as [Chapter 06](06-mutation-safety-and-permission-law.md): the formal
-rulebook defining what agents, daemons, contributors, and users may change under
-which gates, with each mutation class bound to the mechanism that enforces it.
-Next expansions move down the list.
-
-### 2. CursiveRoot Schema and Evidence Storage
-
-The sensor-array theory is strong. Now the database/storage schema needs to be formalized: raw run, sensor result, variant, hardware fingerprint, confidence, confirmation set, anomaly flags, fitness ledger.
-
-### 3. Natural-Language Shell Implementation Spec
-
-The architecture sketch is good, but the product needs implementation details: UI, command preview, memory, model selection, permission escalation, remote-tier disclosure, and tool sandboxing.
-
-### 4. Signed Preset Channel and Regression-Gated Update Flow
-
-This is the heart of Transition 2. The corpus needs a deep spec on signed presets, staging, local regression, rollback, and divergence reporting.
-
-### 5. Fork Obligation and Bitcoin-Anchored Ledger Research
-
-This is unique and high-risk. It needs legal, technical, and adversarial analysis before being relied on as an economic primitive.
-
-## Corpus Implication
-
-The biggest update is that the project is farther along architecturally than the earlier research gaps implied.
-
-The gaps are no longer:
-
-```text
-What is the organism?
-What counts as truth?
-How are contributors rewarded?
-Where does the local agent fit?
-```
-
-The main repo answers those at architecture level.
-
-The new gaps are implementation-level:
-
-```text
-How is the evidence stored?
-How are mutations permissioned?
-How are presets signed and rolled back?
-How is the shell safely implemented?
-How is the economic ledger enforced?
-```
-
-That is good news. The corpus should now move from discovery research to specification research.
