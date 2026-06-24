@@ -146,6 +146,45 @@ Reason:
   is true in the path operators actually run, on more than one machine. The plan
   also ships the §3 item-1 `power_source` field as a side effect and keeps the
   §2.2 cross-machine pooling bar explicit (H3).
+## 2026-06-22 - Red-Team Flag: Ch01 Static-Buffer "Universal Gap" Thesis Overstated
+
+Changed:
+- Flagged `chapters/01-first-principles-and-strategy.md` §2.1/§2.2 in
+  `VALIDATION.md` (Flagged for Review) as an overstated, load-bearing claim,
+  **without editing the chapter text**. The chapter frames a static 212KB TCP
+  buffer default ("appropriate for 1990s modem speeds") as the universal
+  OS-level bottleneck and "foundational opportunity," and its in-chapter
+  assessment marks the wording canon for verbatim white-paper reuse while
+  citing +454–616% network deltas as the proof point.
+- Added `validation/notes/2026-06-22-ch01-buffer-default-overstatement-challenge.md`
+  with the full external-evidence challenge and suggested reconciliation.
+
+Challenge (external + internal evidence):
+- Linux receive-buffer autotuning (Dynamic Right-Sizing) has been on by default
+  since kernel 2.4.17/2.6.7 (~2004): the operative `tcp_rmem` default is ~87KB
+  and grows automatically toward the path BDP. The 212992 figure is the
+  `net.core.rmem_max` ceiling, not an applied per-connection default — so
+  "defaults to 212KB" misdescribes the stack. The "1990s modem" parenthetical
+  is also inverted (a 208KB buffer is ~30s of data for a 56kbps modem).
+- The large, real network win is the buffer-independent CUBIC→BBR
+  congestion-control swap (BBR literature: the advantage holds across bandwidths
+  and is "due to the fundamental algorithm design rather than buffer-specific
+  behavior"; it is a one-line sysctl any operator can set).
+- The corpus's own **Validated** Chapter 16 real-path A/B already found the
+  CursiveOS buffer/qdisc stack adds ~0% (−0.7%) on ordinary ≤1GbE links, with
+  the loopback "+246%" called a non-transferable artifact. That validated
+  correction was never reconciled with the still-canon Chapter 01 thesis.
+
+Reason:
+- §2.1/§2.2 is an irreducible first principle that the moat/flywheel thesis
+  (Chapters 01, 02, 11) and the project's headline performance numbers rest on,
+  and it is slated for verbatim white-paper reuse. If the real lever is a
+  portable one-line BBR swap and autotuning already covers ordinary links, the
+  "universal, structurally inherent" gap — and the defensibility argument built
+  on it — is materially smaller than the foundational chapter asserts. Flagged
+  rather than edited per CORPUS_WORKFLOW.md §3 because the wording is canon
+  headed into an outward-facing document and the reconciliation is a maintainer
+  decision.
 
 ## 2026-06-16 - Noise Floor Measured + GPU Power Now Visible
 
