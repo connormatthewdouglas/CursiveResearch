@@ -103,6 +103,32 @@ Reason:
   preset claim"; this experiment is the cheapest path to both the causal knob
   and a predictor, reusing the factorial-decomposition discipline that already
   paid off on the network thread (§5.6).
+## 2026-06-21 - Red-Team Flag: Covenant-72B "GPT-4-class" Claim Overstated (Chapter 02)
+
+Changed:
+- Flagged (did **not** edit) the Chapter 02 claim that Covenant-72B's 67.1 MMLU
+  is "competitive with early GPT-4-class models" and demonstrates that
+  "decentralized compute can achieve data-center-level results." Added a row to
+  the `VALIDATION.md` "Flagged for Review" table and a full evidence note at
+  `validation/notes/2026-06-21-ch02-covenant-72b-gpt4-class-overstatement-challenge.md`.
+- External evidence: GPT-4 (2023) scored 86.4% on MMLU (OpenAI GPT-4 Technical
+  Report); GPT-3.5 ~70-75%; Llama-2-70B ~68.9% (Llama 2 paper). Covenant-72B's
+  67.1 sits ~19 points below GPT-4, at the Llama-2-70B / GPT-3.5 tier — which is
+  also the model's *own* reported peer set (LLaMA-2-70B 65.6, LLM360 K2 65.5,
+  both 2023-era open base models). The "GPT-4-class / data-center-level" framing
+  is therefore overstated.
+
+Reason:
+- Adversarial corpus review. The Covenant-72B benchmark is the chapter's only
+  concrete model-quality figure and is load-bearing for its market-viability
+  thesis, so overstating its comparison class overstates the opportunity. The
+  underlying decentralized-training achievement (72B model, 1.1T tokens, ~70
+  commodity-hardware contributors) is real and not in dispute; only the GPT-4
+  comparison is challenged. Per the red-team task and CORPUS_WORKFLOW.md, the
+  preserved-DOCX claim was not edited in place — only flagged with external
+  evidence. (For contrast, the chapter's "BBR ... 2700x faster than CUBIC"
+  figure was checked and found to be Google's own published benchmark, so it was
+  not flagged.)
 
 ## 2026-06-16 - Noise Floor Measured + GPU Power Now Visible
 
