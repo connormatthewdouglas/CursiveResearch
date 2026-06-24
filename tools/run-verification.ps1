@@ -244,6 +244,8 @@ $sb4.ToString() | Set-Content (Join-Path $ScratchDir 'supporting-updates.txt') -
 
 # Changed files + input records
 Push-Location $RepoRoot
+$prevEap = $ErrorActionPreference
+$ErrorActionPreference = 'Continue'
 $sb5 = New-Object System.Text.StringBuilder
 [void]$sb5.AppendLine('CHANGED_FILES EVIDENCE')
 [void]$sb5.AppendLine("Generated: $(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')")
@@ -266,7 +268,8 @@ git log -5 --oneline | ForEach-Object { [void]$sb5.AppendLine("  $_") }
 $baseline = $contract.acceptance_gates.goal_baseline_commit
 if ($baseline) {
     [void]$sb5.AppendLine("MODIFIED FILES (git diff --name-status $baseline..HEAD):")
-    $diffNames = git diff --name-status $baseline..HEAD 2>$null
+    $diffRange = "${baseline}..HEAD"
+    $diffNames = git diff --name-status $diffRange 2>$null
     if ($diffNames) {
         $diffNames | ForEach-Object { [void]$sb5.AppendLine("  $_") }
     } else {
@@ -286,6 +289,7 @@ if ($untracked) {
 if (-not $uncommitted -and -not $untracked) {
     [void]$sb5.AppendLine('  (clean)')
 }
+$ErrorActionPreference = $prevEap
 Pop-Location
 $sb5.ToString() | Set-Content (Join-Path $ScratchDir 'changed-files-evidence.txt') -Encoding UTF8
 
