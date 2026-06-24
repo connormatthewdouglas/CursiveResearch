@@ -242,6 +242,32 @@ Reason:
   open-ended improvement is unproven even in purpose-built ALife systems, so
   plateaus should be expected and designed for. Sources cited are those actually
   retrieved via web search (2026-06-22); no full-text paper mirroring.
+## 2026-06-23 - Red-Team Flag: Chapter 01 §2.1 TCP-buffer claim challenged
+
+Changed:
+- VALIDATION.md "Flagged for Review": added a flag against
+  `chapters/01-first-principles-and-strategy.md` §2.1, the First Principle #1
+  flagship example "TCP socket buffers default to 212KB (appropriate for 1990s
+  modem speeds)." The original claim was **not** edited.
+- Added `validation/notes/2026-06-23-ch01-2.1-tcp-buffer-claim-redteam-challenge.md`
+  with the full challenge and external citations.
+
+Reason:
+- The claim is wrong on both halves. 212 KB is `net.core.rmem_max` (the ceiling
+  on *manually* set `SO_RCVBUF`), not the default; ordinary sockets use
+  `tcp_rmem` autotuning up to ~4–6 MB, on by default since the 2.6.x series
+  (~2004). And a 212 KB window supports ~17 Mbit/s at 100 ms RTT and ~1.7 Gbit/s
+  on a LAN — hundreds to tens-of-thousands of times a 56 kbit/s modem, not
+  "modem speeds." Sources: Linux `tcp(7)` man page, Red Hat RHEL 10 TCP-tuning
+  guide, ESnet Fasterdata.
+- This matters because §2.1 is the corpus's most load-bearing technical sentence:
+  it is named "the foundational opportunity CursiveOS exploits" and the chapter's
+  Research-master note canonizes it as "rock-solid"/"now canon"/"quoted verbatim."
+  The corpus's own Validated Chapter 16 network A/B (2026-06-16) already
+  contradicts it — "default-buffer autotuning already covers the ~6 MB BDP,"
+  buffer tuning adds ~0%, and the real network win is CUBIC→BBR.
+- Scope is narrow: First Principle #1 stays Supported in general (governor/GPU
+  examples are sounder); only the TCP-buffer example is challenged.
 
 ## 2026-06-16 - Noise Floor Measured + GPU Power Now Visible
 
