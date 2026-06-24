@@ -4,6 +4,34 @@ This file records meaningful changes to research guidance, validation status,
 and corpus process. It is intended to be readable without reconstructing a
 chain of supporting documents.
 
+## 2026-06-24 - Tier Reconciliation (4 Cornerstone Claims) + AlphaEvolve Decentralization Chapter (03c)
+
+Changed:
+- **Depth-tier reconciliation:** added `papers/TIER-RECONCILIATION.md` listing every
+  folder audited against the depth-tier policy. Closed the **4 cornerstone gaps**
+  by adding `claims-and-results.md` (grounded in each paper's `deep-extraction.md`,
+  mirroring funsearch): `map-elites`, `open-endedness-icml-2024`, `poet`,
+  `reward-hacking-skalse-2022`. The **11 important** folders missing a claims
+  inventory are flagged-only (decision pending), not fixed.
+- **New chapter `03c-alphaevolve-decentralized-evolution-mapping.md`:** maps the
+  AlphaEvolve (RSI-001, arXiv:2506.13131, CC BY-NC-ND — paraphrase only) verifier-
+  grounded loop onto a decentralized BTC-paid contributor fleet. Splits results
+  into externally verifiable (48-mult matmul = ceiling, not expectation) vs
+  proprietary Google-infra; includes a mapping table and an equally prominent
+  disanalogies section (Sybil Ch11, Goodhart/Skalse, hardware-scoped fitness Ch08,
+  mutation safety Ch06, economic attack surface Ch02/12). Thesis: the loop is
+  validated at industrial scale; decentralizing the evaluator is the unsolved hard
+  part. Inherits the Ch20 "Bittensor 23%" Unvalidated flag (no upgrade).
+- **Counts:** `INDEX.md` (reading list + table) and `tools/verification-contract.json`
+  updated — chapters_total 23→24, all_chapters_living_layer 23→24,
+  all_chapters_reinforced 23→24, native_chapters += 03c.
+
+Reason:
+- Last pass documented the depth-tier policy but never enumerated the gaps; this
+  closes the cornerstone tier and records the rest. The AlphaEvolve chapter gives
+  the corpus an honest, hype-free mapping of the strongest industrial RSI result
+  onto CursiveOS's decentralized design — foregrounding what it does *not* prove.
+
 ## 2026-06-24 - Paper-Library Audit: Reflexion Intake, os-r1→tune-agent Rename, Depth-Tier Policy
 
 Changed:

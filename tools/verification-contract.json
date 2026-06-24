@@ -1,9 +1,9 @@
 {
   "version": "2026-06-24-gates",
   "description": "Mirrors goal/plan.md verification gates. run-verification.ps1 must pass all checks before writing scratch evidence.",
-  "chapters_total": 23,
+  "chapters_total": 24,
   "papers_total": 25,
-  "native_chapters": ["00", "01", "02", "03", "05", "06", "07", "07b", "08", "09", "10", "11", "12", "17"],
+  "native_chapters": ["00", "01", "02", "03", "03c", "05", "06", "07", "07b", "08", "09", "10", "11", "12", "17"],
   "docx_import_chapters": ["13", "14", "15", "16", "18", "19", "20", "21", "22"],
   "sample_chapters": [
     "00-benchmark-schema-and-measurement-validity.md",
@@ -26,8 +26,8 @@
     "corpus_inline": "> **Corpus inline (2026-06-24):**"
   },
   "marker_expectations": {
-    "all_chapters_living_layer": 23,
-    "all_chapters_reinforced": 23,
+    "all_chapters_living_layer": 24,
+    "all_chapters_reinforced": 24,
     "docx_chapters_integration": 9,
     "docx_chapters_inline_minimum": 2
   },
