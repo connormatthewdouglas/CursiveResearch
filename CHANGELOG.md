@@ -4,6 +4,28 @@ This file records meaningful changes to research guidance, validation status,
 and corpus process. It is intended to be readable without reconstructing a
 chain of supporting documents.
 
+## 2026-06-24 - Red-Team Flag: Ch20 AlphaEvolve "23% on Bittensor nodes" Overstatement
+
+Changed:
+- **VALIDATION.md** — added a "Flagged for Review" row (red-team) for
+  `chapters/20-market-and-viability.md` § "LLM-Integrated Heuristic Discovery".
+- **validation/notes/2026-06-24-ch20-alphaevolve-23pct-bittensor-overstatement-challenge.md** —
+  new adversarial-review note (challenge only; original claim not edited).
+
+Reason:
+- Adversarial corpus review. The chapter's claim that LLM-guided evolutionary
+  tuning yields "training and inference times for Bittensor nodes by up to 23%"
+  is the only quantified evidence for the product's core "AI-Guided Kernel
+  Tuning" differentiator, yet it misattributes AlphaEvolve's published result:
+  the 23% was a Google-internal Gemini *training*-kernel speedup on TPUs
+  (≈1% end-to-end training time), never evaluated on Bittensor or Intel Arc,
+  and uncited. It also contradicts the corpus's own open proposer-vs-random
+  experiment (CH05-BM-002), which has not shown the LLM proposer beats random
+  search at all. Flagged, not edited (preserved-DOCX import; red-team rule).
+- External evidence: AlphaEvolve (DeepMind, 2025), arXiv:2506.13131 — 23% Gemini
+  training kernel (~1% total training time), 32.5% FlashAttention kernel, 0.7%
+  Borg compute recovery, all on Google's own TPU/data-center stack.
+
 ## 2026-06-24 - Structural Org: Ch03+Ch04 Merge, Ch07 Split, Inline Body Reinforcement
 
 Changed:
