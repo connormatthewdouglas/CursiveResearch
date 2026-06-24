@@ -4,6 +4,29 @@ Source: sources/original-docx/4. Tokenomics_.docx
 Git blob SHA: 839c8733a30a682416ec0858c75e229ebc51131b
 -->
 
+## Corpus status (living layer)
+
+**Last reconciled:** 2026-06-24
+**Confidence:** **Superseded** for CursiveOS product economics — retained as DePIN comparison research
+**Read with:** [Chapter 11](11-bitcoin-native-economics-and-proof-of-useful-optimization.md) (**authoritative** for CursiveOS), [Chapter 10](10-seed-organism-and-sensor-array.md) (fitness/evidence), [Chapter 01](01-first-principles-and-strategy.md) (incentive timing)
+
+CursiveOS Layer 5 v3.3 is **Bitcoin-native**: no custom token, no yield pool, no governance theater. This chapter compares Helium, Render, io.net, Bittensor, etc. — useful for **design comparison**, not current implementation.
+
+### Authoritative for
+
+- DePIN incentive pattern survey (burn-and-mint, demand-weighted emissions, failure modes)
+- Hybrid-model brainstorming that informed early thinking — **not** the shipped design
+
+### Do not use for
+
+- CursiveOS contributor payouts, token policy, or public messaging — use Chapter 11 and main-repo `docs/specs/layer5-economics-v3.3.md`
+
+### Open until experiment/hardware
+
+- Metabolic sensor simulation (pipeline); fork-obligation research
+
+---
+
 # Tokenomics and Incentives
 
 4. Research the best DePIN tokenomics models in 2026 from Helium Render io.net Bittensor and any new projects. Compare their incentive engines reward vaults burn mechanisms and demand-driven emissions. Highlight what worked what failed and recommend a hybrid model that fits our data-contribution → optimization-reward loop without high inflation risk.

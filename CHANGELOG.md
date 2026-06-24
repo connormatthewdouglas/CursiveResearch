@@ -4,6 +4,33 @@ This file records meaningful changes to research guidance, validation status,
 and corpus process. It is intended to be readable without reconstructing a
 chain of supporting documents.
 
+## 2026-06-24 - Early Chapter Cohesion + Workflow Upgrades
+
+Changed:
+- `CORPUS_WORKFLOW.md`: added **Preserved Import + Living Reconciliation** rule,
+  cohesion-pass checklist, and proposed workflow upgrades table (living layers,
+  measurement-first reading path, flag→reconcile→delete, experiment graduation).
+- Chapters **00–07**: each gained a `## Corpus status (living layer)` section
+  cross-linking Ch10–17 and marking superseded import passages (do-not-cite
+  externally) without deleting DOCX intake text.
+- **Chapter 01**: reconciled §2.1/§2.2 and Research-master network canon with
+  Validated Chapter 16 (BBR win, not buffer ceiling; hardware-scoped magnitude).
+- **Chapter 02**: reconciled TDX bus-hardening and Covenant-72B overclaims via
+  living layer; noted TAO-OS → CursiveOS rename.
+- **Chapter 07**: explicit Superseded-by-Chapter-11 banner for product economics.
+- `INDEX.md`: added cohesive reading path for new agents; refreshed confidence
+  labels for Ch00–07.
+- `VALIDATION.md`: cleared three resolved Flagged-for-Review rows; added
+  Disproven high-impact rows for Ch01 TCP example and Ch02 TDX/Covenant claims.
+- `sources/extracted-source-index.md`: refreshed extraction queue for Ch00–07,
+  Ch16, Ch17.
+
+Reason:
+- Early imported chapters were cohesive as intake snapshots but diverged from
+  measurement-validated truth (Ch16) and red-team evidence. Living layers preserve
+  audit history while giving agents a single authoritative guide — no external
+  testing required for this reconciliation pass.
+
 ## 2026-06-23 - Corpus Cleanup Pass
 
 Changed:

@@ -4,6 +4,30 @@ Source: sources/original-docx/2. Linux kernel optimizations.docx
 Git blob SHA: e54cb50b4cfaa93aedbf07f50f4a5dbd7bf8c51e
 -->
 
+## Corpus status (living layer)
+
+**Last reconciled:** 2026-06-24
+**Confidence:** Mechanisms partly Supported; performance magnitudes Unvalidated until harness confirms
+**Read with:** [Chapter 16](16-benchmark-schema-and-measurement-validity.md) (what presets actually measure), [Chapter 17](17-mutation-safety-and-permission-law.md) (class 4–5 mutations), `sources/extracted-source-index.md` (SRC-03-* entries)
+
+### Authoritative for
+
+- Feature existence: sched_ext, zram, fscrypt, PREEMPT_RT, AES kernel paths (see SRC-03-001–004)
+- Research leads for kernel-level opportunity discovery
+
+### Superseded or narrowed
+
+- **Phoronix/LWN percentage claims** (3.3× AES, 75% latency cuts, etc.) are third-party benchmarks — not CursiveOS-validated. Treat as leads.
+- **sched_ext inference benefit** is plausible but unmeasured on the CursiveOS harness (sustained single-stream shows signal < noise in Chapter 16 §5 item 7). Concurrent-load benchmark still proposed in `RESEARCH_PIPELINE.md`.
+- Preset knobs in the main repo (BBR, governor, THP, etc.) are validated **per channel** in Chapter 16 — not every knob in this chapter is in the active preset stack.
+
+### Open until experiment/hardware
+
+- `experiments/kernel-inference-optimization-benchmark-plan.md`
+- sched_ext / eBPF policies require Chapter 17 class-4 gates before unattended deployment
+
+---
+
 # Linux Kernel Optimization
 
 ## Linux kernel optimizations that actually move the needle for GPU inference

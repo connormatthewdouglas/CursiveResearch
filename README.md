@@ -4,6 +4,11 @@ Living research corpus for the CursiveOS team.
 
 ## Start Here
 
+**New agents:** follow the cohesive path in [INDEX.md](INDEX.md) (VALIDATION →
+Chapter 16 → Ch10–11 → Ch01–02 **living layers**). Chapters 00–07 from DOCX
+import keep preserved wording below a `## Corpus status (living layer)` block —
+**read the living layer first**, not the import alone.
+
 Read [CORPUS_WORKFLOW.md](CORPUS_WORKFLOW.md) first when adding or reorganizing
 research. Use [INDEX.md](INDEX.md) for the chapter library,
 [RESEARCH_PIPELINE.md](RESEARCH_PIPELINE.md) for the active research queue,

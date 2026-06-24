@@ -4,6 +4,27 @@ Source: sources/original-docx/Research Master.docx
 Git blob SHA: 081d0d5e31f2f3f8d3230e9c8db0ece7e50456f1
 -->
 
+## Corpus status (living layer)
+
+**Last reconciled:** 2026-06-24
+**Confidence:** Historical snapshot (March 2026); superseded for architecture and measurement
+**Read with:** [INDEX.md](../INDEX.md) reading path; [Chapter 13](13-main-repo-gap-closure-and-research-backlog.md) for current gaps; Chapters 10–12 for organism, economics, and agent architecture
+
+This file is a **point-in-time repo observation log** from March 2026. It is useful for understanding how the project looked during the TAO-OS → CursiveOS rebrand and early CursiveRoot schema work. It is **not** the current architecture spec.
+
+### Use this chapter for
+
+- Historical commit context and rebrand timeline
+- Early kernel/GPU research leads (sched_ext, gpu_ext, Arc driver notes) as **leads to verify**, not validated claims
+
+### Do not use this chapter for
+
+- Current preset versions, harness behavior, or CursiveRoot schema — see main `CursiveOS` repo and Chapter 16
+- Unscoped performance expectations (+5–15% inference claims) without harness validation
+- Economics or incentive design — see Chapter 11
+
+---
+
 # Research Master
 
 Block 1:

@@ -188,3 +188,76 @@ CORPUS_WORKFLOW.md
 + VALIDATION.md when a decision-driving claim changes
 + RESEARCH_PIPELINE.md when priorities change
 ```
+
+## Preserved Import + Living Reconciliation (2026-06-24)
+
+Chapters converted from `sources/original-docx/` keep their imported wording
+below the HTML comment header. That text is an **intake snapshot**, not current
+project truth. When later chapters (especially Chapter 16) or `VALIDATION.md`
+supersede a passage:
+
+1. **Do not delete** the imported block unless doing a deliberate `REWRITE:`
+   (corpus guard allows >40% shrink only with that prefix in the commit message).
+2. **Add or update** a `## Corpus status (living layer)` section immediately
+   after the DOCX header comment. This section is the authoritative reading
+   guide for agents and maintainers.
+3. List **superseded passages** by section ID (e.g. §2.1), state the corrected
+   claim, and link to the validating chapter or `validation/notes/` evidence.
+4. Mark **do-not-cite externally** passages that remain in the import for audit
+   but must not appear in white papers, README copy, or investor material.
+5. When the living layer fully addresses a `VALIDATION.md` "Flagged for Review"
+   row, **delete the flag row** (git history preserves it) and note the
+   resolution in `CHANGELOG.md`.
+
+Template for the living layer:
+
+```markdown
+## Corpus status (living layer)
+
+**Last reconciled:** YYYY-MM-DD
+**Confidence:** <label from INDEX.md>
+**Read with:** <chapters that supersede or constrain this one>
+
+### Authoritative for
+- <bullets: what in this chapter is still useful>
+
+### Superseded or narrowed (do not cite externally)
+| Import § | Issue | Current guidance | Evidence |
+| --- | --- | --- | --- |
+| §X.Y | … | … | Chapter NN / VALIDATION / validation/notes/… |
+
+### Open until experiment/hardware
+- <items that need external testing, not more prose>
+```
+
+## Cohesion Pass Checklist
+
+Run this when early chapters (00–07) drift from Chapters 10–17 or after a
+major measurement update:
+
+| Step | Action |
+| --- | --- |
+| 1 | Read `VALIDATION.md` open flags and Validated rows for the topic. |
+| 2 | Update or add the chapter's living layer; cross-link Ch10–17 as needed. |
+| 3 | Refresh `INDEX.md` confidence labels if they changed. |
+| 4 | Update `sources/extracted-source-index.md` extraction queue for touched chapters. |
+| 5 | Log in `CHANGELOG.md`; delete resolved flag rows. |
+| 6 | Run `.githooks/corpus-guard-ci.sh <base> <head>` before push. |
+
+## Workflow Upgrades (proposed, 2026-06-24)
+
+These extend the fast paths above without new mandatory files:
+
+| Upgrade | What it adds | Why |
+| --- | --- | --- |
+| **Living layer on all DOCX imports** | Standard reconciliation block on Ch00–07 | Preserves audit trail while making Ch16+ truth reachable in one scroll |
+| **Measurement-first reading path** | INDEX routes strategy chapters through Ch16 | Prevents Ch01–02 marketing copy from overriding validated harness results |
+| **Flag → reconcile → delete** | Explicit resolution path for red-team flags | Stops VALIDATION from accumulating duplicate rows on the same claim |
+| **Experiment graduation tag** | Plans in `experiments/` link forward to main-repo task | Research stays here; runnable scripts graduate per boundary rule |
+| **Agent onboarding blurb** | README + INDEX "start here" for multi-agent edits | Reduces re-discovery of daemon/shell split, organism framing, and guardrails |
+
+Optional next steps (not required for every edit):
+
+- Add `chapters/00-research-master.md` deprecation banner pointing to Ch10–13 for current architecture.
+- Periodic `extracted-source-index.md` refresh when red-team or Ch16 updates a chapter's validation status.
+- CI: run corpus-guard on every push to `main` (workflow already exists under `.github/workflows/`).

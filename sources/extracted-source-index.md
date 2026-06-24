@@ -1,6 +1,6 @@
 # Extracted Source Index
 
-Status: Validation passes in progress as of 2026-05-26. Source extraction is incomplete across the full corpus.
+Status: Validation passes in progress as of 2026-06-24. Source extraction is incomplete across the full corpus. Early chapters (00–07) now carry **living reconciliation layers** — see `CORPUS_WORKFLOW.md` § Preserved Import + Living Reconciliation.
 
 Purpose: this file is the canonical index of external sources cited by the research corpus. The existing `source-register.md` tracks provenance of imported DOCX/source-master files. This file tracks the sources cited inside those research documents and inside later project-authored synthesis.
 
@@ -60,12 +60,14 @@ Each source should eventually have this information:
 | `chapters/09-local-agent-arc-b70.md` | P0 | Immediate local-agent and hardware-planning impact | Selected high-priority sources extracted below | Partially verified; hardware/software architecture supported, performance/model claims need reproduction |
 | `chapters/03-linux-kernel-optimization.md` | P0 | Contains near-term technical tuning claims and version-sensitive kernel claims | Selected high-priority sources extracted below | Partially verified; strong on documented kernel features, weak on performance extrapolation |
 | `chapters/05-ai-guided-tuning.md` | P0 | Directly informs autonomous tuning architecture | Selected high-priority sources extracted below | Partially verified; architecture strongly supported, rankings/timelines/costs need correction |
-| `chapters/06-security-and-hardening.md` | P1 | Security claims are high-impact and time-sensitive | Not started | Not started |
-| `chapters/04-gpu-and-accelerator-tuning.md` | P1 | Hardware-specific claims require platform validation | Not started | Not started |
-| `chapters/01-first-principles-and-strategy.md` | P1 | Strategic claims need evidence, but fewer external technical dependencies | Not started | Not started |
-| `chapters/02-market-and-viability.md` | P2 | Market/project claims stale quickly and need broad verification | Not started | Not started |
-| `chapters/07-tokenomics-and-incentives.md` | P2 | Economics claims require current protocol docs and market data | Not started | Not started |
-| `chapters/00-research-master.md` | P3 | Mixed snapshot; should be split into source-backed claims or superseded by later chapters | Not started | Not started |
+| `chapters/16-benchmark-schema-and-measurement-validity.md` | P0 | Ground truth for harness claims; constrains Ch01–06 | Grounded in harness + CursiveRoot | Validated per channel (see VALIDATION.md) |
+| `chapters/17-mutation-safety-and-permission-law.md` | P0 | Self-mutation permission law | Source-backed synthesis | Supported; implementation pending |
+| `chapters/06-security-and-hardening.md` | P1 | Security claims are high-impact and time-sensitive | Living layer added 2026-06-24 | Partially reconciled; deployment tests open |
+| `chapters/04-gpu-and-accelerator-tuning.md` | P1 | Hardware-specific claims require platform validation | Living layer added 2026-06-24 | Partially reconciled with Ch16 GPU-pin findings |
+| `chapters/01-first-principles-and-strategy.md` | P1 | Strategic claims need evidence | Living layer + red-team notes 2026-06-24 | Reconciled with Ch16; TCP example Disproven |
+| `chapters/02-market-and-viability.md` | P2 | Market/project claims stale quickly | Living layer + red-team notes 2026-06-24 | TEE/Covenant flags resolved in living layer |
+| `chapters/07-tokenomics-and-incentives.md` | P2 | DePIN comparison only for CursiveOS | Living layer marks Superseded by Ch11 | Superseded for product economics |
+| `chapters/00-research-master.md` | P3 | March 2026 snapshot | Living layer marks superseded | Historical only; use Ch10–13 |
 
 ## Extracted Sources
 

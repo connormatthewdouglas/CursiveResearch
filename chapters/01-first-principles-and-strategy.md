@@ -4,6 +4,36 @@ Source: sources/original-docx/CursiveOS_First_Principles_Report.docx
 Git blob SHA: 20ff2bd8016cff5bb1b905d37720430a5ab0e360
 -->
 
+## Corpus status (living layer)
+
+**Last reconciled:** 2026-06-24
+**Confidence:** Strategic framing Supported; §2.1 TCP example Disproven; §2.2 narrowed
+**Read with:** [Chapter 16](16-benchmark-schema-and-measurement-validity.md), [Chapter 10](10-seed-organism-and-sensor-array.md), [Chapter 11](11-bitcoin-native-economics-and-proof-of-useful-optimization.md), [VALIDATION.md](../VALIDATION.md)
+
+### Authoritative for
+
+- Moat reframing (database = asset; speed + financial alignment + brand = moat)
+- Product vs moat distinction (§7)
+- Incentive timing vulnerability (§5) — still load-bearing; aligns with Chapter 11 Bitcoin-native design
+- Principles 2.3–2.5 (measurement credibility, CursiveRoot data gap, incentivized feedback)
+- OS-layer bottlenecks exist — but **which knobs matter** is an empirical question answered in Chapter 16
+
+### Superseded or narrowed (do not cite externally)
+
+| Import § | Issue | Current guidance | Evidence |
+| --- | --- | --- | --- |
+| §2.1 (TCP 212 KB / "1990s modem") | Conflates `net.core.rmem_max` ceiling with per-connection default; autotuning has been on since ~2.6.x | Linux defaults *do* leave performance on the table, but the flagship **network** example is **CUBIC→BBR under loss** on real ≤1GbE links — not a static buffer ceiling. Governor and GPU idle-exit behavior remain valid examples. | Chapter 16 §2.1, §5 item 6; `validation/notes/2026-06-22-ch01-buffer-default-overstatement-challenge.md`, `validation/notes/2026-06-23-ch01-2.1-tcp-buffer-claim-redteam-challenge.md` |
+| §2.2 (TCP buffer throttles all workloads equally) | Overgeneralizes from the buffer example | OS-layer tuning **can** be workload-agnostic in *mechanism* (sysctl, governor), but **magnitude** is hardware- and channel-scoped (e.g. cold-start −51% desktop Arc only; network win is BBR). | Chapter 16 §5 items 5–6; VALIDATION cold-start hardware-scoped row |
+| Research master assessment (network +454–616%) | Loopback/emulation magnitude; not real-path scope | Use real-path scoped claims: BBR +1875% under loss on ≤1GbE; buffer stack ~0%. Loopback figures are mechanism-only. | Chapter 16 §5 item 6; VALIDATION network headline row |
+| Research master ("quote §2.1 verbatim") | Would propagate disproven TCP example | Quote moat/product/incentive sections; **do not** quote §2.1 TCP sentence or unscoped network deltas. | This living layer |
+
+### Open until experiment/hardware
+
+- Cold-start magnitude is repeatable (CV 0.002) but **not yet order-robust** — run `experiments/cold-start-order-cache-confound-plan.md` before acceptance-grade cold-start claims.
+- Whether the LLM **proposer** beats random search (CH05-BM-002) — `experiments/proposer-vs-random-tuning-experiment.md`.
+
+---
+
 # First Principles and Strategy
 
 CURSIVEOS

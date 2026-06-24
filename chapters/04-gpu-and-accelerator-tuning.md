@@ -4,6 +4,28 @@ Source: sources/original-docx/3. GPU Kernel Tweaks for Mining_AI.docx
 Git blob SHA: 726912342c92bec12771ffcf36db5ecf8231033d
 -->
 
+## Corpus status (living layer)
+
+**Last reconciled:** 2026-06-24
+**Confidence:** Partly Supported for mechanisms; hardware-specific gains require per-platform validation
+**Read with:** [Chapter 16](16-benchmark-schema-and-measurement-validity.md) (cold-start hardware-scoped, GPU pin ~0 W idle), [Chapter 09](09-local-agent-arc-b70.md) (Arc stack), `experiments/gpu-accelerator-tuning-validation-plan.md`
+
+### Authoritative for
+
+- GPU power-state, SR-IOV, hugepages, NUMA — as **experiment backlog** and hardware-specific research leads
+- Cold-start / TTFT sensitivity framing (aligns with harness cold-start channel)
+
+### Superseded or narrowed
+
+- **v0.8 GPU frequency pin** validated as ~0 W idle cost and ~0 cold-start contribution on Arc A750 (Chapter 16 §5 items 1, 8) — do not cite pin as load-bearing win.
+- Cross-vendor claims (Polaris, Arc, SR-IOV counts) need per-machine confirmation before preset promotion (Chapter 10 hardware-scoped fitness).
+
+### Open until experiment/hardware
+
+- `experiments/gpu-accelerator-tuning-validation-plan.md` and Arc B70 plan (Chapter 09)
+
+---
+
 # GPU and Accelerator Tuning
 
 ## Comprehensive Systems Optimization for Heterogeneous Workloads: Kernel Tuning, Power Scaling, and GPU Multiplexing in 2026

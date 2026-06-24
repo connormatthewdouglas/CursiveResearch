@@ -4,6 +4,28 @@ Source: sources/original-docx/6. Hardening linux.docx
 Git blob SHA: d6f761544e05ccddb4c0269b3d58e059d5bbcad7
 -->
 
+## Corpus status (living layer)
+
+**Last reconciled:** 2026-06-24
+**Confidence:** Partly Supported for external-threat hardening; distinct from organism self-mutation law (Chapter 17)
+**Read with:** [Chapter 17](17-mutation-safety-and-permission-law.md) (inverted threat: self-mutation), [Chapter 12](12-measurement-daemon-and-natural-language-shell.md) (agent containment), [Chapter 02](02-market-and-viability.md) living layer (TEE claims)
+
+### Authoritative for
+
+- Defense-in-depth checklist leads: firewall, SSH, IDS, supply-chain awareness for operator hosts
+- DePIN weight-copying / subnet attack context as background
+
+### Superseded or narrowed
+
+- **TEE/bus attestation as oracle solution** — see Chapter 02 living layer; prefer Chapters 10–11 non-TEE confirmation stack for CursiveOS.
+- Deployment recommendations remain **Unvalidated** until `experiments/security-hardening-validation-plan.md` runs on target hardware.
+
+### Open until experiment/hardware
+
+- Tiered hardening baseline per platform; immune-sensor prototype (Chapter 10 / pipeline)
+
+---
+
 # Security and Hardening
 
 ## Hardening Linux servers for crypto mining and AI agent infrastructure in 2026

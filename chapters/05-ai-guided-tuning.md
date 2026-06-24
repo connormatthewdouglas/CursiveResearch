@@ -4,6 +4,32 @@ Source: sources/original-docx/5. ai guided tuning_.docx
 Git blob SHA: a17532ea3758c27bfd182795d517aee2b80be108
 -->
 
+## Corpus status (living layer)
+
+**Last reconciled:** 2026-06-24
+**Confidence:** Architecture partly Supported; proposer value Unvalidated (CH05-BM-002)
+**Read with:** [Chapter 15](15-foundations-of-software-organisms-rsi-critical-synthesis.md) (verifier/fitness), [Chapter 12](12-measurement-daemon-and-natural-language-shell.md) (shell vs daemon), [Chapter 16](16-benchmark-schema-and-measurement-validity.md), `experiments/proposer-vs-random-tuning-experiment.md`
+
+Historical note: import text references **TAO-Forge**; current names are CursiveOS / CursiveRoot.
+
+### Authoritative for
+
+- Survey of SchedCP, OS-R1, PolicySmith, SemaTune, BranchFS — see SRC-05-* in `sources/extracted-source-index.md`
+- Architectural patterns: MCP control plane, rule-based rewards, transactional rollback, workload analyzers
+
+### Superseded or narrowed
+
+- **"5–25% improvements"** and ranking/effort estimates are import claims — not locally reproduced.
+- **Continuous unattended tuning** is Disproven safe today (Chapter 09 / VALIDATION unattended execution row). Any loop must respect Chapter 12 daemon/shell split and Chapter 17 permission law.
+- The canonical falsifiable test for "does the proposer add value?" is `experiments/proposer-vs-random-tuning-experiment.md`, not generic optimism about LLM tuning.
+
+### Open until experiment/hardware
+
+- CH05-BM-002 proposer vs random search on cold-start channel
+- Repo/license inspection for SRC-05-002, 004, 006 per extraction index
+
+---
+
 # AI-Guided Tuning
 
 5. Ai guided Linux tuning Executive Summary

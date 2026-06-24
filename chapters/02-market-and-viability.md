@@ -4,6 +4,34 @@ Source: sources/original-docx/1. TAO-OS Research and Viability Report.docx
 Git blob SHA: 728366a746ea6ecf1f7488f1f6e39dc6666df303
 -->
 
+## Corpus status (living layer)
+
+**Last reconciled:** 2026-06-24
+**Confidence:** Market context Unvalidated; flagged security/benchmark passages Disproven for cited scope
+**Read with:** [Chapter 11](11-bitcoin-native-economics-and-proof-of-useful-optimization.md) (current CursiveOS economics), [Chapter 06](06-security-and-hardening.md), [Chapter 16](16-benchmark-schema-and-measurement-validity.md), [VALIDATION.md](../VALIDATION.md)
+
+Historical note: this chapter uses the pre-rebrand name **TAO-OS** in the import. CursiveOS is the current product name.
+
+### Authoritative for
+
+- Industrial/mining and DePIN market *context* (difficulty, jitter sensitivity, operator economics) as background — verify numbers before external use
+- Competitive positioning vs management-centric stacks (HiveOS, etc.) as a research lead
+- AI-guided kernel tuning motivation (high-dimensional knob space)
+
+### Superseded or narrowed (do not cite externally)
+
+| Import § | Issue | Current guidance | Evidence |
+| --- | --- | --- | --- |
+| TDX "hardened against physical bus-level attacks" + attestation table | Overstates TEE bus integrity for operator physical-access threat model | DePIN oracle defenses must not rest on TEE bus hardness alone. Use population confirmation, fingerprint cross-checks, anomaly detection, economic slashing (Chapters 10–11). TEE may still help other threat models — not this one. | `validation/notes/2026-06-20-ch02-tdx-bus-attack-resistance-challenge.md` |
+| Covenant-72B "GPT-4-class" / "data-center-level" | 67.1 MMLU ≈ Llama-2-70B / GPT-3.5 tier, ~19 pts below GPT-4 | Decentralized 72B training at scale is real; compare to **open base models of its era** (LLaMA-2-70B, LLM360 K2), not GPT-4. | `validation/notes/2026-06-21-ch02-covenant-72b-gpt4-class-overstatement-challenge.md` |
+
+### Open until experiment/hardware
+
+- Current subnet counts, APY, and March 2026 market tables — refresh before investor or competitive claims.
+- CursiveOS economics: use Chapter 11, not this chapter's token/pool assumptions.
+
+---
+
 # Market and Viability
 
 ## TAO-OS: AI-Guided Linux Optimization for Crypto Miners
