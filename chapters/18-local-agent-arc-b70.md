@@ -40,6 +40,16 @@ Status: Source import from uploaded DOCX. Requires source extraction and validat
 
 Validation plan: see `experiments/arc-b70-local-agent-benchmark-plan.md`. Chapter 18 performance, backend, model-selection, long-context, and tool-calling claims should not be treated as decision-grade until reproduced through that plan.
 
+## Corpus integration notes (2026-06-24)
+
+Targeted narrowing for the DOCX import below.
+
+1. **Hardware specs (TFLOPS, TOPS, bandwidth):** Intel product brief + `experiments/arc-b70-local-agent-benchmark-plan.md` — **Unvalidated** until local reproduction.
+2. **Hermes context 64k:** **Validated** for inspected deployment only (VALIDATION Ch18); do not generalize across builds.
+3. **Unattended repo mutation:** **Disproven** safe today — require Ch06 containment or explicit approval before mutating automation.
+4. **Workstation tier:** Ch10 documents Ollama/llama.cpp split; shell LLM must not write CursiveRoot sensor truth (Ch05).
+5. **Tool reliability:** `papers/software-engineering-agents/reflexion/` — execution post-checks required; OVMS smoke test is not task-grade.
+
 ## Source Import
 
 ## Engineering Local Agent Workloads on the Intel Arc Pro B70: Hardware Architecture, Model Selection, and Software Co-Design

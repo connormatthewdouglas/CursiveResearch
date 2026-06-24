@@ -4,6 +4,20 @@ This file records meaningful changes to research guidance, validation status,
 and corpus process. It is intended to be readable without reconstructing a
 chain of supporting documents.
 
+## 2026-06-24 - Verification Contract + Full DOCX Integration Notes
+
+Changed:
+- `tools/verification-contract.json` + `tools/run-verification.ps1` — contract-driven
+  verification (exits non-zero before writing evidence if counts/markers/samples fail).
+- Sample list now includes **two** new chapters (Ch08 + Ch10) per plan step 3.
+- `## Corpus integration notes` added to all DOCX-import chapters: Ch16, Ch18–Ch22
+  (Ch13–15 already had them); total integration blocks = 9.
+- `REINFORCEMENT_LOG.md` — per-chapter audit table (reviewed, gaps, location, sources).
+
+Reason:
+- Structural fix per goal strategy: bind verification to explicit contract; make
+  DOCX reinforcement auditable without editing preserved import paragraphs.
+
 ## 2026-06-24 - Body-Level Corpus Integration (Ch13–15)
 
 Changed:

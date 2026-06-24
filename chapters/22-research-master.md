@@ -36,6 +36,16 @@ This file is a **point-in-time repo observation log** from March 2026. It is use
 
 # Research Master
 
+## Corpus integration notes (2026-06-24)
+
+**Historical March 2026 snapshot only** — not current architecture, harness, or measurement canon.
+
+1. **Preset versions / CursiveRoot schema:** See main `CursiveOS` repo + Ch00 for current harness truth — not this import.
+2. **Network / cold-start magnitudes:** Migrated to Ch00 + VALIDATION.md — loopback figures are mechanism-only (Ch09).
+3. **Economics / incentives:** Migrated to Ch01, Ch02, Ch05 — do not cite rebrand-era TAO-OS token assumptions.
+4. **Kernel/GPU leads (sched_ext, gpu_ext):** Verify via Ch13/Ch14 + experiments before preset promotion.
+5. **+5–15% inference claims:** **Unvalidated** — require Ch00 harness on target hardware class.
+
 Block 1:
 
 ### GitHub Repo State – CursiveOS (formerly TAO-OS) – 26 March 2026

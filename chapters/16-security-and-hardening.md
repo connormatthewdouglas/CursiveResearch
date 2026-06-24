@@ -37,6 +37,16 @@ Git blob SHA: d6f761544e05ccddb4c0269b3d58e059d5bbcad7
 
 # Security and Hardening
 
+## Corpus integration notes (2026-06-24)
+
+Targeted narrowing for the DOCX import below. External-threat hardening is distinct from organism self-mutation law (Ch06).
+
+1. **TEE / attestation as DePIN oracle:** Import may cite TEE — **Disproven** for operator physical-access bus attacks (Ch20 living layer; VALIDATION). Prefer Ch01–11 population confirmation + Ch11 fingerprints.
+2. **Bittensor PyPi / weight-copying:** Real supply-chain incidents (2024–2025) — background for immune-sensor backlog (Ch01); not a complete CursiveOS defense.
+3. **CIS/STIG checklists:** Operational leads — run `experiments/security-hardening-validation-plan.md` before fleet-wide defaults.
+4. **Agent + mining convergence:** Ch05 containment required; prompt injection must not reach daemon sensor writes.
+5. **Subnet attack tables:** Market-context only; verify current counts before external citation.
+
 ## Hardening Linux servers for crypto mining and AI agent infrastructure in 2026
 
 **Defense-in-depth is no longer optional for mining rigs and AI inference nodes.** The convergence of cryptojacking campaigns, DePIN supply chain attacks (Bittensor's $8M PyPi incident), [The Block](https://www.theblock.co/post/303547/bittensor-exploit) and increasingly sophisticated exploitation of GPU-enabled servers demands a layered security posture spanning kernel, network, access control, monitoring, and decentralized trust verification. This guide synthesizes the most current 2025–2026 hardening practices across five critical domains: kernel hardening, firewall configuration, SSH access control, intrusion detection, and DePIN subnet security. The threat landscape has shifted — attackers now target not just the software stack but the entire trust chain, from kernel modules through package managers to consensus weight manipulation. [Bittensor](https://docs.learnbittensor.org/concepts/weight-copying-in-bittensor)

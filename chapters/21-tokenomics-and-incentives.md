@@ -38,6 +38,16 @@ CursiveOS Layer 5 v3.3 is **Bitcoin-native**: no custom token, no yield pool, no
 
 # Tokenomics and Incentives
 
+## Corpus integration notes (2026-06-24)
+
+**Superseded for CursiveOS product economics** — Ch02 Layer 5 v3.3 is authoritative. This import is DePIN comparison research only.
+
+1. **Custom token / emissions:** CursiveOS design rejects token-first model — no yield pool, no governance token (Ch02).
+2. **Burn-and-mint / demand-weighted patterns:** Useful background for why sensor-gated BTC differs (Ch12 OSS comparison).
+3. **Goodhart / weight-copying:** Skalse et al. (2022) + Bittensor incidents — proxy metrics under token incentives mirror Ch01 sensor-gaming risk.
+4. **Hybrid model recommendations in import:** Brainstorming only — do not implement without Ch00-validated fitness oracle.
+5. **Public messaging:** Never cite this chapter for CursiveOS payout policy; use Ch02 + main-repo Layer 5 spec.
+
 4. Research the best DePIN tokenomics models in 2026 from Helium Render io.net Bittensor and any new projects. Compare their incentive engines reward vaults burn mechanisms and demand-driven emissions. Highlight what worked what failed and recommend a hybrid model that fits our data-contribution → optimization-reward loop without high inflation risk.
 
 The most resilient DePIN tokenomics in 2026 converge on a common pattern: usage-priced in fiat or stable credits, strong buy-and-burn from real revenue, capped or sharply declining emissions, and rewards that are at least partly demand- or performance-weighted rather than purely time-based inflation.[1][2][3] Helium, Render, io.net, and Bittensor each implement pieces of this, while Hivemapper and Grass illustrate both improvements and failure modes; a hybrid model for your “data-contribution → optimization → reward” loop should combine Helium/Render-style burn-and-mint, io.net-style USD-denominated payouts with protocol-level burn, and Bittensor-style performance- and flow-weighted emissions, all under a strict net-emission budget.

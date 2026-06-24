@@ -42,6 +42,16 @@ Git blob SHA: 20ff2bd8016cff5bb1b905d37720430a5ab0e360
 
 # First Principles and Strategy
 
+## Corpus integration notes (2026-06-24)
+
+Targeted narrowing for the DOCX import below. **Do not cite import §2.1 TCP buffer example externally.**
+
+1. **§2.1 TCP 212 KB / modem framing:** **Disproven** — conflates `rmem_max` ceiling with per-connection default; real ≤1GbE win is BBR under loss (Ch00/Ch09; `validation/notes/2026-06-22-*`, `2026-06-23-*`).
+2. **§2.2 workload-agnostic magnitude:** Narrowed — mechanism (sysctl, governor) can be broad; **magnitude** is hardware-scoped (cold-start −51% desktop Arc only; Ch00 §5 item 5).
+3. **Network +454–616% deltas:** Loopback/emulation scope only — public claim = switch to BBR on lossy ≤1GbE links (VALIDATION Ch00 network headline).
+4. **Incentive timing (§5):** Still Supported — aligns with Ch02 Bitcoin-native contributor model vs token emissions (Ch21 comparison only).
+5. **Proposer vs random (CH05-BM-002):** Open — `experiments/proposer-vs-random-tuning-experiment.md` before claiming LLM tuning beats search.
+
 CURSIVEOS
 
 First Principles Analysis

@@ -39,6 +39,16 @@ Historical note: this chapter uses the pre-rebrand name **TAO-OS** in the import
 
 # Market and Viability
 
+## Corpus integration notes (2026-06-24)
+
+Targeted narrowing for the DOCX import below. Pre-rebrand **TAO-OS** name is historical only.
+
+1. **TDX bus hardening table:** **Disproven** for operator physical-access oracle — use Ch01–11 confirmation stack (VALIDATION Ch20; `validation/notes/2026-06-20-*`).
+2. **Covenant-72B "GPT-4-class":** **Disproven** — 67.1 MMLU is open-base tier (~LLaMA-2-70B), not GPT-4 (`validation/notes/2026-06-21-*`).
+3. **March 2026 subnet/APY tables:** **Unvalidated** — refresh before investor or competitive claims.
+4. **CursiveOS economics:** Authoritative design is Ch02 Layer 5 v3.3 (BTC-native), not import token/pool assumptions.
+5. **AI-guided tuning motivation:** Valid as research lead — magnitudes require Ch15 + proposer experiment (CH05-BM-002).
+
 ## TAO-OS: AI-Guided Linux Optimization for Crypto Miners
 
 ### Industrial Context and the Zettahash Era

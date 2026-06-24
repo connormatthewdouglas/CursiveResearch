@@ -1,0 +1,45 @@
+{
+  "version": "2026-06-24",
+  "description": "Mirrors goal/plan.md verification gates. run-verification.ps1 must pass all checks before writing scratch evidence.",
+  "chapters_total": 23,
+  "papers_total": 25,
+  "native_chapters": ["00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "17"],
+  "docx_import_chapters": ["13", "14", "15", "16", "18", "19", "20", "21", "22"],
+  "sample_chapters": [
+    "00-benchmark-schema-and-measurement-validity.md",
+    "03-peer-reviewed-research-recursive-self-improvement-and-agentic-evolution.md",
+    "04-foundations-of-software-organisms-rsi-critical-synthesis.md",
+    "14-gpu-and-accelerator-tuning.md",
+    "19-first-principles-and-strategy.md",
+    "08-population-confirmation-and-fleet-statistics.md",
+    "10-local-llm-inference-runtime-architecture.md"
+  ],
+  "sample_requirements": {
+    "early_docx_import": "19-first-principles-and-strategy.md",
+    "one_of_14_15": ["14-gpu-and-accelerator-tuning.md", "15-ai-guided-tuning.md"],
+    "new_chapters_from_08_12": ["08-population-confirmation-and-fleet-statistics.md", "10-local-llm-inference-runtime-architecture.md"],
+    "min_new_chapter_samples": 2
+  },
+  "markers": {
+    "living_layer": "## Corpus status (living layer)",
+    "reinforced_research": "## Reinforced research",
+    "corpus_integration": "## Corpus integration notes"
+  },
+  "marker_expectations": {
+    "all_chapters_living_layer": 23,
+    "all_chapters_reinforced": 23,
+    "docx_chapters_integration": 9
+  },
+  "paper_example_slugs": ["ai-agents-that-matter", "alphaevolve", "swe-agent"],
+  "scratch_outputs": [
+    "corpus-structure.txt",
+    "index-check.txt",
+    "chapter-samples.txt",
+    "paper-intake-evidence.txt",
+    "changelog-evidence.txt",
+    "supporting-updates.txt",
+    "changed-files-evidence.txt",
+    "marker-counts.txt",
+    "verification-contract-pass.txt"
+  ]
+}
