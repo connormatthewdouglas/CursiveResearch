@@ -61,6 +61,16 @@
     ],
     "min_corpus_inline_per_original": 1
   },
+  "markdown_hygiene_lint": {
+    "enabled": true,
+    "scope": "all tracked .md files (git ls-files '*.md')",
+    "on_violation": "FAIL verification and print offending file:line for each hit",
+    "rules": {
+      "mojibake_signature": "double-encoded UTF-8: the 'â€' sequence, or Ã/Â immediately followed by a non-space character",
+      "citation_span_artifact": "regex \\[span_\\d+\\]\\((?:start|end)_span\\)",
+      "collapsed_table": "a line containing ':---' together with alphanumeric table data cells (table flattened onto one line)"
+    }
+  },
   "canonical_script": "tools/run-verification.ps1",
   "paper_example_slugs": ["ai-agents-that-matter", "alphaevolve", "swe-agent"],
   "scratch_outputs": [

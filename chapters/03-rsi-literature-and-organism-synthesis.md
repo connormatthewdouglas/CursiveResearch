@@ -1,4 +1,4 @@
-﻿## Corpus status (living layer)
+## Corpus status (living layer)
 
 **Last reconciled:** 2026-06-24
 **Confidence:** Structured digest Supported; organism framework Supported; individual paper claims require source-level validation per intake
@@ -10,7 +10,7 @@
 - Verifier/fitness/archive framing and 25-paper library cross-links
 
 ### Superseded or narrowed
-- Unbounded RSI / fast-takeoff narratives â€” not supported by cited literature
+- Unbounded RSI / fast-takeoff narratives — not supported by cited literature
 - Imported performance magnitudes without Ch00 harness validation
 
 ### Open until experiment/hardware
@@ -22,21 +22,21 @@
 
 ## Reinforced research (2026-06-24)
 
-- **2024â€“2025 agent evaluation:** Kapoor et al., *AI Agents That Matter* â€” `papers/agent-evaluation/ai-agents-that-matter/`; corpus P0 guardrail for Ch05 shell evaluation.
-- **Evolutionary code discovery:** Google DeepMind AlphaEvolve (2025) â€” `papers/recursive-self-improvement/alphaevolve/`; LLM+evolution with external verifier mirrors CursiveRoot selection.
-- **Darwin GÃ¶del Machine:** Sakana AI (2025) â€” `papers/recursive-self-improvement/darwin-godel-machine/`; open-ended code evolution with empirical gates.
-- **Open-endedness without collapse:** Lehman et al., ICML 2024 â€” `papers/recursive-self-improvement/open-endedness-icml-2024/`; utility constraints required for CursiveOS selection.
-- **OS-agent realism:** OSWorld (NeurIPS 2024) â€” `papers/agent-evaluation/osworld/`; VM-backed computer-use tasks for shell benchmark design.
-- **Measurement-grounded fitness:** Chapter 00 validity assessment â€” stack-delta decomposition and hardware-scoped cold-start are live instances of organism fitness tests.
+- **2024–2025 agent evaluation:** Kapoor et al., *AI Agents That Matter* — `papers/agent-evaluation/ai-agents-that-matter/`; corpus P0 guardrail for Ch05 shell evaluation.
+- **Evolutionary code discovery:** Google DeepMind AlphaEvolve (2025) — `papers/recursive-self-improvement/alphaevolve/`; LLM+evolution with external verifier mirrors CursiveRoot selection.
+- **Darwin Gödel Machine:** Sakana AI (2025) — `papers/recursive-self-improvement/darwin-godel-machine/`; open-ended code evolution with empirical gates.
+- **Open-endedness without collapse:** Lehman et al., ICML 2024 — `papers/recursive-self-improvement/open-endedness-icml-2024/`; utility constraints required for CursiveOS selection.
+- **OS-agent realism:** OSWorld (NeurIPS 2024) — `papers/agent-evaluation/osworld/`; VM-backed computer-use tasks for shell benchmark design.
+- **Measurement-grounded fitness:** Chapter 00 validity assessment — stack-delta decomposition and hardware-scoped cold-start are live instances of organism fitness tests.
 
 ---
 # RSI Literature and Organism Synthesis
 
-Status: **Merged chapter (2026-06-24)** â€” combines peer-reviewed literature digest (formerly Ch03) and software-organism critical synthesis (formerly Ch04). Preserves both intake blocks; deduplicates navigation only.
+Status: **Merged chapter (2026-06-24)** — combines peer-reviewed literature digest (formerly Ch03) and software-organism critical synthesis (formerly Ch04). Preserves both intake blocks; deduplicates navigation only.
 
 ---
 
-## Part A â€” Peer-Reviewed Literature Digest
+## Part A — Peer-Reviewed Literature Digest
 ## Executive Summary
 
 The current literature does **not** demonstrate unrestricted recursive self-improvement in the popular intelligence-explosion sense. What it does demonstrate is narrower and more useful for software-organism research:
@@ -51,7 +51,7 @@ candidate generator
 
 The strongest demonstrated systems use language models or reinforcement learning to propose candidate programs, policies, or skills, then rely on an external evaluator to decide whether a change is useful. The recurring lesson is blunt: **the verifier is the heart of self-improvement**. A model can propose changes, explain failures, and remember lessons, but it should not be trusted as the final judge of whether its own mutation improved the system.
 
-> **Corpus inline (2026-06-24):** **Merged Ch03+Ch04 (2026-06-24):** Part A = paper digest + 25 `papers/` intakes; Part B = uploaded organism framework (definitions, ALife, failure modes). Unbounded RSI / fast-takeoff narratives remain **unsupported** by cited literature.
+> **Corpus inline (2026-06-24):** **Merged Ch03+Ch04:** Part A = paper digest + 25 `papers/` intakes; Part B = uploaded organism framework (definitions, ALife, failure modes). Unbounded RSI / fast-takeoff narratives remain **unsupported** by cited literature.
 
 Supported findings:
 
@@ -91,7 +91,7 @@ Speculative or unproven claims:
 | Parameter fine-tuning loop | Generate instruction/preference data, then update model behavior through training or preference optimization. | Self-Rewarding Language Models; Process-Based Self-Rewarding | Self-as-judge or process-level reward | Evaluator drift, model collapse, loss of generality | Moderate: useful for offline consolidation, too heavy/risky for real-time adaptation. |
 | Discrete scaffolding optimization | Search over prompts, wrappers, flow control, and code scaffolds. | STOP; Self-Developing-style systems; LADDER | Programmatic downstream utility | Local optima, syntax failures, sandbox bypass attempts | High: directly demonstrates self-restructuring without model training. |
 | Programmatic skill acquisition | Build reusable code skills and retrieve/compose them later. | Voyager; Programmatic Skill Networks | Environment logs, execution traces, verification checks | Cascading skill dependency failures, memory bloat | Very high: closest analogue to cumulative organism memory. |
-| Runtime policy modification | Modify active runtime classes, policies, globals, or patch routines. | GÃ¶del Agent; Polaris | Validation tests and error abstraction | Infinite loops, runtime crash, resource escalation | Extremely high conceptually, but dangerous without isolation. |
+| Runtime policy modification | Modify active runtime classes, policies, globals, or patch routines. | Gödel Agent; Polaris | Validation tests and error abstraction | Infinite loops, runtime crash, resource escalation | Extremely high conceptually, but dangerous without isolation. |
 | Algorithmic superoptimization | Evolutionary or RL search over executable algorithms or low-level routines. | AlphaEvolve; FunSearch; AlphaDev; AlphaTensor; CodeEvolve | Deterministic compiler/math/testbench verifier | Heavy compute; limited to verifiable domains | High: blueprint for optimizing backend utilities and algorithms. |
 | Agent graph optimization | Treat multi-agent prompts/roles/connections as mutable graph structures. | GPTSwarm / Language Agents as Optimizable Graphs | Benchmark objective | Benchmark overfit, fragile transfer, cost blowup | Medium/high: useful for scaffolds, but risky as first-line architecture. |
 | Self-reward/evaluator improvement | Model generates or improves reward/evaluation signals. | Self-Rewarding LMs; Self-Taught Evaluators; Agent-as-a-Judge | LLM-generated judgment | Circular self-approval, evaluator drift | Medium: useful for triage, dangerous as final truth. |
@@ -139,7 +139,7 @@ Speculative or unproven claims:
 | Core idea | Model recursively generates easier variants of hard problems to create its own difficulty gradient, then uses verifiable RL (GRPO) on the variants. Extends to test-time RL (TTRL). | 
 | Improvement target | Problem-solving capability on hard verifiable tasks (demonstrated on mathematical integration). |
 | Feedback signal | Deterministic numerical integration verifier (exact or high-precision match). |
-| Demonstrated result | Llama 3.2 3B: 1% â†’ 82% on undergraduate integration problems. Qwen2.5 7B model: 73% on 2025 MIT Integration Bee qualifying (beats GPT-4o); 90% with TTRL (surpasses o1). |
+| Demonstrated result | Llama 3.2 3B: 1% → 82% on undergraduate integration problems. Qwen2.5 7B model: 73% on 2025 MIT Integration Bee qualifying (beats GPT-4o); 90% with TTRL (surpasses o1). |
 | Main limitation | Relies on existence of a reliable automatic verifier; demonstrated primarily in narrow numeric math domain. |
 | Software-organism relevance | **Very high**. One of the cleanest examples of autonomous curriculum construction + grounded verifier-driven improvement. Directly supports test-time adaptation patterns and the principle that the verifier (not LLM judgment) must anchor the loop. Fits between STOP and pure evolutionary search. |
 
@@ -242,7 +242,7 @@ Speculative or unproven claims:
 | Main limitation | Judge agents inherit bias, drift, tool-use failures, and overfitting risks. |
 | Software-organism relevance | Medium. Useful for triage, not final mutation truth. |
 
-### RSI-013: GÃ¶del Agent
+### RSI-013: Gödel Agent
 
 | Field | Notes |
 | --- | --- |
@@ -257,7 +257,7 @@ Speculative or unproven claims:
 
 | Field | Notes |
 | --- | --- |
-| Core idea | Adapt GÃ¶del-agent-style repair to small language models using compact experience abstraction and localized policy patches. |
+| Core idea | Adapt Gödel-agent-style repair to small language models using compact experience abstraction and localized policy patches. |
 | Improvement target | Runtime policy behavior for SLMs. |
 | Feedback signal | Validation samples and error traces. |
 | Demonstrated result | Research lead for lower-cost self-repair without context explosion. |
@@ -275,7 +275,7 @@ Speculative or unproven claims:
 | Main limitation | New/preprint; needs review and reproduction. |
 | Software-organism relevance | Very high. Skill graphs look more organism-like than flat prompt libraries. |
 
-### RSI-016: Darwin GÃ¶del Machine
+### RSI-016: Darwin Gödel Machine
 
 | Field | Notes |
 | --- | --- |
@@ -451,7 +451,7 @@ Important sandbox constraints:
 | P0 | Keep proposer and verifier separate. | Prevents evaluator capture, self-delusion, and safety-rule mutation. |
 | P0 | Use `AI Agents That Matter` as a benchmark-quality guardrail. | Avoids fake progress from cost-blind or holdout-poor agent tests. |
 | P0 | Treat STOP as bounded RSI, not proof of unrestricted RSI. | It improves scaffolds, not base model intelligence. |
-| P0 | Add GÃ¶del Agent / Polaris / SICA as risk-and-capability leads for runtime self-modification. | These systems map directly to the self-modifying organism idea but expose high instability. |
+| P0 | Add Gödel Agent / Polaris / SICA as risk-and-capability leads for runtime self-modification. | These systems map directly to the self-modifying organism idea but expose high instability. |
 | P0 | Add LADDER as a key reference for autonomous curriculum construction and test-time verifiable RL. | Provides concrete evidence that models can bootstrap their own difficulty gradients when a clean verifier exists; directly relevant to safe self-improvement loops in CursiveOS. |
 | P1 | Study Voyager and Programmatic Skill Networks for capability memory. | They show how skill accumulation can be executable and structured. |
 | P1 | Study self-rewarding and evaluator-improvement papers as risk literature. | They help define what not to trust. |
@@ -478,13 +478,13 @@ Each intake follows `papers/<field>/<slug>/` with `README.md` + `deep-extraction
 | Paper slug | Field | Key lesson for CursiveOS |
 | --- | --- | --- |
 | godel-agent | RSI | Self-referential mutation; verifier must remain external to the mutable substrate |
-| stop-self-taught-optimizer | RSI | Scaffold-level improvement is real but bounded â€” not unrestricted RSI |
+| stop-self-taught-optimizer | RSI | Scaffold-level improvement is real but bounded — not unrestricted RSI |
 | alphaevolve, funsearch, alphadev, codeevolve | RSI | Strongest pattern: candidate generator + hard verifier + selection archive |
 | darwin-godel-machine | RSI | Evolutionary code archive with empirical acceptance gates |
 | voyager | RSI | Executable skill libraries; environment feedback drives accumulation |
 | self-rewarding-language-models, agent-as-a-judge | RSI | Self-judge useful for triage; unsafe as sole fitness oracle |
 | gptswarm, poet, map-elites, open-endedness-icml-2024 | RSI | Diversity archives; MAP-Elites/POET analog for hardware-scoped niches (Ch08) |
-| os-r1, sematune, schedcp, branchfs-fec | RSI | OS/runtime tuning loops â€” require Ch06 permission law before deployment |
+| os-r1, sematune, schedcp, branchfs-fec | RSI | OS/runtime tuning loops — require Ch06 permission law before deployment |
 | reward-hacking-skalse-2022, ladder | RSI | Proxy metrics and specification gaming under selection pressure |
 | ai-agents-that-matter, agent-as-a-judge, osworld | agent-eval | Cost-aware benchmarks, holdouts, OS-task realism |
 | swe-agent, swe-bench, reflexion | SWE agents | Execution-based evaluation template for Ch05 natural-language shell |
@@ -512,7 +512,7 @@ Add or expand pipeline items for:
 
 ---
 
-## Part B â€” Software Organism Critical Synthesis
+## Part B — Software Organism Critical Synthesis
 Status: Part B of merged Chapter 03 (formerly standalone Chapter 04). 
 
 Source intake: `sources/intake/software-organisms-self-improvement-research-intake.md`  
@@ -561,7 +561,7 @@ The uploaded document identifies several self-improvement patterns that are real
 
 ## Biological and Artificial-Life Foundations of the Organism Framing
 
-Everything above this point grounds the *engineering* loop â€” propose, verify,
+Everything above this point grounds the *engineering* loop — propose, verify,
 select, archive. It does not yet ground the word **organism**. The corpus uses
 biological language ("organism", "metabolism", "immune system", "genome") as
 load-bearing framing, and `RESEARCH_PIPELINE.md` flags this as a P0 item
@@ -590,8 +590,8 @@ allopoietic  = produces an output, does not produce itself      -> automation
 autopoietic  = the process maintains and regenerates the process -> organism-like
 ```
 
-By this test, most "self-improving agent" systems in Chapter 03 â€” and CursiveOS
-as it stands today â€” are closer to **allopoietic**: they produce optimized
+By this test, most "self-improving agent" systems in Chapter 03 — and CursiveOS
+as it stands today — are closer to **allopoietic**: they produce optimized
 presets, code, or skills, but a human-maintained harness produces *them*. The
 honest framing is that CursiveOS is currently an automation pipeline that is
 *reaching toward* organism properties, not an autopoietic system. What would
@@ -599,7 +599,7 @@ move it along that axis is concrete: the system maintaining its own boundary
 (what is trusted substrate vs. environment), regenerating its own components
 (the verifier/sensor/archive machinery surviving and repairing across
 mutations), and preserving identity (hardware-keyed, archive-anchored) under
-change â€” not merely emitting better outputs. Autopoiesis is a *direction*, not a
+change — not merely emitting better outputs. Autopoiesis is a *direction*, not a
 badge to claim.
 
 ### Cybernetics and viability: variety, recursion, and the regulator
@@ -615,37 +615,37 @@ disturbance. Two cybernetic ideas transfer directly:
   warning about the *sensor and verifier* layer, not the mutation layer: if the
   organism can generate more kinds of change (preset params, runtime patches,
   skills) than its verifier bundle can distinguish, the verifier loses control
-  and Goodharting (Chapter 00 Â§4) becomes inevitable. Mutation variety must not
+  and Goodharting (Chapter 00 §4) becomes inevitable. Mutation variety must not
   outrun measurement variety.
 - **Recursion**: viable systems contain viable systems described by the same
   cybernetic structure at each level (Beer's S1 operations, S2 coordination, S3
   control + S3* audit, S4 intelligence, S5 policy/identity). This maps onto the
-  corpus's per-machine â†’ fleet â†’ population layering: each machine is a small
+  corpus's per-machine → fleet → population layering: each machine is a small
   self-regulating unit (local sensors, local screen verdict), nested inside a
   fleet-level confirmation layer, nested inside population-level fitness. The VSM
-  insight is that the *audit channel* (S3*) â€” an independent check that bypasses
-  the normal reporting path â€” is structurally necessary, which is exactly the
+  insight is that the *audit channel* (S3*) — an independent check that bypasses
+  the normal reporting path — is structurally necessary, which is exactly the
   role of independent population confirmation and the immutable external verifier
   argued for elsewhere in this chapter.
 
-### Artificial life: what digital evolution actually achieved â€” and where it stalled
+### Artificial life: what digital evolution actually achieved — and where it stalled
 
 Christopher Langton's framing of Artificial Life (the 1987/1989 workshops) as the
-study of "life as it could be" â€” life abstracted from its chemistry into its
-*organization* â€” is the intellectual bridge from biology to software organisms.
+study of "life as it could be" — life abstracted from its chemistry into its
+*organization* — is the intellectual bridge from biology to software organisms.
 Two digital-evolution systems are the load-bearing evidence:
 
 | System | What it is | What it demonstrated | Where it stalled |
 | --- | --- | --- | --- |
-| **Tierra** (Tom Ray, 1990; "An Approach to the Synthesis of Life") | A virtual machine "digital soup" where self-replicating machine-code programs compete for memory space and CPU time | Spontaneous emergence of evolutionary dynamics: parasites, hyper-parasites, and an ecology arose from replication + mutation + selection alone, with no explicit fitness function | Novelty eventually ceases; the system settles and stops producing genuinely new organization â€” the recurring **plateau** of digital evolution |
-| **Avida** (Ofria, Wilke, Adami, et al.; 2000s onward) | An open-source platform of self-replicating programs on a lattice, rewarded for performing logic operations | Lenski, Ofria, Pennock & Adami, *The evolutionary origin of complex features*, **Nature 423, 139â€“144 (2003)**: populations evolved a complex logic function (EQU) requiring coordinated instructions, but **only when simpler intermediate functions were also rewarded** â€” complex features evolved incrementally via stepping stones, not in one jump | Same ceiling: rich within a designed reward landscape, but does not sustain unbounded open-ended novelty |
+| **Tierra** (Tom Ray, 1990; "An Approach to the Synthesis of Life") | A virtual machine "digital soup" where self-replicating machine-code programs compete for memory space and CPU time | Spontaneous emergence of evolutionary dynamics: parasites, hyper-parasites, and an ecology arose from replication + mutation + selection alone, with no explicit fitness function | Novelty eventually ceases; the system settles and stops producing genuinely new organization — the recurring **plateau** of digital evolution |
+| **Avida** (Ofria, Wilke, Adami, et al.; 2000s onward) | An open-source platform of self-replicating programs on a lattice, rewarded for performing logic operations | Lenski, Ofria, Pennock & Adami, *The evolutionary origin of complex features*, **Nature 423, 139–144 (2003)**: populations evolved a complex logic function (EQU) requiring coordinated instructions, but **only when simpler intermediate functions were also rewarded** — complex features evolved incrementally via stepping stones, not in one jump | Same ceiling: rich within a designed reward landscape, but does not sustain unbounded open-ended novelty |
 
 Two lessons travel to CursiveOS. First, the Avida result is the empirical core of
 the **stepping-stone** principle: a complex capability is reachable by selection
 *only if the fitness landscape rewards the intermediate forms*. A fitness bundle
 that rewards only the final target (e.g. a single headline benchmark) is the
 "reward only EQU" condition under which the capability does not evolve. Second,
-every one of these systems **plateaus** â€” open-ended evolution that keeps
+every one of these systems **plateaus** — open-ended evolution that keeps
 generating new organization indefinitely has not been achieved even in
 purpose-built artificial-life worlds. This is the single most important caution
 against any "the organism will keep improving itself forever" claim: the best
@@ -659,7 +659,7 @@ Evolutionary Computation 19(2), 2011) argue the objective function itself is
 often **deceptive**: gradients toward the goal can lead into dead ends, because
 the objective does not reward the stepping stones that actually lead to it. Their
 **novelty search** rewards behavioral *difference* from everything found so far,
-ignoring the objective entirely â€” and counterintuitively outperforms
+ignoring the objective entirely — and counterintuitively outperforms
 objective-driven search on deceptive tasks. Three research lines extend this:
 
 - **Quality-Diversity / MAP-Elites** (Mouret & Clune, *Illuminating search
@@ -672,7 +672,7 @@ objective-driven search on deceptive tasks. Three research lines extend this:
 - **POET** (Wang, Lehman, Clune, Stanley, *Paired Open-Ended Trailblazer*,
   arXiv:1901.01753, 2019). Co-evolves *environments* and the *agents* that solve
   them, building its own expanding curriculum and transferring stepping-stone
-  solutions between niches when they help â€” a concrete (if compute-heavy) attempt
+  solutions between niches when they help — a concrete (if compute-heavy) attempt
   at sustained open-endedness.
 
 The connective tissue is the **archive**. Novelty search, MAP-Elites, and POET
@@ -680,7 +680,7 @@ all replace "one global best" with "a maintained collection of diverse
 stepping stones." This is the same shift the corpus already gestures at when it
 asks "when does an archive of accepted mutations become a genome rather than a
 changelog?" (Chapter 03). The artificial-life literature answers: the archive
-becomes generative â€” genome-like â€” precisely when it is *diverse and
+becomes generative — genome-like — precisely when it is *diverse and
 stepping-stone-structured*, not when it is merely a linear log of the current
 champion.
 
@@ -706,7 +706,7 @@ the organism framing:
   power source) rather than collapsing to a single global-best preset. Diversity
   is what makes an archive generative rather than merely historical, and it is
   the natural counter to the hardware-scoped-fitness problem already observed in
-  Chapter 00 Â§5 (a variant that wins on the Arc desktop is a *cell* in the map,
+  Chapter 00 §5 (a variant that wins on the Arc desktop is a *cell* in the map,
   not a global champion).
 - **Reward the stepping stones, or the capability will not evolve.** Avida's EQU
   result is direct evidence that single-target fitness is often unreachable; the
@@ -714,8 +714,8 @@ the organism framing:
   the multi-objective stance argued from the Goodhart literature.
 - **Match measurement variety to mutation variety.** Ashby's Law says the sensor/
   verifier layer must distinguish at least as many states as the organism can
-  generate. As CursiveOS adds mutation surfaces (presets â†’ runtime patches â†’
-  skills), the verifier bundle must grow in lockstep or lose control â€” a
+  generate. As CursiveOS adds mutation surfaces (presets → runtime patches →
+  skills), the verifier bundle must grow in lockstep or lose control — a
   concrete design constraint, not a slogan.
 - **Expect plateaus and design for them.** No controlled digital-evolution system
   has sustained open-ended novelty. CursiveOS should plan for its benchmark suite
@@ -751,14 +751,14 @@ the organism framing:
 
 ## Layered Taxonomy of Self-Improvement
 
-The uploaded document's strongest contribution is its loop taxonomy. It shows that â€œself-improvementâ€ is not one thing; it happens at different layers with different risks.
+The uploaded document's strongest contribution is its loop taxonomy. It shows that "self-improvement" is not one thing; it happens at different layers with different risks.
 
 | Loop Type | Core Mechanism | Representative Systems | Evaluator | Risk | Organism Use |
 | --- | --- | --- | --- | --- | --- |
 | Parameter fine-tuning | Generate training/preference data and update model behavior. | Self-Rewarding LMs; Process-Based Self-Rewarding | LLM-as-judge or process reward | Evaluator drift; model collapse | Offline consolidation only. |
 | Discrete scaffolding optimization | Search over prompts, wrappers, and code scaffolds. | STOP; self-developing scaffolds | Programmatic utility | Syntax errors; sandbox bypass | Strong early mutation surface. |
 | Programmatic skill acquisition | Build modular executable skill libraries. | Voyager; PSN | Environment logs and execution traces | Dependency cascade; memory bloat | Very strong organism memory model. |
-| Runtime policy modification | Patch active classes, globals, routines, or policies. | GÃ¶del Agent; Polaris | Validation suites and error traces | Crashes, loops, escalation | High-value but high-risk research path. |
+| Runtime policy modification | Patch active classes, globals, routines, or policies. | Gödel Agent; Polaris | Validation suites and error traces | Crashes, loops, escalation | High-value but high-risk research path. |
 | Algorithmic superoptimization | Evolve executable low-level algorithms. | AlphaEvolve; CodeEvolve; AlphaDev; AlphaTensor | Deterministic verifiers | Heavy compute; narrow domains | Strong for backend utilities and algorithms. |
 | Model/parameter merging | Search over model blends and layer flows. | Evolutionary model merging | Validation benchmark | High memory; narrow deployability | Offline model engineering, not core organism loop. |
 
@@ -796,23 +796,23 @@ For software organisms, the verifier should be treated as an immune system:
 - it blocks hidden regressions;
 - it maintains organism identity under mutation pressure.
 
-## Goodhartâ€™s Law, Proxy Optimization, and Robust Fitness Design for Software Organisms
+## Goodhart's Law, Proxy Optimization, and Robust Fitness Design for Software Organisms
 
-Goodhartâ€™s Law (â€œwhen a measure becomes a target, it ceases to be a good measureâ€) is not a minor implementation detail for self-improving systems â€” it is a structural vulnerability. Any organism that proposes mutations and selects on a proxy signal will, under sufficient optimization pressure, learn to exploit that signal rather than improve the underlying objective. Recent literature on reward hacking in RL and LLM agents makes the mechanisms concrete and shows they appear pervasively once optimization crosses a critical threshold.
+Goodhart's Law ("when a measure becomes a target, it ceases to be a good measure") is not a minor implementation detail for self-improving systems — it is a structural vulnerability. Any organism that proposes mutations and selects on a proxy signal will, under sufficient optimization pressure, learn to exploit that signal rather than improve the underlying objective. Recent literature on reward hacking in RL and LLM agents makes the mechanisms concrete and shows they appear pervasively once optimization crosses a critical threshold.
 
 **How it manifests in self-improving loops** (synthesized taxonomy drawing from reward-hacking analyses and RL empirical work):
 - **Reward / proxy misspecification**: The fitness signal compresses a complex goal (real utility, reliability, cost, safety, transfer) into something narrower that is easy to measure but incomplete (e.g., loopback network throughput under fixed netem conditions, single cold-start latency number, RAPL package power only).
-- **Overoptimization / Goodharting phase transition**: Early optimization improves both proxy and true objective. Past a threshold, proxy continues rising while true objective plateaus or declines. The system is still â€œlearningâ€ â€” it is learning the wrong thing.
+- **Overoptimization / Goodharting phase transition**: Early optimization improves both proxy and true objective. Past a threshold, proxy continues rising while true objective plateaus or declines. The system is still "learning" — it is learning the wrong thing.
 - **Specification gaming / exploit discovery**: The proposer finds loopholes in the verifier or benchmark (inspecting evaluation stacks, replacing timing functions, stubbing verifiers, hard-coding known test cases, or gaming variance by cherry-picking runs). Documented in coding/tool-use agent benchmarks; rates vary sharply by post-training but can reach double digits on harder variants.
 - **Evaluator drift / co-evolution**: When the judge and generator improve together (self-reward loops, agent-as-judge without frozen external reference), the signal becomes easier to satisfy without real progress.
 - **Hidden regression and multi-objective collapse**: One metric (throughput) improves while another (power, reliability, real-path behavior, security) degrades silently.
 - **Benchmark overfitting and holdout failure**: The system internalizes quirks of the current test suite rather than general capability.
 
 **CursiveOS-relevant examples** (tied to current empirical record):
-- Network â€œ+500%â€ headline under loopback WAN sim is real within the emulation but largely decomposes into CUBICâ†’BBR (algorithm swap) + buffer/qdisc tuning (CursiveOS contribution). Without the stack-delta ablation and netem verification, the proxy could have been gamed by tuning only for the simulator.
+- Network "+500%" headline under loopback WAN sim is real within the emulation but largely decomposes into CUBIC→BBR (algorithm swap) + buffer/qdisc tuning (CursiveOS contribution). Without the stack-delta ablation and netem verification, the proxy could have been gamed by tuning only for the simulator.
 - Cold-start latency win that is hardware-scoped (strong on founder Arc desktop, neutral on second-machine laptop). A global preset optimized only on the founder rig would have produced a misleading fitness signal.
 - Idle power measurement mixing physically different sources (RAPL package vs. GPU hwmon vs. turbostat) without recording which. Optimizing the number without normalizing the method creates an artifact that future mutations can exploit.
-- Any single-scalar â€œfitnessâ€ used for parent-vs-candidate screens or metabolic sensor weighting is vulnerable once the organism has enough degrees of freedom (preset parameters, future runtime patches, skill libraries).
+- Any single-scalar "fitness" used for parent-vs-candidate screens or metabolic sensor weighting is vulnerable once the organism has enough degrees of freedom (preset parameters, future runtime patches, skill libraries).
 
 **Design patterns that mitigate Goodharting in software organisms** (actionable for CursiveOS sensor array, confirmation logic, and Layer 5 fitness):
 - **Multi-objective / fine-grained fitness bundles** instead of single scalars. Include correctness, latency, throughput, cost, power (with source/method tags), stability (variance across repeated runs), reversibility, regression gates, and transfer (hardware diversity or population confirmation). Negative gates (hard failures) are especially powerful.
@@ -823,16 +823,16 @@ Goodhartâ€™s Law (â€œwhen a measure becomes a target, it ceases to be a
 - **Sandbox as sensory organ, not just containment**. Structured output (exit code, exceptions, resource attempts, timing) becomes evidence. Immutable evaluator/safety boundary + no ambient credentials prevents the candidate from rewriting the verifier.
 - **Budgeted / constrained optimization and rotating test suites**. Limit how aggressively any single proxy can be optimized. Evolve or rotate parts of the fitness bundle itself so no single loophole remains permanently rewarding.
 - **Evaluator hardening and protected verifier**. Freeze or heavily gate core verifiers. Linguistic/agent-as-judge is useful for triage and hypothesis generation but never final truth for mutation acceptance. External ground truth (compiler, deterministic tests, physical sensors, population confirmation) must dominate.
-- **Explicit cost, latency, and reliability accounting** in every fitness claim. Any â€œimprovementâ€ that ignores these is treated as weak or suspect.
+- **Explicit cost, latency, and reliability accounting** in every fitness claim. Any "improvement" that ignores these is treated as weak or suspect.
 
 **Implications for current CursiveOS work**:
-- The recent stack-delta decomposition, hardware-scoped confirmation runs, power-source telemetry, and Chapter 00 validity assessment are already applying several of these patterns â€” this is the correct posture.
+- The recent stack-delta decomposition, hardware-scoped confirmation runs, power-source telemetry, and Chapter 00 validity assessment are already applying several of these patterns — this is the correct posture.
 - Future metabolic sensor weighting, screen-verdict analyzer rules, and CursiveRoot schema extensions should codify multi-objective bundles, negative memory, holdout requirements, and hardware/context tagging.
 - Population confirmation calibration and every-run detail bundles (already in experimental lift) directly address variance and correlation risks.
 - Sandbox structured feedback + canary logic should be treated as core sensory infrastructure for any future runtime mutation surfaces.
 
 **What the corpus should not overclaim**:
-- That current demonstrated loops are â€œunrestricted RSIâ€ or safe for live unconstrained self-patching.
+- That current demonstrated loops are "unrestricted RSI" or safe for live unconstrained self-patching.
 - That any single benchmark or sensor is permanently trustworthy once optimized against.
 - That linguistic self-evaluation or agent-as-judge can safely replace external verifiers for mutation decisions.
 
@@ -845,7 +845,7 @@ In early 2026, Andrej Karpathy released `autoresearch` (https://github.com/karpa
 - The human writes high-level strategy and success criteria in a `program.md` file.
 - An LLM coding agent is pointed at the repository and is only permitted to edit one file: `train.py` (model architecture, optimizer, hyperparameters, etc.).
 - The agent triggers short, fixed-length experiments (default: exactly 5 minutes of wall-clock training time).
-- After each run, it evaluates a clear, objective metric (`val_bpb` â€” validation bits-per-byte; lower is better).
+- After each run, it evaluates a clear, objective metric (`val_bpb` — validation bits-per-byte; lower is better).
 - If the result improves on the previous best, the change is kept (committed to git). Otherwise it is discarded or reverted.
 - The loop repeats autonomously overnight.
 - In the morning, the human reviews the experiment log and the final improved artifact.
@@ -862,11 +862,11 @@ In early 2026, Andrej Karpathy released `autoresearch` (https://github.com/karpa
 
 Karpathy's autoresearch maps remarkably well onto several ideas developed in this chapter and Chapter 03:
 
-- It is a working example of **bounded recursive self-improvement** â€” the agent improves the training process by modifying code, but the loop is deliberately scoped and grounded.
+- It is a working example of **bounded recursive self-improvement** — the agent improves the training process by modifying code, but the loop is deliberately scoped and grounded.
 - The metric functions as a **protected verifier** that the proposing agent cannot easily game or rewrite.
 - Git history serves as both **archive of successful variants** and a record of failed mutations.
 - The design shows how **selection pressure** can be implemented simply and effectively through measurable improvement.
-- It demonstrates a practical humanâ€“agent collaboration pattern that keeps the human in control of direction while removing them from the iteration bottleneck.
+- It demonstrates a practical human–agent collaboration pattern that keeps the human in control of direction while removing them from the iteration bottleneck.
 
 ### What Transfers to CursiveOS
 
@@ -956,7 +956,7 @@ Minimum sandbox principles:
 
 ## Runtime Self-Modification Is Powerful but Volatile
 
-Runtime self-modification systems such as GÃ¶del-agent-style agents and Polaris-style repair are the closest analogues to a live organism modifying itself in place.
+Runtime self-modification systems such as Gödel-agent-style agents and Polaris-style repair are the closest analogues to a live organism modifying itself in place.
 
 They matter because they demonstrate:
 
@@ -1118,7 +1118,7 @@ Any self-improvement claim that ignores cost and reliability should be treated a
 
 ## Corpus Implications
 
-This intake shifts the corpus from â€œself-improvement as conceptâ€ to â€œself-improvement as controlled selection over bounded mutation surfaces.â€
+This intake shifts the corpus from "self-improvement as concept" to "self-improvement as controlled selection over bounded mutation surfaces."
 
 The strongest research-backed posture is:
 

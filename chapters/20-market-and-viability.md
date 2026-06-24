@@ -34,7 +34,7 @@ Historical note: this chapter uses the pre-rebrand name **TAO-OS** in the import
 
 ## Reinforced research (2026-06-24)
 
-- **TEE / Covenant claims:** living layer Disproven rows â€” TEE.Fail (2025) DDR5 bus interposer literature; GPT-4 MMLU 86.4% (OpenAI technical report) vs Covenant 67.1.
+- **TEE / Covenant claims:** living layer Disproven rows — TEE.Fail (2025) DDR5 bus interposer literature; GPT-4 MMLU 86.4% (OpenAI technical report) vs Covenant 67.1.
 - **DePIN context:** treat March 2026 market tables as **Unvalidated** until refreshed; product economics = Ch02 not Ch21.
 
 # Market and Viability
@@ -57,7 +57,7 @@ The operational landscape for cryptocurrency mining in 2026 has transitioned fro
 
 The emergence of Decentralized Physical Infrastructure Networks (DePIN) has further complicated the hardware requirements for miners. Networks like Bittensor (TAO) and io.net have redirected compute power toward artificial intelligence training and inference tasks. As of early 2026, Bittensor hosts over 34 active subnets, each functioning as a specialized marketplace for machine learning tasks. Unlike traditional proof-of-work hashing, these workloads are non-deterministic and highly sensitive to operating system (OS) overhead, memory alignment, and inter-node communication latency. Standard Linux distributions, designed for general-purpose server or desktop use, include thousands of kernel parameters and background services that introduce "jitter"—random performance fluctuations that result in sub-optimal rewards or node de-registration.
 
-TAO-OS serves as a critical intervention in this space, acting not merely as a management dashboard like HiveOS or Awesome Miner, but as an AI-guided kernel optimization layer. The project prioritizes the economy of physical contiguity, treating memory alignment and physical page allocation as the primary determinants of throughput in data-intensive hashing and inference tasks. By leveraging machine learning (ML) models to tune the heart of the OS, TAO-OS bridges the gap between raw silicon capabilities and the high-level requirements of 2026’s decentralized compute economy.
+TAO-OS serves as a critical intervention in this space, acting not merely as a management dashboard like HiveOS or Awesome Miner, but as an AI-guided kernel optimization layer. The project prioritizes the economy of physical contiguity, treating memory alignment and physical page allocation as the primary determinants of throughput in data-intensive hashing and inference tasks. By leveraging machine learning (ML) models to tune the heart of the OS, TAO-OS bridges the gap between raw silicon capabilities and the high-level requirements of 2026's decentralized compute economy.
 
 ### Theoretical Framework for AI-Guided Kernel Tuning
 
@@ -232,7 +232,7 @@ The viability of TAO-OS is bolstered by the maturation of the decentralized comp
 
 #### Comparative Market Analysis
 
-While competitive operating systems like HiveOS provide a polished user experience, they are management-centric rather than optimization-centric. HiveOS’s primary value proposition is its dashboard and mobile app, but it lacks the deep kernel-level BPF hooks and AI-guided tuning capabilities of TAO-OS. Furthermore, HiveOS’s pricing model—at $3 per rig per month—can become prohibitive for large-scale GPU farms. TAO-OS, by contrast, emphasizes open-source modularity and hardware-rooted trust through TDX integration.
+While competitive operating systems like HiveOS provide a polished user experience, they are management-centric rather than optimization-centric. HiveOS's primary value proposition is its dashboard and mobile app, but it lacks the deep kernel-level BPF hooks and AI-guided tuning capabilities of TAO-OS. Furthermore, HiveOS's pricing model—at $3 per rig per month—can become prohibitive for large-scale GPU farms. TAO-OS, by contrast, emphasizes open-source modularity and hardware-rooted trust through TDX integration.
 
 | Feature | HiveOS / Awesome Miner | NiceHash | TAO-OS |
 | --- | --- | --- | --- |

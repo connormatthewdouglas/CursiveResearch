@@ -28,6 +28,44 @@ function Fail([string]$msg) {
     exit 1
 }
 
+# --- Markdown hygiene lint (regression guards) ---
+# Fails verification if any tracked .md file contains: (a) double-encoded UTF-8
+# mojibake, (b) a citation-export span artifact, or (c) a collapsed GFM table.
+# Prints the offending file:line for every hit before failing.
+if (-not $contract.markdown_hygiene_lint -or $contract.markdown_hygiene_lint.enabled) {
+    Push-Location $RepoRoot
+    $trackedMd = @(git ls-files '*.md')
+    Pop-Location
+    $reMoji1 = [regex]'â€'          # 'â€' double-encoded UTF-8 signature
+    $reMoji2 = [regex]'[ÃÂ]\S'      # stray Ã/Â immediately followed by a non-space char
+    $reSpan  = [regex]'\[span_\d+\]\((?:start|end)_span\)'
+    $lintHits = New-Object System.Collections.Generic.List[string]
+    foreach ($rel in $trackedMd) {
+        $full = Join-Path $RepoRoot $rel
+        if (-not (Test-Path $full)) { continue }
+        $lineNo = 0
+        foreach ($line in (Get-Content $full -Encoding UTF8)) {
+            $lineNo++
+            if ($reMoji1.IsMatch($line) -or $reMoji2.IsMatch($line)) {
+                $lintHits.Add("mojibake        ${rel}:${lineNo}: $($line.Trim())")
+            }
+            if ($reSpan.IsMatch($line)) {
+                $lintHits.Add("span-artifact   ${rel}:${lineNo}: $($line.Trim())")
+            }
+            # Collapsed table: a separator-marker line that also carries data cells.
+            if ($line -match ':---' -and $line -match '[0-9A-Za-z]') {
+                $lintHits.Add("collapsed-table ${rel}:${lineNo}: $($line.Trim())")
+            }
+        }
+    }
+    if ($lintHits.Count -gt 0) {
+        Write-Host "MARKDOWN HYGIENE LINT FAILURES ($($lintHits.Count)):" -ForegroundColor Red
+        $lintHits | ForEach-Object { Write-Host "  $_" }
+        Fail "Markdown hygiene lint found $($lintHits.Count) issue(s): mojibake / span-artifact / collapsed-table"
+    }
+    Write-Host "MARKDOWN HYGIENE LINT: clean ($($trackedMd.Count) tracked .md files)"
+}
+
 # --- Live counts ---
 $chapters = Get-ChildItem (Join-Path $RepoRoot 'chapters\*.md') | Sort-Object Name
 $paperDirs = Get-ChildItem (Join-Path $RepoRoot 'papers') -Recurse -Directory |

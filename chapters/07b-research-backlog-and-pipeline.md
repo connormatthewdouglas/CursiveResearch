@@ -1,4 +1,4 @@
-﻿## Corpus status (living layer)
+## Corpus status (living layer)
 
 **Last reconciled:** 2026-06-24
 **Confidence:** Current synthesis Supported; priorities tracked in `RESEARCH_PIPELINE.md`
@@ -9,23 +9,23 @@
 - Experimental lift queue: cold-start confound, proposer test, idle-power channel
 
 ### Superseded or narrowed
-- Discovery-phase gaps â€” superseded by Ch07 gap-closure answers
+- Discovery-phase gaps — superseded by Ch07 gap-closure answers
 
 ### Open until experiment/hardware
-- All items in RESEARCH_PIPELINE Â§3 Experimental Lift
+- All items in RESEARCH_PIPELINE §3 Experimental Lift
 
 ---
 
 ## Reinforced research (2026-06-24)
 
-- **Proposer falsifier:** `experiments/proposer-vs-random-tuning-experiment.md` (CH05-BM-002) â€” highest-leverage Ch15 validation.
-- **Cold-start confound:** `experiments/cold-start-order-cache-confound-plan.md` â€” blocks acceptance-grade fleet claims.
-- **Signed preset channel:** Transition 2 heart â€” deep spec still open; links Ch06 regression gates.
+- **Proposer falsifier:** `experiments/proposer-vs-random-tuning-experiment.md` (CH05-BM-002) — highest-leverage Ch15 validation.
+- **Cold-start confound:** `experiments/cold-start-order-cache-confound-plan.md` — blocks acceptance-grade fleet claims.
+- **Signed preset channel:** Transition 2 heart — deep spec still open; links Ch06 regression gates.
 
 ---
 # Research Backlog and Pipeline
 
-Status: Backlog and pipeline priorities (split from former Ch07, 2026-06-24). Gap status â†’ [Chapter 07](07-main-repo-gap-closure.md).
+Status: Backlog and pipeline priorities (split from former Ch07, 2026-06-24). Gap status → [Chapter 07](07-main-repo-gap-closure.md).
 ## What Should Be Added Next
 
 Based on the main repo, the highest-value new research expansions are now:

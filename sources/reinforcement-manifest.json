@@ -25,7 +25,7 @@
       "id": "03",
       "file": "03-rsi-literature-and-organism-synthesis.md",
       "anchor": "The strongest demonstrated systems use language models or reinforcement learning to propose candidate programs, policies, or skills, then rely on an external evaluator to decide whether a change is useful.",
-      "inline": "> **Corpus inline (2026-06-24):** **Merged Ch03+Ch04 (2026-06-24):** Part A = paper digest + 25 `papers/` intakes; Part B = uploaded organism framework (definitions, ALife, failure modes). Unbounded RSI / fast-takeoff narratives remain **unsupported** by cited literature."
+      "inline": "> **Corpus inline (2026-06-24):** **Merged Ch03+Ch04:** Part A = paper digest + 25 `papers/` intakes; Part B = uploaded organism framework (definitions, ALife, failure modes). Unbounded RSI / fast-takeoff narratives remain **unsupported** by cited literature."
     },
     {
       "id": "05",
@@ -36,7 +36,7 @@
     {
       "id": "06",
       "file": "06-mutation-safety-and-permission-law.md",
-      "anchor": "The danger is not only an intruder but the organism corrupting itself or its measurement substrate.",
+      "anchor": "This chapter is the missing rulebook for that risk.",
       "inline": "> **Corpus inline (2026-06-24):** Ch16 external hardening is **not** sufficient for self-mutation. Class 4–6 mutations (eBPF, kernel, firmware) require staged rollback + Ch00 regression sensors before fleet deploy."
     },
     {

@@ -1,15 +1,15 @@
-﻿## Corpus status (living layer)
+## Corpus status (living layer)
 
 **Last reconciled:** 2026-06-24
 **Confidence:** Current synthesis Supported; backlog priorities evolve with main-repo releases
 **Read with:** [Chapter 07b](07b-research-backlog-and-pipeline.md), [Chapter 01](01-seed-organism-and-sensor-array.md), [Chapter 06](06-mutation-safety-and-permission-law.md), `RESEARCH_PIPELINE.md`
 
 ### Authoritative for
-- Which original five gaps are closed vs open in main `CursiveOS` repo (Gaps 1â€“5)
+- Which original five gaps are closed vs open in main `CursiveOS` repo (Gaps 1–5)
 - Boundary: research here; runnable scripts graduate to main repo
 
 ### Superseded or narrowed
-- "Repo is private" â€” public as of 2026-06-23 cleanup
+- "Repo is private" — public as of 2026-06-23 cleanup
 
 ### Open until experiment/hardware
 - See Ch07b for pipeline experimental lift items
@@ -19,13 +19,13 @@
 ## Reinforced research (2026-06-24)
 
 - **Gap closure status:** Ch01/02/05/06 document main-repo architecture; Ch08/09/10/11/12 close fleet-stats, network, LLM runtime, identity, and OSS-funding gaps.
-- **RSI literature:** Ch03 merged digest + 25 paper intakes â€” pipeline P0 RSI targets substantially delivered.
-- **Measurement priority:** Ch00 Â§3 schema gaps (`power_source`, `page_cache_state`) remain highest-leverage open items for fleet truth.
+- **RSI literature:** Ch03 merged digest + 25 paper intakes — pipeline P0 RSI targets substantially delivered.
+- **Measurement priority:** Ch00 §3 schema gaps (`power_source`, `page_cache_state`) remain highest-leverage open items for fleet truth.
 
 ---
 # Main Repo Gap Closure
 
-Status: Gap-closure synthesis (split from former Ch07, 2026-06-24). Research backlog â†’ [Chapter 07b](07b-research-backlog-and-pipeline.md).
+Status: Gap-closure synthesis (split from former Ch07, 2026-06-24). Research backlog → [Chapter 07b](07b-research-backlog-and-pipeline.md).
 ## Why this chapter exists
 
 Earlier corpus work identified five high-value research gaps:
@@ -45,7 +45,7 @@ After reviewing the main `CursiveOS` repo, several of those gaps are no longer e
 | Source | What it contributes |
 | --- | --- |
 | `README.md` | Current public summary, one-command test path, v0.8/v0.9 status, CursiveRoot upload behavior, initial benchmark results, Layer 5 summary. |
-| `ROADMAP.md` | Four transitions: tweak stack â†’ tuned distribution â†’ measurement-native â†’ workload-native â†’ substrate. |
+| `ROADMAP.md` | Four transitions: tweak stack → tuned distribution → measurement-native → workload-native → substrate. |
 | `docs/architecture/sensor-array.md` | Sensor families, genesis sensor suite, population confirmation, independence criteria, curator model. |
 | `docs/architecture/agent-architecture.md` | Measurement daemon vs natural-language shell trust boundary, permission model, model tiers. |
 | `docs/specs/layer5-economics-v3.3.md` | Bitcoin-native economics, current/lifetime streams, metabolic sensor, tester/contributor role split. |
@@ -139,7 +139,7 @@ The corpus still needs a formal mutation classification model:
 | 5 | Kernel/package/base image | kernel config, ISO build | VM/lab validation, boot test, signed artifact |
 | 6 | Firmware/BMC/BIOS | UEFI/Redfish setting | staged reboot, OOB recovery, human approval |
 
-Recommended expansion: **done (2026-06-22)** â€” see
+Recommended expansion: **done (2026-06-22)** — see
 [Chapter 06 - Mutation Safety and Permission Law](06-mutation-safety-and-permission-law.md),
 which binds this seven-class taxonomy to the enforcement primitive for each gate
 and adds external grounding (least privilege, OWASP Excessive Agency, Linux
@@ -169,10 +169,10 @@ The main repo says current CursiveOS is still pre-Transition-One: it is a set of
 
 Roadmap sequence:
 
-1. **Tweak stack â†’ tuned distribution**: v0.9 ISO alpha to v1.0 stable.
-2. **Tuned distribution â†’ measurement-native**: sensor daemon and signed preset channel make self-improvement empirical.
-3. **Measurement-native â†’ workload-native**: workload detection and per-workload preset families.
-4. **Workload-native â†’ substrate**: CursiveOS becomes a reference platform others build on.
+1. **Tweak stack → tuned distribution**: v0.9 ISO alpha to v1.0 stable.
+2. **Tuned distribution → measurement-native**: sensor daemon and signed preset channel make self-improvement empirical.
+3. **Measurement-native → workload-native**: workload detection and per-workload preset families.
+4. **Workload-native → substrate**: CursiveOS becomes a reference platform others build on.
 
 ### Remaining research needed
 

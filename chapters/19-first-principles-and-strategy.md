@@ -36,7 +36,7 @@ Git blob SHA: 20ff2bd8016cff5bb1b905d37720430a5ab0e360
 
 ## Reinforced research (2026-06-24)
 
-- **Network example correction:** Chapter 09 + Validated Ch00 â€” flagship transport win is **CUBICâ†’BBR under loss**, not static buffer ceiling (Linux autotuning since 2.6.x; 	cp(7) man page).
+- **Network example correction:** Chapter 09 + Validated Ch00 — flagship transport win is **CUBIC→BBR under loss**, not static buffer ceiling (Linux autotuning since 2.6.x; 	cp(7) man page).
 - **Moat pillars:** still Supported; align public copy with Ch02 Bitcoin-native economics (Ch02) not Ch21 DePIN comparison.
 - **Sources:** ESnet host-tuning guide (2025); Red Hat RHEL 10 TCP tuning documentation.
 
@@ -64,9 +64,9 @@ Confidential Working Document
 
 ## 1. Executive Summary
 
-This document distills the CursiveOS project to its irreducible foundational truths and examines the strategic assumptions that underpin the project’s viability. The analysis was conducted by decomposing the white paper (v0.4.1, March 2026) into first principles, then stress-testing each assumption — particularly around defensibility, competitive moats, and roadmap sequencing.
+This document distills the CursiveOS project to its irreducible foundational truths and examines the strategic assumptions that underpin the project's viability. The analysis was conducted by decomposing the white paper (v0.4.1, March 2026) into first principles, then stress-testing each assumption — particularly around defensibility, competitive moats, and roadmap sequencing.
 
-The core finding: CursiveOS’s product (the optimization scripts, the benchmark database, the AI loop) is valuable but replicable. The true moat is not the dataset itself, but the ecosystem dynamics that keep contributors feeding this dataset faster than any competitor can replicate it. That moat rests on three pillars: speed of execution, financial alignment of contributors, and brand recognition.
+The core finding: CursiveOS's product (the optimization scripts, the benchmark database, the AI loop) is valuable but replicable. The true moat is not the dataset itself, but the ecosystem dynamics that keep contributors feeding this dataset faster than any competitor can replicate it. That moat rests on three pillars: speed of execution, financial alignment of contributors, and brand recognition.
 
 ## 2. First Principles of CursiveOS
 
@@ -86,11 +86,11 @@ A TCP buffer ceiling throttles Ollama API traffic identically to how it throttle
 
 ### 2.3 Optimization Without Measurement Is Guesswork
 
-The project’s credibility depends on paired before/after benchmarking across multiple hardware configurations. Every tweak must prove its impact with a measured delta. This principle separates CursiveOS from the scattered Linux tuning advice found in forum posts and GitHub gists. Without rigorous measurement, optimization claims are unfalsifiable.
+The project's credibility depends on paired before/after benchmarking across multiple hardware configurations. Every tweak must prove its impact with a measured delta. This principle separates CursiveOS from the scattered Linux tuning advice found in forum posts and GitHub gists. Without rigorous measurement, optimization claims are unfalsifiable.
 
 ### 2.4 Hardware-Specific Performance Data Does Not Exist in Structured Form
 
-No centralized, queryable database maps hardware fingerprints to measured optimization outcomes. Tools like WhatToMine track hashrate; inference benchmarks track model speed — but the OS layer is invisible to all of them. Every operator independently rediscovers the same optimizations (or doesn’t). This data gap is real and represents the core asset CursiveOS aims to build with CursiveRoot.
+No centralized, queryable database maps hardware fingerprints to measured optimization outcomes. Tools like WhatToMine track hashrate; inference benchmarks track model speed — but the OS layer is invisible to all of them. Every operator independently rediscovers the same optimizations (or doesn't). This data gap is real and represents the core asset CursiveOS aims to build with CursiveRoot.
 
 ### 2.5 A Self-Improving System Requires a Feedback Loop With Incentive
 
@@ -106,7 +106,7 @@ If you systematically collect hardware-verified optimization data that nobody el
 
 ### 4.1 What the White Paper Claims as the Moat
 
-The white paper (v0.4.1) positions the CursiveRoot database as the primary moat: “The database is the moat. A structured, hardware-verified, AI-ready dataset of OS performance deltas across diverse compute hardware does not exist anywhere.”
+The white paper (v0.4.1) positions the CursiveRoot database as the primary moat: "The database is the moat. A structured, hardware-verified, AI-ready dataset of OS performance deltas across diverse compute hardware does not exist anywhere."
 
 ### 4.2 The Vulnerability
 
@@ -118,7 +118,7 @@ First-principles analysis reveals that the defensible moat is not the dataset it
 
 | Pillar | Mechanism | Why It Resists Copying |
 | --- | --- | --- |
-| Speed of Execution | The flywheel must ingest data and ship recursive optimizations faster than any competitor, permanently. This is not a launch advantage — it is an ongoing operational principle. | A competitor copying today’s dataset gets a snapshot. By the time they ship optimizations from it, CursiveOS has already shipped the next iteration trained on newer data they don’t have. |
+| Speed of Execution | The flywheel must ingest data and ship recursive optimizations faster than any competitor, permanently. This is not a launch advantage — it is an ongoing operational principle. | A competitor copying today's dataset gets a snapshot. By the time they ship optimizations from it, CursiveOS has already shipped the next iteration trained on newer data they don't have. |
 | Financial Alignment | Early contributors hold a financial stake in the CursiveOS ecosystem. Their incentive is to evangelize, contribute, and defend the network because their reward grows with adoption. | A fork gets the data but not the stakeholders. Early contributors with vested positions have a real switching cost — leaving means abandoning their stake. This creates economic gravity. |
 | Brand Recognition | CursiveOS becomes the recognized, trusted default for Linux compute optimization. The brand signals legitimacy, methodology rigor, and community momentum. | Brand is earned over time and cannot be forked. A copycat with identical data but no track record must re-earn trust from scratch with a skeptical Linux community. |
 
@@ -126,7 +126,7 @@ First-principles analysis reveals that the defensible moat is not the dataset it
 
 The three pillars are not independent — they operate in a specific causal sequence:
 
-Speed generates better optimizations faster, proving the product’s value in real time.
+Speed generates better optimizations faster, proving the product's value in real time.
 
 Financial alignment converts that proven value into contributor retention, creating economic gravity that keeps data flowing to CursiveOS rather than a competitor.
 
@@ -156,7 +156,7 @@ Cycle 2: Recommendations validated. New deltas feed back into the dataset. AI re
 
 Cycle N: Each subsequent cycle builds on everything before it. The gap between CursiveOS and a competitor starting from Cycle 1 widens with every iteration.
 
-This means a competitor does not just need to copy the dataset — they need to match CursiveOS’s operational tempo indefinitely. A dataset snapshot is stale within one iteration cycle. Matching the speed of the flywheel is a fundamentally harder problem than copying its output.
+This means a competitor does not just need to copy the dataset — they need to match CursiveOS's operational tempo indefinitely. A dataset snapshot is stale within one iteration cycle. Matching the speed of the flywheel is a fundamentally harder problem than copying its output.
 
 ## 7. Product vs. Moat: A Key Distinction
 
@@ -181,7 +181,7 @@ Accelerate incentive design. The financial alignment pillar cannot wait until Ph
 
 Operational speed must be measured and tracked. If speed is a permanent operating principle (not a launch tactic), define what iteration cycle time looks like: how quickly does a benchmark submission become an optimization update? Make this a core KPI.
 
-Reframe the white paper’s moat language. The database is the asset. The moat is the ecosystem (speed + financial alignment + brand) that sustains the asset. This distinction matters for investor communication, contributor recruitment, and strategic clarity.
+Reframe the white paper's moat language. The database is the asset. The moat is the ecosystem (speed + financial alignment + brand) that sustains the asset. This distinction matters for investor communication, contributor recruitment, and strategic clarity.
 
 ## 9. Summary of First Principles
 
@@ -190,7 +190,7 @@ Reframe the white paper’s moat language. The database is the asset. The moat i
 | 1 | Linux defaults sacrifice performance for compatibility | The performance gap is real, measurable, and universal — this is the foundational opportunity |
 | 2 | Bottlenecks are OS-level, not workload-specific | CursiveOS is workload-agnostic by structure, not by choice — the addressable market is every Linux compute operator |
 | 3 | Optimization without measurement is guesswork | Paired benchmarking is the credibility foundation — without it, CursiveOS is just another set of sysctl tweaks |
-| 4 | Structured hardware performance data doesn’t exist | CursiveRoot fills a genuine gap, but the database is the asset, not the moat |
+| 4 | Structured hardware performance data doesn't exist | CursiveRoot fills a genuine gap, but the database is the asset, not the moat |
 | 5 | Self-improving systems need incentivized feedback loops | Financial alignment is structurally required — the incentive layer is more urgent than the roadmap currently reflects |
 
 ### The Three-Pillar Moat
@@ -211,11 +211,11 @@ Key strengths:
 
 Irreducible truths nailed. The five first principles are rock-solid and match our validated rigs + white-paper exactly. Linux defaults for compatibility (not performance), OS-level bottlenecks being workload-agnostic, measurement-as-credibility, the non-existence of structured hardware data, and the necessity of incentivized feedback loops are now canon. These should be quoted verbatim in future white-paper revisions and Copper prompt templates.
 
-Moat reframing is corrective and powerful. The report correctly demotes the database from “the moat” to “the asset” and elevates the three-pillar ecosystem (Speed of Execution → Financial Alignment → Brand). This matches our execution reality: a git clone gives a snapshot, but our live flywheel (benchmarks → CursiveRoot → AI presets) + early contributor stakes + earned trust cannot be forked. The causal sequence (speed proves value → alignment retains contributors → brand compounds) is precise and should guide every v1.5 decision.
+Moat reframing is corrective and powerful. The report correctly demotes the database from "the moat" to "the asset" and elevates the three-pillar ecosystem (Speed of Execution → Financial Alignment → Brand). This matches our execution reality: a git clone gives a snapshot, but our live flywheel (benchmarks → CursiveRoot → AI presets) + early contributor stakes + earned trust cannot be forked. The causal sequence (speed proves value → alignment retains contributors → brand compounds) is precise and should guide every v1.5 decision.
 
 Incentive timing vulnerability called out honestly. This is the most valuable section. Deferring the full incentive layer to Phase 4 creates a faith-based gap between trusted fleet (Phase 2) and rewards. The recommendation — define an earliest credible stake (recorded equity commitments, vesting tied to submission volume, or lightweight credit system) during Phase 2 — is data-driven and prevents the narrow goodwill window from collapsing. It directly supports the tokenomics hybrid in Doc 4 (Helium-style credits + io.net USD base + performance weighting) without rushing a token-first narrative.
 
-Product vs. Moat distinction is clarifying. The table separating replicable product (scripts, methodology, database snapshot) from non-replicable moat (operational tempo, vested stakeholders, earned brand) should be added to the white-paper executive summary. It prevents scope creep into “just another tuning guide.”
+Product vs. Moat distinction is clarifying. The table separating replicable product (scripts, methodology, database snapshot) from non-replicable moat (operational tempo, vested stakeholders, earned brand) should be added to the white-paper executive summary. It prevents scope creep into "just another tuning guide."
 
 Roadmap implications actionable. Accelerating Phase 2 (first 5+ external operators as founding stakeholders), measuring iteration cycle time as a KPI, and reframing moat language for investors/contributors are immediate wins. These reinforce the revenue-focused whiteboard and v1.5 gate (revenue-or-validation milestone).
 
@@ -237,6 +237,6 @@ The three-pillar moat is now our guardrail: every decision must be scored on whe
 
 Recommended immediate additions to project files (for future quick access):
 
-Add a new appendix titled research-master-first-principles-analysis-2026-03.md containing the full report + this synthesis (especially the Product vs. Moat table and incentive timing recommendation). Also cross-link it in white-paper.md under Section 6 (Strategic Context) with a note: “First-principles moat validated March 2026 — database = asset; ecosystem dynamics = moat.”
+Add a new appendix titled research-master-first-principles-analysis-2026-03.md containing the full report + this synthesis (especially the Product vs. Moat table and incentive timing recommendation). Also cross-link it in white-paper.md under Section 6 (Strategic Context) with a note: "First-principles moat validated March 2026 — database = asset; ecosystem dynamics = moat."
 
 Research Master assessment: High-confidence, high-utility document. It is now core canon. It sharpens execution discipline while protecting the recursive vision. No factual contradictions with GitHub state (rebrand complete, v0.8 ROCm auto-enable live, v1.5 data collection active, trusted fleet still pending).

@@ -188,7 +188,7 @@ The automatic NUMA balancing feature in the Linux kernel is designed to optimize
 
 Disable Automatic Balancing: Use sysctl -w kernel.numa_balancing=0 to prevent the kernel from moving memory segments during an active inference pass.
 
-Static Pinning: Use numactl --cpunodeb[span_87](start_span)[span_87](end_span)ind=0 --membind=0 to ensure that both the execution threads and the model weights are strictly co-located on a single NUMA node.
+Static Pinning: Use numactl --cpunodebind=0 --membind=0 to ensure that both the execution threads and the model weights are strictly co-located on a single NUMA node.
 
 Interleaving for Initialization: During the initial loading of massive weight files, memory interleaving (numactl --interleave=all) can utilize the aggregate bandwidth of all memory channels before the model is partitioned for inference.
 
@@ -284,7 +284,15 @@ Cleaning the Memory Slate: To resolve "stuck" hugepages after an application cra
 
 ### Comprehensive Implementation Table for 2026 Tweak Reversibility
 
-| Optimization Layer | Reversibility Command / Action | Stability Risk | Recovery Mode | | :--- | :--- | :--- | :--- | | AMD Undervolting | echo "r" >.../pp_od_clk_voltage | Core crash / Kernel panic | Reboot / module_blacklist. | | Intel Power Caps | Terminate LACT or intel-undervolt | Thermal throttling | Automatic thermal reset. | | GPU Multiplexing | echo 0 >.../sriov_numvfs | System lockup on VF detach | SysRq-B or module_blacklist. | | Hugepages | echo 0 > /proc/sys/vm/nr_hugepages | Out-of-Memory (OOM) | sync && drop_caches. | | NUMA Balancing | echo 1 > /proc/sys/kernel/numa_balancing | Memory migration latency | Runtime sysctl restore. | | BPF Scheduling | sudo scx[span_50](start_span)[span_50](end_span)ctl stop | Thread starvation | SysRq-S. | | NVMe I/O | echo none >.../queue/scheduler | Latency spikes under load | Runtime sysfs restore. |
+| Optimization Layer | Reversibility Command / Action | Stability Risk | Recovery Mode |
+| :--- | :--- | :--- | :--- |
+| AMD Undervolting | echo "r" >.../pp_od_clk_voltage | Core crash / Kernel panic | Reboot / module_blacklist. |
+| Intel Power Caps | Terminate LACT or intel-undervolt | Thermal throttling | Automatic thermal reset. |
+| GPU Multiplexing | echo 0 >.../sriov_numvfs | System lockup on VF detach | SysRq-B or module_blacklist. |
+| Hugepages | echo 0 > /proc/sys/vm/nr_hugepages | Out-of-Memory (OOM) | sync && drop_caches. |
+| NUMA Balancing | echo 1 > /proc/sys/kernel/numa_balancing | Memory migration latency | Runtime sysctl restore. |
+| BPF Scheduling | sudo scxctl stop | Thread starvation | SysRq-S. |
+| NVMe I/O | echo none >.../queue/scheduler | Latency spikes under load | Runtime sysfs restore. |
 
 ### Conclusion and Strategic Recommendations
 
