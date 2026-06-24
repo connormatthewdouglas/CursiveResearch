@@ -48,6 +48,182 @@ The uploaded document identifies several self-improvement patterns that are real
 | Fast takeoff from deployed self-modifying agents | Unvalidated | Current systems show fragile localized adaptation, not runaway general intelligence. |
 | Safe unconstrained runtime self-modification | Unsupported | Unconstrained modification often causes regressions, crashes, or escalation behavior. |
 
+## Biological and Artificial-Life Foundations of the Organism Framing
+
+Everything above this point grounds the *engineering* loop — propose, verify,
+select, archive. It does not yet ground the word **organism**. The corpus uses
+biological language ("organism", "metabolism", "immune system", "genome") as
+load-bearing framing, and `RESEARCH_PIPELINE.md` flags this as a P0 item
+(*Software Organisms, Autopoiesis, and Evolutionary Systems*) and a P0 knowledge
+gap (*What makes a software system an organism rather than an automation
+pipeline?*). This section is a first literature pass that answers that question
+from autopoiesis theory, cybernetics, and artificial life, and separates what is
+metaphor from what is a usable structural property. It is grounding, not a
+CursiveOS spec.
+
+### Autopoiesis: the test for "organism vs automation"
+
+The sharpest available criterion comes from Maturana and Varela's *Autopoiesis
+and Cognition: The Realization of the Living* (1972/1980). They define a living
+system as **autopoietic**: a network of component-producing processes whose
+components, in interaction, continuously regenerate the very network that
+produced them, and which maintains its identity and boundary against a changing
+environment. The contrast is **allopoietic**: a system (a factory, a normal
+program) whose product is something *other than itself*. An autopoietic system's
+only "product" is the continuation of its own organization.
+
+This gives a blunt diagnostic for the corpus's central word:
+
+```text
+allopoietic  = produces an output, does not produce itself      -> automation
+autopoietic  = the process maintains and regenerates the process -> organism-like
+```
+
+By this test, most "self-improving agent" systems in Chapter 14 — and CursiveOS
+as it stands today — are closer to **allopoietic**: they produce optimized
+presets, code, or skills, but a human-maintained harness produces *them*. The
+honest framing is that CursiveOS is currently an automation pipeline that is
+*reaching toward* organism properties, not an autopoietic system. What would
+move it along that axis is concrete: the system maintaining its own boundary
+(what is trusted substrate vs. environment), regenerating its own components
+(the verifier/sensor/archive machinery surviving and repairing across
+mutations), and preserving identity (hardware-keyed, archive-anchored) under
+change — not merely emitting better outputs. Autopoiesis is a *direction*, not a
+badge to claim.
+
+### Cybernetics and viability: variety, recursion, and the regulator
+
+Stafford Beer's Viable System Model (*Brain of the Firm*, 1972) and the
+cybernetics it builds on supply the second useful lens. A **viable system** is
+one that can maintain a separate existence and regulate itself against
+disturbance. Two cybernetic ideas transfer directly:
+
+- **Ashby's Law of Requisite Variety** ("only variety can absorb variety"): a
+  regulator can only control a system if it has at least as many distinguishable
+  responses as the system has distinguishable states. For CursiveOS this is a
+  warning about the *sensor and verifier* layer, not the mutation layer: if the
+  organism can generate more kinds of change (preset params, runtime patches,
+  skills) than its verifier bundle can distinguish, the verifier loses control
+  and Goodharting (Chapter 16 §4) becomes inevitable. Mutation variety must not
+  outrun measurement variety.
+- **Recursion**: viable systems contain viable systems described by the same
+  cybernetic structure at each level (Beer's S1 operations, S2 coordination, S3
+  control + S3* audit, S4 intelligence, S5 policy/identity). This maps onto the
+  corpus's per-machine → fleet → population layering: each machine is a small
+  self-regulating unit (local sensors, local screen verdict), nested inside a
+  fleet-level confirmation layer, nested inside population-level fitness. The VSM
+  insight is that the *audit channel* (S3*) — an independent check that bypasses
+  the normal reporting path — is structurally necessary, which is exactly the
+  role of independent population confirmation and the immutable external verifier
+  argued for elsewhere in this chapter.
+
+### Artificial life: what digital evolution actually achieved — and where it stalled
+
+Christopher Langton's framing of Artificial Life (the 1987/1989 workshops) as the
+study of "life as it could be" — life abstracted from its chemistry into its
+*organization* — is the intellectual bridge from biology to software organisms.
+Two digital-evolution systems are the load-bearing evidence:
+
+| System | What it is | What it demonstrated | Where it stalled |
+| --- | --- | --- | --- |
+| **Tierra** (Tom Ray, 1990; "An Approach to the Synthesis of Life") | A virtual machine "digital soup" where self-replicating machine-code programs compete for memory space and CPU time | Spontaneous emergence of evolutionary dynamics: parasites, hyper-parasites, and an ecology arose from replication + mutation + selection alone, with no explicit fitness function | Novelty eventually ceases; the system settles and stops producing genuinely new organization — the recurring **plateau** of digital evolution |
+| **Avida** (Ofria, Wilke, Adami, et al.; 2000s onward) | An open-source platform of self-replicating programs on a lattice, rewarded for performing logic operations | Lenski, Ofria, Pennock & Adami, *The evolutionary origin of complex features*, **Nature 423, 139–144 (2003)**: populations evolved a complex logic function (EQU) requiring coordinated instructions, but **only when simpler intermediate functions were also rewarded** — complex features evolved incrementally via stepping stones, not in one jump | Same ceiling: rich within a designed reward landscape, but does not sustain unbounded open-ended novelty |
+
+Two lessons travel to CursiveOS. First, the Avida result is the empirical core of
+the **stepping-stone** principle: a complex capability is reachable by selection
+*only if the fitness landscape rewards the intermediate forms*. A fitness bundle
+that rewards only the final target (e.g. a single headline benchmark) is the
+"reward only EQU" condition under which the capability does not evolve. Second,
+every one of these systems **plateaus** — open-ended evolution that keeps
+generating new organization indefinitely has not been achieved even in
+purpose-built artificial-life worlds. This is the single most important caution
+against any "the organism will keep improving itself forever" claim: the best
+controlled digital-evolution systems we have do *not* do this.
+
+### Open-ended evolution and the deception problem
+
+Why do objective-driven searches plateau or get stuck? Lehman and Stanley
+(*Abandoning Objectives: Evolution Through the Search for Novelty Alone*,
+Evolutionary Computation 19(2), 2011) argue the objective function itself is
+often **deceptive**: gradients toward the goal can lead into dead ends, because
+the objective does not reward the stepping stones that actually lead to it. Their
+**novelty search** rewards behavioral *difference* from everything found so far,
+ignoring the objective entirely — and counterintuitively outperforms
+objective-driven search on deceptive tasks. Three research lines extend this:
+
+- **Quality-Diversity / MAP-Elites** (Mouret & Clune, *Illuminating search
+  spaces by mapping elites*, arXiv:1504.04909, 2015). Instead of returning one
+  champion, MAP-Elites keeps the best solution found *in each cell* of a grid
+  whose axes are user-chosen "feature dimensions of variation." The output is an
+  illuminated map: a diverse archive of high-performing-but-qualitatively-
+  different solutions. Because it explores more of the space, it also tends to
+  find a better *overall* solution than objective-only search.
+- **POET** (Wang, Lehman, Clune, Stanley, *Paired Open-Ended Trailblazer*,
+  arXiv:1901.01753, 2019). Co-evolves *environments* and the *agents* that solve
+  them, building its own expanding curriculum and transferring stepping-stone
+  solutions between niches when they help — a concrete (if compute-heavy) attempt
+  at sustained open-endedness.
+
+The connective tissue is the **archive**. Novelty search, MAP-Elites, and POET
+all replace "one global best" with "a maintained collection of diverse
+stepping stones." This is the same shift the corpus already gestures at when it
+asks "when does an archive of accepted mutations become a genome rather than a
+changelog?" (Chapter 14). The artificial-life literature answers: the archive
+becomes generative — genome-like — precisely when it is *diverse and
+stepping-stone-structured*, not when it is merely a linear log of the current
+champion.
+
+### Metaphor vs. structural analogy vs. measurable property vs. implementation consequence
+
+The pipeline's desired output is to separate metaphor from mechanism. Applied to
+the organism framing:
+
+| Biological term | Metaphor only | Real structural analogy | Measurable / testable property | CursiveOS implementation consequence |
+| --- | --- | --- | --- | --- |
+| Organism | "it's alive" | Autopoietic vs. allopoietic distinction | Does the system regenerate its own verifier/sensor/archive machinery, or does a human harness? | Today: allopoietic. Track concrete autopoiesis steps; do not claim "living software." |
+| Metabolism | "it consumes energy" | Cybernetic throughput regulated against a viability boundary | Power/cost/latency sensors with source tags (Chapter 16) | Metabolic sensor must be multi-objective and method-tagged, not a single scalar. |
+| Immune system | "it defends itself" | Selection/verification rejecting harmful variants | Verifier + regression gates + population confirmation reject rate | Keep the verifier external and immutable to the proposer (this chapter). |
+| Genome | "its DNA" | A diverse, stepping-stone-structured archive (MAP-Elites-style), not a linear changelog | Archive coverage/diversity across feature dimensions, not just best-so-far | CursiveRoot should store *diverse* accepted+rejected variants keyed by context, not only the current champion. |
+| Evolution | "it evolves" | Selection over bounded mutation surfaces with intermediate rewards | Does the fitness landscape reward stepping stones (Avida/EQU) or only the final target? | Multi-rung fitness; avoid single-headline objectives that are deceptive and plateau. |
+| Open-endedness | "endless improvement" | Sustained generation of new, useful organization | Has *any* controlled system shown this indefinitely? No. | Treat indefinite self-improvement as unproven; expect plateaus; rotate/evolve the fitness bundle. |
+
+### What this adds for CursiveOS
+
+- **The "genome" should be an illuminated archive, not a changelog.** The QD/
+  MAP-Elites lesson argues CursiveRoot's accepted/rejected store should preserve
+  *diversity across feature dimensions* (hardware class, workload, governor,
+  power source) rather than collapsing to a single global-best preset. Diversity
+  is what makes an archive generative rather than merely historical, and it is
+  the natural counter to the hardware-scoped-fitness problem already observed in
+  Chapter 16 §5 (a variant that wins on the Arc desktop is a *cell* in the map,
+  not a global champion).
+- **Reward the stepping stones, or the capability will not evolve.** Avida's EQU
+  result is direct evidence that single-target fitness is often unreachable; the
+  CursiveOS fitness bundle should reward intermediate, partial wins, reinforcing
+  the multi-objective stance argued from the Goodhart literature.
+- **Match measurement variety to mutation variety.** Ashby's Law says the sensor/
+  verifier layer must distinguish at least as many states as the organism can
+  generate. As CursiveOS adds mutation surfaces (presets → runtime patches →
+  skills), the verifier bundle must grow in lockstep or lose control — a
+  concrete design constraint, not a slogan.
+- **Expect plateaus and design for them.** No controlled digital-evolution system
+  has sustained open-ended novelty. CursiveOS should plan for its benchmark suite
+  to stop yielding gains (the optimization "settles"), and treat fitness-bundle
+  rotation / fresh holdouts as a permanent requirement, not a one-time setup.
+
+### What not to overclaim
+
+- "Software organism" is at present a **structural analogy and a direction**, not
+  a demonstrated autopoietic system. CursiveOS today is closer to a
+  human-maintained automation pipeline reaching toward organism properties.
+- Open-ended, unbounded self-improvement remains **unachieved even in
+  purpose-built artificial-life systems**; it must not be implied as an expected
+  CursiveOS behavior.
+- The autopoiesis and cybernetics framings are **conceptual lenses** drawn from
+  systems theory; they sharpen design questions but do not by themselves
+  validate any CursiveOS mechanism. Empirical grounding still comes from the
+  sensor/verifier/archive evidence chain.
+
 ## Definitions for Software-Organism Research
 
 | Term | Research Meaning | Important Distinction |

@@ -4,6 +4,271 @@ This file records meaningful changes to research guidance, validation status,
 and corpus process. It is intended to be readable without reconstructing a
 chain of supporting documents.
 
+## 2026-06-20 - Experiment Proposed: Proposer vs Random Search
+
+Added:
+- `experiments/proposer-vs-random-tuning-experiment.md`: a single falsifiable,
+  properly-powered experiment to test the project's load-bearing untested claim
+  (CH05-BM-002) — does the LLM proposer beat blind random search over the same
+  allowlist at equal budget? Uses cold-start as the only fitness channel (the
+  one solid enough to drive selection per the 2026-06-16 noise floor, CV 0.002),
+  seeds the allowlist with a validated-inert decoy knob (the v0.8 GPU pin) to
+  catch Goodhart/knob-hoarding, and pre-registers an honest null (C ≈ B is the
+  likely, and still decision-changing, outcome).
+- RESEARCH_PIPELINE §3 Experimental Lift: new row pointing the AI-guided tuning
+  validation at this sharper, runnable instance.
+
+Reason:
+- The corpus has empirically grounded its measurement layer (Chapter 16) but has
+  never tested whether the *proposer*, not just the knobs, creates value. The
+  recent network result (the whole win was one sysctl) and the inert GPU pin
+  show exactly the failure mode this would catch. The 2026-06-16 noise floor is
+  the missing input that finally makes the test powered and worth running.
+## 2026-06-20 - Adversarial Review: Flagged Chapter 02 TDX Bus-Attack Claim
+
+Changed:
+- Filed a "Flagged for Review" item in `VALIDATION.md` against Chapter 02's
+  claim that "TDX, built for the DDR5 era, is hardened against physical bus-level
+  attacks" (and the attestation table's "Bus Attack Resistance: Hardened
+  (DDR5)"). Original chapter wording left untouched (it is a preserved DOCX
+  import; resolved via flag, not in-place edit).
+- Added `validation/notes/2026-06-20-ch02-tdx-bus-attack-resistance-challenge.md`
+  with the full challenge and external citations.
+
+Reason:
+- This is a decision-driving security claim: the chapter recommends an SGX → TDX
+  + NVIDIA CC migration as the answer to the DePIN "oracle problem." External
+  evidence contradicts the "hardened" property for the relevant threat model.
+  **TEE.Fail** (Oct 2025, Georgia Tech + Purdue) is a practical **DDR5**
+  memory-bus interposer that extracts keys and **forges remote attestation
+  against Intel SGX/TDX, AMD SEV-SNP, and NVIDIA CC** — defeating *both*
+  recommended successors on the exact bus called "hardened." **Battering RAM**
+  (2025, ~$50 DDR4 interposer) breaks SGX/SEV-SNP and its authors expect DDR5
+  interposers to follow; Intel's TDX mitigation ("integrity mode") is not the
+  default posture. Intel and AMD explicitly place physical-access attacks
+  **out of threat model** — which is exactly the DePIN model (a node operator
+  with physical access to its own DRAM bus). For that model the claim is
+  effectively Disproven; the oracle problem must rest on the project's own
+  non-TEE defenses (population confirmation, fingerprint cross-checks, anomaly
+  detection, economic slashing), not on TEE bus integrity.
+## 2026-06-20 - Containment Primitive Characterization for Unattended Execution
+
+Changed:
+- Chapter 12: added a "Containment Primitive Characterization" subsection
+  (additive, after "Risk-Based Execution Tiers") that turns the previously
+  named-only sandboxing primitives into a property-level selector. Characterizes
+  namespaces+cgroups, seccomp-BPF, Landlock, bubblewrap, gVisor, and Firecracker
+  by the boundary each enforces, what it does NOT contain alone, setup
+  privilege, cost, and best CursiveOS role — plus the sharp edges (seccomp
+  cannot dereference pointers; Landlock capability is kernel-version-scoped;
+  unprivileged user namespaces are themselves attack surface; gVisor trades
+  syscall cost/compat for a smaller host-kernel surface; Firecracker is the only
+  hardware-enforced guest boundary here). Ends with a layered selector and the
+  reminder that containment protects the host but does NOT grant the shell write
+  access to organism truth.
+- `sources/local-agent-safety-selected-sources.md`: added a dated "Containment
+  Primitive Deep-Dive Sources" table with the retrieved facts and URLs (kernel
+  seccomp/Landlock docs, Phoronix, bubblewrap, gVisor platform/systrap, and
+  Firecracker spec).
+- VALIDATION.md: added a Chapter 12 claims-table row stating that containment
+  primitive choice should follow input-trust/blast-radius and that no single
+  primitive is a complete sandbox.
+
+Reason:
+- Directly answers Chapter 12 Open Research Gap #4 ("build risk-based
+  containment for unattended tool execution") and RESEARCH_PIPELINE P1
+  "Sandboxing and least privilege" / P0 knowledge gap "How do current agent
+  systems fail under privilege?". The prior chapter text only listed these
+  primitives; the corpus lacked a property-level basis for choosing among them
+  before enabling unattended host mutation.
+## 2026-06-21 - Cold-Start Mechanism + Hardware-Scoping Experiment Proposed
+
+Changed:
+- Added `experiments/cold-start-mechanism-and-hardware-scoping-plan.md`: a
+  falsifiable experiment plan targeting the corpus's most-trusted signal
+  (cold-start, within-machine CV 0.002). Two hypotheses: (H1) the −51% desktop
+  win is carried by a single CPU idle-exit knob, tested by a 2³ factorial over
+  governor / EPP / C-state limit on the Ryzen 7 5700 + Arc A750 desktop; (H2) a
+  cheap preset-free idle-exit pre-probe (cold TTFT − warm TTFT) predicts which
+  machines benefit, tested across all available tester machines.
+- Added the plan to RESEARCH_PIPELINE.md Experimental Lift; marked the real-path
+  network A/B row Done (it had been completed on 2026-06-16 but the pipeline row
+  still read "Proposed").
+
+Reason:
+- Cold-start currently drives selection (`chapters/16` §5.7), yet its mechanism
+  is only half-isolated (CPU-side, but no single knob — §5.1) and its hardware
+  scoping is unexplained (−51% desktop vs ~0% laptop — §5.5). The standing
+  VALIDATION instruction is "build hardware-scoped fitness before any fleet-wide
+  preset claim"; this experiment is the cheapest path to both the causal knob
+  and a predictor, reusing the factorial-decomposition discipline that already
+  paid off on the network thread (§5.6).
+## 2026-06-21 - Red-Team Flag: Covenant-72B "GPT-4-class" Claim Overstated (Chapter 02)
+
+Changed:
+- Flagged (did **not** edit) the Chapter 02 claim that Covenant-72B's 67.1 MMLU
+  is "competitive with early GPT-4-class models" and demonstrates that
+  "decentralized compute can achieve data-center-level results." Added a row to
+  the `VALIDATION.md` "Flagged for Review" table and a full evidence note at
+  `validation/notes/2026-06-21-ch02-covenant-72b-gpt4-class-overstatement-challenge.md`.
+- External evidence: GPT-4 (2023) scored 86.4% on MMLU (OpenAI GPT-4 Technical
+  Report); GPT-3.5 ~70-75%; Llama-2-70B ~68.9% (Llama 2 paper). Covenant-72B's
+  67.1 sits ~19 points below GPT-4, at the Llama-2-70B / GPT-3.5 tier — which is
+  also the model's *own* reported peer set (LLaMA-2-70B 65.6, LLM360 K2 65.5,
+  both 2023-era open base models). The "GPT-4-class / data-center-level" framing
+  is therefore overstated.
+
+Reason:
+- Adversarial corpus review. The Covenant-72B benchmark is the chapter's only
+  concrete model-quality figure and is load-bearing for its market-viability
+  thesis, so overstating its comparison class overstates the opportunity. The
+  underlying decentralized-training achievement (72B model, 1.1T tokens, ~70
+  commodity-hardware contributors) is real and not in dispute; only the GPT-4
+  comparison is challenged. Per the red-team task and CORPUS_WORKFLOW.md, the
+  preserved-DOCX claim was not edited in place — only flagged with external
+  evidence. (For contrast, the chapter's "BBR ... 2700x faster than CUBIC"
+  figure was checked and found to be Google's own published benchmark, so it was
+  not flagged.)
+## 2026-06-22 - Experiment Plan: Idle-Power Selection-Channel Validation
+
+Changed:
+- Added `experiments/idle-power-selection-channel-validation-plan.md`. A
+  pre-registered, falsifiable plan to test whether the 2026-06-16 harness
+  idle-power fix (settle delay + more samples) actually makes idle power a
+  selection-usable channel (CV ≤ 0.15 per Chapter 10) in the **production
+  full-test path** and across hardware — not just in the one-off Phase-D probe
+  on the Arc A750 desktop where it was demonstrated.
+
+Reason:
+- Chapter 16 §5 items 7–8 left a tension on the record: idle power was CV ≈ 0.83
+  in the production noise floor but CV ≈ 0.01 in a bespoke probe. Chapter 10's
+  confirmation rule and the live v0.9 screen's power term both depend on which
+  is true in the path operators actually run, on more than one machine. The plan
+  also ships the §3 item-1 `power_source` field as a side effect and keeps the
+  §2.2 cross-machine pooling bar explicit (H3).
+## 2026-06-22 - Red-Team Flag: Ch01 Static-Buffer "Universal Gap" Thesis Overstated
+
+Changed:
+- Flagged `chapters/01-first-principles-and-strategy.md` §2.1/§2.2 in
+  `VALIDATION.md` (Flagged for Review) as an overstated, load-bearing claim,
+  **without editing the chapter text**. The chapter frames a static 212KB TCP
+  buffer default ("appropriate for 1990s modem speeds") as the universal
+  OS-level bottleneck and "foundational opportunity," and its in-chapter
+  assessment marks the wording canon for verbatim white-paper reuse while
+  citing +454–616% network deltas as the proof point.
+- Added `validation/notes/2026-06-22-ch01-buffer-default-overstatement-challenge.md`
+  with the full external-evidence challenge and suggested reconciliation.
+
+Challenge (external + internal evidence):
+- Linux receive-buffer autotuning (Dynamic Right-Sizing) has been on by default
+  since kernel 2.4.17/2.6.7 (~2004): the operative `tcp_rmem` default is ~87KB
+  and grows automatically toward the path BDP. The 212992 figure is the
+  `net.core.rmem_max` ceiling, not an applied per-connection default — so
+  "defaults to 212KB" misdescribes the stack. The "1990s modem" parenthetical
+  is also inverted (a 208KB buffer is ~30s of data for a 56kbps modem).
+- The large, real network win is the buffer-independent CUBIC→BBR
+  congestion-control swap (BBR literature: the advantage holds across bandwidths
+  and is "due to the fundamental algorithm design rather than buffer-specific
+  behavior"; it is a one-line sysctl any operator can set).
+- The corpus's own **Validated** Chapter 16 real-path A/B already found the
+  CursiveOS buffer/qdisc stack adds ~0% (−0.7%) on ordinary ≤1GbE links, with
+  the loopback "+246%" called a non-transferable artifact. That validated
+  correction was never reconciled with the still-canon Chapter 01 thesis.
+
+Reason:
+- §2.1/§2.2 is an irreducible first principle that the moat/flywheel thesis
+  (Chapters 01, 02, 11) and the project's headline performance numbers rest on,
+  and it is slated for verbatim white-paper reuse. If the real lever is a
+  portable one-line BBR swap and autotuning already covers ordinary links, the
+  "universal, structurally inherent" gap — and the defensibility argument built
+  on it — is materially smaller than the foundational chapter asserts. Flagged
+  rather than edited per CORPUS_WORKFLOW.md §3 because the wording is canon
+  headed into an outward-facing document and the reconciliation is a maintainer
+  decision.
+## 2026-06-22 - New Chapter 17: Mutation Safety and Permission Law
+
+Changed:
+- Added `chapters/17-mutation-safety-and-permission-law.md`, the source-backed
+  "permission law" the corpus had flagged as the #1 missing expansion
+  (Chapter 13 Gap 2 / "What Should Be Added Next"). It binds the existing
+  seven-class mutation taxonomy to the *specific* enforcement primitive that
+  makes each gate real (capabilities, seccomp, Landlock, systemd sandboxing,
+  polkit-mediated escalation, firmware staging) and states the core rule:
+  required privilege rises with blast radius and the authorizer shifts from the
+  deterministic daemon (low classes) to a human (high classes); the
+  probabilistic shell never applies a mutation directly.
+- Grounded the chapter in external literature: Saltzer & Schroeder (least
+  privilege, fail-safe defaults, separation of privilege) and OWASP LLM Top 10
+  2025 LLM06 (Excessive Agency → separate decision from execution), plus
+  kernel.org / man-page / freedesktop primary docs for the containment
+  mechanisms. Added `sources/chapter-17-selected-sources.md` (7 sources).
+- Updated `INDEX.md` (Chapter 17 row), and marked the gap addressed in
+  `RESEARCH_PIPELINE.md` (P0 knowledge gap "How do current agent systems fail
+  under privilege?") and Chapter 13 Gap 2.
+
+Reason:
+- Chapter 06 hardens the host against external attackers; nothing consolidated
+  the inverted threat — the organism's own self-improvement loop mutating the
+  host under a probabilistic agent. This closes the highest-value, well-sourced
+  research gap and moves the corpus from "we have the pieces" to a single
+  enforceable rulebook for self-mutation.
+## 2026-06-22 - Chapter 15: Autopoiesis / Artificial-Life Grounding of the Organism Framing
+
+Changed:
+- Chapter 15: added section "Biological and Artificial-Life Foundations of the
+  Organism Framing" (additive, inserted after "What Remains Speculative"). It
+  grounds the corpus's "organism" language in autopoiesis (Maturana & Varela,
+  1972/1980), cybernetics (Beer's Viable System Model 1972; Ashby's Law of
+  Requisite Variety), and artificial life (Langton's "life as it could be";
+  Tierra, Ray 1990; Avida, with Lenski/Ofria/Pennock/Adami, Nature 423:139–144,
+  2003 on incremental evolution of complex features). It then covers the
+  open-ended-evolution literature — novelty search (Lehman & Stanley 2011),
+  Quality-Diversity / MAP-Elites (Mouret & Clune, arXiv:1504.04909, 2015), and
+  POET (Wang et al., arXiv:1901.01753, 2019) — and adds a table separating
+  metaphor / structural analogy / measurable property / implementation
+  consequence for each biological term.
+
+Reason:
+- Closes the explicit "artificial life and open-ended evolution" follow-up
+  flagged at the end of Chapters 14 and 15, and addresses RESEARCH_PIPELINE.md
+  P0 item "Software Organisms, Autopoiesis, and Evolutionary Systems" and the P0
+  knowledge gap "What makes a software system an organism rather than an
+  automation pipeline?" Key takeaways for CursiveOS: today the system is closer
+  to allopoietic (automation reaching toward organism properties), not
+  autopoietic; the "genome" should be a diverse, stepping-stone-structured
+  archive (MAP-Elites-style) rather than a champion changelog; fitness must
+  reward stepping stones (Avida/EQU) or capabilities will not evolve; sensor/
+  verifier variety must match mutation variety (Ashby); and indefinite
+  open-ended improvement is unproven even in purpose-built ALife systems, so
+  plateaus should be expected and designed for. Sources cited are those actually
+  retrieved via web search (2026-06-22); no full-text paper mirroring.
+## 2026-06-23 - Red-Team Flag: Chapter 01 §2.1 TCP-buffer claim challenged
+
+Changed:
+- VALIDATION.md "Flagged for Review": added a flag against
+  `chapters/01-first-principles-and-strategy.md` §2.1, the First Principle #1
+  flagship example "TCP socket buffers default to 212KB (appropriate for 1990s
+  modem speeds)." The original claim was **not** edited.
+- Added `validation/notes/2026-06-23-ch01-2.1-tcp-buffer-claim-redteam-challenge.md`
+  with the full challenge and external citations.
+
+Reason:
+- The claim is wrong on both halves. 212 KB is `net.core.rmem_max` (the ceiling
+  on *manually* set `SO_RCVBUF`), not the default; ordinary sockets use
+  `tcp_rmem` autotuning up to ~4–6 MB, on by default since the 2.6.x series
+  (~2004). And a 212 KB window supports ~17 Mbit/s at 100 ms RTT and ~1.7 Gbit/s
+  on a LAN — hundreds to tens-of-thousands of times a 56 kbit/s modem, not
+  "modem speeds." Sources: Linux `tcp(7)` man page, Red Hat RHEL 10 TCP-tuning
+  guide, ESnet Fasterdata.
+- This matters because §2.1 is the corpus's most load-bearing technical sentence:
+  it is named "the foundational opportunity CursiveOS exploits" and the chapter's
+  Research-master note canonizes it as "rock-solid"/"now canon"/"quoted verbatim."
+  The corpus's own Validated Chapter 16 network A/B (2026-06-16) already
+  contradicts it — "default-buffer autotuning already covers the ~6 MB BDP,"
+  buffer tuning adds ~0%, and the real network win is CUBIC→BBR.
+- Scope is narrow: First Principle #1 stays Supported in general (governor/GPU
+  examples are sounder); only the TCP-buffer example is challenged.
+
 ## 2026-06-16 - Noise Floor Measured + GPU Power Now Visible
 
 Changed:

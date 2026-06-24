@@ -155,3 +155,19 @@ boundary than editing a Markdown file.
 - gVisor documentation: https://gvisor.dev/docs/
 - Firecracker design: https://github.com/firecracker-microvm/firecracker/blob/main/docs/design.md
 - Firecracker jailer: https://github.com/firecracker-microvm/firecracker/blob/main/docs/jailer.md
+
+## Containment Primitive Deep-Dive Sources (2026-06-20)
+
+Added to ground Chapter 12's "Containment Primitive Characterization" subsection,
+which deepens the previously named-only sandboxing primitives into a
+property-level selector for unattended/untrusted execution (Chapter 12 Open
+Research Gap #4; RESEARCH_PIPELINE P1 "Sandboxing and least privilege"; P0
+knowledge gap "How do current agent systems fail under privilege?").
+
+| Source | Retrieved fact used | URL |
+| --- | --- | --- |
+| Linux kernel seccomp_filter docs / community write-ups | BPF filters may not dereference pointers, so seccomp can match syscall number and scalar args (e.g. forbid `dup2` to fd 2) but cannot restrict `open()` to a path allowlist; value-by-inspection also makes it immune to TOCTOU argument swaps. | https://docs.kernel.org/userspace-api/seccomp_filter.html ; https://blog.yadutaf.fr/2014/05/29/introduction-to-seccomp-bpf-linux-syscall-filter/ |
+| Linux kernel Landlock docs; Phoronix | Landlock merged in 5.13 (ABI v1, filesystem self-restriction, unprivileged); TCP bind/connect added in 6.7 (ABI v4); ABI-versioned and best-effort, so capability depends on the running kernel. | https://docs.kernel.org/userspace-api/landlock.html ; https://www.phoronix.com/news/Landlock-Networking-Linux-6.7 |
+| containers/bubblewrap README; systemshardening | bubblewrap is the unprivileged namespace+bind-mount+seccomp engine behind Flatpak; requires unprivileged user namespaces (default on most distros since ~2024, but admins can disable); unprivileged user namespaces are themselves a recurring kernel attack surface. | https://github.com/containers/bubblewrap ; https://www.systemshardening.com/articles/linux/linux-unprivileged-namespace-restriction/ |
+| gVisor platform & systrap docs | Sentry re-implements Linux syscalls in Go (memory-safe); platforms are systrap (current default, `SECCOMP_RET_TRAP`/`SIGSYS`), KVM, and deprecated ptrace; overhead negligible for CPU-bound and significant for syscall-heavy workloads; not 100% syscall-compatible. | https://gvisor.dev/docs/architecture_guide/platforms/ ; https://gvisor.dev/blog/2023/04/28/systrap-release/ |
+| Firecracker design/spec docs | KVM-backed microVM; ≤125 ms from InstanceStart to guest `/sbin/init`; <5 MiB VMM memory overhead per microVM; `jailer` sets up cgroup/chroot/seccomp/namespaces then drops privileges; powers AWS Lambda and Fargate; host needs KVM and kernel ≥4.14. | https://github.com/firecracker-microvm/firecracker/blob/main/SPECIFICATION.md ; https://firecracker-microvm.github.io/ |
