@@ -31,7 +31,7 @@ Git blob SHA: e54cb50b4cfaa93aedbf07f50f4a5dbd7bf8c51e
 ## Reinforced research (2026-06-24)
 
 - **sched_ext:** Linux kernel docs scheduler/sched-ext.html (2025–2026); SchedCP paper intake papers/recursive-self-improvement/schedcp.
-- **SemaTune / OS-R1:** papers/recursive-self-improvement/sematune, os-r1 — online tuning patterns; require Ch06 permission law before deployment.
+- **SemaTune / OS-R1:** papers/recursive-self-improvement/sematune, tune-agent — online tuning patterns; require Ch06 permission law before deployment.
 - **Performance claims:** Phoronix percentages remain **Unvalidated** until Ch00 harness confirms on target hardware.
 
 # Linux Kernel Optimization

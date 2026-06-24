@@ -4,6 +4,33 @@ This file records meaningful changes to research guidance, validation status,
 and corpus process. It is intended to be readable without reconstructing a
 chain of supporting documents.
 
+## 2026-06-24 - Paper-Library Audit: Reflexion Intake, os-r1→tune-agent Rename, Depth-Tier Policy
+
+Changed:
+- **Reflexion intake completed** (`papers/recursive-self-improvement/reflexion/`): added
+  `deep-extraction.md`, `claims-and-results.md`, and `figures-and-tables.md`,
+  grounded in the local full text `paper.md` (arXiv:2303.11366, CC BY 4.0). No
+  `[needs full-text]` markers — every number traces to a section/table.
+- **Folder rename** `os-r1` → `tune-agent` to match the paper's v2 title
+  (TuneAgent, arXiv:2508.12551; same paper formerly titled OS-R1, GitHub
+  `LHY-24/OS-R1`). Updated all old-*path* references in `papers/README.md`,
+  `chapters/03`, `chapters/13`, `chapters/15`, and the folder's own
+  `deep-extraction.md`. Display name "OS-R1" left intact in prose where the
+  corpus still uses the v1 name.
+- **papers/README.md**: documented the **Extraction depth tiers** policy
+  (cornerstone/important require `claims-and-results.md`; routine papers get
+  `deep-extraction.md` only) and a **two-axis labeling convention** note
+  (Extraction Confidence = fidelity to the paper; corpus taxonomy = validation
+  for CursiveOS — kept separate).
+- **Confidence-label normalization**: `claims-and-results.md` for alphaevolve,
+  darwin-godel-machine, and funsearch now use the column header
+  "Extraction Confidence" (values unchanged; no conflation with corpus taxonomy).
+
+Reason:
+- Content audit: finish an incomplete intake from local full text, fix a
+  folder/paper naming mismatch, and make extraction depth + confidence labeling
+  an intentional, documented policy rather than an accidental one.
+
 ## 2026-06-24 - Structural Org: Ch03+Ch04 Merge, Ch07 Split, Inline Body Reinforcement
 
 Changed:

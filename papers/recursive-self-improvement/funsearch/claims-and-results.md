@@ -4,7 +4,7 @@ Source: https://www.nature.com/articles/s41586-023-06924-6 | RSI-002 | Extractio
 
 ## Headline Claims
 
-| # | Claim | Evidence Type | Confidence |
+| # | Claim | Evidence Type | Extraction Confidence |
 | --- | --- | --- | --- |
 | 1 | LLM + evolution discovers new mathematical constructions | Nature peer review | High |
 | 2 | Programs evaluated by automated evaluators, not LM judgment alone | Method | High |

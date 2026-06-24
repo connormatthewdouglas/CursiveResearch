@@ -34,7 +34,7 @@ Historical note: import text references **TAO-Forge**; current names are Cursive
 
 - **Proposer value test:** `experiments/proposer-vs-random-tuning-experiment.md` — CH05-BM-002 still **Unvalidated**; import 5–25% claims not locally reproduced.
 - **SchedCP (2025):** Zheng et al., arXiv:2509.01245 — `papers/recursive-self-improvement/schedcp/`; MCP + execution verifier; kernel ≥6.12 sched_ext.
-- **OS-R1 (2025):** Lin et al., arXiv:2508.12551 — `papers/recursive-self-improvement/os-r1/`; rule-based RL rewards for valid kernel configs.
+- **OS-R1 (2025):** Lin et al., arXiv:2508.12551 — `papers/recursive-self-improvement/tune-agent/`; rule-based RL rewards for valid kernel configs.
 - **SemaTune:** `papers/recursive-self-improvement/sematune/` — online tuning pattern; Ch06 permission law before deployment.
 - **BranchFS rollback:** `papers/recursive-self-improvement/branchfs-fec/` — transactional branches align with Ch01 reversible presets.
 - **Verifier pattern:** AlphaEvolve, CodeEvolve, FunSearch intakes (Ch03) — external measurement daemon must judge improvements, not the proposer LLM.

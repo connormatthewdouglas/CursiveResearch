@@ -1,4 +1,4 @@
-# TuneAgent (os-r1) — Deep Extraction
+# TuneAgent — Deep Extraction
 
 Source: https://arxiv.org/abs/2508.12551
 Authors / Lab: Hongyu Lin, Yuchen Li, Haoran Luo, Zhenghong Lin, Libo Zhang, Mingjie Xing, Yanjun Wu
@@ -103,7 +103,7 @@ Kernel space treated as constrained RL environment.
 
 ## 13. CursiveOS / Corpus Implications
 
-Folder `os-r1` maps to TuneAgent — direct OS kernel organism reference alongside SemaTune and SchedCP. Informs RL vs agentic control-plane design choices for Chapter 03/16. Prefer typed validation + external benchmarks over raw RL if sample efficiency poor.
+Folder `tune-agent` contains TuneAgent — direct OS kernel organism reference alongside SemaTune and SchedCP. Informs RL vs agentic control-plane design choices for Chapter 03/16. Prefer typed validation + external benchmarks over raw RL if sample efficiency poor.
 
 ## 14. Open Questions
 

@@ -4,7 +4,7 @@ Source: https://arxiv.org/abs/2505.22954 | RSI-016 | Extraction only
 
 ## Headline Claims
 
-| # | Claim | Confidence |
+| # | Claim | Extraction Confidence |
 | --- | --- | --- |
 | 1 | Agents can empirically self-improve by modifying own code | High |
 | 2 | Open-ended archive exploration essential | Medium-High |

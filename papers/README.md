@@ -3,6 +3,23 @@
 This directory stores papers and deep paper extractions for the CursiveResearch
 corpus.
 
+## Labeling convention: two separate axes
+
+Extractions carry two different labels that must not be merged into one:
+
+- **Extraction Confidence** (High / Medium / Low) — how faithful the extraction
+  is to the *paper itself* (did we capture the claim, number, or table
+  correctly).
+- **Corpus taxonomy** (Validated / Supported / Unvalidated / Disproven /
+  Speculative) — how validated a claim is *for CursiveOS* (does it transfer to
+  our hardware-scoped fitness loop).
+
+These are independent: an extraction can be High **Extraction Confidence** (we
+faithfully recorded what the paper claims) while its CursiveOS relevance is
+**Unvalidated**. Use "Extraction Confidence" wherever you rate fidelity to the
+paper; use the corpus taxonomy wherever you state CursiveOS relevance or
+transfer. Do not overwrite one axis with the other.
+
 ## Goal
 
 Keep fewer papers with more useful detail.
@@ -70,6 +87,24 @@ reproduction belongs only in rights-cleared paper folders.
 | Important | Paper folder or source entry; structured extraction focused on method, claims, results, limitations, and transfer. |
 | Supporting | Source list entry plus concise structured note. |
 | Lead Only | Link, citation, and one reason it may matter later. |
+
+## Extraction depth tiers
+
+Depth tiers are intentional, not accidental. The tier a paper declares in its
+`Extraction Type:` header determines which extraction files it should carry:
+
+| Declared Extraction Type | Required extraction files |
+| --- | --- |
+| cornerstone | `deep-extraction.md` **and** `claims-and-results.md` (add `figures-and-tables.md` when the paper's figures/tables carry load) |
+| important | `deep-extraction.md` **and** `claims-and-results.md` |
+| supporting | `deep-extraction.md` only |
+| lead-only | source/citation entry only |
+
+Rationale: cornerstone and important papers get a separate claims-and-results
+inventory so their headline numbers stay auditable; routine (supporting /
+lead-only) papers get a single deep extraction. When auditing, compare each
+folder's files against the tier its own header declares and reconcile any gap
+(either add the missing inventory or correct an over-stated tier).
 
 ## Deep Extraction Template
 
@@ -186,7 +221,7 @@ A useful paper extraction lets a future agent answer:
 
 | Slug | Area |
 | --- | --- |
-| ladder, reward-hacking-skalse-2022, godel-agent, stop-self-taught-optimizer, voyager, funsearch, alphaevolve, self-rewarding-language-models, gptswarm, alphadev, os-r1, sematune, branchfs-fec, schedcp, poet, map-elites, open-endedness-icml-2024, darwin-godel-machine, codeevolve | recursive-self-improvement |
+| ladder, reward-hacking-skalse-2022, godel-agent, stop-self-taught-optimizer, voyager, funsearch, alphaevolve, self-rewarding-language-models, gptswarm, alphadev, tune-agent, sematune, branchfs-fec, schedcp, poet, map-elites, open-endedness-icml-2024, darwin-godel-machine, codeevolve | recursive-self-improvement |
 | ai-agents-that-matter, agent-as-a-judge, osworld | agent-evaluation |
 | swe-agent, swe-bench, reflexion | software-engineering-agents |
 

@@ -484,7 +484,7 @@ Each intake follows `papers/<field>/<slug>/` with `README.md` + `deep-extraction
 | voyager | RSI | Executable skill libraries; environment feedback drives accumulation |
 | self-rewarding-language-models, agent-as-a-judge | RSI | Self-judge useful for triage; unsafe as sole fitness oracle |
 | gptswarm, poet, map-elites, open-endedness-icml-2024 | RSI | Diversity archives; MAP-Elites/POET analog for hardware-scoped niches (Ch08) |
-| os-r1, sematune, schedcp, branchfs-fec | RSI | OS/runtime tuning loops — require Ch06 permission law before deployment |
+| tune-agent, sematune, schedcp, branchfs-fec | RSI | OS/runtime tuning loops — require Ch06 permission law before deployment |
 | reward-hacking-skalse-2022, ladder | RSI | Proxy metrics and specification gaming under selection pressure |
 | ai-agents-that-matter, agent-as-a-judge, osworld | agent-eval | Cost-aware benchmarks, holdouts, OS-task realism |
 | swe-agent, swe-bench, reflexion | SWE agents | Execution-based evaluation template for Ch05 natural-language shell |

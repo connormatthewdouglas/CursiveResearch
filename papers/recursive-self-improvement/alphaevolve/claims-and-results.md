@@ -4,7 +4,7 @@ Source: https://arxiv.org/abs/2506.13131 | RSI-001 | Extraction only
 
 ## Headline Claims
 
-| # | Claim | Evidence Type | Confidence |
+| # | Claim | Evidence Type | Extraction Confidence |
 | --- | --- | --- | --- |
 | 1 | Evolutionary coding agent improves SOTA LLMs on scientific/algorithmic tasks | White paper + deployments | Medium-High |
 | 2 | LLM pipeline mutates code with evaluator feedback | Architecture | High |
