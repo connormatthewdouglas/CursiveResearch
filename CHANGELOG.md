@@ -51,6 +51,36 @@ Reason:
   effectively Disproven; the oracle problem must rest on the project's own
   non-TEE defenses (population confirmation, fingerprint cross-checks, anomaly
   detection, economic slashing), not on TEE bus integrity.
+## 2026-06-20 - Containment Primitive Characterization for Unattended Execution
+
+Changed:
+- Chapter 12: added a "Containment Primitive Characterization" subsection
+  (additive, after "Risk-Based Execution Tiers") that turns the previously
+  named-only sandboxing primitives into a property-level selector. Characterizes
+  namespaces+cgroups, seccomp-BPF, Landlock, bubblewrap, gVisor, and Firecracker
+  by the boundary each enforces, what it does NOT contain alone, setup
+  privilege, cost, and best CursiveOS role — plus the sharp edges (seccomp
+  cannot dereference pointers; Landlock capability is kernel-version-scoped;
+  unprivileged user namespaces are themselves attack surface; gVisor trades
+  syscall cost/compat for a smaller host-kernel surface; Firecracker is the only
+  hardware-enforced guest boundary here). Ends with a layered selector and the
+  reminder that containment protects the host but does NOT grant the shell write
+  access to organism truth.
+- `sources/local-agent-safety-selected-sources.md`: added a dated "Containment
+  Primitive Deep-Dive Sources" table with the retrieved facts and URLs (kernel
+  seccomp/Landlock docs, Phoronix, bubblewrap, gVisor platform/systrap, and
+  Firecracker spec).
+- VALIDATION.md: added a Chapter 12 claims-table row stating that containment
+  primitive choice should follow input-trust/blast-radius and that no single
+  primitive is a complete sandbox.
+
+Reason:
+- Directly answers Chapter 12 Open Research Gap #4 ("build risk-based
+  containment for unattended tool execution") and RESEARCH_PIPELINE P1
+  "Sandboxing and least privilege" / P0 knowledge gap "How do current agent
+  systems fail under privilege?". The prior chapter text only listed these
+  primitives; the corpus lacked a property-level basis for choosing among them
+  before enabling unattended host mutation.
 
 ## 2026-06-16 - Noise Floor Measured + GPU Power Now Visible
 
