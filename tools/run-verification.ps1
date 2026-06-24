@@ -93,7 +93,28 @@ foreach ($num in $contract.docx_import_chapters) {
     }
 }
 
+# Inline markers inside preserved import bodies (required chapters)
+$inlineCount = 0
+foreach ($num in $contract.inline_required_chapters) {
+    $file = Get-ChildItem (Join-Path $RepoRoot "chapters\$num-*.md") -ErrorAction SilentlyContinue | Select-Object -First 1
+    if (-not $file) { Fail "Inline-required chapter not found: $num" }
+    $content = Get-Content $file.FullName -Raw
+    if ($content -notlike "*$($contract.markers.corpus_inline)*") {
+        Fail "$($file.Name) missing inline corpus notes in import body"
+    }
+    $inlineCount += ([regex]::Matches($content, [regex]::Escape($contract.markers.corpus_inline))).Count
+}
+if ($inlineCount -lt $contract.marker_expectations.docx_chapters_inline_minimum) {
+    Fail "Inline marker count $inlineCount < $($contract.marker_expectations.docx_chapters_inline_minimum)"
+}
+
 # --- Contract passed: emit evidence ---
+$scriptPath = $PSCommandPath
+$contractHash = (Get-FileHash $contractPath -Algorithm SHA256).Hash
+$scriptHash = (Get-FileHash $scriptPath -Algorithm SHA256).Hash
+Push-Location $RepoRoot
+$gitHead = (git rev-parse HEAD 2>$null)
+Pop-Location
 Write-Host "CONTRACT PASS: chapters=$($chapters.Count) papers=$($paperDirs.Count) living=$living reinforced=$reinforced integration=$integration"
 
 # Step 1: corpus structure
@@ -118,8 +139,10 @@ Copy-Item (Join-Path $RepoRoot 'INDEX.md') (Join-Path $ScratchDir 'index-check.t
 $sb2 = New-Object System.Text.StringBuilder
 [void]$sb2.AppendLine('CHAPTER SAMPLES EVIDENCE')
 [void]$sb2.AppendLine("Generated: $(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')")
-[void]$sb2.AppendLine("Sample list from verification-contract.json ($($contract.sample_chapters.Count) files)")
-[void]$sb2.AppendLine("New chapter samples: $($req.new_chapters_from_08_12 -join ', ')")
+[void]$sb2.AppendLine("Producer: $scriptPath")
+[void]$sb2.AppendLine("Contract: $contractPath")
+[void]$sb2.AppendLine("Contract sample_chapters ($($contract.sample_chapters.Count)): $($contract.sample_chapters -join ', ')")
+[void]$sb2.AppendLine("New chapter samples (min $($req.min_new_chapter_samples)): $($req.new_chapters_from_08_12 -join ', ')")
 [void]$sb2.AppendLine('')
 foreach ($f in $contract.sample_chapters) {
     $path = Join-Path $RepoRoot "chapters\$f"
@@ -130,7 +153,7 @@ foreach ($f in $contract.sample_chapters) {
     Get-Content $path -TotalCount 100 | ForEach-Object { [void]$sb2.AppendLine($_) }
     [void]$sb2.AppendLine('')
     [void]$sb2.AppendLine('--- Select-String markers ---')
-    Select-String -Path $path -Pattern 'living layer|Reinforced research|2026|papers/|Corpus integration' |
+    Select-String -Path $path -Pattern 'living layer|Reinforced research|2026|papers/|Corpus integration|Corpus inline' |
         ForEach-Object { [void]$sb2.AppendLine("$($_.LineNumber): $($_.Line.Trim())") }
     [void]$sb2.AppendLine('')
 }
@@ -188,10 +211,16 @@ $sb5 = New-Object System.Text.StringBuilder
 [void]$sb5.AppendLine("Generated: $(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')")
 [void]$sb5.AppendLine('')
 [void]$sb5.AppendLine('INPUT RECORDS (verification harness):')
-[void]$sb5.AppendLine("  Contract: tools/verification-contract.json")
-[void]$sb5.AppendLine("  Script: tools/run-verification.ps1")
-[void]$sb5.AppendLine("  Scratch: $ScratchDir")
-[void]$sb5.AppendLine("  Repo: $RepoRoot")
+[void]$sb5.AppendLine("  ScriptPath: $scriptPath")
+[void]$sb5.AppendLine("  ScriptSHA256: $scriptHash")
+[void]$sb5.AppendLine("  ContractPath: $contractPath")
+[void]$sb5.AppendLine("  ContractSHA256: $contractHash")
+[void]$sb5.AppendLine("  GitHEAD: $gitHead")
+[void]$sb5.AppendLine("  ScratchDir: $ScratchDir")
+[void]$sb5.AppendLine("  RepoRoot: $RepoRoot")
+[void]$sb5.AppendLine("  SampleChapters: $($contract.sample_chapters -join ', ')")
+[void]$sb5.AppendLine("  InlineRequired: $($contract.inline_required_chapters -join ', ')")
+[void]$sb5.AppendLine("  InlineCount: $inlineCount")
 [void]$sb5.AppendLine('')
 [void]$sb5.AppendLine('Recent commits:')
 git log -5 --oneline | ForEach-Object { [void]$sb5.AppendLine("  $_") }
@@ -202,17 +231,42 @@ if ($st) { $st | ForEach-Object { [void]$sb5.AppendLine($_) } } else { [void]$sb
 Pop-Location
 $sb5.ToString() | Set-Content (Join-Path $ScratchDir 'changed-files-evidence.txt') -Encoding UTF8
 
-"MARKER COUNTS: living_layer=$living reinforced=$reinforced corpus_integration=$integration chapters=$($chapters.Count) papers=$($paperDirs.Count)" |
+"MARKER COUNTS: living_layer=$living reinforced=$reinforced corpus_integration=$integration corpus_inline=$inlineCount chapters=$($chapters.Count) papers=$($paperDirs.Count)" |
     Set-Content (Join-Path $ScratchDir 'marker-counts.txt') -Encoding UTF8
+
+@{
+    generated = (Get-Date -Format 'yyyy-MM-dd HH:mm:ss')
+    scriptPath = $scriptPath
+    scriptSHA256 = $scriptHash
+    contractPath = $contractPath
+    contractSHA256 = $contractHash
+    gitHEAD = $gitHead
+    repoRoot = $RepoRoot
+    scratchDir = $ScratchDir
+    sampleChapters = $contract.sample_chapters
+    newChapterSamples = $req.new_chapters_from_08_12
+    inlineRequired = $contract.inline_required_chapters
+    counts = @{
+        chapters = $chapters.Count
+        papers = $paperDirs.Count
+        living = $living
+        reinforced = $reinforced
+        integration = $integration
+        inline = $inlineCount
+    }
+    pass = $true
+} | ConvertTo-Json -Depth 5 | Set-Content (Join-Path $ScratchDir 'input-records.json') -Encoding UTF8
 
 @(
     'VERIFICATION CONTRACT PASSED',
     "Time: $(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')",
+    "Producer: $scriptPath",
     "Chapters: $($chapters.Count)",
     "Papers: $($paperDirs.Count)",
     "Living: $living",
     "Reinforced: $reinforced",
     "Integration: $integration",
+    "Inline: $inlineCount",
     "Samples: $($contract.sample_chapters -join ', ')"
 ) | Set-Content (Join-Path $ScratchDir 'verification-contract-pass.txt') -Encoding UTF8
 

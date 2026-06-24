@@ -4,6 +4,19 @@ This file records meaningful changes to research guidance, validation status,
 and corpus process. It is intended to be readable without reconstructing a
 chain of supporting documents.
 
+## 2026-06-24 - Inline DOCX Reinforcement + Verification Harness Fix
+
+Changed:
+- **Ch14, Ch19:** `> **Corpus inline (2026-06-24):**` blocks inserted **inside** preserved
+  DOCX import paragraphs (sched_ext/SchedCP; TCP §2.1/§2.2 narrowing).
+- `tools/verification-contract.json`: inline marker gate for Ch14+Ch19; `input-records.json` output.
+- `tools/run-verification.ps1`: SHA256 input records, inline checks, producer path in samples.
+- `implementer/run-verification.ps1`: stub delegates to canonical `tools/run-verification.ps1`.
+
+Reason:
+- Verification skeptic gaps: script/contract mismatch, missing Ch10 in stale scratch script,
+  inline body reinforcements required alongside integration-note headers.
+
 ## 2026-06-24 - Verification Contract + Full DOCX Integration Notes
 
 Changed:

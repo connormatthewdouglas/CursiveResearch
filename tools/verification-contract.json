@@ -23,13 +23,17 @@
   "markers": {
     "living_layer": "## Corpus status (living layer)",
     "reinforced_research": "## Reinforced research",
-    "corpus_integration": "## Corpus integration notes"
+    "corpus_integration": "## Corpus integration notes",
+    "corpus_inline": "> **Corpus inline (2026-06-24):**"
   },
   "marker_expectations": {
     "all_chapters_living_layer": 23,
     "all_chapters_reinforced": 23,
-    "docx_chapters_integration": 9
+    "docx_chapters_integration": 9,
+    "docx_chapters_inline_minimum": 2
   },
+  "inline_required_chapters": ["14", "19"],
+  "canonical_script": "tools/run-verification.ps1",
   "paper_example_slugs": ["ai-agents-that-matter", "alphaevolve", "swe-agent"],
   "scratch_outputs": [
     "corpus-structure.txt",
@@ -40,6 +44,7 @@
     "supporting-updates.txt",
     "changed-files-evidence.txt",
     "marker-counts.txt",
-    "verification-contract-pass.txt"
+    "verification-contract-pass.txt",
+    "input-records.json"
   ]
 }

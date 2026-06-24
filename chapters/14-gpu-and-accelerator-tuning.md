@@ -55,7 +55,11 @@ The operational landscape of 2026 is characterized by a profound shift toward lo
 
 By 2026, the Linux kernel has transitioned from a static resource manager into an extensible, AI-augmented infrastructure. This transformation is rooted in the maturation of eBPF (extended Berkeley Packet Filter), which has enabled the introduction of the sched_ext framework. This framework allows for the dynamic loading of CPU schedulers from userspace, effectively ending the era of the "one-size-fits-all" scheduling policy represented by the legacy Completely Fair Scheduler (CFS) and its successor, the Earliest Eligible Virtual Deadline First (EEVDF) scheduler. For practitioners in 2026, kernel tuning is no longer restricted to static sysctl modifications; it involves the deployment of specialized scheduling policies that can distinguish between background throughput-oriented tasks, such as mining, and foreground interactive tasks, such as LLM inference.
 
+> **Corpus inline (2026-06-24):** `sched_ext` is real (kernel ≥6.12; [Linux sched-ext docs](https://docs.kernel.org/scheduler/sched-ext.html)) but **tail-latency / inference gains in this import are Unvalidated** on the CursiveOS harness — sustained-inference channel is signal<noise (Ch00 §5 item 7). Treat sched_ext claims as experiment backlog until concurrent-load benchmark runs (`RESEARCH_PIPELINE.md`).
+
 The integration of AI into the kernel control plane is another hallmark of the 2026 ecosystem. Subsystems now utilize machine-learning-informed advice to manage power states and resource distribution, ensuring that performance is maintained without compromising system determinism. Furthermore, the emergence of "Agentic OS" frameworks, such as SchedCP, allows Large Language Model agents to autonomously analyze workloads and synthesize eBPF programs to optimize the system in real-time. These advancements provide the foundation for the specific hardware and memory tweaks detailed in the following sections.
+
+> **Corpus inline (2026-06-24):** SchedCP (Zheng et al., arXiv:2509.01245, 2025) is intaken at `papers/recursive-self-improvement/schedcp/` — MCP control plane + execution verifier. **Requires Ch06 class-4 permission gates** before unattended deploy; proposer must not write CursiveRoot sensor truth (Ch05).
 
 ### Power Scaling and Undervolting Techniques for Heterogeneous GPU Arrays
 

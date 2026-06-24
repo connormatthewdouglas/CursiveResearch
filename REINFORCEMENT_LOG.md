@@ -20,12 +20,12 @@ Update a row when a chapter is reviewed or reinforced. Verification contract:
 | 11 | hardware-identity | native (new) | 2026-06-24 | Fleet fingerprint logging | living layer + reinforced | sensor-array spec; SMBIOS; Ch20 TEE limits |
 | 12 | oss-funding | native (new) | 2026-06-24 | Product vs OSS comparison | living layer + reinforced | Ch02 authoritative; GitHub Sponsors; Skalse; CHAOSS |
 | 13 | linux-kernel | docx | 2026-06-24 | Phoronix magnitudes | living layer + reinforced + integration notes | sched_ext; SchedCP; SemaTune/OS-R1; Ch00/Ch09 BBR |
-| 14 | gpu-accelerator | docx | 2026-06-24 | Cross-vendor claims | living layer + reinforced + integration notes | Ch00 GPU pin; hwmon power; SchedCP; hardware-scoped fitness |
+| 14 | gpu-accelerator | docx | 2026-06-24 | Cross-vendor claims | living layer + reinforced + integration + **inline** (sched_ext, SchedCP) | Ch00 GPU pin; hwmon power; SchedCP arXiv:2509.01245; kernel sched-ext docs |
 | 15 | ai-guided-tuning | docx | 2026-06-24 | Proposer unvalidated | living layer + reinforced + integration notes | SchedCP; OS-R1; SemaTune; BranchFS; proposer experiment |
 | 16 | security-hardening | docx | 2026-06-24 | TEE overclaims | living layer + reinforced + integration notes | CIS/STIG; Ch20 TEE; Ch05 containment; immune sensors |
 | 17 | firmware-bios | native | 2026-06-24 | Platform probes open | living layer + reinforced | DMTF Redfish 2025.2; fwupd; efivarfs |
 | 18 | local-agent-arc-b70 | docx | 2026-06-24 | Import specs unvalidated | living layer + reinforced + integration notes | Intel B70 brief; OpenVINO; Ch10; Reflexion |
-| 19 | first-principles | docx | 2026-06-24 | TCP §2.1 disproven | living layer + reinforced + integration notes | Ch00/Ch09 BBR; ESnet; Red Hat TCP docs |
+| 19 | first-principles | docx | 2026-06-24 | TCP §2.1 disproven | living layer + reinforced + integration + **inline** (§2.1, §2.2) | Ch00/Ch09 BBR; validation notes 2026-06-22/23; hardware-scoped fitness |
 | 20 | market-viability | docx | 2026-06-24 | TEE/Covenant disproven | living layer + reinforced + integration notes | TEE.Fail 2025; GPT-4 MMLU baseline; Ch02 economics |
 | 21 | tokenomics | docx | 2026-06-24 | Superseded by Ch02 | living layer + reinforced + integration notes | Skalse 2022; DePIN survey; Ch12 contrast |
 | 22 | research-master | docx | 2026-06-24 | Historical only | living layer + reinforced + integration notes | Ch00 measurement canon; Ch01-02 architecture migration |

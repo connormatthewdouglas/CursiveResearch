@@ -76,9 +76,13 @@ The following five foundational truths were identified by decomposing the projec
 
 Every Linux distribution ships with kernel parameters tuned for the broadest possible hardware compatibility, not for compute-intensive workloads. TCP socket buffers default to 212KB (appropriate for 1990s modem speeds). CPU governors default to power-saving modes. GPU frequencies idle to minimum between requests. These defaults create a measurable, quantifiable gap between what hardware can deliver and what the OS permits. This gap is the foundational opportunity CursiveOS exploits.
 
+> **Corpus inline (2026-06-24):** The 212 KB / "1990s modem" framing **misdescribes Linux TCP autotuning** (per-connection windows scale via `tcp_*` autotuning since ~2.6.x; `rmem_max` is a ceiling). On CursiveOS's validated ≤1GbE lossy path, the flagship **network** win is **CUBIC→BBR**, not raising a static buffer ceiling (Ch00 §5 item 6; Ch09; `validation/notes/2026-06-22-*`, `2026-06-23-*`). **Do not cite this sentence externally.**
+
 ### 2.2 The Bottlenecks Are OS-Level, Not Workload-Specific
 
 A TCP buffer ceiling throttles Ollama API traffic identically to how it throttles Bittensor validator gossip. A GPU frequency floor adds the same cold-start latency to an inference request as it does to a mining job. Because CursiveOS operates at the OS layer, its fixes apply universally across any compute workload on Linux. This workload-agnosticism is structurally inherent — not a marketing decision, but a consequence of where the bottlenecks exist.
+
+> **Corpus inline (2026-06-24):** OS-layer **mechanisms** (sysctl, governor, BBR) can apply broadly, but **magnitudes** are hardware- and channel-scoped: cold-start −51% on Ryzen 5700 + Arc A750 desktop vs ~0% on i5-11300H laptop (Ch00 §5 item 5); network magnitude is not quoteable on the emulation channel (CV 0.192). Prefer hardware-scoped fitness (Ch08).
 
 ### 2.3 Optimization Without Measurement Is Guesswork
 
