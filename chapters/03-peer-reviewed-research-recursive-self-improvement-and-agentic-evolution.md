@@ -1,3 +1,32 @@
+## Corpus status (living layer)
+
+**Last reconciled:** 2026-06-24
+**Confidence:** Structured digest Supported; individual paper claims require source-level validation per intake
+**Read with:** [Chapter 04](04-foundations-of-software-organisms-rsi-critical-synthesis.md), [Chapter 05](05-measurement-daemon-and-natural-language-shell.md), [Chapter 06](06-mutation-safety-and-permission-law.md), `papers/README.md`
+
+### Authoritative for
+- Demonstrated vs speculative RSI claims in current literature
+- Verifier/fitness/archive framing for software-organism design
+- Benchmark-quality guardrails (cost, holdouts, baselines)
+
+### Superseded or narrowed
+- Unbounded RSI / fast-takeoff narratives — not supported by cited literature
+
+### Open until experiment/hardware
+- Source-level validation of each P0 paper claim against full text
+- Graduation of proposer-vs-random experiment (`experiments/proposer-vs-random-tuning-experiment.md`)
+
+---
+
+## Reinforced research (2026-06-24)
+
+- **2024–2025 agent evaluation:** Kapoor et al., *AI Agents That Matter* — `papers/agent-evaluation/ai-agents-that-matter/`; corpus P0 guardrail for Ch05 shell evaluation.
+- **Evolutionary code discovery:** Google DeepMind AlphaEvolve (2025 preprint) — `papers/recursive-self-improvement/alphaevolve/`; LLM+evolution with external verifier mirrors CursiveRoot selection.
+- **Darwin Gödel Machine:** Sakana AI (2025) — `papers/recursive-self-improvement/darwin-godel-machine/`; open-ended code evolution with empirical gates.
+- **OS-agent realism:** OSWorld (NeurIPS 2024) — `papers/agent-evaluation/osworld/`; VM-backed computer-use tasks for shell benchmark design.
+
+---
+
 # Peer-Reviewed Research: Recursive Self-Improvement and Agentic Evolution
 
 Status: Structured research digest. This chapter summarizes published papers, preprints, and credible research systems without reproducing paper contents verbatim. It is intended to support future research and implementation decisions, not to serve as a product or daemon specification.
@@ -436,6 +465,26 @@ Important sandbox constraints:
 - Can local/small models participate meaningfully in self-improvement if verifiers and scaffolds are strong?
 - How can safety rules remain outside the mutable substrate?
 - How far can autonomous curriculum construction (LADDER-style) generalize beyond narrow verifiable domains?
+
+## Corpus paper library cross-links (2026-06-24)
+
+Each intake follows `papers/<field>/<slug>/` with `README.md` + `deep-extraction.md` per [papers/README.md](../papers/README.md).
+
+| Paper slug | Field | Key lesson for CursiveOS |
+| --- | --- | --- |
+| godel-agent | RSI | Self-referential mutation; verifier must remain external to the mutable substrate |
+| stop-self-taught-optimizer | RSI | Scaffold-level improvement is real but bounded — not unrestricted RSI |
+| alphaevolve, funsearch, alphadev, codeevolve | RSI | Strongest pattern: candidate generator + hard verifier + selection archive |
+| darwin-godel-machine | RSI | Evolutionary code archive with empirical acceptance gates |
+| voyager | RSI | Executable skill libraries; environment feedback drives accumulation |
+| self-rewarding-language-models, agent-as-a-judge | RSI | Self-judge useful for triage; unsafe as sole fitness oracle |
+| gptswarm, poet, map-elites, open-endedness-icml-2024 | RSI | Diversity archives; MAP-Elites/POET analog for hardware-scoped niches (Ch08) |
+| os-r1, sematune, schedcp, branchfs-fec | RSI | OS/runtime tuning loops — require Ch06 permission law before deployment |
+| reward-hacking-skalse-2022, ladder | RSI | Proxy metrics and specification gaming under selection pressure |
+| ai-agents-that-matter, agent-as-a-judge, osworld | agent-eval | Cost-aware benchmarks, holdouts, OS-task realism |
+| swe-agent, swe-bench, reflexion | SWE agents | Execution-based evaluation template for Ch05 natural-language shell |
+
+See [Chapter 04](04-foundations-of-software-organisms-rsi-critical-synthesis.md) for organism-framing synthesis beyond this digest.
 
 ## Source List
 

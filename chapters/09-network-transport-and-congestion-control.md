@@ -25,9 +25,11 @@
 
 ## Reinforced research (2026-06-24)
 
-- Corpus reorganized to strategic order 00-22; see [INDEX.md](../INDEX.md).
-- Paper library: **25** peer intakes in papers/ (extraction-only unless rights-cleared).
-- Credible external sources: Linux kernel docs, arXiv 2024-2026 preprints, DMTF/UEFI/Red Hat/ESnet where applicable â€” details in chapter body and sources/.
+- **BBR under loss:** Cardwell et al., "BBR: Congestion-Based Congestion Control" (ACM Queue 2017); Linux `tcp_bbr` — explains CUBIC collapse vs BBR under 0.5% random loss (§2).
+- **Validated decomposition:** Chapter 00 real-path A/B (2026-06-16): CUBIC 43.1 → BBR 851.1 Mbit/s on ≤1GbE; stack delta −0.7% (§5).
+- **Loopback BDP artifact:** iperf3 loopback effective BDP can reach tens of MB — stack tuning magnitudes are mechanism-only, not NIC-transferable (§3).
+- **ESnet tuning:** ESnet "Host Tuning" guidance — label tests `real-path` vs `loopback-emulation`; public iperf3 endpoints unreliable per Ch00 §3 item 7.
+- **Fleet escalation:** Network CV 0.192 > 0.15 threshold — per-channel confirmation per Ch08 §4.
 
 # Network Transport and Congestion Control
 

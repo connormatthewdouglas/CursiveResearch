@@ -1,3 +1,33 @@
+## Corpus status (living layer)
+
+**Last reconciled:** 2026-06-24
+**Confidence:** Daemon/shell split Supported; containment architecture Supported; shell implementation **Unvalidated**
+**Read with:** [Chapter 06](06-mutation-safety-and-permission-law.md), [Chapter 10](10-local-llm-inference-runtime-architecture.md), [Chapter 18](18-local-agent-arc-b70.md), [VALIDATION.md](../VALIDATION.md)
+
+### Authoritative for
+- Measurement daemon writes sensor truth; NL shell reads only
+- Layered containment selector (namespaces → seccomp/Landlock → gVisor → Firecracker)
+- Shell evaluation as controlled computer operation, not chat quality
+
+### Superseded or narrowed
+- Prompt-only safety for host mutation — insufficient per OWASP LLM06 / NCSC guidance
+
+### Open until experiment/hardware
+- Risk-based sandbox selector implementation and test (Open Gap #4)
+- Shell benchmark suite with reset/rollback (SWE-bench / OSWorld patterns)
+
+---
+
+## Reinforced research (2026-06-24)
+
+- **Prompt injection:** OWASP LLM Top 10 (2025), LLM06 Prompt Injection — deterministic policy layer required before tool execution.
+- **Agentic skills risk:** OWASP Agentic AI Top 10 (2025) — skill manifests and blast-radius classes for Ch06 permission matrix.
+- **Execution-based eval:** Jimenez et al., SWE-bench (2024) — `papers/software-engineering-agents/swe-bench/`; Yang et al., SWE-agent — `papers/software-engineering-agents/swe-agent/`.
+- **OS-task realism:** OSWorld (NeurIPS 2024) — `papers/agent-evaluation/osworld/`; VM-backed starting state + post-check for shell tasks.
+- **Containment:** gVisor Sentry model; Firecracker microVM docs (≤125 ms start) — cited in VALIDATION Ch05 containment row.
+
+---
+
 # Measurement Daemon and Natural-Language Shell
 
 Status: Current architecture imported from the main `CursiveOS` repo. Measurement daemon is specified; natural-language shell is architectural sketch, not implemented.

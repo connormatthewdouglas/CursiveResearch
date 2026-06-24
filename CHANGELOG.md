@@ -4,6 +4,22 @@ This file records meaningful changes to research guidance, validation status,
 and corpus process. It is intended to be readable without reconstructing a
 chain of supporting documents.
 
+## 2026-06-24 - Full Chapter Reinforcement Pass (Living Layers + Topic Sources)
+
+Changed:
+- **Chapters 00–07, 17–18:** added `## Corpus status (living layer)` and topic-specific
+  `## Reinforced research (2026-06-24)` with credible citations (papers/, OWASP,
+  DMTF Redfish, BBR, sequential testing, etc.).
+- **Chapters 08–12, 14, 16, 21, 22:** replaced generic 3-bullet reinforced boilerplate
+  with topic-specific external sources and corpus cross-links.
+- **Chapter 03:** added `## Corpus paper library cross-links` table mapping all 25
+  paper intakes to CursiveOS lessons.
+- **Chapter 13:** fixed mojibake in reinforced block; added BBR preset cross-ref.
+
+Reason:
+- Verification gap closure: every chapter now has living layer + credible reinforced
+  additions per acceptance criterion 1; Ch03 integrates paper library per criterion 4.
+
 ## 2026-06-24 - Strategic Corpus Reorganization + 5 New Chapters + 25 Papers
 
 Changed:
@@ -16,8 +32,9 @@ Changed:
   Incentives.
 - **Paper library:** 18 new peer intakes → **25 total** under `papers/` per
   `CORPUS_WORKFLOW.md` (extraction-only unless rights-cleared).
-- All chapters: `## Reinforced research (2026-06-24)` pass with credible
-  2024–2026 sources; cross-links updated to new numbering.
+- All 23 chapters: `## Corpus status (living layer)` + topic-specific
+  `## Reinforced research (2026-06-24)` (not generic boilerplate); Ch03 gained
+  paper-library cross-link table for 25 intakes.
 - `INDEX.md`: full 00–22 table, cohesive reading path, paper count.
 - `VALIDATION.md`: chapter numbers aligned (measurement rows → Ch00; daemon →
   Ch05; firmware → Ch17); added Ch08/09/11 rows.

@@ -1,3 +1,31 @@
+## Corpus status (living layer)
+
+**Last reconciled:** 2026-06-24
+**Confidence:** Supported as specified Layer 5 v3.3 design; real BTC payouts **Unvalidated** (not deployed)
+**Read with:** [Chapter 12](12-open-source-funding-and-contributor-incentives.md) (OSS comparison), [Chapter 21](21-tokenomics-and-incentives.md) (DePIN comparison, superseded for product), [Chapter 01](01-seed-organism-and-sensor-array.md) (fitness gates)
+
+### Authoritative for
+- No custom token, no yield pool, no governance token for CursiveOS
+- Contributor compensation weighted by measured fitness via sensor array
+- Proof of Useful Optimization as economic metabolism, not hash mining
+
+### Superseded or narrowed
+- Token-emission DePIN models in Ch21 — useful comparison only, not product design
+
+### Open until experiment/hardware
+- Metabolic sensor split calibration across power sources (Ch00)
+- Real payout rail deployment and fork-obligation behavior
+
+---
+
+## Reinforced research (2026-06-24)
+
+- **Reward hacking under economic pressure:** Skalse et al. (2022) — `papers/recursive-self-improvement/reward-hacking-skalse-2022/`; sensor-gated payouts reduce but do not eliminate proxy optimization (Ch12 §4).
+- **OSS incentive comparison:** Linux Foundation / CHAOSS contributor models (2024–2025 surveys) — Ch12 synthesizes; CursiveOS differs by requiring verifiable fitness before payout.
+- **Benchmark-grounded value:** Kapoor et al., *AI Agents That Matter* (2024) — economic claims must trace to Ch00-validated sensors, not demo metrics.
+
+---
+
 # Bitcoin-Native Economics and Proof of Useful Optimization
 
 Status: Current project architecture imported from the main `CursiveOS` repo. This chapter supersedes token-first assumptions in the earlier tokenomics research when discussing CursiveOS's own economic design.

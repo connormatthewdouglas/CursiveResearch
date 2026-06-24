@@ -30,9 +30,11 @@ CursiveOS Layer 5 v3.3 is **Bitcoin-native**: no custom token, no yield pool, no
 
 ## Reinforced research (2026-06-24)
 
-- Corpus reorganized to strategic order 00-22; see [INDEX.md](../INDEX.md).
-- Paper library: **25** peer intakes in papers/ (extraction-only unless rights-cleared).
-- Credible external sources: Linux kernel docs, arXiv 2024-2026 preprints, DMTF/UEFI/Red Hat/ESnet where applicable â€” details in chapter body and sources/.
+- **Superseded for CursiveOS product:** Ch02 Layer 5 v3.3 is authoritative — no custom token, no yield pool.
+- **DePIN comparison value:** Helium/Filecoin/Bittensor emission models — background for why sensor-gated BTC differs (import §2–4).
+- **Goodhart in token networks:** Skalse et al. (2022) — proxy metrics under token incentives mirror sensor-gaming risk in Ch01.
+- **OSS funding contrast:** Ch12 — grants and bounties lack Ch02 fitness oracle; use for validation funding only.
+- **Market tables:** Import dated March 2026 — refresh subnet counts/APY before investor use (living layer open item).
 
 # Tokenomics and Incentives
 

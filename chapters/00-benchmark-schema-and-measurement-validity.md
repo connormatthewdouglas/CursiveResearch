@@ -1,3 +1,33 @@
+## Corpus status (living layer)
+
+**Last reconciled:** 2026-06-24
+**Confidence:** Validated for harness-grounded measurement rows in `VALIDATION.md`; schema recommendations not yet implemented
+**Read with:** [Chapter 01](01-seed-organism-and-sensor-array.md), [Chapter 08](08-population-confirmation-and-fleet-statistics.md), [Chapter 09](09-network-transport-and-congestion-control.md), [VALIDATION.md](../VALIDATION.md)
+
+### Authoritative for
+- What each benchmark channel actually measures and where magnitudes are trustworthy
+- Per-channel noise floor (cold-start CV 0.002 vs network 0.192 on Stardust)
+- Real-path network decomposition: BBR swap dominates; buffer stack ~0% on ≤1GbE loss
+
+### Superseded or narrowed
+- Loopback +246% stack-delta as transferable WAN claim — **Disproven**; mechanism-only (Ch09)
+- Idle-power CV 0.83 as inherent noise — **Disproven**; sampling artifact (settled idle CV ≈ 0.01)
+
+### Open until experiment/hardware
+- Cold-start order/cache counterbalance (`experiments/cold-start-order-cache-confound-plan.md`)
+- `power_source` and `page_cache_state` in structured output (§3 items 2, 4)
+
+---
+
+## Reinforced research (2026-06-24)
+
+- **Agent benchmark discipline:** Kapoor et al., *AI Agents That Matter* (2024) — intake `papers/agent-evaluation/ai-agents-that-matter/`; cost, holdouts, and simple baselines must gate any Ch05 shell benchmark design.
+- **Proxy / Goodhart risk:** Skalse et al., "Defining and Characterizing Reward Hacking" (NeurIPS 2022) — `papers/recursive-self-improvement/reward-hacking-skalse-2022/`; single-channel fitness (network emulation) is high Goodhart surface.
+- **Sequential decision-making:** Spotify Engineering (2023), [Choosing a Sequential Testing Framework](https://engineering.atspotify.com/2023/03/choosing-sequential-testing-framework-comparisons-and-discussions) — supports pre-registered counterbalance before acceptance-grade cold-start claims (Ch08).
+- **Transport measurement scope:** Linux `Documentation/networking/tcp-bbr.rst` and Cardwell et al. BBR (ACM Queue 2017) — algorithm-vs-buffer decomposition in §5 item 6; ESnet/iperf3 guidance for labeled real-path vs loopback tests.
+
+---
+
 # Benchmark Schema and Measurement Validity
 
 Status: First assessment pass (2026-06-11), grounded in the actual main-repo

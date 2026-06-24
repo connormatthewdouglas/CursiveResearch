@@ -28,9 +28,11 @@ This file is a **point-in-time repo observation log** from March 2026. It is use
 
 ## Reinforced research (2026-06-24)
 
-- Corpus reorganized to strategic order 00-22; see [INDEX.md](../INDEX.md).
-- Paper library: **25** peer intakes in papers/ (extraction-only unless rights-cleared).
-- Credible external sources: Linux kernel docs, arXiv 2024-2026 preprints, DMTF/UEFI/Red Hat/ESnet where applicable â€” details in chapter body and sources/.
+- **Historical scope only:** March 2026 repo snapshot during TAO-OS → CursiveOS rebrand — not current harness or schema truth.
+- **Measurement canon migrated:** Network, noise-floor, and cold-start findings now authoritative in Ch00 + VALIDATION.md (not this import).
+- **Architecture canon migrated:** Seed organism, economics, daemon/shell → Ch01, Ch02, Ch05; gap closure → Ch07.
+- **Preserved value:** Early sched_ext, gpu_ext, Arc driver leads as *verify-before-claim* research items (Ch13, Ch14).
+- **Do-not-cite:** Unscoped +5–15% inference expectations and pre-rebrand naming in external copy without living-layer check.
 
 # Research Master
 

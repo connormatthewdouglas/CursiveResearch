@@ -29,9 +29,11 @@ Git blob SHA: d6f761544e05ccddb4c0269b3d58e059d5bbcad7
 
 ## Reinforced research (2026-06-24)
 
-- Corpus reorganized to strategic order 00-22; see [INDEX.md](../INDEX.md).
-- Paper library: **25** peer intakes in papers/ (extraction-only unless rights-cleared).
-- Credible external sources: Linux kernel docs, arXiv 2024-2026 preprints, DMTF/UEFI/Red Hat/ESnet where applicable â€” details in chapter body and sources/.
+- **Threat model split:** This chapter = external attackers; Ch06 = organism self-mutation — complementary, not interchangeable.
+- **CIS Benchmarks / STIG:** Linux hardening baselines (2024–2025) — operational checklist for DePIN fleet hosts.
+- **TEE overclaims:** Ch20 living layer — TDX bus integrity insufficient for operator physical-access oracle; use Ch01–11 confirmation stack.
+- **Agent containment:** Ch05 layered sandbox — external prompt injection must not gain daemon write path.
+- **Immune sensors:** Ch01 backlog — detect correlated fake confirmations across fleet (prototype).
 
 # Security and Hardening
 

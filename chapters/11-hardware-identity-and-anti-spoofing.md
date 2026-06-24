@@ -26,9 +26,11 @@
 
 ## Reinforced research (2026-06-24)
 
-- Corpus reorganized to strategic order 00-22; see [INDEX.md](../INDEX.md).
-- Paper library: **25** peer intakes in papers/ (extraction-only unless rights-cleared).
-- Credible external sources: Linux kernel docs, arXiv 2024-2026 preprints, DMTF/UEFI/Red Hat/ESnet where applicable â€” details in chapter body and sources/.
+- **Fingerprint v2:** Main-repo sensor-array spec — CPU model, board, GPU PCI IDs, microcode; statistical independence input for Ch08 §5.
+- **SMBIOS/DMI:** `dmidecode` / sysfs `product_uuid` — baseline hardware class taxonomy; correlate with Ch00 performance clusters (§4).
+- **GPU VBIOS:** sysfs / vendor tools — immune-sensor context for spoofed accelerator claims (§3).
+- **Sybil economics:** Ch02 BTC fitness gates + Ch12 OSS comparison — wallet separation adds friction, not proof against determined farms (§6).
+- **TEE limits:** Ch20 living layer — population confirmation stack preferred over TEE bus attestation alone for oracle defense.
 
 # Hardware Identity and Anti-Spoofing
 

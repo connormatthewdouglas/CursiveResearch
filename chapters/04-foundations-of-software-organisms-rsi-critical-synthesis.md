@@ -1,3 +1,31 @@
+## Corpus status (living layer)
+
+**Last reconciled:** 2026-06-24
+**Confidence:** Substantial intake synthesis Supported; individual source claims need per-paper validation
+**Read with:** [Chapter 03](03-peer-reviewed-research-recursive-self-improvement-and-agentic-evolution.md), [Chapter 00](00-benchmark-schema-and-measurement-validity.md), [Chapter 01](01-seed-organism-and-sensor-array.md)
+
+### Authoritative for
+- Software-organism definitions, metabolism/sensing/selection framing
+- Failure modes: evaluator capture, Goodharting, open-ended plateau
+- Adoption/avoidance lessons from ALife and cybernetics literature
+
+### Superseded or narrowed
+- Imported performance magnitudes without Ch00 harness validation
+
+### Open until experiment/hardware
+- Formal mapping from organism taxonomy to Ch06 mutation classes
+
+---
+
+## Reinforced research (2026-06-24)
+
+- **Open-endedness without collapse:** Lehman et al., ICML 2024 — `papers/recursive-self-improvement/open-endedness-icml-2024/`; utility constraints required for CursiveOS selection.
+- **Empirical code evolution:** Sakana Darwin Gödel Machine (2025) — `papers/recursive-self-improvement/darwin-godel-machine/`; archive + verifier loop parallels seed-organism candidate screens.
+- **Measurement-grounded fitness:** Chapter 00 validity assessment — stack-delta decomposition and hardware-scoped cold-start are live instances of the organism test in this chapter.
+- **Autoresearch analogy:** Karpathy autoresearch (2025) — narrow verifier + fast iteration; maps to preset A/B loop but lacks fleet confirmation (Ch08).
+
+---
+
 # Foundations of Software Organisms: Recursive Self-Improvement Critical Synthesis
 
 Status: Substantial intake synthesis from uploaded research document `Software Organisms_ Self-Improvement Research.md`. This chapter complements Chapter 03. Chapter 03 is the paper/system digest; this chapter preserves the broader critical framework, definitions, organism-specific lessons, and open research questions from the uploaded document.

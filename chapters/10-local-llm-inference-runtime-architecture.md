@@ -26,9 +26,11 @@
 
 ## Reinforced research (2026-06-24)
 
-- Corpus reorganized to strategic order 00-22; see [INDEX.md](../INDEX.md).
-- Paper library: **25** peer intakes in papers/ (extraction-only unless rights-cleared).
-- Credible external sources: Linux kernel docs, arXiv 2024-2026 preprints, DMTF/UEFI/Red Hat/ESnet where applicable â€” details in chapter body and sources/.
+- **Ollama architecture:** Ollama docs (2025) — local model serving via llama.cpp; current CursiveOS harness interface (Ch00 §1 sustained channel).
+- **llama.cpp:** ggml-project (2024–2025) — GGUF quantization, batching, and GPU backend selection for workstation tier (§2).
+- **Trust boundary:** Ch05 daemon/shell split — LLM in measurement path invalidates sensor integrity (VALIDATION-supported).
+- **Inference validity:** Record `model_id`, `quantization`, `page_cache_state` in detail bundles (Ch00 §3 items 4–5).
+- **Workstation tier:** Intel Arc Pro B70 32 GB ECC — Ch18 import; multi-step file reasoning needs containment per Ch06 before unattended use.
 
 # Local LLM Inference Runtime Architecture
 

@@ -1,3 +1,32 @@
+## Corpus status (living layer)
+
+**Last reconciled:** 2026-06-24
+**Confidence:** Research synthesis Supported; enforcement gates not implemented
+**Read with:** [Chapter 05](05-measurement-daemon-and-natural-language-shell.md), [Chapter 16](16-security-and-hardening.md) (external threats), [Chapter 17](17-firmware-and-bios-control.md) (class 6–7 mutations)
+
+### Authoritative for
+- Mutation-class → containment-primitive matrix (sysctl through firmware)
+- Inverted threat model: organism mutating its own host and measurement substrate
+- Daemon/shell separation of duties for write gates
+
+### Superseded or narrowed
+- Treating Ch16 external-hardening checklist as sufficient for self-mutation — it is not
+
+### Open until experiment/hardware
+- Build and test risk-based sandbox selector before unattended host mutation
+- Firmware mutation staging with measured rollback (Ch17)
+
+---
+
+## Reinforced research (2026-06-24)
+
+- **Least privilege:** NIST SP 800-53 Rev. 5 access control family — baseline for mutation-class gating.
+- **Linux containment:** seccomp-BPF (no pointer deref), Landlock LSM (kernel-version-scoped ABI), bubblewrap — design direction in VALIDATION Ch05 row.
+- **Agentic risk:** OWASP Agentic AI (2025) — untrusted tool graphs must not receive daemon write capability regardless of sandbox tier.
+- **Reversible OS tuning:** BranchFS (2024) — `papers/recursive-self-improvement/branchfs-fec/`; FEC/isolated branches for candidate presets.
+
+---
+
 # Mutation Safety and Permission Law
 
 Status: First research-synthesis pass (2026-06-22). Grounds the project's

@@ -26,9 +26,11 @@
 
 ## Reinforced research (2026-06-24)
 
-- Corpus reorganized to strategic order 00-22; see [INDEX.md](../INDEX.md).
-- Paper library: **25** peer intakes in papers/ (extraction-only unless rights-cleared).
-- Credible external sources: Linux kernel docs, arXiv 2024-2026 preprints, DMTF/UEFI/Red Hat/ESnet where applicable â€” details in chapter body and sources/.
+- **Per-channel variance:** Chapter 00 §5 item 7 (Stardust 6× v0.9) — cold-start CV 0.002 vs network 0.192 motivates per-sensor N escalation in §4.
+- **Multiple comparisons:** Benjamini–Hochberg FDR (1995); Spotify sequential testing framework (2023) — pre-registered counterbalance before fleet promotion.
+- **Quality-diversity analogy:** MAP-Elites / POET — `papers/recursive-self-improvement/map-elites/`, `poet/`; hardware class as behavior descriptor (§3).
+- **Sybil resistance inputs:** Chapter 11 fingerprint spec; wallet + anomaly independence necessary but not sufficient (§5).
+- **Goodhart under fleet scale:** Skalse et al. (2022) — `papers/recursive-self-improvement/reward-hacking-skalse-2022/`; uncorrected per-candidate testing accepts noise (§6).
 
 # Population Confirmation and Fleet Statistics
 

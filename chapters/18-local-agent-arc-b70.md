@@ -5,6 +5,35 @@ Source SHA-256: 54cde0c3dd1faf51e142b5d76d25aaedf475775995af9f6f76826117006382c5
 Imported: 2026-05-26
 -->
 
+## Corpus status (living layer)
+
+**Last reconciled:** 2026-06-24
+**Confidence:** Hermes context Validated locally; performance/import claims Unvalidated; unattended mutation Disproven
+**Read with:** [Chapter 10](10-local-llm-inference-runtime-architecture.md), [Chapter 05](05-measurement-daemon-and-natural-language-shell.md), [Chapter 06](06-mutation-safety-and-permission-law.md), `experiments/arc-b70-local-agent-benchmark-plan.md`
+
+### Authoritative for
+- Arc Pro B70 as workstation-tier local agent target (32 GB ECC GDDR6)
+- Hermes/OVMS tool-envelope constraints on inspected deployment
+- Import as research leads — not decision-grade until benchmark plan runs
+
+### Superseded or narrowed
+- Unattended host-repo mutation without containment — **Disproven** (VALIDATION Ch18 row)
+- "GPT-4-class" decentralized model claims — see Ch20 living layer
+
+### Open until experiment/hardware
+- Controlled Arc B70 throughput, power, and tool-reliability benchmarks per experiment plan
+
+---
+
+## Reinforced research (2026-06-24)
+
+- **Intel Arc Pro B70:** Intel product brief (Battlemage Xe2, 32 GB ECC) — verify peak TFLOPS/TOPS against `experiments/arc-b70-local-agent-benchmark-plan.md` before external claims.
+- **OpenVINO / Level Zero:** Intel oneAPI 2025.x runtime docs — backend selection and ECC memory paths for agent workloads.
+- **Local inference stack:** Ch10 Ollama/llama.cpp architecture — B70 fits workstation tier; daemon must not delegate sensor writes to shell LLM.
+- **Tool reliability:** Shinn et al., Reflexion (2023) — `papers/software-engineering-agents/reflexion/`; verbal self-correction insufficient without executable post-checks.
+
+---
+
 # Local Agent Setup for Arc B70
 
 Status: Source import from uploaded DOCX. Requires source extraction and validation before being used for engineering decisions.

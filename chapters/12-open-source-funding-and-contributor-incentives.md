@@ -25,9 +25,11 @@
 
 ## Reinforced research (2026-06-24)
 
-- Corpus reorganized to strategic order 00-22; see [INDEX.md](../INDEX.md).
-- Paper library: **25** peer intakes in papers/ (extraction-only unless rights-cleared).
-- Credible external sources: Linux kernel docs, arXiv 2024-2026 preprints, DMTF/UEFI/Red Hat/ESnet where applicable â€” details in chapter body and sources/.
+- **Authoritative product economics:** Ch02 Layer 5 v3.3 — BTC in/out, no token; this chapter is comparison-only for CursiveOS design.
+- **Bounty vs sensor-gated payout:** GitHub Sponsors / IBB models (2024) — open bounties lack verifiable fitness gate; Skalse proxy-hacking risk applies (§4).
+- **Grants for validation:** NSF/NLnet-style funding fits Ch00/Ch08 measurement experiments, not operating-budget substitution (§5).
+- **DePIN token death spirals:** Ch21 survey — emissions-based networks contrast with Ch02 lifetime BTC stream (§3 table).
+- **Maintainer succession:** CHAOSS contributor metrics — sensor curation in Ch01 differs from commit-bit governance (§6).
 
 # Open Source Funding and Contributor Incentives
 

@@ -29,9 +29,11 @@ Git blob SHA: 726912342c92bec12771ffcf36db5ecf8231033d
 
 ## Reinforced research (2026-06-24)
 
-- Corpus reorganized to strategic order 00-22; see [INDEX.md](../INDEX.md).
-- Paper library: **25** peer intakes in papers/ (extraction-only unless rights-cleared).
-- Credible external sources: Linux kernel docs, arXiv 2024-2026 preprints, DMTF/UEFI/Red Hat/ESnet where applicable â€” details in chapter body and sources/.
+- **Arc A750 idle pin:** Ch00 §5 items 1, 8 — GPU freq pin ~0 W idle; ~0 cold-start contribution; v0.9 drops on parsimony not power.
+- **Total power sensor:** v1.4.3 `hwmon4/energy1_input` — use CPU+GPU package for power claims, not RAPL alone (VALIDATION row).
+- **Intel Arc driver stack:** i915/Xe kernel driver + Level Zero (2025) — platform-specific; magnitudes require Ch00 harness per machine class.
+- **ROCm path:** AMD GPU tuning sections — validate on target hardware before fleet preset claims.
+- **Hardware-scoped fitness:** Desktop −51% cold-start vs laptop ~0% (Ch00) — label gains by hardware class (Ch08 §3).
 
 # GPU and Accelerator Tuning
 

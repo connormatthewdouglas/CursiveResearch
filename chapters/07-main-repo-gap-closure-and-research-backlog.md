@@ -1,3 +1,30 @@
+## Corpus status (living layer)
+
+**Last reconciled:** 2026-06-24
+**Confidence:** Current synthesis Supported; backlog priorities evolve with main-repo releases
+**Read with:** [Chapter 01](01-seed-organism-and-sensor-array.md), [Chapter 06](06-mutation-safety-and-permission-law.md), [RESEARCH_PIPELINE.md](../RESEARCH_PIPELINE.md)
+
+### Authoritative for
+- Which original five gaps are closed vs open in main `CursiveOS` repo
+- Next research targets: fleet statistics, firmware probes, shell containment
+- Boundary: research here; runnable scripts graduate to main repo
+
+### Superseded or narrowed
+- "Repo is private" — public as of 2026-06-23 cleanup
+
+### Open until experiment/hardware
+- Items in RESEARCH_PIPELINE §3 Experimental Lift (cold-start confound, proposer test, idle-power channel)
+
+---
+
+## Reinforced research (2026-06-24)
+
+- **Gap closure status:** Ch01/02/05/06 now document main-repo architecture; Ch08/09/10/11/12 close fleet-stats, network, LLM runtime, identity, and OSS-funding gaps identified here.
+- **RSI literature:** Ch03 + 25 paper intakes — pipeline P0 RSI targets substantially delivered; remaining work is validation and experiments.
+- **Measurement priority:** Ch00 §3 schema gaps (`power_source`, `page_cache_state`) remain highest-leverage open items for fleet truth.
+
+---
+
 # Main Repo Gap Closure and Research Backlog
 
 Status: Current synthesis from the main `CursiveOS` repo and the `CursiveResearch` corpus. Use this as the bridge between research questions and active project architecture.

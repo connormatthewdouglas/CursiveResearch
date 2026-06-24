@@ -1,3 +1,32 @@
+## Corpus status (living layer)
+
+**Last reconciled:** 2026-06-24
+**Confidence:** Control-surface inventory Supported; platform-specific mutation **Unvalidated**
+**Read with:** [Chapter 06](06-mutation-safety-and-permission-law.md), [Chapter 16](16-security-and-hardening.md), `sources/firmware-control-surfaces-selected-sources.md`
+
+### Authoritative for
+- UEFI/Redfish/fwupd/flashrom as agent-operable firmware surfaces
+- CursiveFirmware staging model: discover → stage → reboot → measure → record
+- Firmware as developmental layer of the whole-machine organism
+
+### Superseded or narrowed
+- Blind BIOS menu automation — rejected; API-gated staging only
+
+### Open until experiment/hardware
+- Platform/vendor matrix and read-only inventory on target motherboards
+- Measured rollback path for trial firmware states
+
+---
+
+## Reinforced research (2026-06-24)
+
+- **Redfish BIOS configuration:** DMTF Redfish Schema Index + BIOS Configuration white paper — `AttributeRegistry` / `Bios` resource patterns for read/write staging.
+- **Redfish 2025.2 release:** DMTF (2025) — expanded telemetry and composition schemas; track for CursiveFirmware capability discovery.
+- **Linux exposure:** `efivarfs`, `firmware-attributes` class (kernel 6.x+) — sysfs paths for OS-visible firmware knobs before Redfish.
+- **Capsule updates:** fwupd / UEFI capsule flow — preferred path for signed trial firmware vs raw flashrom where available.
+
+---
+
 # Firmware and BIOS Control
 
 Original research note authored from CursiveOS design discussion on 2026-05-26.

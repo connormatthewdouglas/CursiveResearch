@@ -1,3 +1,32 @@
+## Corpus status (living layer)
+
+**Last reconciled:** 2026-06-24
+**Confidence:** Supported as current main-repo architecture; fleet-scale selection **Unvalidated**
+**Read with:** [Chapter 00](00-benchmark-schema-and-measurement-validity.md), [Chapter 08](08-population-confirmation-and-fleet-statistics.md), [Chapter 02](02-bitcoin-native-economics-and-proof-of-useful-optimization.md), [Chapter 05](05-measurement-daemon-and-natural-language-shell.md)
+
+### Authoritative for
+- Phase 0 loop: reversible presets, paired measurement, CursiveRoot submission, parent-vs-candidate selection
+- Population confirmation requirements: N-rule, CV threshold, hardware/wallet/anomaly independence
+- Sensor families: regression gates before performance channels
+
+### Superseded or narrowed
+- Universal preset claims from kernel/GPU chapters — magnitudes are hardware-scoped (Ch00 cold-start split)
+
+### Open until experiment/hardware
+- Fleet calibration of N and CV thresholds (Ch08)
+- Immune-sensor prototypes for correlated confirmations
+
+---
+
+## Reinforced research (2026-06-24)
+
+- **Quality-diversity archives:** Mouret & Clune, MAP-Elites (2015); Wang et al., POET (2019) — intakes `papers/recursive-self-improvement/map-elites/`, `poet/`; hardware-scoped fitness is the fleet analogue of behavioral niches (Ch08 §3).
+- **Open-ended evolution guardrails:** Lehman et al., ICML 2024 open-endedness tutorial — `papers/recursive-self-improvement/open-endedness-icml-2024/`; novelty without utility constraints is not selection-grade.
+- **Verifier-grounded loops:** Romera-Paredes et al., FunSearch (Nature 2023) — `papers/recursive-self-improvement/funsearch/`; external evaluator is non-negotiable for organism mutations.
+- **Rollback / branch isolation:** BranchFS (2024 preprint) — `papers/recursive-self-improvement/branchfs-fec/`; aligns with reversible preset design in the core loop.
+
+---
+
 # Seed Organism and Sensor Array
 
 Status: Current project architecture imported from the main `CursiveOS` repo. Treat as the current internal specification for Phase 0/Transition 1 unless superseded by later CursiveOS implementation changes.
