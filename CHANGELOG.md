@@ -185,6 +185,33 @@ Reason:
   rather than edited per CORPUS_WORKFLOW.md §3 because the wording is canon
   headed into an outward-facing document and the reconciliation is a maintainer
   decision.
+## 2026-06-22 - New Chapter 17: Mutation Safety and Permission Law
+
+Changed:
+- Added `chapters/17-mutation-safety-and-permission-law.md`, the source-backed
+  "permission law" the corpus had flagged as the #1 missing expansion
+  (Chapter 13 Gap 2 / "What Should Be Added Next"). It binds the existing
+  seven-class mutation taxonomy to the *specific* enforcement primitive that
+  makes each gate real (capabilities, seccomp, Landlock, systemd sandboxing,
+  polkit-mediated escalation, firmware staging) and states the core rule:
+  required privilege rises with blast radius and the authorizer shifts from the
+  deterministic daemon (low classes) to a human (high classes); the
+  probabilistic shell never applies a mutation directly.
+- Grounded the chapter in external literature: Saltzer & Schroeder (least
+  privilege, fail-safe defaults, separation of privilege) and OWASP LLM Top 10
+  2025 LLM06 (Excessive Agency → separate decision from execution), plus
+  kernel.org / man-page / freedesktop primary docs for the containment
+  mechanisms. Added `sources/chapter-17-selected-sources.md` (7 sources).
+- Updated `INDEX.md` (Chapter 17 row), and marked the gap addressed in
+  `RESEARCH_PIPELINE.md` (P0 knowledge gap "How do current agent systems fail
+  under privilege?") and Chapter 13 Gap 2.
+
+Reason:
+- Chapter 06 hardens the host against external attackers; nothing consolidated
+  the inverted threat — the organism's own self-improvement loop mutating the
+  host under a probabilistic agent. This closes the highest-value, well-sourced
+  research gap and moves the corpus from "we have the pieces" to a single
+  enforceable rulebook for self-mutation.
 
 ## 2026-06-16 - Noise Floor Measured + GPU Power Now Visible
 

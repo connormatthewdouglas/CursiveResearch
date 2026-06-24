@@ -113,7 +113,12 @@ The corpus still needs a formal mutation classification model:
 | 5 | Kernel/package/base image | kernel config, ISO build | VM/lab validation, boot test, signed artifact |
 | 6 | Firmware/BMC/BIOS | UEFI/Redfish setting | staged reboot, OOB recovery, human approval |
 
-Recommended expansion: create `chapters/14-mutation-safety-and-permission-law.md` or integrate this into Chapter 06/08.
+Recommended expansion: **done (2026-06-22)** — see
+[Chapter 17 - Mutation Safety and Permission Law](17-mutation-safety-and-permission-law.md),
+which binds this seven-class taxonomy to the enforcement primitive for each gate
+and adds external grounding (least privilege, OWASP Excessive Agency, Linux
+containment primitives). Remaining work is implementation-level (scoped-helper
+IPC contract, class-0 containment prototype, blast-radius accounting).
 
 ## Gap 3: Seed Organism Specification
 
@@ -235,9 +240,12 @@ The economic design also answers why testers should not earn lifetime revenue: t
 
 Based on the main repo, the highest-value new research expansions are now:
 
-### 1. Mutation Safety and Permission Law
+### 1. Mutation Safety and Permission Law — done (2026-06-22)
 
-The corpus has enough pieces, but not yet the formal rulebook. This should define exactly what agents, daemons, contributors, and users are allowed to change under which gates.
+Delivered as [Chapter 17](17-mutation-safety-and-permission-law.md): the formal
+rulebook defining what agents, daemons, contributors, and users may change under
+which gates, with each mutation class bound to the mechanism that enforces it.
+Next expansions move down the list.
 
 ### 2. CursiveRoot Schema and Evidence Storage
 

@@ -229,7 +229,7 @@ Knowledge Gaps are questions the corpus should answer with research synthesis be
 | --- | --- | --- |
 | When does network tuning transfer from simulation to real distributed workloads? | Current network deltas are strong but isolated. | Research BBR/BDP literature and compare to real P2P/mining/inference traffic patterns. |
 | What is the right evaluation stack for OS-operating agents? | The natural-language shell needs benchmarks beyond chat quality. | Survey OSWorld, SWE-bench, AgentBench, WebArena, terminal-agent evaluations. |
-| How do current agent systems fail under privilege? | Root-capable agents are dangerous. | Research prompt injection, tool attacks, command transparency, sandboxing. |
+| How do current agent systems fail under privilege? | Root-capable agents are dangerous. | Initial synthesis delivered in Chapter 17 (Mutation Safety and Permission Law): least-privilege model, OWASP Excessive Agency, mutation-class → containment matrix. Remaining: deeper prompt-injection/tool-attack survey and a class-0 containment prototype. |
 | Which hardware identity signals are stable enough for population confirmation? | Spoofing resistance depends on hardware fingerprints. | Research SMBIOS/DMI, GPU VBIOS, TPM, attestation, kernel version, microcode. |
 | What is the strongest non-token incentive model for open infrastructure contributors? | Layer 5 is novel and needs external grounding. | Research OSS funding, bounty systems, revenue share, credit systems, Bitcoin payments. |
 
