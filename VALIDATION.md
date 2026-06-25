@@ -23,7 +23,7 @@ When a flag is resolved, delete its row (git history preserves it).
 
 | Date | Item | Location (file §) | Issue | Suggested action | Status |
 | --- | --- | --- | --- | --- | --- |
-| _(none open)_ | | | | | |
+| 2026-06-24 | AlphaEvolve "reduce training and inference times for Bittensor nodes by up to 23%" | `chapters/20-market-and-viability.md` § "LLM-Integrated Heuristic Discovery" | Overstated/misattributed: AlphaEvolve's 23% is a Google-internal Gemini *training*-kernel speedup on TPUs (≈1% end-to-end training time), never run on Bittensor or Intel Arc; uncited; contradicts the open proposer-vs-random experiment (CH05-BM-002). Sole quantified number behind the product's core "AI-Guided Kernel Tuning" differentiator. | Do not reuse externally; gate any first-party AI-tuning magnitude on CH05-BM-002 + Ch00 hardware-scoped measurement. See `validation/notes/2026-06-24-ch20-alphaevolve-23pct-bittensor-overstatement-challenge.md`. | Flagged (red-team) |
 
 ## Current High-Impact Claims
 
