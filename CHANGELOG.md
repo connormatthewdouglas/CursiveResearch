@@ -37,6 +37,32 @@ Changed:
 
 Reason:
 - The probe is built but `Unvalidated` (no hardware noise floor). The plan runs the same gate every other channel cleared on 2026-06-16: H1 within-machine CV ≤ 0.15 on Stardust + the i5-11300H, plus H2 (zram `mm_stat` engagement) and H3 (zram/disk-swap/no-swap discrimination) as validity checks so a quiet channel is not mistaken for a discriminating one. Only on H1–H3 pass does it integrate the probe as a weighted fifth fitness channel and re-screen the inconclusive `candidate-v0.10-zram` (H4). This is the cheapest experiment in the queue (instrument already exists) and the one that unblocks the entire zram / memory-class thread.
+## 2026-06-25 - Red-team challenge: unscoped "switch to BBR" headline / default preset
+
+Changed:
+- **VALIDATION.md**: added a "Flagged for Review" (red-team) row challenging the
+  unscoped promotion of the single-flow CUBIC→BBR win to a Validated public claim,
+  a fleet default preset, and the 0.40 network fitness driver.
+- **validation/notes/2026-06-25-ch09-bbr-default-overstatement-redteam-challenge.md**:
+  new red-team challenge note.
+
+Reason:
+- The corpus's CUBIC→BBR decomposition (real-path A/B, +1875% single flow, buffer
+  stack ≈0%) is sound and is **not** disputed. What is challenged is the *scope*:
+  every BBR measurement is a single iperf3 flow in isolation, yet the result is
+  promoted to the canonical "switch to BBR" public/marketing line (VALIDATION
+  "Chapter 00 / network headline"), a default preset for loss-prone workloads
+  (Ch09 §7), and the highest-weighted fitness channel (0.40). Peer-reviewed
+  multi-flow evidence contradicts an unscoped default: BBRv1 (the in-tree
+  `tcp_bbr`) takes a roughly fixed bottleneck share (~40%) regardless of how many
+  CUBIC flows it competes with (Ware et al., IMC 2019) and inflicts high
+  retransmit loss in shallow buffers + RTT-unfairness (Hock et al., ICNP 2017) —
+  Google built BBRv2/v3 specifically to fix this. A system-wide
+  `tcp_congestion_control` change also has off-host blast radius (competing /
+  neighbor traffic), making it a Chapter 06 mutation-safety concern. The
+  challenge does not edit the Validated rows; it recommends scoping the claim to
+  "single flow in isolation" and running Ch09 Gap #3/#5 (multi-flow fairness +
+  ≥3-path confirmation) before any default-preset or marketing use.
 
 ## 2026-06-25 - Memory-pressure sensor prototype (5th channel)
 
