@@ -23,7 +23,7 @@ When a flag is resolved, delete its row (git history preserves it).
 
 | Date | Item | Location (file §) | Issue | Suggested action | Status |
 | --- | --- | --- | --- | --- | --- |
-| _(none open)_ | | | | | |
+| 2026-06-25 | Truncated DOCX import | Ch15 `15-ai-guided-tuning.md` (end of file) | The preserved DOCX import ends mid-table at `\| **AutoOS → TAO:*` — the final "Estimated Engineering Effort and Timeline" row and any trailing prose are cut off. Native living-layer content above it is intact. | Re-import the AutoOS row + remaining text from `sources/original-docx/5. ai guided tuning_.docx` (blob a17532ea) under a `REWRITE:` commit, or confirm the source itself is truncated. Do not delete the partial row meanwhile. | Open |
 
 ## Current High-Impact Claims
 

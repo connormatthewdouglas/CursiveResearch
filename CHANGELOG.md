@@ -4,6 +4,40 @@ This file records meaningful changes to research guidance, validation status,
 and corpus process. It is intended to be readable without reconstructing a
 chain of supporting documents.
 
+## 2026-06-25 - Ch15: Classical Autotuning Baselines (what the proposer must beat)
+
+Changed:
+- **Chapter 15 (`15-ai-guided-tuning.md`):** added one additive section,
+  `## Classical autotuning baselines: what the proposer must beat (2026-06-25)`,
+  inserted after the native `## Reinforced research` block and before the DOCX
+  import (no existing content rewritten; 132 → 245 lines, all prior headers
+  intact). Grounds the black-box-optimization baselines the corpus's load-bearing
+  test **CH05-BM-002** (`experiments/proposer-vs-random-tuning-experiment.md`)
+  compares against: random search (Bergstra & Bengio 2012, *JMLR* — low effective
+  dimensionality; beats grid search at a fraction of compute), Bayesian
+  optimization (Snoek *et al.* 2012, *NeurIPS* — GP surrogate, kernel-fragile),
+  OpenTuner (Ansel *et al.*, PACT 2014 — ensemble + AUC-Bandit meta-technique,
+  up to ~2.8× [needs full-text]), Hyperband (Li *et al.* 2017, *JMLR* — bandit +
+  successive halving), and Google Vizier (Golovin *et al.*, KDD 2017 — productionized
+  GP-bandit service). Includes a baseline→CursiveOS-implication table. Explicitly
+  does **not** upgrade CH05-BM-002 (still Unvalidated); the architectural takeaway
+  is to treat the LLM proposer as one arm in an OpenTuner-style portfolio judged
+  by the external measurement daemon (Ch05/Ch06).
+- **VALIDATION.md:** added a "Flagged for Review" row — Ch15's DOCX import is
+  truncated mid-table at `| **AutoOS → TAO:*` (final timeline row cut off). Flagged,
+  not edited.
+
+Reason:
+- Fills a real gap: the chapter surveyed LLM-driven tuners but never grounded the
+  classical baselines those tuners (and CursiveOS's proposer) must beat to justify
+  their compute. Without that grounding, a one-line baseline or chance over a small
+  allowlist can masquerade as a proposer "win" — the exact failure mode that sank
+  the "+246% network tuning" result. Maps to RESEARCH_PIPELINE P0 ("what RSI is real
+  today vs theoretical") and P1 ("right evaluation stack for OS-operating agents").
+- Sources retrieved at abstract/publisher-summary level via web search; OpenTuner
+  specifics from secondary summaries (PACT PDF 403) and marked [needs full-text].
+  No numbers locally reproduced.
+
 ## 2026-06-24 - Tier Reconciliation (4 Cornerstone Claims) + AlphaEvolve Decentralization Chapter (03c)
 
 Changed:
