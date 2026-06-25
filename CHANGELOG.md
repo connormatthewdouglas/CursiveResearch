@@ -122,6 +122,37 @@ Reason:
 - Sources retrieved at abstract/publisher-summary level via web search; OpenTuner
   specifics from secondary summaries (PACT PDF 403) and marked [needs full-text].
   No numbers locally reproduced.
+## 2026-06-24 - New Chapter 03d: Verifying Decentralized Computation (untrusted-evaluator prior art)
+
+Changed:
+- **New chapter `03d-verifying-decentralized-computation.md`:** source-backed external
+  survey of how prior systems verify computation done by untrusted, paid, remote
+  machines — directly answering the frontier Ch03c §5 names ("decentralizing the
+  evaluator is the unsolved hard part"). Surveys five verification families with
+  canonical citations: redundant execution + statistical spot-checking
+  (Sarmenta 2002; BOINC, arXiv:1903.01699), interactive dispute / refereed
+  delegation (Truebit, arXiv:1908.04756; Gensyn Verde, arXiv:2502.19405), TEE
+  remote attestation (Intel TDX / AMD SEV-SNP; SIGMETRICS-2025 + SoK arXiv:2503.08256),
+  cryptographic validity proofs (zk-SNARK/STARK), and consensus over subjective
+  scores (Bittensor Yuma Consensus). Organizes the space on the **optimistic vs.
+  validity** axis and argues — with explicit disanalogies — that CursiveOS's
+  hardware-scoped, non-reproducible, partly-subjective fitness can inherit only
+  the **statistical, credibility-weighted, attestation-assisted** end (reframing
+  Ch08 as the de-facto sabotage-tolerance layer), and must reject exact replication,
+  bisection disputes, and zk proofs. Includes living layer + reinforced research.
+- **New sources digest `sources/decentralized-verifiable-computation-selected-sources.md`:**
+  per-source extraction and citation list for the seven source families above.
+- **Counts:** `INDEX.md` (reading list + table) and `tools/verification-contract.json`
+  updated — chapters_total 24→25, all_chapters_living_layer 24→25,
+  all_chapters_reinforced 24→25, native_chapters += 03d. `source-register.md` and
+  `RESEARCH_PIPELINE.md` updated.
+
+Reason:
+- The corpus repeatedly named evaluator decentralization as its #1 unsolved frontier
+  (Ch03c) and touched its faces in Ch08/11/02/12, but never assembled the external
+  computer-science prior art on the general problem. This chapter fills that gap and,
+  crucially, keeps the corpus honest by showing which well-known techniques do **not**
+  transfer to noisy, hardware-scoped benchmark fitness.
 
 ## 2026-06-24 - Tier Reconciliation (4 Cornerstone Claims) + AlphaEvolve Decentralization Chapter (03c)
 
