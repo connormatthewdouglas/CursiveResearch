@@ -23,7 +23,7 @@ When a flag is resolved, delete its row (git history preserves it).
 
 | Date | Item | Location (file §) | Issue | Suggested action | Status |
 | --- | --- | --- | --- | --- | --- |
-| _(none open)_ | | | | | |
+| 2026-06-25 | Unscoped "switch to BBR" public claim + default-preset recommendation | `chapters/09-...md` §3/§7/§9; VALIDATION "Chapter 00 / network headline" & "Chapter 09 / BBR vs buffer magnitude" | Every BBR number is single-flow; promoting it to a Validated public/marketing headline, a fleet default, and the 0.40 fitness driver ignores peer-reviewed multi-flow evidence that BBRv1 (the in-tree `tcp_bbr`) is unfair to competing CUBIC (a single BBR flow takes ~40% vs up to 16 CUBIC flows; Ware IMC 2019) and inflicts high retransmit loss in shallow buffers + RTT-unfairness (Hock ICNP 2017) — Google built BBRv2/v3 to fix this. Off-host blast radius makes it a Ch06 mutation-safety issue too. | Scope the validated win to "single flow in isolation"; keep "switch to BBR" out of public copy and out of the default preset until Ch09 Gap #3 (multi-flow fairness/retransmit) + Gap #5 run; pair with `fq` pacing; prefer BBRv2/v3. See `validation/notes/2026-06-25-ch09-bbr-default-overstatement-redteam-challenge.md`. Do **not** edit the Validated rows in place. | Flagged (red-team) |
 
 ## Current High-Impact Claims
 
