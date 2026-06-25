@@ -39,6 +39,119 @@ Historical note: import text references **TAO-Forge**; current names are Cursive
 - **BranchFS rollback:** `papers/recursive-self-improvement/branchfs-fec/` — transactional branches align with Ch01 reversible presets.
 - **Verifier pattern:** AlphaEvolve, CodeEvolve, FunSearch intakes (Ch03) — external measurement daemon must judge improvements, not the proposer LLM.
 
+## Classical autotuning baselines: what the proposer must beat (2026-06-25)
+
+**Maps to:** this chapter's load-bearing claim **CH05-BM-002** and
+`experiments/proposer-vs-random-tuning-experiment.md`; RESEARCH_PIPELINE P0
+knowledge gap *"What kinds of recursive self-improvement are real today versus
+theoretical?"* and P1 gap *"What is the right evaluation stack for OS-operating
+agents?"*
+
+**The gap this fills.** Everything above surveys *LLM-driven* tuners (SchedCP,
+OS-R1/TuneAgent, PolicySmith, AutoOS, Liargkovas' always-on agent). But the
+corpus's canonical falsifiable test — CH05-BM-002 — is not "does the LLM tune
+well?"; it is "does the LLM proposer beat **blind random search over the same
+allowlist at equal evaluation budget**, scored only on the clean cold-start
+channel?" (`experiments/proposer-vs-random-tuning-experiment.md`, H1). Until
+this section, the chapter never grounded *what the classical baselines actually
+are* or *why random search is a deceptively strong one*. Without that grounding
+it is easy to credit the proposer for a win that a one-line baseline (or pure
+chance over a small allowlist) would have captured anyway — the exact failure
+mode that sank the "+246% network tuning" result (whole real-path win was
+`tcp_congestion_control=bbr`; Ch09 / VALIDATION). The black-box optimization
+literature is decades deep; CursiveOS does not get to ignore it just because its
+proposer is an LLM.
+
+### The baseline landscape
+
+- **Random search (Bergstra & Bengio 2012, *JMLR* 13:281–305).** The reference
+  baseline, and a strong one. The paper shows empirically and theoretically
+  that randomly sampled trials find models *as good or better* than grid search
+  "within a small fraction of the computation time." The mechanism is **low
+  effective dimensionality**: on most problems only a few knobs actually matter,
+  and random search samples more *distinct* values along each individual
+  dimension than a grid does, so it spends fewer evaluations on knobs that don't
+  move the metric. This is precisely the regime of a small CursiveOS allowlist
+  seeded with inert decoy knobs — which is why the proposer-vs-random experiment
+  uses random search, not grid search, as H0. [retrieval: abstract + JMLR
+  summary; full text not fetched]
+
+- **Bayesian optimization (Snoek, Larochelle & Adams 2012, *NeurIPS 25*).**
+  Models the objective as a draw from a Gaussian process and picks the next
+  trial by an acquisition function, trading exploration for exploitation. More
+  sample-efficient than random search *when the surrogate fits* — but the paper's
+  own headline finding is that GP kernel choice and the treatment of its
+  hyperparameters "play a crucial role," i.e. BO is fragile to misspecification.
+  This is the baseline the chapter already references indirectly: Liargkovas
+  *et al.* report their always-on LLM agent beating Bayesian optimization by only
+  ~5–7% on CFS hyperparameters (see "Top 5 Approaches" §4) — a *few-percent* edge,
+  not a category difference, and within the range where measurement noise must be
+  ruled out first. [retrieval: NeurIPS abstract + summary]
+
+- **OpenTuner (Ansel *et al.*, PACT 2014; MIT-licensed,
+  [github.com/jansel/opentuner](https://github.com/jansel/opentuner)).** The
+  program-autotuning analogue closest to CursiveOS's problem (tuning real system
+  knobs, not ML hyperparameters). Its central lesson: **no single search
+  technique wins across domains**, so it runs an *ensemble* — differential
+  evolution, Torczon/Nelder-Mead simplex methods, and greedy evolutionary
+  techniques — under an **AUC-Bandit meta-technique** that treats each technique
+  as a multi-armed-bandit arm, reallocating the evaluation budget toward
+  techniques recently producing speedups and disabling those that don't. Reported
+  speedups of up to **~2.8×** over prior techniques across its benchmark suite
+  (including searching the GCC `-O` flag space). The transferable point for
+  CursiveOS: a credible autotuner is itself a *portfolio with online credit
+  assignment*; "an LLM proposer" is one arm in that portfolio, not a replacement
+  for it. [retrieval: secondary summaries quoting the paper; PACT PDF returned
+  403 — **needs full-text confirmation** of the 2.8× figure and AUC-Bandit
+  formula]
+
+- **Hyperband (Li *et al.*, *JMLR* 2017, 18:6765–6816).** Reframes tuning as a
+  pure-exploration bandit problem and speeds up random search via **adaptive
+  resource allocation + successive halving**: sample many random configs, give
+  them a small budget, kill the worst, and reinvest the budget in survivors. It
+  beats plain random search precisely *because* it spends almost nothing on bad
+  configs. The CursiveOS-relevant caveat: Hyperband assumes a cheap low-fidelity
+  proxy that correlates with the full evaluation. The cold-start channel is
+  already cheap and the harness already reverts presets between runs, so a
+  successive-halving wrapper is a plausible *budget-saver*, but only if a partial
+  measurement predicts the confirmed one — untested here. [retrieval: JMLR
+  abstract + summary]
+
+- **Google Vizier (Golovin *et al.*, KDD 2017).** Evidence that black-box
+  optimization is a *solved, productionized service* problem at scale: Vizier has
+  tuned 70M+ objectives at Google, defaults to a Gaussian-process-bandit
+  algorithm, and ships transfer learning and automated early stopping. It is the
+  "what good looks like" reference for the measurement-daemon side of CursiveOS —
+  the optimizer is infrastructure, deterministic and auditable, separate from
+  whatever proposes candidates. [retrieval: research.google + KDD summaries]
+
+### CursiveOS implications
+
+| Baseline | What it is | What it implies for CursiveOS |
+| --- | --- | --- |
+| Random search (Bergstra & Bengio) | Uniform sampling; strong under low effective dimensionality | The honest H0 for CH05-BM-002. If the proposer can't beat it past the cold-start noise floor (CV 0.002, Ch00/Ch22), the proposer adds no value. |
+| Bayesian optimization (Snoek) | GP surrogate + acquisition function; sample-efficient but kernel-fragile | A stronger optional baseline arm; the existing ~5–7% LLM-over-BO edge (Liargkovas) is small enough to be noise until verified. |
+| OpenTuner (Ansel) | Ensemble of search techniques + AUC-Bandit credit assignment | The right architecture is a *portfolio with online credit assignment*; the LLM proposer is one arm, the measurement daemon is the verifier (Ch05). |
+| Hyperband (Li) | Bandit + successive halving over evaluation budget | A budget-saver for the proposer test *if* a cheap partial measurement predicts the confirmed cold-start delta — currently untested. |
+| Vizier (Golovin) | Productionized GP-bandit black-box service | "What good looks like" for the daemon-side optimizer: deterministic, auditable infrastructure, decoupled from candidate generation. |
+
+**Net guidance.** (1) The proposer-vs-random experiment is using the *correct*
+H0; random search is a strong baseline, not a strawman. (2) The proposer's only
+honest justification is beating these classical methods **at equal evaluation
+budget on a verifier-clean channel** — anything else risks crediting the LLM for
+luck or for a one-knob effect. (3) Architecturally, CursiveOS should treat "LLM
+proposer" as one arm in an OpenTuner-style portfolio judged by the external
+measurement daemon (Ch05/Ch06), not as a self-grading optimizer. This does
+**not** upgrade CH05-BM-002 — it remains **Unvalidated** until the experiment
+runs; this section only grounds the baselines the experiment compares against.
+
+**Retrieval caveats.** All five items were retrieved at abstract / publisher-
+summary level via web search; no full texts were fetched in this pass. The
+OpenTuner 2.8× speedup and AUC-Bandit formula come from secondary summaries
+quoting the paper (the PACT 2014 PDF returned HTTP 403) and are marked **[needs
+full-text]** above. Numbers are reported as the sources state them and are not
+locally reproduced on the CursiveOS harness.
+
 # AI-Guided Tuning
 
 ## Corpus integration notes (2026-06-24)
