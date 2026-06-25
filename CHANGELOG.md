@@ -4,6 +4,15 @@ This file records meaningful changes to research guidance, validation status,
 and corpus process. It is intended to be readable without reconstructing a
 chain of supporting documents.
 
+## 2026-06-25 - Memory-pressure sensor noise-floor experiment plan
+
+Changed:
+- **experiments/**: added `memory-pressure-sensor-noise-floor-plan.md`, a pre-registered, falsifiable plan to measure the CV of the `benchmark-memory-pressure-v0.1.sh` refault-time probe before it can gate selection.
+- **RESEARCH_PIPELINE.md**: added the experiment to the Experimental Lift table.
+
+Reason:
+- The probe is built but `Unvalidated` (no hardware noise floor). The plan runs the same gate every other channel cleared on 2026-06-16: H1 within-machine CV ≤ 0.15 on Stardust + the i5-11300H, plus H2 (zram `mm_stat` engagement) and H3 (zram/disk-swap/no-swap discrimination) as validity checks so a quiet channel is not mistaken for a discriminating one. Only on H1–H3 pass does it integrate the probe as a weighted fifth fitness channel and re-screen the inconclusive `candidate-v0.10-zram` (H4). This is the cheapest experiment in the queue (instrument already exists) and the one that unblocks the entire zram / memory-class thread.
+
 ## 2026-06-25 - Memory-pressure sensor prototype (5th channel)
 
 Changed:
