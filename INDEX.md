@@ -1,7 +1,7 @@
 # Research Index
 
 This index is the primary navigation page for the CursiveOS research corpus.
-Chapters are living documents in strategic reading order (23 files, **00–22**
+Chapters are living documents in strategic reading order (25 files, **00–23**
 logical slots): measurement and organism architecture first, then literature and
 platform depth, then historical strategy imports last.
 
@@ -29,7 +29,7 @@ Use [CORPUS_WORKFLOW.md](CORPUS_WORKFLOW.md) for intake and maintenance,
 9. [19 - First Principles](chapters/19-first-principles-and-strategy.md) + [20 - Market](chapters/20-market-and-viability.md) — **read the living layer first**, then the DOCX import below it
 10. [22 - Research Master](chapters/22-research-master.md) — March 2026 historical snapshot only
 
-Chapters **19–22** preserve DOCX imports with living layers. Chapters **13–18** are platform and agent implementation leads constrained by **00**, **06**, and **VALIDATION.md**.
+Chapters **19–22** preserve DOCX imports with living layers. Chapters **13–18** are platform and agent implementation leads constrained by **00**, **06**, and **VALIDATION.md**. Chapter **23** is a native cross-cutting chapter linking measurement (**00**), economics (**02**), and containment (**06**).
 
 ### Full chapter index (strategic order)
 
@@ -59,6 +59,7 @@ Chapters **19–22** preserve DOCX imports with living layers. Chapters **13–1
 | 20 | [Market and Viability](chapters/20-market-and-viability.md) | DePIN market context | Background; living layer flags TEE/benchmark overclaims | Context Unvalidated; flagged passages Disproven |
 | 21 | [Tokenomics and Incentives](chapters/21-tokenomics-and-incentives.md) | DePIN token models | Comparison only | Superseded by Ch02 for CursiveOS |
 | 22 | [Research Master](chapters/22-research-master.md) | March 2026 repo snapshot | Historical context only | Superseded for architecture; see Ch00–07 |
+| 23 | [Energy Efficiency and Performance-per-Watt](chapters/23-energy-efficiency-and-performance-per-watt.md) | Energy-per-task as a fitness channel; RAPL domains/accuracy; PLATYPUS privilege collision | Defining "useful optimization" as work-per-joule; energy measurement validity | Direction Supported; channel Unvalidated; privilege collision Validated |
 
 ## Confidence Labels
 
