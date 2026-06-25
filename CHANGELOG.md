@@ -29,6 +29,14 @@ Reason:
 - The economic thesis pays for *useful* optimization but the fitness schema had no work-normalized efficiency channel — only a machine-specific idle-power penalty. Energy-per-task is the cleanest hardware-grounded definition of "useful" and a built-in counterweight to the speed-only Goodhart (a clock-boost mutation that wins cold-start while burning 2× energy should be visible as a loss). The chapter is deliberately Unvalidated as a deployed channel: the PLATYPUS privilege restriction and RAPL domain non-comparability are real blockers that must be solved (labeled schema + setuid helper + wall-meter calibration) before any fitness weight.
 
 Sources: Khan et al. "RAPL in Action" (ACM ToMPECS 2018); Weaver "Reading RAPL energy measurements from Linux"; Lipp et al. PLATYPUS (CVE-2020-8694/8695); Linux powercap docs + `amd_energy` removal (5.13, `9049572fb`); MLPerf Power (arXiv:2410.12032); SPECpower_ssj2008; "16 Years of SPEC Power" (arXiv:2411.07062); Yang et al. nvidia-smi power measurement (arXiv:2312.02741).
+## 2026-06-25 - Memory-pressure sensor noise-floor experiment plan
+
+Changed:
+- **experiments/**: added `memory-pressure-sensor-noise-floor-plan.md`, a pre-registered, falsifiable plan to measure the CV of the `benchmark-memory-pressure-v0.1.sh` refault-time probe before it can gate selection.
+- **RESEARCH_PIPELINE.md**: added the experiment to the Experimental Lift table.
+
+Reason:
+- The probe is built but `Unvalidated` (no hardware noise floor). The plan runs the same gate every other channel cleared on 2026-06-16: H1 within-machine CV ≤ 0.15 on Stardust + the i5-11300H, plus H2 (zram `mm_stat` engagement) and H3 (zram/disk-swap/no-swap discrimination) as validity checks so a quiet channel is not mistaken for a discriminating one. Only on H1–H3 pass does it integrate the probe as a weighted fifth fitness channel and re-screen the inconclusive `candidate-v0.10-zram` (H4). This is the cheapest experiment in the queue (instrument already exists) and the one that unblocks the entire zram / memory-class thread.
 
 ## 2026-06-25 - Memory-pressure sensor prototype (5th channel)
 
