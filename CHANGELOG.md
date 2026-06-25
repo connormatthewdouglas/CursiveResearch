@@ -110,6 +110,27 @@ Reason:
 - Content audit: finish an incomplete intake from local full text, fix a
   folder/paper naming mismatch, and make extraction depth + confidence labeling
   an intentional, documented policy rather than an accidental one.
+## 2026-06-24 - New Experiment Plan: Cold-Start Model/Runtime Transfer
+
+Changed:
+- **Added `experiments/cold-start-model-runtime-transfer-plan.md`** — falsifiable
+  plan testing whether the validated cold-start preset gain (−51% on Stardust)
+  survives a change of model, quantization, or runtime on the *same* machine.
+  Separates absolute idle-exit saving (ms, predicted model-invariant) from the
+  reported percentage gain (predicted to dilute as model-load grows). Single
+  machine, existing harness + cold-start sensor, ~6-cell config matrix; no new
+  infrastructure.
+- `RESEARCH_PIPELINE.md` — added the plan to the Experimental Lift table.
+
+Reason:
+- The cold-start channel (CV 0.002) drives every acceptance-grade selection
+  decision, but every cold-start number on record was measured against one
+  inference configuration. The corpus has tested cross-*machine* transfer
+  (hardware-scoping plan) but never the orthogonal cross-*model/runtime* axis.
+  Outcome decides whether the CursiveRoot fitness key must include
+  `(model × quantization × backend)` or whether one preset serves a machine's
+  whole model zoo. Grounded in Ch00 §2.3/§5.1 (CPU idle-exit mechanism; page-cache
+  load dominance) and Ch10's open OpenVINO/SYCL parity-matrix task.
 
 ## 2026-06-24 - Structural Org: Ch03+Ch04 Merge, Ch07 Split, Inline Body Reinforcement
 
