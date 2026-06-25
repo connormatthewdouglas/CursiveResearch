@@ -221,8 +221,8 @@ A useful paper extraction lets a future agent answer:
 
 | Slug | Area |
 | --- | --- |
-| ladder, reward-hacking-skalse-2022, godel-agent, stop-self-taught-optimizer, voyager, funsearch, alphaevolve, self-rewarding-language-models, gptswarm, alphadev, tune-agent, sematune, branchfs-fec, schedcp, poet, map-elites, open-endedness-icml-2024, darwin-godel-machine, codeevolve | recursive-self-improvement |
-| ai-agents-that-matter, agent-as-a-judge, osworld | agent-evaluation |
-| swe-agent, swe-bench, reflexion | software-engineering-agents |
+| ladder, reward-hacking-skalse-2022, godel-agent, stop-self-taught-optimizer, voyager, funsearch, alphaevolve, self-rewarding-language-models, gptswarm, alphadev, tune-agent, sematune, branchfs-fec, schedcp, poet, map-elites, open-endedness-icml-2024, darwin-godel-machine, codeevolve, reflexion | recursive-self-improvement |
+| ai-agents-that-matter, agent-as-a-judge, osworld, swe-bench | agent-evaluation |
+| swe-agent | software-engineering-agents |
 
 Add new areas as the corpus grows.
