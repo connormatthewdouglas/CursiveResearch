@@ -103,7 +103,8 @@ the machine under memory pressure. This gap was made concrete by cycle 2: the
 `candidate-v0.10-zram` variant (v0.9 parent stack plus a compressed-RAM swap
 device — the organism's first *added* optimization rather than a v0.8 subset)
 screened on the i5-11300H laptop and came back **inconclusive** — fitness
-≈ −0.0257 (neutral), confidence 0.50 from a single screen. That is the
+≈ +0.0136 (neutral, inside the per-channel noise floor; reproducible from the
+backfilled CursiveRoot bundle), confidence 0.50 from a single screen. That is the
 *expected and honest* result, pre-registered in the variant hypothesis: a
 swap-compression change cannot move sensors that never touch memory, so the
 screen only proved safe apply/revert and non-regression. Two consequences worth

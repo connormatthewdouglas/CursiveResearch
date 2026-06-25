@@ -8,10 +8,10 @@ chain of supporting documents.
 
 Changed:
 - **Chapter 01** (`01-seed-organism-and-sensor-array.md`): added a "Known coverage gap — no memory-pressure sensor" note under Performance Sensors, grounded in the cycle-2 `candidate-v0.10-zram` inconclusive screen; added Open Research Gap #6 (memory-pressure sensor + swappiness-aware variant).
-- **VALIDATION.md**: two new rows — "Chapter 01 / zram cycle-2 screen" (Unvalidated, inconclusive: fitness ≈ −0.0257, confidence 0.50, single screen) and "Chapter 01 / memory-pressure sensor gap" (Supported).
+- **VALIDATION.md**: two new rows — "Chapter 01 / zram cycle-2 screen" (Unvalidated, inconclusive: fitness ≈ +0.0136, confidence 0.50, single screen) and "Chapter 01 / memory-pressure sensor gap" (Supported).
 
 Reason:
-- Honest record of the organism's first *added* optimization (cycle 2). zram's benefit lives in a channel the genesis suite does not measure, so the screen correctly read neutral and only proved safe apply/revert + non-regression — pre-registered in the variant hypothesis. Treat zram as an unscreened lead, not a rejected one. Note: the bundle did not reach CursiveRoot because of the `seed_bundles` RLS upsert bug, fixed the same day (CursiveOS `c65c5ef`, merge-duplicates → ignore-duplicates).
+- Honest record of the organism's first *added* optimization (cycle 2). zram's benefit lives in a channel the genesis suite does not measure, so the screen correctly read neutral and only proved safe apply/revert + non-regression — pre-registered in the variant hypothesis. Treat zram as an unscreened lead, not a rejected one. Marginal deltas vs v0.9 (cold-start +0.11%, idle power −1.75%, network −3.77% gate-only, sustained +0.06%) are all inside the measured noise floor. The verdict bundle initially did not reach CursiveRoot because of the `seed_bundles` RLS upsert bug (fixed same day, CursiveOS `c65c5ef`, merge-duplicates → ignore-duplicates); it was then regenerated from the surviving CursiveRoot run data and uploaded (fitness +0.0136 supersedes an earlier in-session −0.0257 figure that could not be reproduced from stored data).
 
 ## 2026-06-24 - Tier Reconciliation (4 Cornerstone Claims) + AlphaEvolve Decentralization Chapter (03c)
 
