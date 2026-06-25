@@ -97,6 +97,23 @@ Initial performance sensors include:
 - **Sustained inference sensor** — measures steady-state tokens per second on a warm model.
 - **Idle power sensor** — measures the power cost of disabling C-states or pinning GPU frequency.
 
+**Known coverage gap — no memory-pressure sensor.** The genesis suite measures
+network, cold-start, sustained inference, and idle power, but nothing that puts
+the machine under memory pressure. This gap was made concrete by cycle 2: the
+`candidate-v0.10-zram` variant (v0.9 parent stack plus a compressed-RAM swap
+device — the organism's first *added* optimization rather than a v0.8 subset)
+screened on the i5-11300H laptop and came back **inconclusive** — fitness
+≈ −0.0257 (neutral), confidence 0.50 from a single screen. That is the
+*expected and honest* result, pre-registered in the variant hypothesis: a
+swap-compression change cannot move sensors that never touch memory, so the
+screen only proved safe apply/revert and non-regression. Two consequences worth
+recording: (1) optimizations whose benefit lives in an unmeasured channel will
+correctly read as neutral and never accumulate fitness, so the suite must grow a
+memory-pressure sensor before zram-class changes can be selected on evidence;
+and (2) the v0.9 parent sets `swappiness=0`, which further suppresses any zram
+effect — a memory-pressure sensor and a swappiness-aware variant need to land
+together. Until then, treat zram as an *unscreened lead*, not a rejected one.
+
 ### Regression Sensors
 
 Regression sensors are gates. They do not add fitness. They block bad variants.
@@ -198,6 +215,7 @@ This chapter fills several gaps:
 3. Calibrate the CV threshold and confirmation rule with real fleet data.
 4. Define hardware-scoped fitness for changes that help one hardware class and hurt another.
 5. Decide how local agent recommendations consume sensor results without contaminating the deterministic measurement pipeline.
+6. Add a memory-pressure sensor (and a swappiness-aware variant) so memory-class optimizations such as zram can be selected on evidence instead of reading as neutral. Exposed by the cycle-2 `candidate-v0.10-zram` inconclusive screen.
 
 ## Source anchors from main CursiveOS repo
 

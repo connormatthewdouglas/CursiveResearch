@@ -4,6 +4,15 @@ This file records meaningful changes to research guidance, validation status,
 and corpus process. It is intended to be readable without reconstructing a
 chain of supporting documents.
 
+## 2026-06-25 - Cycle-2 zram inconclusive + memory-pressure sensor gap
+
+Changed:
+- **Chapter 01** (`01-seed-organism-and-sensor-array.md`): added a "Known coverage gap — no memory-pressure sensor" note under Performance Sensors, grounded in the cycle-2 `candidate-v0.10-zram` inconclusive screen; added Open Research Gap #6 (memory-pressure sensor + swappiness-aware variant).
+- **VALIDATION.md**: two new rows — "Chapter 01 / zram cycle-2 screen" (Unvalidated, inconclusive: fitness ≈ −0.0257, confidence 0.50, single screen) and "Chapter 01 / memory-pressure sensor gap" (Supported).
+
+Reason:
+- Honest record of the organism's first *added* optimization (cycle 2). zram's benefit lives in a channel the genesis suite does not measure, so the screen correctly read neutral and only proved safe apply/revert + non-regression — pre-registered in the variant hypothesis. Treat zram as an unscreened lead, not a rejected one. Note: the bundle did not reach CursiveRoot because of the `seed_bundles` RLS upsert bug, fixed the same day (CursiveOS `c65c5ef`, merge-duplicates → ignore-duplicates).
+
 ## 2026-06-24 - Tier Reconciliation (4 Cornerstone Claims) + AlphaEvolve Decentralization Chapter (03c)
 
 Changed:
