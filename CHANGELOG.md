@@ -4,6 +4,15 @@ This file records meaningful changes to research guidance, validation status,
 and corpus process. It is intended to be readable without reconstructing a
 chain of supporting documents.
 
+## 2026-06-25 - AI model supply-chain security section (Ch16)
+
+Changed:
+- **Chapter 16** (`16-security-and-hardening.md`): added a `### AI model supply chain: malicious weights as a code-execution and measurement-integrity surface` subsection (additive, inserted after the IDS subsection / before the DePIN subnet-security block). It deepens the chapter's single existing control ("verify AI model hashes before loading") into a characterized attack surface for the local model-pull path (Ollama, `llama.cpp`/GGUF, Hugging Face — Ch10/Ch18) and maps it onto the daemon/shell split. Covers: pickle `torch.load` RCE vs `safetensors` safe-by-design (Trail of Bits audit, May 2023); scanner evasion (ReversingLabs "nullifAI" picklescan bypass, 2025-02); loader RCEs (Wiz Probllama CVE-2024-37032; Databricks GGUF parser bugs + llama.cpp CVE-2025-53630); and Unit 42 model namespace reuse. Adds a threat→control table and four organism design rules (format over scanning; loader = untrusted-input code → Ch05 sandbox; pin by sha256 digest not name → Ch11/Ch08; model RCE must not reach the Ch06 daemon write path). No existing content removed; chapter 152→258 lines.
+- **VALIDATION.md**: new claims-table row "Chapter 16 / model supply chain" (Supported — external CVEs/incidents strong; CursiveOS controls not implemented).
+
+Reason:
+- Closes part of the P1 "Local Agent Architecture and Safety" pipeline item ("deeper prompt-injection/tool-attack survey") on the supply-chain axis specifically. A poisoned model is a dual threat for CursiveOS — host compromise during load/inference and Goodhart-style measurement gaming through the weights — and the corpus previously had only a one-line mention. The section is research synthesis with concrete daemon/shell implications, not an implementation spec; all claims trace to retrieved primary/secondary sources (HF/EleutherAI safetensors audit, ReversingLabs, Wiz, Databricks, llama.cpp GHSA-vgg9-87g3-85w8, Unit 42). It does not alter the existing DePIN/package supply-chain guidance, which remains authoritative for PyPI/dependency and consensus-layer threats.
+
 ## 2026-06-25 - Memory-pressure sensor prototype (5th channel)
 
 Changed:
