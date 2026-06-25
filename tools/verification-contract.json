@@ -1,7 +1,7 @@
 {
   "version": "2026-06-24-gates",
   "description": "Mirrors goal/plan.md verification gates. run-verification.ps1 must pass all checks before writing scratch evidence.",
-  "chapters_total": 25,
+  "chapters_total": 26,
   "papers_total": 25,
   "native_chapters": ["00", "01", "02", "03", "03c", "03d", "05", "06", "07", "07b", "08", "09", "10", "11", "12", "17", "23"],
   "docx_import_chapters": ["13", "14", "15", "16", "18", "19", "20", "21", "22"],
