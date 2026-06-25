@@ -115,6 +115,25 @@ and (2) the v0.9 parent sets `swappiness=0`, which further suppresses any zram
 effect — a memory-pressure sensor and a swappiness-aware variant need to land
 together. Until then, treat zram as an *unscreened lead*, not a rejected one.
 
+**Prototype (2026-06-25):** `benchmarks/benchmark-memory-pressure-v0.1.sh` in the
+main repo is a first memory-pressure probe. It creates deterministic pressure
+with a cgroup-v2 `memory.high` ceiling smaller than a fixed compressible working
+set, then times faulting that set back in. With a zram swap device the refault
+is a fast in-RAM (de)compress; with disk swap it is slow; with no swap it
+throttles — so a lower median time means the memory subsystem is coping better.
+Three design choices make it a *fair* sensor: (1) the cgroup ceiling fixes the
+pressure point independent of total RAM, so the same parameters mean the same
+thing on a 16 GB laptop and a 64 GB desktop (Chapter 08 comparability);
+(2) `memory.high` throttles rather than OOM-kills, so it is safe to run
+unattended; (3) cgroup-forced reclaim swaps anon pages even under v0.9's
+`swappiness=0`, so it isolates zram's benefit *before* a swappiness-aware variant
+exists. It reads `/sys/block/zram0/mm_stat` before/after to prove zram actually
+engaged and report the achieved compression ratio (auditable — it answers "was
+the channel exercised?"). It is a **prototype**: it logs locally, does not upload,
+and is not yet wired into fitness. Integration as a weighted fifth channel waits
+on a measured noise floor (CV across reps and machines), the same gate every
+existing channel passed before it could move a decision.
+
 ### Regression Sensors
 
 Regression sensors are gates. They do not add fitness. They block bad variants.
@@ -216,7 +235,7 @@ This chapter fills several gaps:
 3. Calibrate the CV threshold and confirmation rule with real fleet data.
 4. Define hardware-scoped fitness for changes that help one hardware class and hurt another.
 5. Decide how local agent recommendations consume sensor results without contaminating the deterministic measurement pipeline.
-6. Add a memory-pressure sensor (and a swappiness-aware variant) so memory-class optimizations such as zram can be selected on evidence instead of reading as neutral. Exposed by the cycle-2 `candidate-v0.10-zram` inconclusive screen.
+6. Add a memory-pressure sensor (and a swappiness-aware variant) so memory-class optimizations such as zram can be selected on evidence instead of reading as neutral. Exposed by the cycle-2 `candidate-v0.10-zram` inconclusive screen. **Prototype built** (`benchmarks/benchmark-memory-pressure-v0.1.sh`, 2026-06-25); remaining work = measure its noise floor across reps + machines, then wire it into `seed_organism` fitness as a weighted fifth channel (weight/cap/severe-threshold set from the measured CV).
 
 ## Source anchors from main CursiveOS repo
 

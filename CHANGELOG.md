@@ -4,6 +4,15 @@ This file records meaningful changes to research guidance, validation status,
 and corpus process. It is intended to be readable without reconstructing a
 chain of supporting documents.
 
+## 2026-06-25 - Memory-pressure sensor prototype (5th channel)
+
+Changed:
+- **Chapter 01**: added a "Prototype (2026-06-25)" paragraph under Performance Sensors describing `benchmark-memory-pressure-v0.1.sh` (CursiveOS `99e6996`) and updated Open Gap #6 to "prototype built; noise floor + integration pending".
+- **VALIDATION.md**: new row "Chapter 01 / memory-pressure sensor prototype" (Unvalidated — built + statically validated, no hardware noise floor yet).
+
+Reason:
+- Close the design half of the memory-pressure gap exposed by cycle 2. The probe creates deterministic pressure via a cgroup-v2 `memory.high` ceiling and times faulting a fixed compressible working set back in; lower median = better. It is RAM-size-independent (laptop/desktop comparability), throttles rather than OOM-kills (safe unattended), engages zram even under v0.9 `swappiness=0` (cgroup-forced reclaim), and proves engagement via `/sys/block/zram0/mm_stat` (auditable). Prototype only — logs locally, not wired into fitness until a measured noise floor clears the same gate every other channel passed.
+
 ## 2026-06-25 - Cycle-2 zram inconclusive + memory-pressure sensor gap
 
 Changed:
