@@ -4,6 +4,20 @@ This file records meaningful changes to research guidance, validation status,
 and corpus process. It is intended to be readable without reconstructing a
 chain of supporting documents.
 
+## 2026-06-25 - Cornerstone full-text repair: FunSearch, LADDER, DGM, Open-Endedness
+
+Changed:
+- **Full-text storage repaired for CC BY 4.0 cornerstone papers**:
+  - `papers/recursive-self-improvement/funsearch/`: added Nature Open Access / CC BY 4.0 `paper.pdf` and full PDF-derived `paper.md`.
+  - `papers/recursive-self-improvement/ladder/`: replaced the partial abstract/core-excerpt `paper.md` with full PDF-derived text and added `paper.pdf`.
+  - `papers/recursive-self-improvement/darwin-godel-machine/`: added `paper.pdf` and full `paper.md` from arXiv:2505.22954v3.
+  - `papers/recursive-self-improvement/open-endedness-icml-2024/`: added `paper.pdf` and full `paper.md` from arXiv:2406.04268v1.
+- **Metadata repaired** in folder READMEs, `deep-extraction.md`, `claims-and-results.md`, `sources/source-register.md`, `sources/peer-reviewed-rsi-selected-sources.md`, and `papers/TIER-RECONCILIATION.md` so agents no longer believe these cornerstone folders are abstract-only.
+- **New audit artifact**: `papers/FULL-TEXT-AUDIT-2026-06-25.md` maps cornerstone full-text status, source/license basis, remaining rights constraints, and strategic next actions.
+
+Reason:
+- CursiveResearch is becoming the project-alignment/spec corpus for multiple agents and future specialized models. Cornerstone papers cannot remain summaries-of-summaries when rights-cleared full text is available; the corpus needs source-preserving, auditable, agent-readable paper bodies before strategic extraction/model-training decisions.
+
 ## 2026-06-25 - Memory-pressure sensor prototype (5th channel)
 
 Changed:

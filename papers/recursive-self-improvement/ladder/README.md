@@ -27,4 +27,4 @@ It fills a gap in the current corpus between STOP (scaffold self-improvement) an
 - HTML version: https://arxiv.org/html/2503.00735v3
 - PDF: https://arxiv.org/pdf/2503.00735
 
-Full paper text stored in `paper.md` (rights-cleared). Deep extraction and claims inventory in the sibling files.
+Full PDF and agent-readable PDF text extraction are stored in `paper.pdf` and `paper.md` (rights-cleared). Deep extraction and claims inventory are in the sibling files.

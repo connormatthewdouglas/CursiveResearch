@@ -5,11 +5,11 @@ Authors / Lab: Bernardino Romera-Paredes et al., Google DeepMind
 Year / Venue: 2024, Nature (s41586-023-06924-6)
 Corpus Status: unvalidated
 Extraction Type: cornerstone
-Rights Status: extraction only (Nature proprietary license)
+Rights Status: full-text allowed; Nature article page states CC BY 4.0 / Open Access, and `paper.pdf` + `paper.md` are stored locally.
 
 ## 0. Extraction Provenance
 
-Grounded in Nature abstract, public summaries, and AlphaEvolve citations (Romera-Paredes et al., 2023). Full Nature text not stored. Specific numeric results and algorithm listings marked **[needs full-text]**.
+Originally grounded in Nature abstract, public summaries, and AlphaEvolve citations (Romera-Paredes et al., 2023). On 2026-06-25 the rights-cleared Nature PDF and PDF-derived text were added locally. Specific numeric results and algorithm listings still need second-pass extraction hardening from `paper.md`.
 
 ## 1. Paper Map
 
@@ -28,7 +28,7 @@ Grounded in Nature abstract, public summaries, and AlphaEvolve citations (Romera
 | --- | --- | --- | --- |
 | LLM + evolutionary search discovers new mathematical results | Abstract / press | Cap set constructions | High (peer-reviewed Nature) |
 | Automated evaluators make programs first-class searchable artifacts | Method summaries | Evaluator-led selection | High |
-| Discovered heuristics outperform known baselines on bin packing instances | Reported results | Benchmark eval | Medium — **[needs full-text numbers]** |
+| Improved heuristics outperform known baselines on bin packing instances | Reported results | Benchmark eval | Medium — full text now stored; numbers need second-pass hardening |
 | Approach generalizes across problems sharing evaluator interface | Discussion | Multiple domains | Medium |
 
 ## 3. System / Method Architecture
@@ -58,7 +58,7 @@ Problems reported publicly:
 - Cap set problem (extremal combinatorics).
 - Online bin packing / heuristic optimization.
 
-Components: pretrained LLM (DeepMind internal), custom evaluators per problem, evolutionary outer loop. **[needs full-text]** for model IDs, population sizes, compute.
+Components: pretrained LLM (DeepMind internal), custom evaluators per problem, evolutionary outer loop. Full text now stored; model IDs, population sizes, and compute need second-pass hardening.
 
 ## 6. Results Inventory
 
@@ -66,20 +66,20 @@ Components: pretrained LLM (DeepMind internal), custom evaluators per problem, e
 | --- | --- | --- | --- | --- |
 | New cap set constructions | Set size / dimension | Prior best constructions | Genuine mathematical progress | Specialist verification needed |
 | Improved bin packing heuristics | Excess / waste metric | Published heuristics | Practical OR impact | Instance distribution matters |
-| Sample-efficient search | Programs to discovery | Traditional search | LLM prior helps | **[needs full-text]** |
+| Sample-efficient search | Programs to discovery | Traditional search | LLM prior helps | Full text available; needs second-pass extraction |
 
 ## 7. Figures and Tables Inventory
 
 | Figure/Table | What It Shows | Important Takeaway | Should Corpus Recreate/Summarize? |
 | --- | --- | --- | --- |
-| **[needs full-text]** | FunSearch loop diagram | Evaluator-centric architecture | Yes |
-| **[needs full-text]** | Cap set improvements | Science outcome credibility | Summarize in own words |
+| Full text available | FunSearch loop diagram | Evaluator-centric architecture | Yes; second-pass figure extraction needed |
+| Full text available | Cap set improvements | Science outcome credibility | Summarize in own words; second-pass table extraction needed |
 
 ## 8. Limitations Stated By Authors
 
 - Requires problem-specific automated evaluators (not all domains have them).
 - LLM and search compute costs significant.
-- **[needs full-text]** for full author limitations list.
+- Full text now available for full author limitations second-pass extraction.
 
 ## 9. Limitations Inferred By Corpus
 
@@ -103,7 +103,7 @@ Components: pretrained LLM (DeepMind internal), custom evaluators per problem, e
 
 - Assuming cap-set-level discoveries in CursiveOS near term.
 - Omitting evaluator engineering from project plans.
-- Storing Nature full text without rights.
+- Treating full-text storage as sufficient; extraction still needs source-level hardening against the local `paper.md`.
 
 ## 13. CursiveOS / Corpus Implications
 
@@ -116,12 +116,12 @@ RSI-002 lineage root for AlphaEvolve/CodeEvolve. CursiveOS organism loop should 
 
 ## 15. Extraction Coverage Notes
 
-- All major claims extracted: partial (secondary sources + abstract knowledge)
+- All major claims extracted: partial; full text now local, second-pass hardening pending
 - All experiments extracted: no
 - All figures/tables inventoried: no
 - Source-level validation complete: no
-- Sections skipped: full Nature body — rights restricted
+- Sections skipped: none intentionally; full Nature body is now locally available under CC BY 4.0, but extraction coverage still needs review.
 
 ## 16. Source Reliability
 
-Peer-reviewed Nature article from DeepMind. Very high credibility; corpus extraction limited by publisher rights.
+Peer-reviewed Nature article from DeepMind. Very high credibility; full source text now stored, but the existing extraction still needs a table/figure/numeric-results pass.

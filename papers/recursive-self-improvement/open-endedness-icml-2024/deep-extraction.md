@@ -5,7 +5,7 @@ Authors / Lab: Edward Hughes, Michael Dennis, Jack Parker-Holder, Feryal Behbaha
 Year / Venue: 2024, ICML 2024 (arXiv:2406.04268v1)
 Corpus Status: unvalidated
 Extraction Type: cornerstone
-Rights Status: extraction only (CC BY 4.0)
+Rights Status: full-text allowed; `paper.pdf` and `paper.md` stored under CC BY 4.0
 
 ## 1. Paper Map
 
@@ -23,7 +23,7 @@ Rights Status: extraction only (CC BY 4.0)
 | --- | --- | --- | --- |
 | Ingredients now exist to achieve open-endedness relative to human observer | Abstract | FM + algorithms | Medium (position) |
 | Open-endedness is essential property of artificial superhuman intelligence | Abstract | Argument | Medium (thesis) |
-| Formal definition via novelty and learnability | Abstract | Theory | Medium — details **[needs full-text]** |
+| Formal definition via novelty and learnability | Abstract | Theory | Medium — full text now stored locally; formalism needs second-pass hardening |
 | Path: open-ended FM-based systems making novel human-relevant discoveries | Abstract | Research agenda | Medium |
 | Safety implications must be examined for capable open-ended AI | Abstract | Safety discussion | High |
 | Open-ended FMs will be increasingly fertile, safety-critical research area | Abstract | Conclusion | High |
@@ -52,7 +52,7 @@ Formalizes open-endedness: generated artifacts must be novel yet learnable/valua
 
 ## 5. Experimental Setup
 
-Not empirical benchmark paper. May include illustrative examples **[needs full-text]**. Argumentative structure with references to POET, quality-diversity, FM agents.
+Not empirical benchmark paper. Argumentative structure with references to POET, quality-diversity, FM agents. Full text is now stored locally for illustrative-example hardening.
 
 ## 6. Results Inventory
 
@@ -65,12 +65,12 @@ Not empirical benchmark paper. May include illustrative examples **[needs full-t
 
 | Figure/Table | What It Shows | Important Takeaway | Should Corpus Recreate/Summarize? |
 | --- | --- | --- | --- |
-| **[needs full-text]** | Novelty/learnability diagram | Formalism visual | Yes |
+| Full text available | Novelty/learnability diagram | Formalism visual | Yes; second-pass figure extraction needed |
 
 ## 8. Limitations Stated By Authors
 
 - Position paper — empirical validation of ASI path incomplete.
-- **[needs full-text]** for scope of safety analysis.
+- Full text now available for second-pass safety-scope extraction.
 
 ## 9. Limitations Inferred By Corpus
 
@@ -106,7 +106,7 @@ RSI-032 provides theoretical justification for POET/MAP-Elites/DGM direction in 
 
 ## 15. Extraction Coverage Notes
 
-- Abstract-complete; formalism details **[needs full-text]**
+- Full text now stored in `paper.md`; formalism details need second-pass extraction hardening.
 
 ## 16. Source Reliability
 

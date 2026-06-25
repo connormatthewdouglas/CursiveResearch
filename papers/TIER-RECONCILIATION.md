@@ -7,8 +7,33 @@ Audit of every paper folder against the **Extraction depth tiers** policy in
 - `important` → requires `deep-extraction.md` **and** `claims-and-results.md`
 - `supporting` / `lead-only` → `deep-extraction.md` only (or source entry)
 
-Each folder's tier is read from its own `Extraction Type:` header. Last audited
-2026-06-24.
+Each folder's tier is read from its own `Extraction Type:` header. Extraction-depth last audited 2026-06-24; rights-cleared full-text status last audited 2026-06-25.
+
+Full-text status pass added 2026-06-25: rights-cleared cornerstone papers should
+store `paper.pdf` and `paper.md`, not just abstract-level summaries or deep
+extractions.
+
+Detailed license/source map: `papers/FULL-TEXT-AUDIT-2026-06-25.md`.
+
+## Rights-cleared full-text gaps — CLOSED 2026-06-25
+
+These folders either had no full text or had only a partial `paper.md` despite
+CC BY 4.0 rights. Added rights-cleared PDFs plus `pdftotext`-derived
+agent-readable text:
+
+| Folder | Paper | Fix |
+| --- | --- | --- |
+| `funsearch` | FunSearch (RSI-002, Nature s41586-023-06924-6) | Added Nature Open Access / CC BY 4.0 `paper.pdf` and full `paper.md`. |
+| `ladder` | LADDER (RSI-023, arXiv 2503.00735v3) | Replaced partial abstract/core excerpt with full PDF text; added `paper.pdf`. |
+| `darwin-godel-machine` | Darwin Gödel Machine (RSI-016, arXiv 2505.22954v3) | Added `paper.pdf` and full `paper.md`. |
+| `open-endedness-icml-2024` | Open-Endedness is Essential for ASI (RSI-032, arXiv 2406.04268v1) | Added `paper.pdf` and full `paper.md`. |
+
+## Remaining full-text constraints — documented, not copied
+
+The following cornerstone folders remain extraction/citation-only under the
+current corpus storage rule: `ai-agents-that-matter`, `alphaevolve`,
+`map-elites`, `poet`, and `reward-hacking-skalse-2022`. Their license/source
+status and next actions are recorded in `FULL-TEXT-AUDIT-2026-06-25.md`.
 
 ## Cornerstone gaps — CLOSED this pass
 

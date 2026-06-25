@@ -5,7 +5,7 @@ Authors / Lab: Jenny Zhang, Shengran Hu, Cong Lu, Robert Lange, Jeff Clune
 Year / Venue: 2025–2026, arXiv (2505.22954v3)
 Corpus Status: unvalidated
 Extraction Type: cornerstone
-Rights Status: extraction only (CC BY 4.0)
+Rights Status: full-text allowed; `paper.pdf` and `paper.md` stored under CC BY 4.0
 
 ## 1. Paper Map
 
@@ -58,7 +58,7 @@ Combines Darwinian evolution + Gödel-inspired self-modification without formal 
 - Benchmarks: SWE-bench, Polyglot.
 - Starting performance: 20.0% / 14.2%.
 - Final performance: 50.0% / 30.7%.
-- Baselines: no self-improvement; no open-ended exploration **[needs full-text details]**.
+- Baselines: no self-improvement; no open-ended exploration. Full text now stored locally; ablation details need second-pass hardening from `paper.md`.
 - Safety: sandbox, human oversight.
 - Code: github.com/jennyzzt/dgm.
 
@@ -68,21 +68,21 @@ Combines Darwinian evolution + Gödel-inspired self-modification without formal 
 | --- | --- | --- | --- | --- |
 | SWE-bench lift | 20.0% → 50.0% | Initial agent | Strong self-improvement | Benchmark-specific |
 | Polyglot lift | 14.2% → 30.7% | Initial agent | Generalizes across suites | Still coding-only |
-| Ablation superiority | Solve rate | Non-OE / non-self-improve baselines | Both components needed | **[needs full-text]** |
-| Auto-improved tooling | Qualitative | Evolved editors, context mgmt, peer review | Meta-capability gains | **[needs full-text examples]** |
+| Ablation superiority | Solve rate | Non-OE / non-self-improve baselines | Both components needed | Full text available; needs second-pass extraction |
+| Auto-improved tooling | Qualitative | Evolved editors, context mgmt, peer review | Meta-capability gains | Full text available; needs second-pass examples |
 
 ## 7. Figures and Tables Inventory
 
 | Figure/Table | What It Shows | Important Takeaway | Should Corpus Recreate/Summarize? |
 | --- | --- | --- | --- |
-| **[needs full-text]** | Archive tree growth | Open-ended branching | Yes |
-| **[needs full-text]** | Ablation bars | Component contributions | Yes |
+| Full text available | Archive tree growth | Open-ended branching | Yes; second-pass figure extraction needed |
+| Full text available | Ablation bars | Component contributions | Yes; second-pass figure extraction needed |
 
 ## 8. Limitations Stated By Authors
 
 - Empirical validation ≠ provable improvement.
 - Safety precautions required; not fully autonomous unsupervised deployment.
-- **[needs full-text]** for compute, failure cases.
+- Full text now available for compute/failure-case second-pass extraction.
 
 ## 9. Limitations Inferred By Corpus
 
@@ -120,7 +120,7 @@ RSI-016: closest coding-agent analogue to software organisms. CursiveOS delibera
 
 ## 15. Extraction Coverage Notes
 
-- Strong abstract extraction; v3 body **[needs full-text]** for ablations and tooling examples
+- Full v3 text now stored in `paper.md`; ablations and tooling examples need second-pass expansion.
 
 ## 16. Source Reliability
 

@@ -1,6 +1,6 @@
 # Darwin Gödel Machine — Claims and Results Inventory
 
-Source: https://arxiv.org/abs/2505.22954 | RSI-016 | Extraction only
+Source: https://arxiv.org/abs/2505.22954 | RSI-016 | CC BY 4.0 full text stored in `paper.pdf` and `paper.md`
 
 ## Headline Claims
 
@@ -21,7 +21,7 @@ Source: https://arxiv.org/abs/2505.22954 | RSI-016 | Extraction only
 
 - Beats baselines without self-improvement.
 - Beats baselines without open-ended exploration.
-- Details: **[needs full-text]**
+- Details: full text now stored locally; extraction still needs a second-pass table/ablation expansion from `paper.md`.
 
 ## What Not To Overclaim
 
