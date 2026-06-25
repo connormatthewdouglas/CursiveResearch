@@ -129,6 +129,112 @@ For centralized logging, Grafana Loki offers up to 90% less storage than the ELK
 
 Anomaly detection for cryptojacking on legitimate mining operations focuses on unexpected deviation from known baselines: sustained CPU/GPU usage during off-hours, connections to unwhitelisted pool ports, DNS queries to known mining pool domains outside your approved list, and process names that don't match your deployed software. A 2024 IEEE paper demonstrated 80% cryptojacking detection rates using GPU load and VRAM consumption pattern analysis.  (arXiv)
 
+### AI model supply chain: malicious weights as a code-execution and measurement-integrity surface
+
+The line above ("verify AI model hashes before loading") names one control but does
+not characterize the attack surface it defends. For CursiveOS this surface is
+not optional background: the local stack **pulls and runs external model weights**
+(Ollama, `llama.cpp`/GGUF, Hugging Face — see [Chapter 10](10-local-llm-inference-runtime-architecture.md)
+and the Arc B70 agent in [Chapter 18](18-local-agent-arc-b70.md)), and a fleet that
+distributes models or presets across contributors inherits everyone's model-pull
+risk. A poisoned model is two threats at once: a **host-compromise vector** (code
+execution during load or inference) and a **measurement-integrity vector** (a model
+that recognizes the benchmark harness and games the score — the Goodhart problem of
+[Chapter 08](08-population-confirmation-and-fleet-statistics.md) and the reward-hacking
+literature digested in [Chapter 03](03-rsi-literature-and-organism-synthesis.md), arriving
+through the weights rather than through the optimizer).
+
+**The format is the first decision.** Legacy PyTorch checkpoints (`.bin`, `.pt`,
+`.ckpt`) are Python **pickle** streams, and deserializing a pickle (`torch.load`)
+can execute arbitrary code embedded in the checkpoint's `__reduce__` hooks — credential
+theft, environment-variable exfiltration, payload download, or a reverse shell, all
+during load and before a single token is generated. [Hugging Face — Pickle Scanning](https://huggingface.co/docs/hub/en/security-pickle)
+`safetensors` was designed to remove this: it stores only tensor data plus the
+metadata needed to map them, so loading a `.safetensors` file does not run any Python
+reconstruction logic. A May 2023 Trail of Bits audit commissioned by Hugging Face,
+EleutherAI, and Stability AI found **no critical flaw leading to arbitrary code
+execution**, fixed a polyglot-file validation gap, and the format subsequently became
+the Transformers default. [EleutherAI — Safetensors audited as really safe](https://blog.eleuther.ai/safetensors-security-audit/)
+[Hugging Face — Safetensors security audit](https://huggingface.co/blog/safetensors-security-audit)
+
+**Scanners are necessary but not sufficient — the same lesson as prompt injection.**
+In February 2025 ReversingLabs found malicious PyTorch models on Hugging Face
+("nullifAI") that compressed the archive with 7z instead of the default ZIP so that
+`torch.load` would not auto-load them, and placed the reverse-shell payload at the
+*start* of the pickle stream so it executed before deserialization hit the deliberately
+broken tail — evading **picklescan**, the primary open-source pickle scanner. Hugging
+Face removed the models within roughly 24 hours, after downloads had already occurred.
+[ReversingLabs — Malicious ML models on Hugging Face](https://www.reversinglabs.com/blog/rl-identifies-malware-ml-model-hosted-on-hugging-face)
+[The Hacker News (2025-02)](https://thehackernews.com/2025/02/malicious-ml-models-found-on-hugging.html)
+This mirrors [Chapter 05](05-measurement-daemon-and-natural-language-shell.md)'s
+prompt-injection boundary: content filtering will not catch every malicious artifact,
+so the defense has to be format choice plus impact containment, not detection alone.
+
+**The loader is an attack surface independent of the weights.** Two classes matter:
+
+- *Inference-runtime parsers.* `llama.cpp`'s GGUF parser is memory-unsafe C/C++ doing
+  insufficient validation on attacker-controlled tensor and metadata fields. Databricks
+  (2024) reported multiple memory-corruption bugs where a crafted key/value length
+  (e.g. an enormous or negative size) yields an undersized allocation followed by an
+  out-of-bounds write — exploitable for code execution merely by loading a crafted GGUF.
+  [Databricks — GGML GGUF file-format vulnerabilities](https://www.databricks.com/blog/ggml-gguf-file-format-vulnerabilities)
+  This is an ongoing class: **CVE-2025-53630** (High; published 2025-07-10, fixed at
+  commit `26a48ad`) is an integer overflow in `gguf_init_from_file_impl` leading to a
+  heap out-of-bounds read/write, with follow-on advisories patching bypasses of the
+  first fix. [llama.cpp advisory GHSA-vgg9-87g3-85w8](https://github.com/ggml-org/llama.cpp/security/advisories/GHSA-vgg9-87g3-85w8)
+- *Model servers.* Ollama's **CVE-2024-37032** ("Probllama", Wiz, disclosed 2024-05-05,
+  fixed in 0.1.34 on 2024-05-07, CVSS 8.8) was a path-traversal in digest validation:
+  a rogue model registry could drive `/api/pull` to overwrite arbitrary files and reach
+  RCE. Wiz found 1,000+ exposed Ollama instances; Docker deployments were worst because
+  the API server defaulted to root and bound to all interfaces. [Wiz — Probllama (CVE-2024-37032)](https://www.wiz.io/blog/probllama-ollama-vulnerability-cve-2024-37032)
+
+**Trusting a name is not trusting an artifact.** Palo Alto Unit 42 (2025) documented
+**model namespace reuse**: when a Hugging Face author account is deleted, its `author/model`
+namespace can be re-registered by anyone, so a pipeline that fetches by name silently
+pulls an attacker's replacement. Unit 42 demonstrated reverse-shell RCE this way against
+Google Vertex AI Model Garden and Microsoft Azure AI Foundry's catalogs; after the
+February 2025 report Google added daily scans for orphaned models. [Unit 42 — Model Namespace Reuse](https://unit42.paloaltonetworks.com/model-namespace-reuse/)
+The defensive consequence is direct: **pin by content hash, never by name.**
+
+#### CursiveOS implications
+
+| Threat | Concrete vector | CursiveOS control | Cross-ref |
+| --- | --- | --- | --- |
+| Pickle deserialization RCE | `.bin`/`.pt`/`.ckpt` executes on `torch.load` | Prefer `safetensors`; refuse pickle on the daemon path | Ch05 risk tiers |
+| Scanner evasion | nullifAI-style broken/repacked pickle beats picklescan | Treat scan as advisory, not a gate; rely on format + sandbox | Ch05 injection boundary |
+| Loader memory corruption | crafted GGUF → OOB write in `llama.cpp` | Pin runtime versions; run load+inference in the untrusted-code sandbox | Ch10, Ch05 (gVisor/Firecracker) |
+| Model-server RCE | Probllama-style path traversal via rogue registry | Pin Ollama version; bind localhost; never root/0.0.0.0 in Docker | Ch10, Ch16 egress rules |
+| Namespace/name swap | deleted-account namespace re-registered | Pin model by sha256 digest; record digest in CursiveRoot evidence | Ch11 identity, Ch08 |
+
+Design rules that follow for the organism:
+
+1. **Format over scanning.** Default to `safetensors`/verified GGUF on any path that
+   feeds the measurement daemon; do not let a pickle checkpoint load inside the trusted
+   process. Scanners (picklescan and successors) are a tripwire, not a boundary.
+2. **The loader is untrusted-input code.** GGUF and pickle parsers process
+   attacker-controlled bytes, so model load and inference belong in the risk-tiered
+   sandbox of [Chapter 05](05-measurement-daemon-and-natural-language-shell.md)
+   (gVisor/Firecracker), exactly as for untrusted downloaded code. Pin and track
+   `llama.cpp`/Ollama versions against their security advisories — the weights and the
+   runtime are separate supply chains.
+3. **Pin artifacts by content hash, not by name.** Fetch and verify models by sha256
+   digest, and record that digest in the CursiveRoot run evidence. This defeats
+   namespace reuse and makes a swapped model *invalidate the run* rather than silently
+   poison fitness — extending [Chapter 11](11-hardware-identity-and-anti-spoofing.md)'s
+   identity logic from hardware to weights.
+4. **Even successful model RCE must not reach measurement truth.** This is the
+   [Chapter 06](06-mutation-safety-and-permission-law.md) boundary again: a compromised
+   inference process may corrupt a host it is sandboxed on, but it must not hold the
+   daemon's write path — it cannot rewrite sensor outputs, mark a bad preset good, or
+   submit false CursiveRoot evidence. A model that games its own benchmark is then a
+   bounded measurement-quality problem (Ch08 confirmation, the Ch01 immune-sensor
+   backlog), not a fleet-wide compromise.
+
+This deepens the single "verify AI model hashes before loading" control into a
+characterized surface and maps it onto the daemon/shell split; it does not change the
+existing DePIN/package supply-chain guidance below, which remains the authority for
+PyPI/dependency and consensus-layer threats.
+
 DePIN subnet security: validating trust in decentralized infrastructure
 
 Protecting against malicious submissions in DePIN networks requires addressing threats across four layers: work validation, identity/Sybil resistance, workload sandboxing, and supply chain integrity. Bittensor's $8M PyPi supply chain attack in July 2024 — where a malicious package version stole unencrypted coldkeys — remains the canonical case study, demonstrating that protocol-level security means nothing if the software distribution channel is compromised.  (The Block)  (Mitrade)
