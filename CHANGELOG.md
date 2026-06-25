@@ -17,6 +17,18 @@ Changed:
 
 Reason:
 - CursiveResearch is becoming the project-alignment/spec corpus for multiple agents and future specialized models. Cornerstone papers cannot remain summaries-of-summaries when rights-cleared full text is available; the corpus needs source-preserving, auditable, agent-readable paper bodies before strategic extraction/model-training decisions.
+## 2026-06-25 - New Chapter 23: Energy Efficiency and Performance-per-Watt as a Fitness Channel
+
+Changed:
+- **New chapter `23-energy-efficiency-and-performance-per-watt.md`** (native, full living layer + reinforced research). Addresses a standing corpus gap: energy appears only as the **idle-power penalty** (Ch00 §2.2), never as a positive **energy-per-task / performance-per-watt under load** signal — yet that is the most defensible operationalization of Ch02's "proof of useful optimization." The chapter: (1) argues work-per-joule is monotone with the real electricity externality, work-normalized, and Goodhart-resistant vs speed-only channels; (2) tabulates what `read_watts` actually reads (RAPL `package`/`psys`/`DRAM`, AMD core/package, GPU hwmon, NVML) and why unlabeled watts are non-comparable across domains; (3) documents the **privilege collision** — since PLATYPUS (CVE-2020-8694/8695) `energy_uj` is root-only and the unprivileged AMD `amd_energy` path was removed in Linux 5.13, contradicting the Ch05/Ch06 least-privilege daemon, with a least-bad `setuid` read-only helper proposed; (4) imports MLPerf Power (samples/joule) and SPECpower (ssj_ops/watt) methodology and the fixed-work / dynamic-energy / thermal-DVFS / sampling-artifact confounds; (5) recommends observe-only adoption until a fleet CV clears the Ch08 0.15 gate.
+- **INDEX.md**: added the Chapter 23 row, bumped the header to "25 files, 00–23 logical slots," and noted 23 as a cross-cutting native chapter linking Ch00/02/06.
+- **tools/verification-contract.json**: `chapters_total` 24→25, `native_chapters` += "23", `all_chapters_living_layer` 24→25, `all_chapters_reinforced` 24→25.
+- **RESEARCH_PIPELINE.md**: marked the P1 "Power-state latency / Memory pressure" energy strand and the idle-power experiments as partially served by Chapter 23 (energy-as-fitness framing now exists; measurement/experiments remain open).
+
+Reason:
+- The economic thesis pays for *useful* optimization but the fitness schema had no work-normalized efficiency channel — only a machine-specific idle-power penalty. Energy-per-task is the cleanest hardware-grounded definition of "useful" and a built-in counterweight to the speed-only Goodhart (a clock-boost mutation that wins cold-start while burning 2× energy should be visible as a loss). The chapter is deliberately Unvalidated as a deployed channel: the PLATYPUS privilege restriction and RAPL domain non-comparability are real blockers that must be solved (labeled schema + setuid helper + wall-meter calibration) before any fitness weight.
+
+Sources: Khan et al. "RAPL in Action" (ACM ToMPECS 2018); Weaver "Reading RAPL energy measurements from Linux"; Lipp et al. PLATYPUS (CVE-2020-8694/8695); Linux powercap docs + `amd_energy` removal (5.13, `9049572fb`); MLPerf Power (arXiv:2410.12032); SPECpower_ssj2008; "16 Years of SPEC Power" (arXiv:2411.07062); Yang et al. nvidia-smi power measurement (arXiv:2312.02741).
 
 ## 2026-06-25 - Memory-pressure sensor prototype (5th channel)
 

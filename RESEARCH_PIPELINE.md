@@ -179,6 +179,15 @@ The existing chapters contain many optimization leads. We need more foundational
 
 Expand Chapters 07/04/09 with explanatory foundations, not just tuning recipes.
 
+**Status (2026-06-25):** the **energy** strand is now partially served by new
+**Chapter 23 (Energy Efficiency and Performance-per-Watt)** — RAPL domains/accuracy,
+the PLATYPUS root-only privilege collision, and MLPerf Power / SPECpower perf-per-watt
+methodology, framed as a candidate fitness channel (proof of useful optimization,
+Ch02). Remaining: a measured fleet CV for energy-per-task, a domain-labeled
+`power_source`/`energy_domain` schema, a least-privilege `setuid` energy-reader
+prototype, and wall-meter calibration before any fitness weight. Power-state latency,
+scheduler, and GPU-runtime strands remain open.
+
 ## P1 — Arc B70 and Intel AI Stack Research
 
 ### Why this matters
