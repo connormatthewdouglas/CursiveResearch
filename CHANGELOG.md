@@ -72,6 +72,14 @@ Changed:
 Reason:
 - Closes part of the P1 "Local Agent Architecture and Safety" pipeline item ("deeper prompt-injection/tool-attack survey") on the supply-chain axis specifically. A poisoned model is a dual threat for CursiveOS — host compromise during load/inference and Goodhart-style measurement gaming through the weights — and the corpus previously had only a one-line mention. The section is research synthesis with concrete daemon/shell implications, not an implementation spec; all claims trace to retrieved primary/secondary sources (HF/EleutherAI safetensors audit, ReversingLabs, Wiz, Databricks, llama.cpp GHSA-vgg9-87g3-85w8, Unit 42). It does not alter the existing DePIN/package supply-chain guidance, which remains authoritative for PyPI/dependency and consensus-layer threats.
 
+## 2026-06-25 - Memory-pressure sensor cross-machine confirmed + probe v0.2
+
+Changed:
+- **Chapter 01** + **VALIDATION.md**: added Stardust (Ryzen 7 5700 / 64 GB) confirmation to the memory-pressure sensor row; probe ref bumped to v0.2.
+
+Reason:
+- Cross-machine validation cleared the "second machine first" gate. Stardust: zram 11.56 s (CV 0.003) vs disk-swapfile 24.27 s — ~2× faster, low-noise, matching the laptop's direction. Key result: zram peak_orig ~647 MiB on BOTH the 16 GB laptop and 64 GB desktop, proving the cgroup ceiling (not total RAM) fixes the pressure regime — Chapter 08 comparability demonstrated directly. Absolute times are hardware-scoped (different disk-swap/CPU/governor); the within-machine zram-vs-disk delta is the portable signal. Probe v0.2 (CursiveOS `d4bbc90`) adds a background peak sampler that fixes the v0.1 engagement proof (endpoint read freed zram between reps → 0). Sensor is ready to integrate as a weighted 5th channel (provisional weight 0.10).
+
 ## 2026-06-25 - Memory-pressure sensor VALIDATED on laptop
 
 Changed:

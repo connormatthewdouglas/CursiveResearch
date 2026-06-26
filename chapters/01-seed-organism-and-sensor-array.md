@@ -142,9 +142,20 @@ zram swap device the refault time was **5.779 s median in *both* orders**
 6–30× steadier**, and the identical median across run orders rules out a warmup
 artifact. Two findings fall out: (1) the sensor is trustworthy enough to weight
 in fitness, and (2) disk-swap memory pressure is itself a high-variance regime
-that zram *tames* — so the win is both lower latency and lower variance. Next:
-integrate as a lower-is-better fifth channel and re-screen zram (which the
-genesis suite could not see) plus a swappiness-aware variant.
+that zram *tames* — so the win is both lower latency and lower variance.
+
+**Cross-machine confirmation (Stardust, Ryzen 7 5700 / 64 GB).** Re-running the
+same parameters on a machine with 4× the RAM gave zram 11.56 s (CV 0.003) vs a
+disk-swapfile baseline of 24.27 s — again ~2× faster and low-noise. The decisive
+detail: the zram `peak_orig` was ~647 MiB on *both* the 16 GB laptop and the
+64 GB desktop, because the cgroup ceiling — not total RAM — sets the pressure.
+That is the Chapter 08 comparability claim demonstrated directly: the same
+sensor parameters produce the same pressure regime across hardware. Absolute
+times still differ by hardware (disk-swap speed, CPU, governor), which is exactly
+why fitness stays hardware-scoped; the within-machine zram-vs-disk delta is the
+clean, portable signal. The sensor is ready to integrate as a lower-is-better
+fifth channel; next is re-screening zram (which the genesis suite could not see)
+and a swappiness-aware variant.
 
 ### Regression Sensors
 
