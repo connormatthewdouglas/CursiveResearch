@@ -1,9 +1,9 @@
 # Research Index
 
 This index is the primary navigation page for the CursiveOS research corpus.
-Chapters are living documents in strategic reading order (25 files, **00–23**
-logical slots): measurement and organism architecture first, then literature and
-platform depth, then historical strategy imports last.
+Chapters are living documents in strategic reading order (26 files: **00–23**
+logical slots plus **03c/03d** inserts): measurement and organism architecture
+first, then literature and platform depth, then historical strategy imports last.
 
 Use [CORPUS_WORKFLOW.md](CORPUS_WORKFLOW.md) for intake and maintenance,
 [VALIDATION.md](VALIDATION.md) for the status of important claims, and

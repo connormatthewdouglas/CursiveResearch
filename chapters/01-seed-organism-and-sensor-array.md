@@ -96,10 +96,11 @@ Initial performance sensors include:
 - **Cold-start latency sensor** — measures GPU idle to first inference token time.
 - **Sustained inference sensor** — measures steady-state tokens per second on a warm model.
 - **Idle power sensor** — measures the power cost of disabling C-states or pinning GPU frequency.
+- **Memory-pressure sensor** — measures cgroup-`memory.high` refault time under a fixed compressible working set; lower is better. Added as the validated fifth channel in harness v1.4.5 / cycle 3 with provisional fitness weight 0.10.
 
-**Known coverage gap — no memory-pressure sensor.** The genesis suite measures
-network, cold-start, sustained inference, and idle power, but nothing that puts
-the machine under memory pressure. This gap was made concrete by cycle 2: the
+**Memory-pressure gap closed (2026-06-25/26).** The original genesis suite
+measured network, cold-start, sustained inference, and idle power, but nothing
+that put the machine under memory pressure. This gap was made concrete by cycle 2: the
 `candidate-v0.10-zram` variant (v0.9 parent stack plus a compressed-RAM swap
 device — the organism's first *added* optimization rather than a v0.8 subset)
 screened on the i5-11300H laptop and came back **inconclusive** — fitness
@@ -109,30 +110,26 @@ backfilled CursiveRoot bundle), confidence 0.50 from a single screen. That is th
 swap-compression change cannot move sensors that never touch memory, so the
 screen only proved safe apply/revert and non-regression. Two consequences worth
 recording: (1) optimizations whose benefit lives in an unmeasured channel will
-correctly read as neutral and never accumulate fitness, so the suite must grow a
-memory-pressure sensor before zram-class changes can be selected on evidence;
-and (2) the v0.9 parent sets `swappiness=0`, which further suppresses any zram
-effect — a memory-pressure sensor and a swappiness-aware variant need to land
-together. Until then, treat zram as an *unscreened lead*, not a rejected one.
+correctly read as neutral and never accumulate fitness unless the sensor array
+grows, and (2) the v0.9 parent sets `swappiness=0`, which further suppresses
+any zram effect. The sensor has now landed, and the active candidate is the
+swappiness-aware successor **v0.11-zram-swappiness**, not v0.10-zram.
 
-**Prototype (2026-06-25):** `benchmarks/benchmark-memory-pressure-v0.1.sh` in the
-main repo is a first memory-pressure probe. It creates deterministic pressure
-with a cgroup-v2 `memory.high` ceiling smaller than a fixed compressible working
-set, then times faulting that set back in. With a zram swap device the refault
-is a fast in-RAM (de)compress; with disk swap it is slow; with no swap it
-throttles — so a lower median time means the memory subsystem is coping better.
-Three design choices make it a *fair* sensor: (1) the cgroup ceiling fixes the
-pressure point independent of total RAM, so the same parameters mean the same
-thing on a 16 GB laptop and a 64 GB desktop (Chapter 08 comparability);
-(2) `memory.high` throttles rather than OOM-kills, so it is safe to run
-unattended; (3) cgroup-forced reclaim swaps anon pages even under v0.9's
-`swappiness=0`, so it isolates zram's benefit *before* a swappiness-aware variant
-exists. It reads `/sys/block/zram0/mm_stat` before/after to prove zram actually
-engaged and report the achieved compression ratio (auditable — it answers "was
-the channel exercised?"). It is a **prototype**: it logs locally, does not upload,
-and is not yet wired into fitness. Integration as a weighted fifth channel waits
-on a measured noise floor (CV across reps and machines), the same gate every
-existing channel passed before it could move a decision.
+**Validated sensor (2026-06-25):** `benchmarks/benchmark-memory-pressure-v0.2.sh`
+in the main repo creates deterministic pressure with a cgroup-v2 `memory.high`
+ceiling smaller than a fixed compressible working set, then times faulting that
+set back in. With a zram swap device the refault is a fast in-RAM (de)compress;
+with disk swap it is slow; with no fast swap it throttles to the wall-clock cap —
+so a lower median time means the memory subsystem is coping better. Three design
+choices make it a fair sensor: (1) the cgroup ceiling fixes the pressure point
+independent of total RAM, so the same parameters mean the same thing on a 16 GB
+laptop and a 64 GB desktop (Chapter 08 comparability); (2) `memory.high`
+throttles rather than OOM-kills, so it is safe to run unattended; (3) the v0.2
+peak sampler reads `/sys/block/zram0/mm_stat` during the run to prove zram
+actually engaged and report the achieved compression ratio. It is now wired into
+`cursiveos-full-test-v1.4.sh`, the CursiveRoot `runs` memory columns, and
+`tools/seed_organism.py` as a lower-is-better fifth channel with provisional
+weight 0.10.
 
 **Validated (2026-06-25, i5-11300H laptop).** A counterbalanced run (working set
 1024 MB, ceiling 384 MB, 5 reps each order) cleared that gate decisively. With a
@@ -153,9 +150,20 @@ That is the Chapter 08 comparability claim demonstrated directly: the same
 sensor parameters produce the same pressure regime across hardware. Absolute
 times still differ by hardware (disk-swap speed, CPU, governor), which is exactly
 why fitness stays hardware-scoped; the within-machine zram-vs-disk delta is the
-clean, portable signal. The sensor is ready to integrate as a lower-is-better
-fifth channel; next is re-screening zram (which the genesis suite could not see)
-and a swappiness-aware variant.
+clean, portable signal. These measurements justified integrating memory refault
+as a lower-is-better fifth channel and screening the swappiness-aware v0.11
+variant.
+
+**Cycle-3 v0.11 screen (2026-06-26, Stardust).** The first full multi-channel
+screen of **v0.11-zram-swappiness** against the v0.9 parent earned positive
+fitness via the new memory channel: **fitness +0.0954**, decision `inconclusive`
+only because one screen gives confidence 0.50. Per-channel result: memory
+**+75.4%** (the driver; refault about 45 s capped → **10.86 s**), cold-start
+**−0.5%**, sustained **0.0%**, idle **−0.1%**, and network **−24%** treated as
+gate-only loopback noise with no severe trip. The important safety result is
+that raising `vm.swappiness` from 0 to 60 did **not** regress inference in this
+screen. Next step is confirmation (reversed order and/or second machine) before
+accepting v0.11 and promoting a new canonical parent.
 
 ### Regression Sensors
 
@@ -258,11 +266,11 @@ This chapter fills several gaps:
 3. Calibrate the CV threshold and confirmation rule with real fleet data.
 4. Define hardware-scoped fitness for changes that help one hardware class and hurt another.
 5. Decide how local agent recommendations consume sensor results without contaminating the deterministic measurement pipeline.
-6. Add a memory-pressure sensor (and a swappiness-aware variant) so memory-class optimizations such as zram can be selected on evidence instead of reading as neutral. Exposed by the cycle-2 `candidate-v0.10-zram` inconclusive screen. **Prototype built** (`benchmarks/benchmark-memory-pressure-v0.1.sh`, 2026-06-25); remaining work = measure its noise floor across reps + machines, then wire it into `seed_organism` fitness as a weighted fifth channel (weight/cap/severe-threshold set from the measured CV).
+6. **Closed for Phase 0:** add a memory-pressure sensor so memory-class optimizations such as zram can be selected on evidence instead of reading as neutral. Exposed by the cycle-2 `candidate-v0.10-zram` inconclusive screen; closed by validated `benchmark-memory-pressure-v0.2.sh`, harness v1.4.5 memory columns, and provisional fifth-channel fitness integration. Remaining work is confirmation/promotion of the active swappiness-aware v0.11 candidate and later tuning of the swappiness value.
 
 ## Source anchors from main CursiveOS repo
 
-- `README.md` — current public project summary, seed organism path, v0.8/v0.9 status, CursiveRoot overview.
+- `README.md` — current public project summary, seed organism path, v0.9/v0.11 status, CursiveRoot overview.
 - `white-paper.md` v2.4 — measurement-first architecture and five-layer structure.
 - `docs/architecture/sensor-array.md` — sensor families, genesis sensor suite, population confirmation, curator model.
 - `ROADMAP.md` — transitions from tweak stack to tuned distribution, measurement-native OS, workload-native OS, and substrate.

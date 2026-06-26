@@ -7,9 +7,30 @@ Linked chapters: `chapters/01-seed-organism-and-sensor-array.md`
 (§5 noise-floor methodology, per-channel CV), `chapters/08-population-confirmation-and-fleet-statistics.md`
 (per-channel confirmation counts).
 Sharpens: the cycle-2 `candidate-v0.10-zram` inconclusive screen (VALIDATION,
-2026-06-25) and the memory-pressure sensor prototype row (VALIDATION,
-2026-06-25, "no hardware noise floor yet").
-Status: Proposed; not yet executed.
+2026-06-25) and the memory-pressure sensor validation row (VALIDATION,
+2026-06-25/26).
+Status: **Completed / validated.** The pre-registered noise-floor gate passed on
+the i5-11300H laptop and Stardust; the probe is now integrated as the fifth
+fitness channel in CursiveOS harness v1.4.5 and `seed_organism`.
+
+## Completion note (2026-06-26)
+
+Measured results closed the plan:
+
+- i5-11300H / 16 GB: zram **5.78 s** median refault (CV 0.006/0.019 in both
+  orders) vs disk swap **13.9–14.1 s** (CV 0.12/0.19): zram ~2.4× faster and
+  steadier.
+- Stardust / Ryzen 7 5700 / 64 GB: zram **11.56 s** (CV 0.003) vs disk swap
+  **24.27 s** (CV 0.097): zram ~2.1× faster. Identical zram `peak_orig`
+  (~647 MiB) across the 16 GB and 64 GB hosts confirmed the cgroup ceiling fixes
+  the pressure regime.
+- Swappiness finding: v0.9 and v0.10-zram both capped around **45 s** while
+  `vm.swappiness=0`; v0.11 (`v0.9 + zram + swappiness=60`) cut refault to
+  **10.86 s** with zram peak ~648 MiB.
+- First full cycle-3 screen: v0.11 vs v0.9 on Stardust scored **fitness +0.0954**
+  with **+75.4%** memory-channel delta and no inference regression
+  (cold-start −0.5%, sustained 0.0%). It remains `inconclusive` only because one
+  screen gives confidence 0.50; confirmation/promotion is the next step.
 
 ## 0. Why this experiment, why now
 
@@ -19,30 +40,23 @@ memory-pressure channel**. Cycle 2 made the cost of that gap concrete: the
 **inconclusive** — fitness ≈ +0.0136, inside the per-channel noise floor — for
 the simple reason that a swap-compression change cannot move sensors that never
 touch memory (Chapter 01 Performance Sensors; VALIDATION "zram cycle-2 screen").
-Any memory-class optimization (zram, swappiness, THP, hugepages, NUMA) therefore
-correctly reads as neutral today and can never accumulate fitness. This is a
-selection blind spot, not a property of the optimizations.
+Before this experiment, any memory-class optimization (zram, swappiness, THP,
+hugepages, NUMA) correctly read as neutral and could never accumulate fitness.
+That was a selection blind spot, not a property of the optimizations.
 
-A prototype now exists. `benchmarks/benchmark-memory-pressure-v0.1.sh` (main
-repo, `99e6996`, 2026-06-25) creates deterministic pressure with a cgroup-v2
+A validated sensor now exists. `benchmarks/benchmark-memory-pressure-v0.2.sh`
+(main repo, 2026-06-25) creates deterministic pressure with a cgroup-v2
 `memory.high` ceiling smaller than a fixed compressible working set, then times
 faulting that set back in. With a zram swap device the refault is a fast in-RAM
 (de)compress; with disk swap it is slow; with no swap it throttles — so a lower
 median refault time means the memory subsystem is coping better. It is
 RAM-size-independent, throttles rather than OOM-kills (safe to run unattended),
-forces reclaim even under v0.9's `swappiness=0`, and reads
-`/sys/block/zram0/mm_stat` before/after to prove zram actually engaged.
-
-But the probe has only been **statically** validated (`bash -n`, embedded
-python run); it carries **VALIDATION status `Unvalidated`** with the explicit
-next action: *"Run on a Linux host to measure CV across reps + machines; if
-low-noise like cold-start, integrate as a weighted 5th channel and re-screen
-zram + a swappiness-aware variant."* No probe enters fitness without first
-clearing the same noise-floor gate every other channel cleared on 2026-06-16
-(Chapter 00 §5; Chapter 01 §"Population Confirmation"). That gate is what this
-plan runs. **This is the single experiment that unblocks the entire zram /
-memory-class research thread**, and it is the cheapest one in the queue because
-the instrument is already built.
+uses a peak sampler for `/sys/block/zram0/mm_stat` to prove zram actually
+engaged. The measured runs above cleared the same noise-floor gate every other
+channel cleared on 2026-06-16 (Chapter 00 §5; Chapter 01 §"Population
+Confirmation"), so the probe has graduated from proposed instrument to
+validated fifth channel. This plan remains as the pre-registration and audit
+trail for that decision.
 
 ## 1. Hypotheses (pre-registered)
 
@@ -150,16 +164,17 @@ effort to the swappiness-aware variant rather than to more probe engineering.
 
 ## 8. Feasibility
 
-- **Instrument:** already built — `benchmarks/benchmark-memory-pressure-v0.1.sh`
-  (`99e6996`). No new measurement code; this is a run-and-analyze experiment.
+- **Instrument:** built and validated — `benchmarks/benchmark-memory-pressure-v0.2.sh`.
+  v0.2 adds peak zram engagement sampling and capped-rep reporting; no new probe
+  design is needed for the current cycle-3 screen.
 - **Hardware:** Stardust + the i5-11300H laptop, both already in the tester set
   and both already characterized for other channels.
 - **Safety:** `memory.high` throttles, never OOM-kills; no host mutation beyond
   reversible swap/cgroup config; nothing graduates to unattended execution.
-- **New build (graduates to main `CursiveOS` repo per workflow):** a thin
-  N-rep harness wrapper around the probe, a CV/median analyzer, and the
-  fifth-channel fitness integration (weight/cap/threshold) — gated on H1–H3
-  passing. Estimated effort: well under a day of operator time per machine.
+- **Main-repo build outcome:** the probe graduated into the full-test harness,
+  CursiveRoot memory columns, and `seed_organism` fifth-channel scoring after
+  H1–H3 passed. Remaining work is confirmation/promotion of v0.11, not probe
+  design.
 
 ## 9. What would change our mind
 

@@ -26,8 +26,8 @@
     "corpus_inline": "> **Corpus inline (2026-06-24):**"
   },
   "marker_expectations": {
-    "all_chapters_living_layer": 25,
-    "all_chapters_reinforced": 25,
+    "all_chapters_living_layer": 26,
+    "all_chapters_reinforced": 26,
     "docx_chapters_integration": 9,
     "docx_chapters_inline_minimum": 2
   },

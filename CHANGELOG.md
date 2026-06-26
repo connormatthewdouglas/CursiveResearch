@@ -4,6 +4,17 @@ This file records meaningful changes to research guidance, validation status,
 and corpus process. It is intended to be readable without reconstructing a
 chain of supporting documents.
 
+## 2026-06-26 - Drift cleanup: v0.11 memory channel is current, validated, and integrated
+
+Changed:
+- **INDEX.md**: reconciled the chapter count with the tracked corpus and verification contract: 26 chapter files (00–23 logical slots plus 03c/03d inserts), not 25.
+- **tools/verification-contract.json**: marker expectations now match the actual 26 living-layer / reinforced chapter files.
+- **Chapter 01**: moved the memory-pressure section out of stale "prototype / not wired" language. It now records the validated v0.2 sensor, harness/fitness integration, and the cycle-3 v0.11 screen result: v0.11 vs v0.9 fitness **+0.0954**, memory **+75.4%**, cold-start **−0.5%**, sustained **0.0%**, idle **−0.1%**, network **−24%** gate-only loopback noise, single-screen confidence 0.50.
+- **experiments/memory-pressure-sensor-noise-floor-plan.md**: marked the pre-registered plan completed and attached the measured results rather than leaving it as proposed/unvalidated.
+
+Reason:
+- The corpus and main repo had crossed the measurement boundary, but some navigation and experiment-plan text still described the memory channel as future work. This cleanup keeps agents pointed at the current real result: zram alone is neutral under `swappiness=0`; v0.11 (`v0.9 + zram + swappiness=60`) is the active cycle-3 candidate needing confirmation/promotion.
+
 ## 2026-06-25 - Cornerstone full-text repair: FunSearch, LADDER, DGM, Open-Endedness
 
 Changed:
