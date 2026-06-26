@@ -134,6 +134,18 @@ and is not yet wired into fitness. Integration as a weighted fifth channel waits
 on a measured noise floor (CV across reps and machines), the same gate every
 existing channel passed before it could move a decision.
 
+**Validated (2026-06-25, i5-11300H laptop).** A counterbalanced run (working set
+1024 MB, ceiling 384 MB, 5 reps each order) cleared that gate decisively. With a
+zram swap device the refault time was **5.779 s median in *both* orders**
+(CV 0.006 and 0.019 — cold-start tier); against the laptop's existing disk
+`/swapfile` it was 13.9–14.1 s (CV 0.116 and 0.193). zram is **2.4× faster and
+6–30× steadier**, and the identical median across run orders rules out a warmup
+artifact. Two findings fall out: (1) the sensor is trustworthy enough to weight
+in fitness, and (2) disk-swap memory pressure is itself a high-variance regime
+that zram *tames* — so the win is both lower latency and lower variance. Next:
+integrate as a lower-is-better fifth channel and re-screen zram (which the
+genesis suite could not see) plus a swappiness-aware variant.
+
 ### Regression Sensors
 
 Regression sensors are gates. They do not add fitness. They block bad variants.

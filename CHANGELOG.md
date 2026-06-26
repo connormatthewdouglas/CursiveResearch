@@ -72,6 +72,14 @@ Changed:
 Reason:
 - Closes part of the P1 "Local Agent Architecture and Safety" pipeline item ("deeper prompt-injection/tool-attack survey") on the supply-chain axis specifically. A poisoned model is a dual threat for CursiveOS — host compromise during load/inference and Goodhart-style measurement gaming through the weights — and the corpus previously had only a one-line mention. The section is research synthesis with concrete daemon/shell implications, not an implementation spec; all claims trace to retrieved primary/secondary sources (HF/EleutherAI safetensors audit, ReversingLabs, Wiz, Databricks, llama.cpp GHSA-vgg9-87g3-85w8, Unit 42). It does not alter the existing DePIN/package supply-chain guidance, which remains authoritative for PyPI/dependency and consensus-layer threats.
 
+## 2026-06-25 - Memory-pressure sensor VALIDATED on laptop
+
+Changed:
+- **Chapter 01** + **VALIDATION.md**: memory-pressure sensor prototype row upgraded Unvalidated → **Validated** with the laptop result.
+
+Reason:
+- Counterbalanced hardware run (i5-11300H, WS 1024M/ceiling 384M, 5 reps/order) cleared the noise-floor gate. zram refault = 5.779 s median in BOTH orders (CV 0.006/0.019, cold-start tier); disk-swapfile baseline 13.9–14.1 s (CV 0.116/0.193). zram is 2.4× faster + 6–30× steadier; identical median across orders rules out warmup. The comparison is zram-swap vs the laptop's existing /swapfile (the realistic case). The sensor can now see what the genesis suite could not. Next: integrate as a lower-is-better 5th fitness channel; fix v0.2 mm_stat engagement proof (endpoint read frees zram between reps).
+
 ## 2026-06-25 - Memory-pressure sensor prototype (5th channel)
 
 Changed:
