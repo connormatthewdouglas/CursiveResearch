@@ -4,6 +4,17 @@ This file records meaningful changes to research guidance, validation status,
 and corpus process. It is intended to be readable without reconstructing a
 chain of supporting documents.
 
+## 2026-06-26 - Cycle 3 closed: v0.11 accepted, parent promoted to v0.12
+
+Changed:
+- **VALIDATION.md**: v0.11 row updated to accepted/closed cycle 3 (confidence 0.875, three confirmations).
+- **Chapter 01**: living layer records cycle-3 accept and v0.12 parent promotion; concurrency sensor named as next gap.
+- **RESEARCH_PIPELINE.md**: cycle-3 screen row closed; concurrency inference sensor kickoff row added.
+- **experiments/concurrency-inference-sensor-noise-floor-plan.md**: new pre-registered plan for parallel-stream tok/s probe.
+
+Reason:
+- CursiveOS HANDOVER documents cycle 3 accept and v0.12 promotion; corpus must match so agents do not re-run confirmation work.
+
 ## 2026-06-26 - Drift cleanup: v0.11 memory channel is current, validated, and integrated
 
 Changed:

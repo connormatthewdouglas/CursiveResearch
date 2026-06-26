@@ -154,16 +154,15 @@ clean, portable signal. These measurements justified integrating memory refault
 as a lower-is-better fifth channel and screening the swappiness-aware v0.11
 variant.
 
-**Cycle-3 v0.11 screen (2026-06-26, Stardust).** The first full multi-channel
-screen of **v0.11-zram-swappiness** against the v0.9 parent earned positive
-fitness via the new memory channel: **fitness +0.0954**, decision `inconclusive`
-only because one screen gives confidence 0.50. Per-channel result: memory
-**+75.4%** (the driver; refault about 45 s capped → **10.86 s**), cold-start
-**−0.5%**, sustained **0.0%**, idle **−0.1%**, and network **−24%** treated as
-gate-only loopback noise with no severe trip. The important safety result is
-that raising `vm.swappiness` from 0 to 60 did **not** regress inference in this
-screen. Next step is confirmation (reversed order and/or second machine) before
-accepting v0.11 and promoting a new canonical parent.
+**Cycle-3 v0.11 ACCEPTED (2026-06-26).** Full multi-channel screen of
+**v0.11-zram-swappiness** vs v0.9 parent; three confirming screens (Stardust
+normal +0.0954, laptop cross-machine +0.1004, Stardust reversed +0.0947) →
+confidence **0.875**, decision **accepted**, fitness **+0.1004**. Memory
+**+75.4%** drove the win; cold-start **−0.5%**, sustained **0.0%**, idle
+**−0.1%** — swappiness 0→60 did **not** regress inference. **2nd accepted
+variant ever; first selected by the memory channel.** Promoted to canonical
+parent **v0.12** in CursiveOS. Next measurement gap: concurrency inference
+sensor (single-stream sustained below noise floor).
 
 ### Regression Sensors
 
