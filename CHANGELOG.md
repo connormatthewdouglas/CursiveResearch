@@ -72,6 +72,14 @@ Changed:
 Reason:
 - Closes part of the P1 "Local Agent Architecture and Safety" pipeline item ("deeper prompt-injection/tool-attack survey") on the supply-chain axis specifically. A poisoned model is a dual threat for CursiveOS — host compromise during load/inference and Goodhart-style measurement gaming through the weights — and the corpus previously had only a one-line mention. The section is research synthesis with concrete daemon/shell implications, not an implementation spec; all claims trace to retrieved primary/secondary sources (HF/EleutherAI safetensors audit, ReversingLabs, Wiz, Databricks, llama.cpp GHSA-vgg9-87g3-85w8, Unit 42). It does not alter the existing DePIN/package supply-chain guidance, which remains authoritative for PyPI/dependency and consensus-layer threats.
 
+## 2026-06-25 - zram needs swappiness>0; v0.11 swappiness-aware variant
+
+Changed:
+- **VALIDATION.md**: new row "Chapter 01 / zram needs swappiness > 0" (Validated).
+
+Reason:
+- Wiring the memory channel into the full harness (v1.4.5) and screening v0.10-zram surfaced a real result: zram does NOTHING under memory pressure while v0.9's `vm.swappiness=0` is set. On Stardust, v0.9 and v0.10-zram BOTH throttle to the probe cap (v0.10's zram is touched — ratio 55× — but the kernel won't swap to it). v0.11 (= v0.9 + zram + swappiness=60) drops to 10.86 s vs the capped 45 s — >4× faster, zram peak 648 MiB. So v0.10-zram correctly screens neutral and the actual improvement is the swappiness-aware v0.11. New artifacts: presets/cursiveos-presets-v0.11-zram-swappiness.sh + variant + probe per-rep timeout (bounds swappiness=0 throttle stalls). The tradeoff (swapping could evict model weights) is being checked by a full multi-channel v0.9-vs-v0.11 screen.
+
 ## 2026-06-25 - Memory-pressure sensor cross-machine confirmed + probe v0.2
 
 Changed:
