@@ -1,6 +1,6 @@
 # Concurrency Inference Sensor Noise-Floor Plan
 
-**Status:** H1/H2 passed, H3 blocked (2026-06-27) — repeatable but not discriminative for v0.12 vs v0.8; fitness weight stays 0
+**Status:** Failed/Blocked (2026-06-27) — H3 signal gate failed (0% v0.8 vs v0.12 on Stardust); H1/H2 passed; fitness weight stays 0
 **Sensor:** `benchmark-inference-concurrency-v0.1.sh` (CursiveOS)
 **Harness:** v1.4.5 observe-only (`telemetry.concurrency_inference`, weight 0)
 
