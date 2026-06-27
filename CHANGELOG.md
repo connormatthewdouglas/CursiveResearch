@@ -4,6 +4,17 @@ This file records meaningful changes to research guidance, validation status,
 and corpus process. It is intended to be readable without reconstructing a
 chain of supporting documents.
 
+## 2026-06-27 - Concurrency sensor noise-floor gates: H1/H2 pass, H3 blocked
+
+Changed:
+- **experiments/concurrency-inference-sensor-noise-floor-plan.md**: results table + blocked status (H3 null: 0% v0.8 vs v0.12 on Stardust).
+- **VALIDATION.md**: new concurrency inference sensor row (repeatable, not discriminative for memory-class stack).
+- **Chapter 01**: concurrency paragraph — CV validated, weight stays 0, next axis = scheduler tweak.
+- **RESEARCH_PIPELINE.md**: concurrency rows updated to H1/H2 pass / H3 blocked.
+
+Reason:
+- Founder-fleet H1/H2/H3 runs complete on Stardust + laptop; concurrency is measurement-grade but cannot gate selection on current parent stack.
+
 ## 2026-06-26 - Cycle 3 closed: v0.11 accepted, parent promoted to v0.12
 
 Changed:

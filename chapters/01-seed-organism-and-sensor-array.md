@@ -161,8 +161,15 @@ confidence **0.875**, decision **accepted**, fitness **+0.1004**. Memory
 **+75.4%** drove the win; cold-start **−0.5%**, sustained **0.0%**, idle
 **−0.1%** — swappiness 0→60 did **not** regress inference. **2nd accepted
 variant ever; first selected by the memory channel.** Promoted to canonical
-parent **v0.12** in CursiveOS. Next measurement gap: concurrency inference
-sensor (single-stream sustained below noise floor).
+parent **v0.12** in CursiveOS.
+
+**Concurrency inference sensor validated for repeatability, blocked for selection
+(2026-06-27).** `benchmark-inference-concurrency-v0.1.sh` (4 parallel streams)
+shows rock-solid CV on both founder rigs (Stardust 0.0009, laptop 0.0002) but
+**0% delta** between v0.8 and v0.12 on Stardust — memory-class presets do not
+move parallel inference throughput. Harness stays observe-only (weight 0).
+**Next candidate axis:** scheduler-class tweak vs v0.12 parent (where concurrency
+may finally discriminate).
 
 ### Regression Sensors
 
