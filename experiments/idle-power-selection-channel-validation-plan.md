@@ -27,12 +27,14 @@ Status: **Partial (2026-06-28)** — Stardust H1 **PASS**; laptop-on-AC H1 **FAI
 - Rig logs: `/tmp/idle-power-Stardust-ac-20260628-031719.out`,
   `/tmp/idle-power-elizabethslaptop-ac-20260628-031719.out`
 
-### Decision impact (interim)
+### Integration decision (2026-06-28, locked)
 
-- **Stardust:** idle-power penalty term is selection-usable within-machine (CV ≪ 0.15).
-- **Laptop:** idle power remains **hardware/condition-scoped** — require warmed-session
-  runs or exclude first-run-of-session until cold-tail artifact is bounded.
-- **Fleet:** do not pool idle power across machines (H3 confirmed).
+- **Stardust:** idle-power penalty term is **selection-usable within-machine** (CV 0.016 ≪ 0.15).
+- **Laptop:** idle power is **hardware/condition-scoped** — full N=10 AC cohort fails H1;
+  warmed runs 2–10 alone would pass; require drop-first-run or extra settle before gating.
+- **H3:** **PASS** — different `power_source` per machine; **no cross-machine pooling**.
+- **Fitness weight:** stays **0** fleet-wide (observe + document); do not wire idle-power
+  into `seed_organism.py` until laptop battery cohort completes.
 
 ## Purpose
 
