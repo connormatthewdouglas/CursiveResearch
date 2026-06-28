@@ -4,7 +4,35 @@ Date created: 2026-06-22
 Linked chapters: `chapters/00-benchmark-schema-and-measurement-validity.md`
 (§2.2, §5 items 7–8), `chapters/01-seed-organism-and-sensor-array.md`
 (Population Confirmation, CV ≤ 0.15 rule).
-Status: Proposed validation plan; not yet executed.
+Status: **Partial (2026-06-28)** — Stardust H1 **PASS**; laptop-on-AC H1 **FAIL**
+(cold-run outlier); H3 **PASS**. Battery cohort deferred.
+
+## Results (2026-06-28, production full-test v1.4.5, preset v0.9, N=10)
+
+| Cohort | Machine | idle_baseline_w (10 runs) | CV | H1 | power_source |
+| --- | --- | --- | --- | --- | --- |
+| AC | Stardust (`3e6b165ddf112a75`) | 9.34, 8.93, 8.93, 8.86, 8.91, 8.87, 8.85, 8.88, 8.89, 8.93 | **0.016** | **PASS** | `energy_counter:…/intel-rapl:0/energy_uj` + GPU `gpu_energy_counter:…/energy1_input` |
+| AC | Laptop (`42e7c7257af11f46`) | 32.11, 3.44, 3.1, 2.46, 3.07, 3.07, 2.64, 2.55, 2.84, 2.56 | **1.60** | **FAIL** | `energy_counter:…/intel-rapl:0/energy_uj`; GPU `gpu_none` |
+
+- **Stardust:** CV 0.016 ≪ 0.15 gate — idle power is selection-usable on desktop in the
+  production path (confirms Phase-D probe finding in harness, not bespoke probe).
+- **Laptop-on-AC:** Full N=10 cohort fails H1 because **run 1 (cold session)** reads
+  32.11 W vs ~2.5–3.4 W for runs 2–10. Runs 2–10 alone: CV ≈ **0.12** (would pass).
+  Consistent with §2.2 cold-start / post-activity tail bias — first run of a session
+  must not gate selection on this hardware class without extra settle or drop-first-run.
+- **H3 (comparability):** PASS — Stardust reports RAPL + GPU energy counter; laptop
+  reports RAPL only (`gpu_none`). Cross-machine idle-power pooling stays barred.
+- **Harness fixes during sprint:** `observe_only: true` → `True` in RESULT_JSON heredoc
+  (`8566b86`); CRLF line-ending strip on rigs after Windows SCP (`deaa9a4`).
+- Rig logs: `/tmp/idle-power-Stardust-ac-20260628-031719.out`,
+  `/tmp/idle-power-elizabethslaptop-ac-20260628-031719.out`
+
+### Decision impact (interim)
+
+- **Stardust:** idle-power penalty term is selection-usable within-machine (CV ≪ 0.15).
+- **Laptop:** idle power remains **hardware/condition-scoped** — require warmed-session
+  runs or exclude first-run-of-session until cold-tail artifact is bounded.
+- **Fleet:** do not pool idle power across machines (H3 confirmed).
 
 ## Purpose
 
