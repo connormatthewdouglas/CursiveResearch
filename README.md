@@ -13,7 +13,9 @@ Read [CORPUS_WORKFLOW.md](CORPUS_WORKFLOW.md) first when adding or reorganizing
 research. Use [INDEX.md](INDEX.md) for the chapter library,
 [RESEARCH_PIPELINE.md](RESEARCH_PIPELINE.md) for the active research queue,
 [VALIDATION.md](VALIDATION.md) for important claim status, and
-[CHANGELOG.md](CHANGELOG.md) for material edits.
+[CHANGELOG.md](CHANGELOG.md) for material edits. Use
+[docs/corpus-retrieval.md](docs/corpus-retrieval.md) to build/search the local
+retrieval index before making source-backed claims and after adding content.
 
 ## Purpose
 
@@ -43,7 +45,8 @@ does not imply that every claim has been proven.
 | `sources/` | Source links, bibliographies, and provenance records where they improve research quality. |
 | `experiments/` | Plans and results for tests worth keeping or repeating. Experimental outputs may later become specs or scripts in the main `CursiveOS` repo. |
 | `validation/notes/` | Legacy detailed validation records and optional future deep-dive notes. |
-| `tools/` | Repeatable conversion and integrity-checking utilities. |
+| `tools/` | Repeatable conversion, integrity-checking, and local retrieval utilities. |
+| `docs/` | Operator/agent guides for repo-native tooling such as corpus retrieval. |
 
 ## Working Rule
 

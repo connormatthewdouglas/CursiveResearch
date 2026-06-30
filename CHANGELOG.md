@@ -4,6 +4,17 @@ This file records meaningful changes to research guidance, validation status,
 and corpus process. It is intended to be readable without reconstructing a
 chain of supporting documents.
 
+## 2026-06-30 - Repo-native corpus retrieval spine
+
+Changed:
+- **tools/corpus_retrieval.py**: added a local SQLite FTS5 retrieval CLI with Markdown-section chunking, cited `path:start-end` search results, JSON output for agents, status/staleness checks, and a self-test.
+- **docs/corpus-retrieval.md**: documented the retrieval workflow, including how agents should index/search/show passages and avoid committing generated cache data.
+- **CORPUS_WORKFLOW.md / README.md**: made retrieval refresh and representative search visible in the normal corpus-maintenance path after adding or materially editing corpus Markdown.
+- **tests/test_corpus_retrieval.py** and `.gitignore`: added focused regression coverage and ignored generated `.cursive-research-rag/` indexes.
+
+Reason:
+- CursiveResearch is the grounding corpus for CursiveOS agents. A small repo-native retrieval layer lets agents cite local evidence before making implementation claims, while keeping generated indexes rebuildable instead of turning the corpus into a heavier RAG platform.
+
 ## 2026-06-30 - Branch sweep: pending Claude corpus work + Windows verification fix
 
 Changed:

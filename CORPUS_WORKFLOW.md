@@ -29,6 +29,23 @@ preserve the source
 | Important claim changes | Edit chapter, update `VALIDATION.md`, add `CHANGELOG.md` entry. |
 | New research priority | Update `RESEARCH_PIPELINE.md`; add a chapter only when research is actually incorporated. |
 
+## Retrieval Habit
+
+CursiveResearch has a local retrieval index so agents can find source passages
+with path and line citations. After adding or materially editing Markdown content,
+run:
+
+```bash
+python tools/corpus_retrieval.py index
+python tools/corpus_retrieval.py status
+python tools/corpus_retrieval.py search "<topic or claim you added>" --limit 5
+```
+
+Use the returned `path:start-end` citations when applying corpus evidence to
+CursiveOS or summarizing research. The generated `.cursive-research-rag/` index
+is local cache and must not be committed. Full usage is in
+[docs/corpus-retrieval.md](docs/corpus-retrieval.md).
+
 ## Repository Map
 
 | Location | Use |
@@ -44,6 +61,8 @@ preserve the source
 | `sources/` | Bibliographies, source lists, and provenance records. |
 | `experiments/` | Research experiment plans and results worth retaining. |
 | `validation/notes/` | Historical detailed validation notes; optional for new work. |
+| `tools/` | Repeatable conversion, verification, and local retrieval utilities. |
+| `docs/` | Operator/agent usage guides for repo-native tools such as retrieval. |
 
 ## Intake Decision Tree
 
@@ -171,6 +190,7 @@ For most meaningful research changes, do only this:
 2. Update `CHANGELOG.md`.
 3. Update `VALIDATION.md` only for decision-driving claims.
 4. Update `RESEARCH_PIPELINE.md` only if priorities changed.
+5. Refresh local retrieval with `python tools/corpus_retrieval.py index` and smoke-test one representative search.
 
 That is enough. Extra ledgers, notes, and source tables are optional when they
 help preserve evidence or repeat a consequential result.
@@ -187,6 +207,7 @@ CORPUS_WORKFLOW.md
 + CHANGELOG.md
 + VALIDATION.md when a decision-driving claim changes
 + RESEARCH_PIPELINE.md when priorities change
++ local retrieval index refresh/search smoke test
 ```
 
 ## Preserved Import + Living Reconciliation (2026-06-24)

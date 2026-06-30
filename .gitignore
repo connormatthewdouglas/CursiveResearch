@@ -1,0 +1,7 @@
+# Generated local retrieval indexes and caches.
+.cursive-research-rag/
+
+# Python/editor scratch.
+__pycache__/
+.pytest_cache/
+*.pyc
