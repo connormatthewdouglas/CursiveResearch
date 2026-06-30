@@ -235,6 +235,143 @@ characterized surface and maps it onto the daemon/shell split; it does not chang
 existing DePIN/package supply-chain guidance below, which remains the authority for
 PyPI/dependency and consensus-layer threats.
 
+### GPU memory isolation: shared accelerators as a cross-tenant leakage and measurement-integrity surface
+
+[Chapter 14](14-gpu-and-accelerator-tuning.md) actively recommends **sharing one
+physical GPU** across workloads — Single Root I/O Virtualization via
+`i915-sriov-dkms` (up to 7 Virtual Functions on consumer Intel Arc), AMD MxGPU/GIM,
+and NVIDIA MIG — with the explicit example of "one VF [handling] Plex transcoding
+while another handles LLM inference" and "concurrent mining and LLM workloads on a
+single physical GPU." That chapter treats multiplexing purely as a throughput and
+density win. It never states the security precondition: **co-residency on a GPU is a
+trust boundary**, and most consumer-grade sharing mechanisms do *not* enforce memory
+isolation across that boundary. This section adds the missing isolation analysis and
+maps it onto the CursiveOS daemon/shell split and fleet model. It does not retract
+Chapter 14's tuning guidance; it constrains *when* multiplexing is safe.
+
+**LeftoverLocals proves the leak is real for LLM workloads.** In January 2024,
+Trail of Bits (Tyler Sorensen) disclosed **LeftoverLocals** (**CVE-2023-4969**): GPUs
+that do not clear **local/shared memory** between kernel executions let a second,
+co-resident process read whatever a prior process left behind. The proof of concept
+is roughly **10 lines of OpenCL**, and the headline demonstration is exactly the
+CursiveOS workload — on an **AMD Radeon RX 7900 XT** running `llama.cpp`, an attacker
+process recovered on the order of **181 MB per query**, enough to **reconstruct
+another user's LLM responses with high accuracy**. Affected vendors per the
+coordinated disclosure include **AMD, Apple, Qualcomm, and Imagination**; **NVIDIA and
+Arm devices were reported not affected**. Disclosure ran through **CERT/CC (VU#446598)**
+from September 2023 to the January 16, 2024 publication, and vendor remediation is
+generational — newer parts get driver/firmware fixes while older devices may stay
+vulnerable. The structural mitigation is to **clear local memory after use** (or
+deploy the vendor patch), which is *not* something an organism gets for free from the
+multiplexing knobs Chapter 14 enables.
+[Trail of Bits — LeftoverLocals](https://blog.trailofbits.com/2024/01/16/leftoverlocals-listening-to-llm-responses-through-leaked-gpu-local-memory/)
+[CERT/CC VU#446598](https://kb.cert.org/vuls/id/446598)
+[AMD security bulletin AMD-SB-6010](https://www.amd.com/en/resources/product-security/bulletin/amd-sb-6010.html)
+[BleepingComputer — LeftoverLocals](https://www.bleepingcomputer.com/news/security/amd-apple-qualcomm-gpus-leak-ai-data-in-leftoverlocals-attacks/)
+
+**Not all GPU sharing is equal — only hardware partitioning isolates memory.** The
+sharing mechanism determines whether co-residency is exploitable at all:
+
+- *NVIDIA MIG (Multi-Instance GPU).* Partitions one GPU into up to seven instances,
+  each with **separate, isolated paths through the entire memory system** — on-chip
+  crossbar ports, L2 cache banks, memory controllers, and DRAM address buses assigned
+  uniquely per instance — giving fault isolation and memory-bandwidth QoS. This is the
+  only one of Chapter 14's options that provides a **hardware** memory boundary, and
+  it exists only on data-center-class NVIDIA parts.
+  [NVIDIA — Multi-Instance GPU](https://www.nvidia.com/en-us/technologies/multi-instance-gpu/)
+- *Time-slicing.* Rapidly context-switches the whole GPU between workloads. **No memory
+  isolation**; tenants can interfere through memory contention and scheduling delay.
+- *MPS (Multi-Process Service).* Runs kernels from multiple processes concurrently in a
+  **shared memory space with no fault isolation** — a rogue process can read or corrupt
+  another process's GPU memory. Suitable only for *mutually trusting* cooperative
+  workloads.
+  [Kubenatives — MIG vs Time-Slicing vs MPS](https://www.kubenatives.com/p/mig-vs-time-slicing-vs-mps-which)
+  [OpenMetal — MIG vs Time-Slicing](https://openmetal.io/resources/blog/mig-vs-time-slicing-gpu-sharing/)
+- *SR-IOV vGPU (the consumer Chapter 14 path).* A vGPU's framebuffer is carved from the
+  physical framebuffer at creation and held exclusively until the vGPU is destroyed
+  ([NVIDIA vGPU User Guide](https://docs.nvidia.com/vgpu/16.0/grid-vgpu-user-guide/index.html)).
+  Framebuffer partitioning is not the same as a guarantee that VRAM is **scrubbed on
+  teardown/reallocation**, and the `i915-sriov-dkms` consumer path Chapter 14 relies on
+  is community-maintained and unofficial — its cross-VF scrubbing behavior is **not
+  documented as a security boundary** [unverified]. Treat consumer SR-IOV partitioning
+  as a *resource* mechanism, not an *isolation* guarantee, until proven otherwise on the
+  specific hardware.
+
+**GPU isolation failures are a class, not a one-off.** Independently of LeftoverLocals,
+**GPU.zip** (IEEE S&P 2024; UT Austin, CMU, UW, UIUC) showed that *software-transparent*
+hardware graphical compression leaks pixel data across origins — a cross-origin
+SVG-filter pixel-stealing PoC reconstructed a Wikipedia username through Chrome at
+**97% accuracy in ~30 min (Ryzen iGPU)** and **98.3% in ~215 min (Intel iGPU)**, with
+**all tested GPUs (AMD, Apple, Arm, Intel, Qualcomm iGPUs and one NVIDIA dGPU)
+affected** and no vendor patches as of disclosure. GPU.zip is a browser-side side
+channel, not a headless-inference leak, so it does **not** directly threaten the
+measurement daemon; it is cited only as evidence that GPU microarchitectural state
+crosses trust boundaries in more than one way, so "the card is shared but the driver
+looks fine" is not a sufficient isolation argument.
+[BleepingComputer — GPU.zip](https://www.bleepingcomputer.com/news/security/modern-gpus-vulnerable-to-new-gpuzip-side-channel-attack/)
+[GPU.zip project page](https://www.hertzbleed.com/gpu.zip/)
+
+#### CursiveOS implications
+
+For CursiveOS the shared GPU is **two risks at once**, mirroring the supply-chain
+section's structure: a **confidentiality** risk (a co-tenant reads another organism's
+weights, prompts, or activations from leaked VRAM/local memory) and a
+**measurement-integrity** risk (a co-tenant observes or perturbs a benchmark sharing
+the card, so a fitness number reflects contention rather than the preset under test —
+the Goodhart/[Chapter 08](08-population-confirmation-and-fleet-statistics.md)
+confirmation problem and the [Chapter 01](01-seed-organism-and-sensor-array.md)
+immune-sensor backlog, arriving through the hardware rather than the optimizer). This
+matters most where a contributor runs the harness on a multi-tenant cloud GPU or
+co-resides two organisms on one local card — precisely the density scenario Chapter 14
+promotes.
+
+| Threat | Concrete vector | CursiveOS control | Cross-ref |
+| --- | --- | --- | --- |
+| Cross-process VRAM leak | LeftoverLocals (CVE-2023-4969) reads leftover local memory of a co-resident LLM | Sole-tenant GPU during measurement; pin/patch driver; clear-on-free | Ch14 multiplexing, Ch10 runtime |
+| No-isolation sharing | Time-slicing/MPS let a rogue tenant read or perturb GPU memory | Forbid untrusted co-tenancy; require MIG hardware partitioning if sharing is unavoidable | Ch14 SR-IOV/MxGPU/MIG |
+| Consumer SR-IOV scrub gap | `i915-sriov-dkms` VF teardown scrubbing undocumented [unverified] | Treat as resource split, not isolation; verify per hardware before trusting | Ch14 i915-sriov-dkms |
+| Contention-as-noise | Co-tenant load inflates/deflates the measured delta | Record GPU tenancy + isolation mode in run evidence; reject shared-GPU runs for selection | Ch08 confirmation, Ch00 validity |
+| Stale driver on fleet | Leak-vulnerable GPU stack on a contributor machine | Flag run for immune sensor; do not pool with patched-fleet data | Ch01 immune sensor, Ch11 identity |
+
+Design rules that follow for the organism:
+
+1. **Measurement runs get sole tenancy, or hardware-partitioned tenancy.** The
+   benchmark that writes fitness truth should own the GPU for the duration of the run,
+   or run inside a MIG instance with a hardware memory boundary. Co-residing an
+   untrusted workload on a time-sliced or MPS-shared card during measurement violates
+   both confidentiality and [Chapter 00](00-benchmark-schema-and-measurement-validity.md)
+   measurement validity.
+2. **GPU sharing mode is part of the fitness key.** Hardware-scoped fitness
+   ([Chapter 01](01-seed-organism-and-sensor-array.md)) already keys on hardware; add
+   the **tenancy/isolation mode** (sole / MIG / time-sliced / MPS / SR-IOV-VF) to the
+   recorded evidence in CursiveRoot. A shared-GPU number is not comparable to a
+   sole-tenant number and must not be pooled across the two.
+3. **Pin and track the GPU stack against leak-class advisories.** Extend the
+   supply-chain section's version-pinning rule from the model runtime to the **GPU
+   driver/firmware**: record the driver version, check it against LeftoverLocals-class
+   advisories, and flag a run on a vulnerable, unpatched stack for the
+   [Chapter 01](01-seed-organism-and-sensor-array.md) immune sensor rather than silently
+   trusting it.
+4. **A GPU-side leak must still not reach measurement truth.** This is the
+   [Chapter 06](06-mutation-safety-and-permission-law.md) boundary once more: even if a
+   co-tenant reads or perturbs an organism's GPU memory, it must not hold the daemon's
+   write path — it cannot rewrite sensor outputs or submit false CursiveRoot evidence.
+   A shared-GPU leak is then a bounded confidentiality + measurement-quality problem
+   (handled by sole-tenancy and Ch08 confirmation), not a fleet-wide compromise.
+
+**Retrieval caveats.** LeftoverLocals figures (181 MB/query, RX 7900 XT, ~10 lines of
+OpenCL, affected/unaffected vendor list, CVE-2023-4969, CERT/CC VU#446598 timeline) and
+the AMD bulletin status were retrieved via web-search summaries of the Trail of Bits
+blog, CERT/CC, AMD-SB-6010, and BleepingComputer; the primary Trail of Bits, CERT, and
+AMD pages returned HTTP 403 to direct fetch in this pass, so they are **[needs
+full-text confirmation]** for any externally quoted artifact. MIG/time-slicing/MPS
+isolation properties and the NVIDIA vGPU framebuffer-allocation behavior were retrieved
+at vendor-page / summary level. GPU.zip accuracy/timing figures are as the cited
+secondary sources state them. None of these results are locally reproduced on CursiveOS
+hardware; the consumer `i915-sriov-dkms` scrubbing question is explicitly marked
+**[unverified]** and is a candidate for the Chapter 14 GPU capability probe
+(`experiments/gpu-accelerator-tuning-validation-plan.md`).
+
 DePIN subnet security: validating trust in decentralized infrastructure
 
 Protecting against malicious submissions in DePIN networks requires addressing threats across four layers: work validation, identity/Sybil resistance, workload sandboxing, and supply chain integrity. Bittensor's $8M PyPi supply chain attack in July 2024 — where a malicious package version stole unencrypted coldkeys — remains the canonical case study, demonstrating that protocol-level security means nothing if the software distribution channel is compromised.  (The Block)  (Mitrade)

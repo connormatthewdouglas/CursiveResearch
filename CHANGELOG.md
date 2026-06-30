@@ -4,6 +4,15 @@ This file records meaningful changes to research guidance, validation status,
 and corpus process. It is intended to be readable without reconstructing a
 chain of supporting documents.
 
+## 2026-06-30 - Branch sweep: pending Claude corpus work + Windows verification fix
+
+Changed:
+- **Merged pending Claude corpus branches into main**: Chapter 16 shared-GPU isolation, Chapter 24 contributor data privacy / telemetry governance, Ch08 sabotage-tolerance simulation plan, Mesa 26.1 Arc compute/mining red-team challenge, and Flagged-for-Review triage escalations.
+- **tools/run-verification.ps1**: made mojibake-regex literals ASCII-only so the canonical verification script runs under Windows PowerShell 5.1 when the repo file is UTF-8 without a BOM.
+
+Reason:
+- These remote branches contained decision-driving corpus/security/privacy work that was not on `main`, and the verification script itself needed a small portability fix before the normal documented command could verify the merge on this Windows host.
+
 ## 2026-06-27 - Concurrency sensor noise-floor gates: H1/H2 pass, H3 blocked
 
 Changed:
@@ -36,6 +45,112 @@ Changed:
 
 Reason:
 - The corpus and main repo had crossed the measurement boundary, but some navigation and experiment-plan text still described the memory channel as future work. This cleanup keeps agents pointed at the current real result: zram alone is neutral under `swappiness=0`; v0.11 (`v0.9 + zram + swappiness=60`) is the active cycle-3 candidate needing confirmation/promotion.
+## 2026-06-26 - Chapter 16: GPU memory isolation for shared accelerators
+
+Changed:
+- **`chapters/16-security-and-hardening.md`**: added one additive section, **"GPU
+  memory isolation: shared accelerators as a cross-tenant leakage and
+  measurement-integrity surface"** (inserted after the AI-model-supply-chain section,
+  before the DePIN section; no existing content rewritten — file 258 → 395 lines, all
+  prior `##`/`#` headers intact). It fills a real gap: [Chapter 14](chapters/14-gpu-and-accelerator-tuning.md)
+  actively recommends sharing one physical GPU (SR-IOV `i915-sriov-dkms` up to 7 VFs,
+  AMD MxGPU/GIM, NVIDIA MIG) for concurrent mining + LLM inference, but never states
+  that co-residency is a trust boundary or that most consumer sharing modes provide no
+  memory isolation. The section characterizes the surface (**LeftoverLocals /
+  CVE-2023-4969** — co-resident process reads another LLM's leaked GPU local memory,
+  ~181 MB/query on RX 7900 XT + llama.cpp; AMD/Apple/Qualcomm/Imagination affected,
+  NVIDIA/Arm not), contrasts isolation by sharing mode (MIG hardware memory boundary
+  vs time-slicing/MPS no isolation vs consumer SR-IOV scrub gap **[unverified]**),
+  notes **GPU.zip** (IEEE S&P 2024) as a separate isolation-failure class, and maps it
+  onto the daemon/shell split with a CursiveOS-implications table + design rules
+  (sole-tenant/MIG measurement runs; tenancy in the fitness key; pin/track GPU driver
+  vs leak advisories; keep leaks off the Ch06 daemon write path).
+- **`VALIDATION.md`**: added one decision-driving claims-table row ("Chapter 16 /
+  shared-GPU isolation", **Supported**) — sole-tenancy/MIG for measurement runs,
+  record GPU tenancy/isolation mode in CursiveRoot evidence, do not pool shared-GPU
+  runs with sole-tenant runs for selection.
+
+Reason:
+- Chapter 14's GPU-multiplexing guidance had no security precondition, and Chapter 16
+  (security) had no GPU-isolation content at all. Because CursiveOS contributors may run
+  the fitness harness on multi-tenant cloud GPUs or co-reside two organisms on one local
+  card, a shared GPU is simultaneously a confidentiality risk (a co-tenant reads weights/
+  prompts/activations) and a measurement-integrity risk (a co-tenant perturbs a benchmark
+  sharing the card) — the Goodhart/Ch08 confirmation and Ch01 immune-sensor problem
+  arriving through hardware rather than the optimizer. Maps to RESEARCH_PIPELINE P1
+  "Hardware Optimization Foundations / GPU runtime stacks" and the security chapter, and
+  bridges Ch14↔Ch16. The section is additive and over-claim-guarded: every external
+  figure is marked retrieval-caveated (primary Trail of Bits/CERT/AMD pages returned 403;
+  search-summary level) and the consumer `i915-sriov-dkms` scrub question is marked
+  **[unverified]**, deferred to the Ch14 GPU capability probe.
+
+Sources: Trail of Bits — LeftoverLocals (CVE-2023-4969, blog.trailofbits.com 2024-01-16);
+CERT/CC VU#446598; AMD-SB-6010; BleepingComputer LeftoverLocals coverage; NVIDIA
+Multi-Instance GPU technology page + vGPU User Guide; Kubenatives / OpenMetal MIG-vs-
+time-slicing-vs-MPS comparisons; GPU.zip (hertzbleed.com/gpu.zip, IEEE S&P 2024) via
+BleepingComputer. All retrieved at search-summary / vendor-page level this pass; not
+locally reproduced.
+## 2026-06-26 - Red-team challenge: Mesa 26.1 "260%" reframed as an Intel Arc compute/mining uplift (Ch14 + Ch20)
+
+Changed:
+- **`VALIDATION.md`**: added a "Flagged for Review" row (red-team) challenging the reuse of the third-party "up to 260%" Mesa 26.1 figure as (a) a "specific **compute** scenarios" boost in Chapter 14 and (b) a "**for miners** … 260%" uplift shipped as a default in Chapter 20. No chapter text was edited (challenge-only, per CORPUS_WORKFLOW §3).
+- **`validation/notes/2026-06-26-ch14-ch20-mesa-260pct-arc-compute-mining-misattribution-redteam-challenge.md`**: full evidence note.
+
+Finding:
+- The 260% is a **single DirectX 11 game trace** (NBA 2K23, 4K Ultra) produced as a side effect of Mesa 26.1's HiZ-CCS depth-buffer **graphics-corruption** fix on Intel Alchemist/Meteor Lake GPUs — Linux-only, Windows-untested, and explicitly non-generalized per the corpus's own cited sources (TechPowerUp Works-cited #32; Wccftech #35). A depth-buffer resolve lives in the 3D rasterization path and has no mechanism to raise GPGPU **compute** (oneAPI/OpenCL/SHA-256) throughput, so re-labeling it a "compute" (Ch14) or "miners" (Ch20) gain is a category error. The on-point Arc compute measurement (Phoronix *Xe vs i915*, Linux 6.19) shows ≤~40% best-case OpenCL and "minimal" elsewhere — roughly an order of magnitude below 260% — and the corpus's own sources #16/#62–#64 already note Arc compute on Linux is under-delivered.
+
+Reason:
+- Intel Arc is CursiveOS's primary documented GPU (Arc A750 in Ch00, B70 in Ch18), so 260% is the sole quantified magnitude behind the Arc GPU-tuning differentiator, and Ch20 elevates it to a contributor default and investor-facing market copy. This is the same misattributed-magnitude failure mode as the 2026-06-24 AlphaEvolve "23% for Bittensor" flag. The challenge does not dispute the real (graphics) result — only its reuse as a compute/mining number. Per the flag, any first-party Arc GPU-tuning magnitude must be earned on the Ch00 harness for the actual workload (cf. CH05-BM-002, Ch08 hardware-scoped fitness) before it ships as a default or a public claim.
+
+Sources: TechPowerUp #345740 (single NBA 2K23 DX11 trace); Wccftech Mesa-260% report; Phoronix *Intel Xe vs. i915 … Linux 6.19* (OpenCL ≤~40%); Ch20 Works-cited #16/#62–#64; internal `2026-06-24-ch20-alphaevolve-23pct-bittensor-overstatement-challenge.md`, Ch00/Ch08/Ch15.
+## 2026-06-26 - Experiment plan: adversarial sabotage-tolerance test of Ch08 confirmation
+
+Changed:
+- **experiments/**: added `sabotage-tolerance-confirmation-simulation-plan.md`, a
+  pre-registered, falsifiable plan that answers the explicit open item left by
+  Chapter 03d §5 and the RESEARCH_PIPELINE §2 P0 knowledge gap ("adversarial test
+  of whether Ch08 confirmation behaves as a sabotage-tolerance layer"). It is a
+  Monte-Carlo simulation of the **exact Ch08 §2 rule** (N = max(1,min(5,floor(sqrt(fleet)))),
+  CV>0.15→N+2, hardware-scoped pooling, optional Ch08 §5 effective-N downgrade),
+  **seeded by already-measured corpus constants** — Ch00 per-channel CVs
+  (cold-start 0.002, network 0.192) and the hardware-scoped −51% / ~0% cold-start
+  split — so the error curves are grounded, not a toy. It sweeps saboteur fraction
+  f and fleet_size across four corpus-anchored attack models (independent liars,
+  Sybil cluster, Goodhart gamer on the high-weight network channel, and a griefer
+  that suppresses a real win), with pre-registered accept-bad / reject-good
+  thresholds (Sarmenta's two-sided failure modes; Byzantine one-third bound).
+- **RESEARCH_PIPELINE.md**: updated the P0 "hardware-scoped truth" knowledge-gap
+  row to mark the adversarial test as delivered-as-plan, and added a row to the
+  Experimental Lift table.
+
+Reason:
+- The corpus has reasoned about confirmation-under-attack only by analogy (Ch03d
+  Sarmenta/BOINC lineage, Ch08 §5 immune sensors, the Skalse Goodhart warning) and
+  has never measured the rule's actual error rates with an adversary in the loop —
+  yet all twelve existing experiment plans are physical hardware-tuning runs with
+  no saboteur. The moment Layer 5 (Ch02) attaches real BTC to measured fitness, the
+  confirmation rule becomes a security boundary (a contributor is paid to lie), and
+  the cheap time to find that the rule accepts a one-third lie — or is trivially
+  griefed into rejecting honest wins — is in simulation now, not after money is on
+  the fleet. The plan is pure Monte-Carlo (no hardware, no fleet, no funds at risk),
+  shares its rule implementation with the live hub analyzer so the thing tested is
+  the thing deployed, and yields "Supported by simulation" bounds that gate Ch02
+  payout sequencing and the Ch08 §10 open calibration gaps.
+
+Sources / anchors: Sarmenta (FGCS 2002, sabotage-tolerance); Anderson (BOINC,
+arXiv:1903.01699); Skalse et al. (NeurIPS 2022, reward hacking); Ch00 noise-floor
+data; Ch08 N-rule + immune sensors; Ch03c/03d decentralized-evaluator framing.
+## 2026-06-26 - New Chapter 24: Contributor Data Privacy and Telemetry Governance
+
+Changed:
+- **New chapter `24-contributor-data-privacy-and-telemetry-governance.md`** (native, full living layer + reinforced research). Closes a standing corpus gap: the corpus rigorously specifies **what to measure** on a contributor's machine (Ch00 schema, Ch01 sensors, Ch08 fleet statistics) and **what may mutate** it (Ch06 permission law), but never **what may leave it**. The chapter: (1) argues a network that pays BTC (Ch02) for on-host measurement on other people's machines is a personal-data processor, not an anonymous mesh; (2) shows the corpus already built its own re-identification surface — the Ch11 fingerprint is a deliberately unique high-entropy key (calibrated against Eckersley's ≥18.1-bit Panopticlick result) and the Ch02 wallet links it to a financial identity, so "anonymous telemetry" is false; (3) reframes the privacy↔fleet-statistics tension via RAPPOR's central-collector conflict; (4) surveys the mitigation menu (data minimisation, pseudonymisation/salted hardware-*class* token, local DP, federated analytics) and argues the Ch08 estimators are population aggregates well-suited to federated analytics, with local DP reserved for coarse high-N counts; (5) imports the Tang et al. macOS-DP finding (a renewing privacy budget leaks cumulatively) as the governance guardrail; (6) recommends an observe-and-measure posture: minimise + segregate payout from telemetry + aggregate on-device now, but measure the utility cost on the Ch08 estimators (CV/median/fitness) before any privacy mechanism gates the pipeline.
+- **INDEX.md**: added the Chapter 24 row, bumped the header to "27 files: 00–24 logical slots plus 03c/03d inserts," and noted 24 as a cross-cutting native chapter linking Ch08/11/02/05/06.
+- **tools/verification-contract.json**: `chapters_total` 26→27, `native_chapters` += "24", `all_chapters_living_layer` 26→27, `all_chapters_reinforced` 26→27.
+
+Reason:
+- The DePIN model runs on contributors' personal/business hardware and pays them, which makes telemetry a *disclosure* problem, not just a measurement problem — yet no chapter drew the transmitted-vs-read line, named a consent/legal basis, or reckoned with the re-identification risk the Ch11 fingerprint and Ch02 payout jointly create. The chapter is deliberately Unvalidated as a deployed pipeline: minimisation is a free win, but federated analytics / local DP must have their accuracy cost on the Ch08 0.15 CV gate measured before they gate selection, lest the network trade a real measurement capability for a privacy property it could reach more cheaply.
+
+Sources: Erlingsson, Pihur, Korolova "RAPPOR" (ACM CCS 2014); Eckersley "How Unique Is Your Web Browser?" (PETS 2010, Panopticlick); Tang et al. "Privacy Loss in Apple's Implementation of Differential Privacy on macOS 10.12" (arXiv:1709.02753, 2017); Kairouz et al. "Advances and Open Problems in Federated Learning" (arXiv:1912.04977, 2021) + Google Federated Analytics; EU GDPR Art. 4/5/6 + Recital 26.
 
 ## 2026-06-25 - Cornerstone full-text repair: FunSearch, LADDER, DGM, Open-Endedness
 

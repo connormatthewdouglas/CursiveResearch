@@ -36,9 +36,11 @@ if (-not $contract.markdown_hygiene_lint -or $contract.markdown_hygiene_lint.ena
     Push-Location $RepoRoot
     $trackedMd = @(git ls-files '*.md')
     Pop-Location
-    $reMoji1 = [regex]'â€'          # 'â€' double-encoded UTF-8 signature
-    $reMoji2 = [regex]'[ÃÂ]\S'      # stray Ã/Â immediately followed by a non-space char
+    # Keep regex literals/comments ASCII-only so Windows PowerShell 5.1 can parse this UTF-8 file without a BOM.
+    $reMoji1 = [regex]'\u00e2\u20ac'       # double-encoded UTF-8 signature
+    $reMoji2 = [regex]'[\u00c3\u00c2]\S'  # stray mojibake lead char followed by a non-space char
     $reSpan  = [regex]'\[span_\d+\]\((?:start|end)_span\)'
+
     $lintHits = New-Object System.Collections.Generic.List[string]
     foreach ($rel in $trackedMd) {
         $full = Join-Path $RepoRoot $rel
