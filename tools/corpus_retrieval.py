@@ -38,6 +38,41 @@ EXCLUDED_DIRS = {
 HEADING_RE = re.compile(r"^(#{1,6})\s+(.+?)\s*$")
 TOKEN_RE = re.compile(r"[A-Za-z0-9_][A-Za-z0-9_./:+-]*")
 FENCE_MARKERS = ("```", "~~~")
+SEARCH_STOPWORDS = {
+    "a",
+    "about",
+    "an",
+    "and",
+    "are",
+    "as",
+    "at",
+    "be",
+    "by",
+    "can",
+    "does",
+    "for",
+    "from",
+    "how",
+    "in",
+    "is",
+    "it",
+    "of",
+    "on",
+    "or",
+    "say",
+    "says",
+    "should",
+    "that",
+    "the",
+    "this",
+    "to",
+    "what",
+    "when",
+    "where",
+    "whether",
+    "which",
+    "with",
+}
 DEFAULT_AUDIT_CASES: tuple[dict[str, Any], ...] = (
     {
         "name": "measurement daemon / shell boundary",
@@ -68,6 +103,15 @@ DEFAULT_AUDIT_CASES: tuple[dict[str, Any], ...] = (
         "query": "contributor privacy telemetry governance",
         "match": "all",
         "expect_paths": ("chapters/24-contributor-data-privacy-and-telemetry-governance.md",),
+    },
+    {
+        "name": "founder dependency / normal contributor fallback",
+        "query": "founder dependency",
+        "match": "all",
+        "expect_paths": (
+            "chapters/01-seed-organism-and-sensor-array.md",
+            "chapters/02-bitcoin-native-economics-and-proof-of-useful-optimization.md",
+        ),
     },
 )
 
@@ -115,6 +159,26 @@ class SearchResult:
         data = asdict(self)
         data["citation"] = self.citation
         return data
+
+
+@dataclass(frozen=True)
+class SearchResponse:
+    query: str
+    strategy: str
+    match_query: str
+    results: tuple[SearchResult, ...]
+    attempts: tuple[dict[str, object], ...]
+    expanded: bool
+
+    def to_dict(self) -> dict[str, object]:
+        return {
+            "query": self.query,
+            "strategy": self.strategy,
+            "match_query": self.match_query,
+            "expanded": self.expanded,
+            "attempts": list(self.attempts),
+            "results": [result.to_dict() for result in self.results],
+        }
 
 
 def repo_root_from_script() -> Path:
@@ -417,10 +481,86 @@ def quote_fts_token(token: str) -> str:
     return '"' + token.replace('"', '""') + '"'
 
 
+def normalize_query_token(token: str) -> str:
+    return token.strip().lower()
+
+
+def query_tokens(query: str, *, keep_stopwords: bool = False) -> list[str]:
+    tokens = [normalize_query_token(token) for token in TOKEN_RE.findall(query)]
+    tokens = [token for token in tokens if token]
+    if keep_stopwords:
+        return tokens
+    useful = [token for token in tokens if token not in SEARCH_STOPWORDS]
+    return useful or tokens
+
+
+def lexical_variants(token: str) -> set[str]:
+    token = normalize_query_token(token)
+    variants = {token}
+    stems: set[str] = set()
+
+    if len(token) > 4:
+        if token.endswith("ies"):
+            variants.add(token[:-3] + "y")
+        elif token.endswith("y"):
+            variants.add(token[:-1] + "ies")
+        elif token.endswith("s") and not token.endswith("ss"):
+            variants.add(token[:-1])
+        else:
+            variants.add(token + "s")
+
+    for suffix, replacements in (
+        ("ancy", ("ency", "ance", "ant")),
+        ("ency", ("ence", "ent")),
+        ("ance", ("ant",)),
+        ("ence", ("ent",)),
+        ("ities", ("ity",)),
+        ("ity", ("ities",)),
+    ):
+        if token.endswith(suffix) and len(token) - len(suffix) >= 5:
+            root = token[: -len(suffix)]
+            stems.add(root)
+            for replacement in replacements:
+                variants.add(root + replacement)
+
+    for suffix in ("ization", "isation", "ations", "ation", "ments", "ment", "ing", "ed"):
+        if token.endswith(suffix) and len(token) - len(suffix) >= 5:
+            stems.add(token[: -len(suffix)])
+
+    for stem in stems:
+        if stem:
+            variants.add(stem)
+    return {variant for variant in variants if variant}
+
+
+def quote_fts_prefix(prefix: str) -> str | None:
+    cleaned = re.sub(r"[^a-z0-9_]", "", prefix.lower())
+    if len(cleaned) < 5:
+        return None
+    return f"{cleaned}*"
+
+
+def expanded_fragments(token: str) -> list[str]:
+    variants = lexical_variants(token)
+    fragments = {quote_fts_token(variant) for variant in variants}
+    for variant in variants:
+        prefix = quote_fts_prefix(variant)
+        if prefix:
+            fragments.add(prefix)
+    return sorted(fragments)
+
+
+def primary_expanded_fragment(token: str) -> str:
+    prefixes = [prefix for variant in lexical_variants(token) if (prefix := quote_fts_prefix(variant))]
+    if prefixes:
+        return sorted(prefixes, key=lambda value: (len(value), value))[0]
+    return quote_fts_token(normalize_query_token(token))
+
+
 def build_match_query(query: str, mode: str) -> str:
     if mode == "raw":
         return query
-    tokens = TOKEN_RE.findall(query)
+    tokens = query_tokens(query)
     if not tokens:
         raise ValueError("query has no searchable tokens")
     quoted = [quote_fts_token(token) for token in tokens]
@@ -428,6 +568,28 @@ def build_match_query(query: str, mode: str) -> str:
         return " ".join(quoted)
     if mode == "any":
         return " OR ".join(quoted)
+    raise ValueError(f"unknown match mode: {mode}")
+
+
+def build_expanded_match_query(query: str, mode: str) -> str:
+    if mode == "raw":
+        return query
+    tokens = query_tokens(query)
+    if not tokens:
+        raise ValueError("query has no searchable tokens")
+    if mode == "all":
+        return " ".join(primary_expanded_fragment(token) for token in tokens)
+    if mode == "any":
+        fragments: list[str] = []
+        seen: set[str] = set()
+        for token in tokens:
+            for fragment in expanded_fragments(token):
+                if fragment not in seen:
+                    seen.add(fragment)
+                    fragments.append(fragment)
+        if not fragments:
+            raise ValueError("query has no expandable tokens")
+        return " OR ".join(fragments)
     raise ValueError(f"unknown match mode: {mode}")
 
 
@@ -445,17 +607,15 @@ def normalize_heading_filter(value: str) -> str:
     return cleaned
 
 
-def search_index(
+def _search_match_query(
     index_path: Path,
-    query: str,
+    match_query: str,
     limit: int = 10,
-    mode: str = "any",
     path_filters: Sequence[str] = (),
     heading_filters: Sequence[str] = (),
 ) -> list[SearchResult]:
     if not index_path.exists():
         raise FileNotFoundError(f"index not found: {index_path}; run `python tools/corpus_retrieval.py index`")
-    match_query = build_match_query(query, mode)
     where = ["chunk_fts MATCH ?"]
     params: list[object] = [match_query]
 
@@ -482,7 +642,18 @@ def search_index(
             FROM chunk_fts
             JOIN chunks c ON c.id = chunk_fts.rowid
             WHERE {' AND '.join(where)}
-            ORDER BY score ASC, c.path ASC, c.start_line ASC
+            ORDER BY
+                CASE
+                    WHEN c.path LIKE 'chapters/%' THEN 0
+                    WHEN c.path = 'VALIDATION.md' OR c.path LIKE 'validation/%' THEN 1
+                    WHEN c.path LIKE 'sources/%' THEN 2
+                    WHEN c.path = 'INDEX.md' OR c.path = 'RESEARCH_PIPELINE.md' THEN 3
+                    WHEN c.path = 'CHANGELOG.md' OR c.path LIKE 'docs/%' THEN 9
+                    ELSE 4
+                END ASC,
+                score ASC,
+                c.path ASC,
+                c.start_line ASC
             LIMIT ?
             """
     con = connect(index_path)
@@ -491,6 +662,86 @@ def search_index(
     finally:
         con.close()
     return [SearchResult(**dict(row)) for row in rows]
+
+
+def search_index(
+    index_path: Path,
+    query: str,
+    limit: int = 10,
+    mode: str = "any",
+    path_filters: Sequence[str] = (),
+    heading_filters: Sequence[str] = (),
+) -> list[SearchResult]:
+    return _search_match_query(
+        index_path,
+        build_match_query(query, mode),
+        limit=limit,
+        path_filters=path_filters,
+        heading_filters=heading_filters,
+    )
+
+
+def rare_token_plan(
+    index_path: Path,
+    query: str,
+    path_filters: Sequence[str] = (),
+    heading_filters: Sequence[str] = (),
+) -> dict[str, object] | None:
+    probes: list[tuple[int, str, str]] = []
+    for token in query_tokens(query):
+        match_query = build_expanded_match_query(token, "any")
+        count = len(_search_match_query(index_path, match_query, limit=1000, path_filters=path_filters, heading_filters=heading_filters))
+        if count > 0:
+            probes.append((count, token, match_query))
+    if not probes:
+        return None
+    count, token, match_query = sorted(probes, key=lambda item: (item[0], len(item[1]), item[1]))[0]
+    return {"token": token, "match_query": match_query, "corpus_hits": count}
+
+
+def search_index_with_fallback(
+    index_path: Path,
+    query: str,
+    limit: int = 10,
+    mode: str = "any",
+    path_filters: Sequence[str] = (),
+    heading_filters: Sequence[str] = (),
+    expand: str = "auto",
+) -> SearchResponse:
+    if expand not in {"auto", "always", "never"}:
+        raise ValueError(f"unknown expansion mode: {expand}")
+
+    attempts: list[dict[str, object]] = []
+    direct_query = build_match_query(query, mode)
+    direct_results = _search_match_query(index_path, direct_query, limit, path_filters, heading_filters)
+    attempts.append({"strategy": "direct", "match_query": direct_query, "results": len(direct_results)})
+
+    if mode == "raw" or expand == "never" or (direct_results and expand == "auto"):
+        return SearchResponse(query, "direct", direct_query, tuple(direct_results), tuple(attempts), expanded=False)
+
+    plans: list[tuple[str, str]] = []
+    if mode == "all":
+        rare = rare_token_plan(index_path, query, path_filters, heading_filters)
+        if rare:
+            plans.append((f"relaxed-rare-term:{rare['token']}", str(rare["match_query"])))
+    expanded_same_mode = build_expanded_match_query(query, mode)
+    plans.append((f"expanded-{mode}", expanded_same_mode))
+    if mode == "all":
+        plans.append(("expanded-any", build_expanded_match_query(query, "any")))
+    else:
+        plans.append(("expanded-any", expanded_same_mode))
+
+    seen = {direct_query}
+    for strategy, match_query in plans:
+        if match_query in seen:
+            continue
+        seen.add(match_query)
+        results = _search_match_query(index_path, match_query, limit, path_filters, heading_filters)
+        attempts.append({"strategy": strategy, "match_query": match_query, "results": len(results)})
+        if results:
+            return SearchResponse(query, strategy, match_query, tuple(results), tuple(attempts), expanded=True)
+
+    return SearchResponse(query, "direct", direct_query, tuple(direct_results), tuple(attempts), expanded=False)
 
 
 def get_chunk(index_path: Path, chunk_id: int) -> dict[str, object]:
@@ -586,14 +837,16 @@ def retrieval_audit(
 ) -> dict[str, object]:
     items: list[dict[str, object]] = []
     for case in cases:
-        results = search_index(
+        response = search_index_with_fallback(
             index_path,
             str(case["query"]),
             limit=limit,
             mode=str(case.get("match", "any")),
             path_filters=tuple(case.get("path_filters", ())),
             heading_filters=tuple(case.get("heading_filters", ())),
+            expand=str(case.get("expand", "auto")),
         )
+        results = list(response.results)
         expected_paths = tuple(str(path) for path in case.get("expect_paths", ()))
         matched = next((result for result in results if any(expected in result.path for expected in expected_paths)), None)
         items.append(
@@ -601,6 +854,7 @@ def retrieval_audit(
                 "name": case.get("name", case["query"]),
                 "query": case["query"],
                 "match": case.get("match", "any"),
+                "strategy": response.strategy,
                 "expected_paths": list(expected_paths),
                 "passed": matched is not None,
                 "matched_citation": matched.citation if matched else None,
@@ -631,6 +885,17 @@ def print_search_results(results: Sequence[SearchResult]) -> None:
         print()
 
 
+def print_search_response(response: SearchResponse, *, explain: bool = False) -> None:
+    if response.strategy != "direct":
+        print(f"Search fallback: {response.strategy} (direct query had no matches).")
+    if explain:
+        print(f"FTS query: {response.match_query}")
+        for attempt in response.attempts:
+            print(f"Attempt: {attempt['strategy']} -> {attempt['results']} result(s)")
+        print()
+    print_search_results(response.results)
+
+
 def print_status(status: dict[str, object], changed_only: bool = False) -> None:
     if not changed_only:
         print(f"Index: {status['index']}")
@@ -657,6 +922,8 @@ def print_audit(report: dict[str, object]) -> None:
         mark = "PASS" if item["passed"] else "FAIL"
         print(f"[{mark}] {item['name']}")
         print(f"  query: {item['query']}")
+        if item.get("strategy") and item["strategy"] != "direct":
+            print(f"  strategy: {item['strategy']}")
         if item["matched_citation"]:
             print(f"  matched: {item['matched_citation']}")
         else:
@@ -724,6 +991,13 @@ def main(argv: Sequence[str] | None = None) -> int:
     p_search.add_argument("query", help="Search query")
     p_search.add_argument("--limit", type=int, default=10)
     p_search.add_argument("--match", choices=("any", "all", "raw"), default="any", help="FTS matching mode")
+    p_search.add_argument(
+        "--expand",
+        choices=("auto", "always", "never"),
+        default="auto",
+        help="Fallback query expansion when a direct non-raw search misses; default: auto",
+    )
+    p_search.add_argument("--explain", action="store_true", help="Show search strategy/attempt metadata")
     p_search.add_argument("--path", action="append", default=[], help="Restrict to path prefix; repeatable, e.g. --path chapters/")
     p_search.add_argument("--heading", action="append", default=[], help="Restrict to heading substring; repeatable")
 
@@ -781,18 +1055,19 @@ def main(argv: Sequence[str] | None = None) -> int:
             return 1 if args.strict and not status["up_to_date"] else 0
 
         if args.command == "search":
-            results = search_index(
+            response = search_index_with_fallback(
                 index_path,
                 args.query,
                 limit=args.limit,
                 mode=args.match,
                 path_filters=args.path,
                 heading_filters=args.heading,
+                expand=args.expand,
             )
             if args.json:
-                print_json([result.to_dict() for result in results])
+                print_json(response.to_dict() if args.explain else [result.to_dict() for result in response.results])
             else:
-                print_search_results(results)
+                print_search_response(response, explain=args.explain)
             return 0
 
         if args.command == "show":

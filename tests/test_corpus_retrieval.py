@@ -21,6 +21,10 @@ def write_sample_repo(root: Path) -> None:
     (root / "sources").mkdir(parents=True)
     (root / ".cursive-research-rag").mkdir(parents=True)
     (root / "README.md").write_text("# Sample Corpus\n\nIntro text.\n", encoding="utf-8")
+    (root / "CHANGELOG.md").write_text(
+        "# Changelog\n\nFounder-risk retrieval fallback changed here, but this is process metadata.\n",
+        encoding="utf-8",
+    )
     (root / "chapters" / "01-measurement.md").write_text(
         "# Measurement Trust\n\n"
         "The measurement daemon owns organism truth.\n\n"
@@ -30,6 +34,12 @@ def write_sample_repo(root: Path) -> None:
     )
     (root / "sources" / "source-register.md").write_text(
         "# Source Register\n\nBBR fairness and retransmit risk remain review flags.\n",
+        encoding="utf-8",
+    )
+    (root / "chapters" / "02-economics.md").write_text(
+        "# Economics\n\n"
+        "Founder cut is none; the founder is paid as a normal contributor.\n"
+        "Sensor evidence, not governance theater, controls value.\n",
         encoding="utf-8",
     )
     (root / ".cursive-research-rag" / "ignored.md").write_text(
@@ -46,7 +56,7 @@ class CorpusRetrievalTests(unittest.TestCase):
             index_path = root / ".cursive-research-rag" / "index.sqlite"
 
             summary = corpus_retrieval.build_index(root, index_path)
-            self.assertEqual(summary["documents"], 3)
+            self.assertEqual(summary["documents"], 5)
             self.assertGreaterEqual(summary["chunks"], 4)
 
             results = corpus_retrieval.search_index(index_path, "shell organism truth", limit=5, mode="all")
@@ -88,6 +98,80 @@ class CorpusRetrievalTests(unittest.TestCase):
 
             chapter_results = corpus_retrieval.search_index(index_path, "BBR retransmit", limit=5, path_filters=("chapters/",))
             self.assertEqual(chapter_results, [])
+
+    def test_query_expansion_falls_back_to_rare_anchor_term(self) -> None:
+        with tempfile.TemporaryDirectory(prefix="corpus-retrieval-test-") as tmp:
+            root = Path(tmp)
+            write_sample_repo(root)
+            index_path = root / ".cursive-research-rag" / "index.sqlite"
+            corpus_retrieval.build_index(root, index_path)
+
+            direct = corpus_retrieval.search_index(index_path, "founder dependency", limit=5, mode="all")
+            self.assertEqual(direct, [])
+
+            response = corpus_retrieval.search_index_with_fallback(index_path, "founder dependency", limit=5, mode="all")
+            self.assertTrue(response.expanded)
+            self.assertEqual(response.strategy, "relaxed-rare-term:founder")
+            self.assertTrue(response.results)
+            self.assertEqual(response.results[0].path, "chapters/02-economics.md")
+
+    def test_cli_explains_expanded_search_fallback(self) -> None:
+        with tempfile.TemporaryDirectory(prefix="corpus-retrieval-test-") as tmp:
+            root = Path(tmp)
+            write_sample_repo(root)
+            index_path = root / ".cursive-research-rag" / "index.sqlite"
+            subprocess.run(
+                [sys.executable, str(MODULE_PATH), "index", "--repo-root", str(root), "--index", str(index_path), "--json"],
+                check=True,
+                text=True,
+                capture_output=True,
+            )
+
+            explained = subprocess.run(
+                [
+                    sys.executable,
+                    str(MODULE_PATH),
+                    "search",
+                    "founder dependency",
+                    "--match",
+                    "all",
+                    "--repo-root",
+                    str(root),
+                    "--index",
+                    str(index_path),
+                    "--explain",
+                    "--json",
+                ],
+                check=True,
+                text=True,
+                capture_output=True,
+            )
+            payload = json.loads(explained.stdout)
+            self.assertEqual(payload["strategy"], "relaxed-rare-term:founder")
+            self.assertTrue(payload["expanded"])
+            self.assertEqual(payload["results"][0]["path"], "chapters/02-economics.md")
+
+            unexpanded = subprocess.run(
+                [
+                    sys.executable,
+                    str(MODULE_PATH),
+                    "search",
+                    "founder dependency",
+                    "--match",
+                    "all",
+                    "--expand",
+                    "never",
+                    "--repo-root",
+                    str(root),
+                    "--index",
+                    str(index_path),
+                    "--json",
+                ],
+                check=True,
+                text=True,
+                capture_output=True,
+            )
+            self.assertEqual(json.loads(unexpanded.stdout), [])
 
     def test_cli_json_search_and_status_ergonomics(self) -> None:
         with tempfile.TemporaryDirectory(prefix="corpus-retrieval-test-") as tmp:

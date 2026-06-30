@@ -4,6 +4,16 @@ This file records meaningful changes to research guidance, validation status,
 and corpus process. It is intended to be readable without reconstructing a
 chain of supporting documents.
 
+## 2026-06-30 - Corpus retrieval synonym/anchor fallback
+
+Changed:
+- **tools/corpus_retrieval.py**: added default `--expand auto` search fallback for non-raw queries: stopword trimming, lexical variants, singular/plural/suffix variants, and a rare-anchor fallback when strict terms do not co-occur.
+- **tests/test_corpus_retrieval.py**: added regression coverage proving a founder-risk query can recover the founder-as-normal-contributor passage while `--expand never` remains strict.
+- **docs/corpus-retrieval.md**: documented fallback behavior, `--explain`, `--expand never`, and added the founder-risk transition to the query cookbook/audit scope.
+
+Reason:
+- Exact keywords are brittle. The retrieval CLI should help agents recover corpus concepts even when a user's phrasing differs from the corpus wording, without immediately adding embeddings or requiring a hand-curated synonym list.
+
 ## 2026-06-30 - Corpus retrieval polish: filters, audit, canonical verification
 
 Changed:

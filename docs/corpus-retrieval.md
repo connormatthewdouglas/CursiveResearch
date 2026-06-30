@@ -33,8 +33,10 @@ python tools/corpus_retrieval.py index --if-stale
 python tools/corpus_retrieval.py status
 python tools/corpus_retrieval.py status --changed-only
 
-# Search for cited passages.
+# Search for cited passages. If a direct non-raw search misses, the tool
+# automatically tries lexical variants and a rare-anchor fallback.
 python tools/corpus_retrieval.py search "measurement daemon shell truth" --limit 5
+python tools/corpus_retrieval.py search "founder risk transition" --match all --explain
 
 # Narrow by path prefix or heading substring.
 python tools/corpus_retrieval.py search "GPU isolation" --path chapters/ --heading security
@@ -90,13 +92,22 @@ python tools/corpus_retrieval.py search "BBR fairness retransmit" --match all --
 # Current economics authority.
 python tools/corpus_retrieval.py search "Layer 5 economics" --match all --path chapters/02-bitcoin-native
 
+# Founder-risk / bootstrapping transition.
+python tools/corpus_retrieval.py search "founder risk transition" --match all --explain
+
 # Contributor privacy and telemetry governance.
 python tools/corpus_retrieval.py search "contributor privacy telemetry governance" --match all --path chapters/24-contributor
 ```
 
-If a direct query misses, try synonyms from `INDEX.md`, `VALIDATION.md`, or the
-chapter title. If that still misses, improve the chapter heading/source wording
-so the next agent can find it.
+If a direct query misses, the CLI does not stop at brittle keywords: default
+`--expand auto` tries lexical variants, singular/plural forms, common suffix
+variants, and then relaxes to the rarest surviving anchor term. Use `--explain`
+to see which fallback fired. Use `--expand never` when you need strict lexical
+proof that the exact query terms co-occur.
+
+This is still local FTS, not magic semantic search. If the fallback finds the
+right concept but the corpus lacks the phrase humans naturally ask for, improve
+the chapter heading/source wording so the next agent can find it even faster.
 
 ## Search modes and filters
 
@@ -106,10 +117,11 @@ Use stricter matching when needed:
 ```bash
 python tools/corpus_retrieval.py search "shell organism truth" --match all
 python tools/corpus_retrieval.py search '"BBR" NEAR "fairness"' --match raw
+python tools/corpus_retrieval.py search "founder risk transition" --match all --expand never
 ```
 
 Raw mode sends the query directly to SQLite FTS5. Use it only when you know FTS5
-query syntax.
+query syntax. `--expand never` keeps the normal parser but disables fallback.
 
 Filters are repeatable and combine with the FTS query:
 
@@ -178,8 +190,9 @@ python tools/corpus_retrieval.py audit --json
 
 The audit is intentionally small. It checks that known high-value queries can
 recover their expected source areas: measurement daemon/shell boundary, shared
-GPU isolation, BBR fairness caveat, Layer 5 economics, and contributor privacy / telemetry governance.
-It is not a semantic benchmark. It is a smoke alarm for obvious retrieval drift.
+GPU isolation, BBR fairness caveat, Layer 5 economics, contributor privacy /
+telemetry governance, and the founder-risk fallback. It is not a semantic
+benchmark. It is a smoke alarm for obvious retrieval drift.
 
 ## Verification
 
