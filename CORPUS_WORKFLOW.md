@@ -36,8 +36,8 @@ with path and line citations. After adding or materially editing Markdown conten
 run:
 
 ```bash
-python tools/corpus_retrieval.py index
-python tools/corpus_retrieval.py status
+python tools/corpus_retrieval.py index --if-stale
+python tools/corpus_retrieval.py status --changed-only
 python tools/corpus_retrieval.py search "<topic or claim you added>" --limit 5
 ```
 
@@ -190,7 +190,7 @@ For most meaningful research changes, do only this:
 2. Update `CHANGELOG.md`.
 3. Update `VALIDATION.md` only for decision-driving claims.
 4. Update `RESEARCH_PIPELINE.md` only if priorities changed.
-5. Refresh local retrieval with `python tools/corpus_retrieval.py index` and smoke-test one representative search.
+5. Refresh local retrieval with `python tools/corpus_retrieval.py index --if-stale`, check `python tools/corpus_retrieval.py status --changed-only`, and smoke-test one representative search.
 
 That is enough. Extra ledgers, notes, and source tables are optional when they
 help preserve evidence or repeat a consequential result.

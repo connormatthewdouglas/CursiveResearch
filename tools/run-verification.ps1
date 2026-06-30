@@ -68,6 +68,59 @@ if (-not $contract.markdown_hygiene_lint -or $contract.markdown_hygiene_lint.ena
     Write-Host "MARKDOWN HYGIENE LINT: clean ($($trackedMd.Count) tracked .md files)"
 }
 
+# --- Retrieval check (guards the local FTS retrieval spine) ---
+$retrievalTool = Join-Path $RepoRoot 'tools\corpus_retrieval.py'
+if (Test-Path $retrievalTool) {
+    Push-Location $RepoRoot
+    $prevRetrievalEap = $ErrorActionPreference
+    $ErrorActionPreference = 'Continue'
+    try {
+        $retrievalEvidence = New-Object System.Collections.Generic.List[string]
+        $retrievalEvidence.Add('RETRIEVAL EVIDENCE') | Out-Null
+        $retrievalEvidence.Add("Generated: $(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')") | Out-Null
+        $retrievalEvidence.Add("Tool: $retrievalTool") | Out-Null
+        $retrievalEvidence.Add('') | Out-Null
+
+        $selfTestOutput = & python $retrievalTool self-test 2>&1
+        $retrievalEvidence.Add('--- self-test ---') | Out-Null
+        $selfTestOutput | ForEach-Object { $retrievalEvidence.Add($_.ToString()) | Out-Null }
+        if ($LASTEXITCODE -ne 0) { Fail "Retrieval self-test failed" }
+
+        $unitOutput = & python -m unittest tests.test_corpus_retrieval -v 2>&1
+        $retrievalEvidence.Add('') | Out-Null
+        $retrievalEvidence.Add('--- unittest ---') | Out-Null
+        $unitOutput | ForEach-Object { $retrievalEvidence.Add($_.ToString()) | Out-Null }
+        if ($LASTEXITCODE -ne 0) { Fail "Retrieval unittest failed" }
+
+        $indexOutput = & python $retrievalTool index --if-stale --json 2>&1
+        $retrievalEvidence.Add('') | Out-Null
+        $retrievalEvidence.Add('--- index --if-stale --json ---') | Out-Null
+        $indexOutput | ForEach-Object { $retrievalEvidence.Add($_.ToString()) | Out-Null }
+        if ($LASTEXITCODE -ne 0) { Fail "Retrieval index refresh failed" }
+
+        $statusOutput = & python $retrievalTool status --strict --json 2>&1
+        $retrievalEvidence.Add('') | Out-Null
+        $retrievalEvidence.Add('--- status --strict --json ---') | Out-Null
+        $statusOutput | ForEach-Object { $retrievalEvidence.Add($_.ToString()) | Out-Null }
+        if ($LASTEXITCODE -ne 0) { Fail "Retrieval index status is stale" }
+        $status = ($statusOutput -join "`n") | ConvertFrom-Json
+
+        $auditOutput = & python $retrievalTool audit --json 2>&1
+        $retrievalEvidence.Add('') | Out-Null
+        $retrievalEvidence.Add('--- audit --json ---') | Out-Null
+        $auditOutput | ForEach-Object { $retrievalEvidence.Add($_.ToString()) | Out-Null }
+        if ($LASTEXITCODE -ne 0) { Fail "Retrieval audit failed" }
+        $audit = ($auditOutput -join "`n") | ConvertFrom-Json
+
+        $retrievalEvidence | Set-Content (Join-Path $ScratchDir 'retrieval-evidence.txt') -Encoding UTF8
+        Write-Host "RETRIEVAL CHECK: current ($($status.documents_indexed) docs, $($status.chunks_indexed) chunks), audit=$($audit.passed_cases)/$($audit.total_cases)"
+    }
+    finally {
+        $ErrorActionPreference = $prevRetrievalEap
+        Pop-Location
+    }
+}
+
 # --- Live counts ---
 $chapters = Get-ChildItem (Join-Path $RepoRoot 'chapters\*.md') | Sort-Object Name
 $paperDirs = Get-ChildItem (Join-Path $RepoRoot 'papers') -Recurse -Directory |

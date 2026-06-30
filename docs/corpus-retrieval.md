@@ -26,17 +26,27 @@ From the repository root:
 # Build or refresh the local index.
 python tools/corpus_retrieval.py index
 
+# Rebuild only if the index is missing/stale.
+python tools/corpus_retrieval.py index --if-stale
+
 # Check whether the index matches current Markdown files.
 python tools/corpus_retrieval.py status
+python tools/corpus_retrieval.py status --changed-only
 
 # Search for cited passages.
 python tools/corpus_retrieval.py search "measurement daemon shell truth" --limit 5
+
+# Narrow by path prefix or heading substring.
+python tools/corpus_retrieval.py search "GPU isolation" --path chapters/ --heading security
 
 # Show a full passage from a search result.
 python tools/corpus_retrieval.py show <chunk_id>
 
 # Machine-readable output for agents.
 python tools/corpus_retrieval.py search "BBR fairness retransmit" --json
+
+# Built-in retrieval-quality spot check.
+python tools/corpus_retrieval.py audit
 ```
 
 The generated database lives at:
@@ -51,8 +61,8 @@ That directory is ignored by git. Rebuild it locally instead of committing it.
 
 After adding or materially editing Markdown content:
 
-1. Run `python tools/corpus_retrieval.py index`.
-2. Run `python tools/corpus_retrieval.py status` and confirm it is up to date.
+1. Run `python tools/corpus_retrieval.py index --if-stale`.
+2. Run `python tools/corpus_retrieval.py status --changed-only` and confirm it is up to date.
 3. Run at least one representative search for the claim/topic you added.
 4. Use the returned `path:start-end` citation when summarizing or applying the
    research elsewhere.
@@ -61,7 +71,34 @@ After adding or materially editing Markdown content:
 This makes the retrieval layer grow with the corpus without creating a second
 copy of the corpus.
 
-## Search modes
+## Query cookbook
+
+Good retrieval queries are short, source-specific, and use the language the
+corpus uses. Prefer nouns and trust-boundary terms over full natural-language
+questions.
+
+```bash
+# Measurement daemon / shell boundary.
+python tools/corpus_retrieval.py search "measurement daemon shell truth" --match all --path chapters/
+
+# Shared GPU isolation caveat.
+python tools/corpus_retrieval.py search "GPU isolation shared accelerators" --match all --path chapters/ --path VALIDATION.md
+
+# Network caveat: BBR fairness and retransmit risk.
+python tools/corpus_retrieval.py search "BBR fairness retransmit" --match all --path validation/notes/
+
+# Current economics authority.
+python tools/corpus_retrieval.py search "Layer 5 economics" --match all --path chapters/02-bitcoin-native
+
+# Contributor privacy and telemetry governance.
+python tools/corpus_retrieval.py search "contributor privacy telemetry governance" --match all --path chapters/24-contributor
+```
+
+If a direct query misses, try synonyms from `INDEX.md`, `VALIDATION.md`, or the
+chapter title. If that still misses, improve the chapter heading/source wording
+so the next agent can find it.
+
+## Search modes and filters
 
 Default search uses `--match any`, which is broad and useful for discovery.
 Use stricter matching when needed:
@@ -73,6 +110,22 @@ python tools/corpus_retrieval.py search '"BBR" NEAR "fairness"' --match raw
 
 Raw mode sends the query directly to SQLite FTS5. Use it only when you know FTS5
 query syntax.
+
+Filters are repeatable and combine with the FTS query:
+
+```bash
+# Any result under chapters/ or VALIDATION.md.
+python tools/corpus_retrieval.py search "shared GPU isolation" --path chapters/ --path VALIDATION.md
+
+# Only headings containing a substring.
+python tools/corpus_retrieval.py search "truth" --heading "Relationship Between Shell and Daemon"
+
+# Combine filters.
+python tools/corpus_retrieval.py search "BBR retransmit" --path validation/notes/ --heading caveat
+```
+
+`--path` is a case-insensitive path-prefix filter, not a regex. `--heading` is a
+case-insensitive heading substring filter.
 
 ## What gets indexed
 
@@ -113,6 +166,21 @@ Before answering or changing CursiveOS from CursiveResearch evidence:
 5. If retrieval misses a known source, improve the source/chapter wording or add
    metadata so future agents can find it.
 
+## Retrieval-quality audit
+
+Run the built-in audit after retrieval changes or before claiming the tool is in
+good shape:
+
+```bash
+python tools/corpus_retrieval.py audit
+python tools/corpus_retrieval.py audit --json
+```
+
+The audit is intentionally small. It checks that known high-value queries can
+recover their expected source areas: measurement daemon/shell boundary, shared
+GPU isolation, BBR fairness caveat, Layer 5 economics, and contributor privacy / telemetry governance.
+It is not a semantic benchmark. It is a smoke alarm for obvious retrieval drift.
+
 ## Verification
 
 Run the retrieval smoke test:
@@ -121,13 +189,20 @@ Run the retrieval smoke test:
 python tools/corpus_retrieval.py self-test
 ```
 
-For repo-level verification after changing retrieval code or docs, also run:
+For repo-level verification after changing retrieval code or docs, run:
 
 ```bash
 python -m py_compile tools/corpus_retrieval.py
 python -m unittest tests.test_corpus_retrieval -v
+python tools/corpus_retrieval.py index --if-stale
+python tools/corpus_retrieval.py status --strict
+python tools/corpus_retrieval.py audit
 powershell.exe -NoProfile -ExecutionPolicy Bypass -File tools/run-verification.ps1
 ```
+
+`tools/run-verification.ps1` now includes the retrieval self-test, focused
+retrieval unittests, index/status check, and retrieval audit as part of the
+canonical corpus verification path.
 
 ## Current scope
 

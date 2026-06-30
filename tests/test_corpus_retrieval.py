@@ -61,13 +61,35 @@ class CorpusRetrievalTests(unittest.TestCase):
 
             status = corpus_retrieval.corpus_status(root, index_path)
             self.assertTrue(status["up_to_date"])
+            self.assertEqual(corpus_retrieval.changed_status(status)["new"], [])
 
             (root / "chapters" / "02-new.md").write_text("# New\n\nFresh research.\n", encoding="utf-8")
             status = corpus_retrieval.corpus_status(root, index_path)
             self.assertFalse(status["up_to_date"])
             self.assertEqual(status["new"], ["chapters/02-new.md"])
 
-    def test_cli_json_search(self) -> None:
+    def test_search_path_and_heading_filters(self) -> None:
+        with tempfile.TemporaryDirectory(prefix="corpus-retrieval-test-") as tmp:
+            root = Path(tmp)
+            write_sample_repo(root)
+            index_path = root / ".cursive-research-rag" / "index.sqlite"
+            corpus_retrieval.build_index(root, index_path)
+
+            source_results = corpus_retrieval.search_index(
+                index_path,
+                "BBR retransmit",
+                limit=5,
+                path_filters=("sources/",),
+                heading_filters=("Source Register",),
+            )
+            self.assertTrue(source_results)
+            self.assertTrue(all(result.path.startswith("sources/") for result in source_results))
+            self.assertIn("Source Register", source_results[0].heading)
+
+            chapter_results = corpus_retrieval.search_index(index_path, "BBR retransmit", limit=5, path_filters=("chapters/",))
+            self.assertEqual(chapter_results, [])
+
+    def test_cli_json_search_and_status_ergonomics(self) -> None:
         with tempfile.TemporaryDirectory(prefix="corpus-retrieval-test-") as tmp:
             root = Path(tmp)
             write_sample_repo(root)
@@ -78,6 +100,22 @@ class CorpusRetrievalTests(unittest.TestCase):
                 text=True,
                 capture_output=True,
             )
+            skipped = subprocess.run(
+                [sys.executable, str(MODULE_PATH), "index", "--if-stale", "--repo-root", str(root), "--index", str(index_path), "--json"],
+                check=True,
+                text=True,
+                capture_output=True,
+            )
+            self.assertTrue(json.loads(skipped.stdout)["skipped"])
+
+            status = subprocess.run(
+                [sys.executable, str(MODULE_PATH), "status", "--changed-only", "--repo-root", str(root), "--index", str(index_path), "--json"],
+                check=True,
+                text=True,
+                capture_output=True,
+            )
+            self.assertEqual(json.loads(status.stdout), {"up_to_date": True, "new": [], "stale": [], "missing": []})
+
             proc = subprocess.run(
                 [
                     sys.executable,
@@ -88,6 +126,10 @@ class CorpusRetrievalTests(unittest.TestCase):
                     str(root),
                     "--index",
                     str(index_path),
+                    "--path",
+                    "sources/",
+                    "--heading",
+                    "Source Register",
                     "--json",
                 ],
                 check=True,
@@ -97,6 +139,27 @@ class CorpusRetrievalTests(unittest.TestCase):
             results = json.loads(proc.stdout)
             self.assertTrue(results)
             self.assertTrue(results[0]["citation"].startswith("sources/source-register.md:"))
+
+    def test_retrieval_audit_accepts_expected_source_areas(self) -> None:
+        with tempfile.TemporaryDirectory(prefix="corpus-retrieval-test-") as tmp:
+            root = Path(tmp)
+            write_sample_repo(root)
+            index_path = root / ".cursive-research-rag" / "index.sqlite"
+            corpus_retrieval.build_index(root, index_path)
+
+            report = corpus_retrieval.retrieval_audit(
+                index_path,
+                cases=(
+                    {
+                        "name": "sample source caveat",
+                        "query": "BBR fairness retransmit",
+                        "match": "all",
+                        "expect_paths": ("sources/source-register.md",),
+                    },
+                ),
+            )
+            self.assertTrue(report["passed"])
+            self.assertEqual(report["passed_cases"], 1)
 
     def test_git_checkout_respects_ignore_rules_but_includes_new_markdown(self) -> None:
         with tempfile.TemporaryDirectory(prefix="corpus-retrieval-git-test-") as tmp:

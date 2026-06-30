@@ -19,7 +19,7 @@ import sys
 import tempfile
 from dataclasses import asdict, dataclass
 from pathlib import Path
-from typing import Iterable, Sequence
+from typing import Any, Sequence
 
 SCHEMA_VERSION = "1"
 DEFAULT_INDEX_DIR = ".cursive-research-rag"
@@ -38,6 +38,38 @@ EXCLUDED_DIRS = {
 HEADING_RE = re.compile(r"^(#{1,6})\s+(.+?)\s*$")
 TOKEN_RE = re.compile(r"[A-Za-z0-9_][A-Za-z0-9_./:+-]*")
 FENCE_MARKERS = ("```", "~~~")
+DEFAULT_AUDIT_CASES: tuple[dict[str, Any], ...] = (
+    {
+        "name": "measurement daemon / shell boundary",
+        "query": "measurement daemon shell truth",
+        "match": "all",
+        "expect_paths": ("chapters/05-measurement-daemon-and-natural-language-shell.md",),
+    },
+    {
+        "name": "shared GPU isolation",
+        "query": "GPU isolation shared accelerators",
+        "match": "all",
+        "expect_paths": ("chapters/16-security-and-hardening.md", "VALIDATION.md"),
+    },
+    {
+        "name": "BBR fairness/retransmit caveat",
+        "query": "BBR fairness retransmit",
+        "match": "all",
+        "expect_paths": ("validation/notes/2026-06-25-ch09-bbr-default-overstatement-redteam-challenge.md",),
+    },
+    {
+        "name": "Layer 5 economics authority",
+        "query": "Layer 5 economics",
+        "match": "all",
+        "expect_paths": ("chapters/02-bitcoin-native-economics-and-proof-of-useful-optimization.md",),
+    },
+    {
+        "name": "contributor privacy telemetry governance",
+        "query": "contributor privacy telemetry governance",
+        "match": "all",
+        "expect_paths": ("chapters/24-contributor-data-privacy-and-telemetry-governance.md",),
+    },
+)
 
 
 @dataclass(frozen=True)
@@ -399,14 +431,46 @@ def build_match_query(query: str, mode: str) -> str:
     raise ValueError(f"unknown match mode: {mode}")
 
 
-def search_index(index_path: Path, query: str, limit: int = 10, mode: str = "any") -> list[SearchResult]:
+def normalize_path_filter(value: str) -> str:
+    cleaned = value.strip().replace("\\", "/").lstrip("./")
+    if not cleaned:
+        raise ValueError("path filter cannot be empty")
+    return cleaned.lower()
+
+
+def normalize_heading_filter(value: str) -> str:
+    cleaned = value.strip().lower()
+    if not cleaned:
+        raise ValueError("heading filter cannot be empty")
+    return cleaned
+
+
+def search_index(
+    index_path: Path,
+    query: str,
+    limit: int = 10,
+    mode: str = "any",
+    path_filters: Sequence[str] = (),
+    heading_filters: Sequence[str] = (),
+) -> list[SearchResult]:
     if not index_path.exists():
         raise FileNotFoundError(f"index not found: {index_path}; run `python tools/corpus_retrieval.py index`")
     match_query = build_match_query(query, mode)
-    con = connect(index_path)
-    try:
-        rows = con.execute(
-            """
+    where = ["chunk_fts MATCH ?"]
+    params: list[object] = [match_query]
+
+    paths = [normalize_path_filter(path) for path in path_filters if path.strip()]
+    if paths:
+        where.append("(" + " OR ".join("lower(c.path) LIKE ?" for _ in paths) + ")")
+        params.extend(f"{path}%" for path in paths)
+
+    headings = [normalize_heading_filter(heading) for heading in heading_filters if heading.strip()]
+    if headings:
+        where.append("(" + " OR ".join("lower(c.heading) LIKE ?" for _ in headings) + ")")
+        params.extend(f"%{heading}%" for heading in headings)
+
+    params.append(limit)
+    sql = f"""
             SELECT
                 c.id,
                 c.path,
@@ -417,12 +481,13 @@ def search_index(index_path: Path, query: str, limit: int = 10, mode: str = "any
                 bm25(chunk_fts) AS score
             FROM chunk_fts
             JOIN chunks c ON c.id = chunk_fts.rowid
-            WHERE chunk_fts MATCH ?
+            WHERE {' AND '.join(where)}
             ORDER BY score ASC, c.path ASC, c.start_line ASC
             LIMIT ?
-            """,
-            (match_query, limit),
-        ).fetchall()
+            """
+    con = connect(index_path)
+    try:
+        rows = con.execute(sql, params).fetchall()
     finally:
         con.close()
     return [SearchResult(**dict(row)) for row in rows]
@@ -493,6 +558,64 @@ def corpus_status(repo_root: Path, index_path: Path) -> dict[str, object]:
     }
 
 
+def changed_status(status: dict[str, object]) -> dict[str, object]:
+    return {
+        "up_to_date": status["up_to_date"],
+        "new": status["new"],
+        "stale": status["stale"],
+        "missing": status["missing"],
+    }
+
+
+def skipped_index_summary(repo_root: Path, index_path: Path, status: dict[str, object]) -> dict[str, object]:
+    return {
+        "index": str(index_path),
+        "repo_root": str(repo_root),
+        "documents": status["documents_indexed"],
+        "chunks": status["chunks_indexed"],
+        "schema_version": status["schema_version"],
+        "skipped": True,
+        "reason": "up_to_date",
+    }
+
+
+def retrieval_audit(
+    index_path: Path,
+    cases: Sequence[dict[str, Any]] = DEFAULT_AUDIT_CASES,
+    limit: int = 5,
+) -> dict[str, object]:
+    items: list[dict[str, object]] = []
+    for case in cases:
+        results = search_index(
+            index_path,
+            str(case["query"]),
+            limit=limit,
+            mode=str(case.get("match", "any")),
+            path_filters=tuple(case.get("path_filters", ())),
+            heading_filters=tuple(case.get("heading_filters", ())),
+        )
+        expected_paths = tuple(str(path) for path in case.get("expect_paths", ()))
+        matched = next((result for result in results if any(expected in result.path for expected in expected_paths)), None)
+        items.append(
+            {
+                "name": case.get("name", case["query"]),
+                "query": case["query"],
+                "match": case.get("match", "any"),
+                "expected_paths": list(expected_paths),
+                "passed": matched is not None,
+                "matched_citation": matched.citation if matched else None,
+                "top_results": [result.to_dict() for result in results],
+            }
+        )
+    passed_cases = sum(1 for item in items if item["passed"])
+    return {
+        "passed": passed_cases == len(items),
+        "passed_cases": passed_cases,
+        "total_cases": len(items),
+        "cases": items,
+    }
+
+
 def print_json(data: object) -> None:
     print(json.dumps(data, indent=2, ensure_ascii=False, sort_keys=True))
 
@@ -508,12 +631,16 @@ def print_search_results(results: Sequence[SearchResult]) -> None:
         print()
 
 
-def print_status(status: dict[str, object]) -> None:
-    print(f"Index: {status['index']}")
-    print(f"Exists: {status['exists']}")
-    print(f"Documents: indexed={status['documents_indexed']} current={status['documents_current']}")
-    print(f"Chunks: {status['chunks_indexed']}")
-    print(f"Up to date: {status['up_to_date']}")
+def print_status(status: dict[str, object], changed_only: bool = False) -> None:
+    if not changed_only:
+        print(f"Index: {status['index']}")
+        print(f"Exists: {status['exists']}")
+        print(f"Documents: indexed={status['documents_indexed']} current={status['documents_current']}")
+        print(f"Chunks: {status['chunks_indexed']}")
+        print(f"Up to date: {status['up_to_date']}")
+    elif status["up_to_date"]:
+        print("Index up to date; no new/stale/missing Markdown files.")
+        return
     for key in ("new", "stale", "missing"):
         values = status[key]
         if values:
@@ -522,6 +649,25 @@ def print_status(status: dict[str, object]) -> None:
                 print(f"  - {value}")
             if len(values) > 20:
                 print(f"  ... {len(values) - 20} more")
+
+
+def print_audit(report: dict[str, object]) -> None:
+    print(f"Retrieval audit: {report['passed_cases']}/{report['total_cases']} cases passed")
+    for item in report["cases"]:
+        mark = "PASS" if item["passed"] else "FAIL"
+        print(f"[{mark}] {item['name']}")
+        print(f"  query: {item['query']}")
+        if item["matched_citation"]:
+            print(f"  matched: {item['matched_citation']}")
+        else:
+            print(f"  expected path contains one of: {', '.join(item['expected_paths'])}")
+            top_results = item["top_results"]
+            if top_results:
+                print(f"  top result: {top_results[0]['citation']}")
+            else:
+                print("  top result: no matches")
+    if not report["passed"]:
+        print("Retrieval audit failed; inspect failed cases above.")
 
 
 def add_common_args(parser: argparse.ArgumentParser) -> None:
@@ -566,20 +712,28 @@ def main(argv: Sequence[str] | None = None) -> int:
     p_index = sub.add_parser("index", help="Rebuild the local SQLite FTS index")
     add_common_args(p_index)
     p_index.add_argument("--max-chars", type=int, default=4500, help="Maximum chunk size before splitting long sections")
+    p_index.add_argument("--if-stale", action="store_true", help="Skip rebuild when status is already up to date")
 
     p_status = sub.add_parser("status", help="Check whether the local index is current")
     add_common_args(p_status)
     p_status.add_argument("--strict", action="store_true", help="Exit non-zero when index is missing or stale")
+    p_status.add_argument("--changed-only", action="store_true", help="Only print new/stale/missing files")
 
     p_search = sub.add_parser("search", help="Search indexed corpus passages")
     add_common_args(p_search)
     p_search.add_argument("query", help="Search query")
     p_search.add_argument("--limit", type=int, default=10)
     p_search.add_argument("--match", choices=("any", "all", "raw"), default="any", help="FTS matching mode")
+    p_search.add_argument("--path", action="append", default=[], help="Restrict to path prefix; repeatable, e.g. --path chapters/")
+    p_search.add_argument("--heading", action="append", default=[], help="Restrict to heading substring; repeatable")
 
     p_show = sub.add_parser("show", help="Show a retrieved chunk by id")
     add_common_args(p_show)
     p_show.add_argument("id", type=int, help="Chunk id from search output")
+
+    p_audit = sub.add_parser("audit", help="Run built-in retrieval quality checks against expected source areas")
+    add_common_args(p_audit)
+    p_audit.add_argument("--limit", type=int, default=5, help="Results inspected per audit query")
 
     p_self = sub.add_parser("self-test", help="Run a temp-corpus smoke test")
     p_self.add_argument("--json", action="store_true")
@@ -599,7 +753,18 @@ def main(argv: Sequence[str] | None = None) -> int:
 
         repo_root, index_path = resolved_paths(args)
         if args.command == "index":
+            if args.if_stale:
+                status = corpus_status(repo_root, index_path)
+                if status["up_to_date"]:
+                    summary = skipped_index_summary(repo_root, index_path, status)
+                    if args.json:
+                        print_json(summary)
+                    else:
+                        print(f"Index already up to date: {summary['index']}")
+                        print(f"Documents: {summary['documents']}  Chunks: {summary['chunks']}")
+                    return 0
             summary = build_index(repo_root, index_path, max_chars=args.max_chars)
+            summary["skipped"] = False
             if args.json:
                 print_json(summary)
             else:
@@ -610,13 +775,20 @@ def main(argv: Sequence[str] | None = None) -> int:
         if args.command == "status":
             status = corpus_status(repo_root, index_path)
             if args.json:
-                print_json(status)
+                print_json(changed_status(status) if args.changed_only else status)
             else:
-                print_status(status)
+                print_status(status, changed_only=args.changed_only)
             return 1 if args.strict and not status["up_to_date"] else 0
 
         if args.command == "search":
-            results = search_index(index_path, args.query, limit=args.limit, mode=args.match)
+            results = search_index(
+                index_path,
+                args.query,
+                limit=args.limit,
+                mode=args.match,
+                path_filters=args.path,
+                heading_filters=args.heading,
+            )
             if args.json:
                 print_json([result.to_dict() for result in results])
             else:
@@ -633,6 +805,14 @@ def main(argv: Sequence[str] | None = None) -> int:
                 print()
                 print(chunk["text"])
             return 0
+
+        if args.command == "audit":
+            report = retrieval_audit(index_path, limit=args.limit)
+            if args.json:
+                print_json(report)
+            else:
+                print_audit(report)
+            return 0 if report["passed"] else 1
 
     except (FileNotFoundError, KeyError, ValueError, sqlite3.Error, AssertionError) as exc:
         print(f"ERROR: {exc}", file=sys.stderr)

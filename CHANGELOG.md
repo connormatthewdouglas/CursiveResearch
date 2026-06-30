@@ -4,6 +4,17 @@ This file records meaningful changes to research guidance, validation status,
 and corpus process. It is intended to be readable without reconstructing a
 chain of supporting documents.
 
+## 2026-06-30 - Corpus retrieval polish: filters, audit, canonical verification
+
+Changed:
+- **tools/corpus_retrieval.py**: added `--path` and `--heading` search filters, `index --if-stale`, `status --changed-only`, and a built-in `audit` command for known high-value retrieval queries.
+- **tests/test_corpus_retrieval.py**: expanded focused coverage for filters, status/index ergonomics, and retrieval audit behavior.
+- **tools/run-verification.ps1**: made retrieval self-test, focused unittests, index/status check, and audit part of canonical corpus verification.
+- **docs/corpus-retrieval.md / CORPUS_WORKFLOW.md**: added query cookbook examples and updated the normal corpus-maintenance habit to use `index --if-stale` plus `status --changed-only`.
+
+Reason:
+- The first retrieval spine was usable; this pass makes it harder for agents to forget, easier to narrow searches, and guarded by the same verification path as the rest of the corpus.
+
 ## 2026-06-30 - Repo-native corpus retrieval spine
 
 Changed:
