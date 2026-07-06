@@ -4,6 +4,14 @@ This file records meaningful changes to research guidance, validation status,
 and corpus process. It is intended to be readable without reconstructing a
 chain of supporting documents.
 
+## 2026-07-06 - Cycle 5: first fully autonomous loop closure + evidence-gate finding
+
+Changed:
+- **VALIDATION.md**: two new rows. (1) Autonomous loop closure Validated on one machine — proposer-materialized v0.13-pagecluster0 went enqueue → daemon claim → screen → upload → trust-spine rows with zero founder screen steps; candidate neutral on all weighted channels (honest null for the pre-registered page-cluster hypothesis). (2) Evidence gate bug Validated — the hardened gate fraud-rejects honest founder-rig runs because `sustained_inference_cpu_bound` voids the whole bundle instead of the sustained channel; contradicts the pre-registered V honest-control bar.
+
+Reason:
+- Cycle 5 is the first loop iteration where the organism proposed, coordinated, and measured its own experiment; both the closure and the gate defect belong in the corpus record before the gate fix lands.
+
 ## 2026-07-06 - Three red-team flags resolved (Mesa 260%, AlphaEvolve 23%, Ch15 truncation)
 
 Changed:
