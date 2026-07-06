@@ -4,6 +4,14 @@ This file records meaningful changes to research guidance, validation status,
 and corpus process. It is intended to be readable without reconstructing a
 chain of supporting documents.
 
+## 2026-07-06 (night) - Stardust Arc A750 SYCL inference backend built and functionally verified
+
+Changed:
+- **CursiveOS HANDOVER/action-plan** (recorded here for corpus continuity): ipex-llm SYCL ollama (2.3.0b20250725) now runs as an isolated second instance on Stardust (port 11435) with the Intel compute runtime installed — userspace only, no kernel/driver change. Functional verification: SYCL discovers the Arc A750 via Level Zero and tinyllama offloads 23/23 layers to the GPU. Performance is deliberately UNMEASURED (a game owned the GPU during the build); the sustained channel on Stardust stays voided until a clean idle benchmark and harness integration land.
+
+Reason:
+- Closes the "no Intel Arc backend" root cause identified this morning. The laptop's same-day 5x result predicts the value; the clean Stardust number is the next measurement.
+
 ## 2026-07-06 (evening) - Laptop GPU inference enabled: 5x sustained token generation
 
 Changed:
