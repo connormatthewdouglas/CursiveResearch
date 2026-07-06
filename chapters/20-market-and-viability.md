@@ -6,7 +6,7 @@ Git blob SHA: 728366a746ea6ecf1f7488f1f6e39dc6666df303
 
 ## Corpus status (living layer)
 
-**Last reconciled:** 2026-06-24
+**Last reconciled:** 2026-07-06
 **Confidence:** Market context Unvalidated; flagged security/benchmark passages Disproven for cited scope
 **Read with:** [Chapter 02](02-bitcoin-native-economics-and-proof-of-useful-optimization.md) (current CursiveOS economics), [Chapter 16](16-security-and-hardening.md), [Chapter 00](00-benchmark-schema-and-measurement-validity.md), [VALIDATION.md](../VALIDATION.md)
 
@@ -24,6 +24,8 @@ Historical note: this chapter uses the pre-rebrand name **TAO-OS** in the import
 | --- | --- | --- | --- |
 | TDX "hardened against physical bus-level attacks" + attestation table | Overstates TEE bus integrity for operator physical-access threat model | DePIN oracle defenses must not rest on TEE bus hardness alone. Use population confirmation, fingerprint cross-checks, anomaly detection, economic slashing (Chapters 01–11). TEE may still help other threat models — not this one. | `validation/notes/2026-06-20-ch02-tdx-bus-attack-resistance-challenge.md` |
 | Covenant-72B "GPT-4-class" / "data-center-level" | 67.1 MMLU ≈ Llama-2-70B / GPT-3.5 tier, ~19 pts below GPT-4 | Decentralized 72B training at scale is real; compare to **open base models of its era** (LLaMA-2-70B, LLM360 K2), not GPT-4. | `validation/notes/2026-06-21-ch02-covenant-72b-gpt4-class-overstatement-challenge.md` |
+| AlphaEvolve "reduce training and inference times for Bittensor nodes by up to 23%" | Misattributed: the 23% is a Google-internal Gemini *training*-kernel speedup on TPUs (≈1% end-to-end), never run on Bittensor or Intel Arc; uncited | Do not reuse the 23% externally or attribute it to Bittensor/CursiveOS. Any first-party AI-tuning magnitude must come from the CH05-BM-002 proposer-vs-random experiment plus Ch00 hardware-scoped measurement. | `validation/notes/2026-06-24-ch20-alphaevolve-23pct-bittensor-overstatement-challenge.md` |
+| Mesa 26.1 "for miners … 260%" + ship-as-default framing | Misattributed magnitude: the 260% is a single DX11 game trace (NBA 2K23, 4K Ultra) from a depth-buffer (HiZ-CCS) graphics fix; mining/inference is GPGPU compute, which that path cannot touch. Real Arc compute gains (i915→Xe) are ≤~40% best-case OpenCL | Validated **only** as a single-game DX11 graphics result. **Disproven** as a compute/mining magnitude — do not use "260%" in mining/compute copy or ship it as a default-preset claim; gate Arc numbers on Ch00 harness measurement of the actual workload. | `validation/notes/2026-06-26-ch14-ch20-mesa-260pct-arc-compute-mining-misattribution-redteam-challenge.md` |
 
 ### Open until experiment/hardware
 

@@ -243,3 +243,5 @@ To integrate these approaches into **TAO-Forge**, we propose the following commo
 | **Always-On LLM Agent:** Connect TAO metric APIs to LLM prompts; implement commit/revert hook. | 1–2 mo | 3–6 mo      | 1–2 dev-months; low API cost (<$1K)             |
 
 | **AutoOS → TAO:*
+
+> **Corpus note (2026-07-06, truncation confirmed at source):** The import ends mid-row above because the preserved source DOCX (`sources/original-docx/5. ai guided tuning_.docx`, blob a17532ea) is itself truncated at exactly this point — verified by unpacking the DOCX: its final paragraph is the literal fragment `| **AutoOS → TAO:*` followed by the document close. The import is faithful; no fuller source exists in the repo. The missing row's substance is recoverable from this same chapter: Table 1 gives AutoOS ~2–3 dev-months at moderate cost (~$5k), and §Top 5 item 5 gives a ~1–2 month prototype path. Keep the partial row as-is (import fidelity); do not delete it.

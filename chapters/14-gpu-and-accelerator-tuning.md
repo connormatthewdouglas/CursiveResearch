@@ -6,7 +6,7 @@ Git blob SHA: 726912342c92bec12771ffcf36db5ecf8231033d
 
 ## Corpus status (living layer)
 
-**Last reconciled:** 2026-06-24
+**Last reconciled:** 2026-07-06
 **Confidence:** Partly Supported for mechanisms; hardware-specific gains require per-platform validation
 **Read with:** [Chapter 00](00-benchmark-schema-and-measurement-validity.md) (cold-start hardware-scoped, GPU pin ~0 W idle), [Chapter 18](18-local-agent-arc-b70.md) (Arc stack), `experiments/gpu-accelerator-tuning-validation-plan.md`
 
@@ -19,6 +19,7 @@ Git blob SHA: 726912342c92bec12771ffcf36db5ecf8231033d
 
 - **v0.8 GPU frequency pin** validated as ~0 W idle cost and ~0 cold-start contribution on Arc A750 (Chapter 00 §5 items 1, 8) — do not cite pin as load-bearing win.
 - Cross-vendor claims (Polaris, Arc, SR-IOV counts) need per-machine confirmation before preset promotion (Chapter 01 hardware-scoped fitness).
+- **Mesa 26.1 "up to 260%"** is a single DirectX 11 game trace (NBA 2K23, 4K Ultra) from the HiZ-CCS depth-buffer fix — a graphics-path result. It is **Disproven as a compute/mining magnitude**: mining/inference on Arc is GPGPU compute, which a depth-buffer resolve cannot touch; real Arc compute gains (i915→Xe) are ≤~40% best-case OpenCL. Do not use "260% compute" or "for miners … 260%" in external copy; gate any first-party Arc number on Ch00 harness measurement of the actual workload. See `validation/notes/2026-06-26-ch14-ch20-mesa-260pct-arc-compute-mining-misattribution-redteam-challenge.md`.
 
 ### Open until experiment/hardware
 

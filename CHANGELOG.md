@@ -4,6 +4,17 @@ This file records meaningful changes to research guidance, validation status,
 and corpus process. It is intended to be readable without reconstructing a
 chain of supporting documents.
 
+## 2026-07-06 - Three red-team flags resolved (Mesa 260%, AlphaEvolve 23%, Ch15 truncation)
+
+Changed:
+- **chapters/20-market-and-viability.md**: living layer gains two "Superseded or narrowed (do not cite externally)" rows — AlphaEvolve "23% for Bittensor nodes" (Google-internal TPU training-kernel result, never Bittensor/Arc) and Mesa 26.1 "for miners … 260%" (single DX11 game trace from a depth-buffer graphics fix; not a compute path).
+- **chapters/14-gpu-and-accelerator-tuning.md**: living layer "Superseded or narrowed" gains the Mesa 260% narrowing (graphics-only; real Arc compute gains ≤~40% best-case OpenCL).
+- **chapters/15-ai-guided-tuning.md**: the end-of-file truncation is now confirmed to exist in the preserved source DOCX itself (unpacked blob a17532ea ends at the identical `AutoOS → TAO` fragment). A corpus note at the truncation point records this; the import is faithful and the partial row stays.
+- **VALIDATION.md**: the three corresponding flag rows are resolved/deleted; three closure rows added to Current High-Impact Claims (AlphaEvolve Disproven-as-attributed, Mesa Disproven-as-compute-magnitude, Ch15 truncation Validated-at-source).
+
+Reason:
+- These were the remaining escalated red-team flags actionable without new hardware experiments. The BBR single-flow/default-preset flag remains open — it is gated on the Ch09 multi-flow fairness/retransmit experiment (Gap #3/#5) and a human decision on default-preset/public copy.
+
 ## 2026-06-30 - Corpus retrieval synonym/anchor fallback
 
 Changed:
