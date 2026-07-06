@@ -4,6 +4,14 @@ This file records meaningful changes to research guidance, validation status,
 and corpus process. It is intended to be readable without reconstructing a
 chain of supporting documents.
 
+## 2026-07-06 (later) - Evidence-gate + config-drift fixes verified live; pagecluster0 null confirmed cross-machine
+
+Changed:
+- **VALIDATION.md**: evidence-gate row updated to Validated (fixed) — honest hardware flags now void only their channel (CursiveOS `d69587a`); the same post-mortem exposed and fixed rig-local config drift (both founder rigs still ran retired network=0.40 weights, the source of Stardust's phantom −0.1198 fitness; `config_version` auto-heal verified live). Loop-closure row updated: laptop screen through the fixed gate → inconclusive 0.50 / fitness −0.0023 / sustained voided; pagecluster0 null confirmed on both machines and retired.
+
+Reason:
+- The cycle-5 defect pair is closed with live cross-machine evidence; the corpus record should show the verified fix, the corrected interpretation of Stardust's fitness number, and the knob retirement.
+
 ## 2026-07-06 - Cycle 5: first fully autonomous loop closure + evidence-gate finding
 
 Changed:
