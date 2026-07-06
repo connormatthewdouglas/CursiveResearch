@@ -4,6 +4,14 @@ This file records meaningful changes to research guidance, validation status,
 and corpus process. It is intended to be readable without reconstructing a
 chain of supporting documents.
 
+## 2026-07-06 (evening) - Laptop GPU inference enabled: 5x sustained token generation
+
+Changed:
+- **VALIDATION.md**: new Validated row — the laptop's CPU-bound sustained channel was a driver problem, not a hardware limit: the GTX 1650 ran nouveau, which ollama cannot use. Installing the Canonical-signed nvidia-580 driver (Secure Boot untouched) took tinyllama from 33.4 to ~166 tok/s (100% GPU) and enabled phi3 at ~25 tok/s (81% offload, 4 GiB VRAM limit). Stability probe clean; one unexplained reboot during the very first phi3 load is flagged as a watch item.
+
+Reason:
+- This is an environment change on a founder measurement machine: the sustained channel becomes real on the laptop (no more cpu-bound void), and all pre-change laptop sustained/cold-start magnitudes become CPU-era history that must not be compared across the boundary. Stardust remains CPU-bound pending an Intel Arc backend (ipex-llm / llama.cpp SYCL) — the laptop's 5x quantifies the value of that experiment.
+
 ## 2026-07-06 (later) - Evidence-gate + config-drift fixes verified live; pagecluster0 null confirmed cross-machine
 
 Changed:
